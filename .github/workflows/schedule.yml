@@ -35,12 +35,13 @@ jobs:
             const dbSheetName = `DB_${sheetNameSuffix}`;
 
             let dbSheet = doc.sheetsByTitle[dbSheetName];
+            const dbHeaders = ["날짜", "순위", "증감", "앱이름", "장르", "개발사(퍼블리셔)", "증감수치", "평점"];
             if (!dbSheet) {
-                const dbHeaders = ["날짜", "순위", "증감", "앱이름", "장르", "개발사(퍼블리셔)", "증감수치", "평점"];
                 dbSheet = await doc.addSheet({ title: dbSheetName, headerValues: dbHeaders });
             }
+            await dbSheet.loadHeaderRow();
 
-            // 1. 과거 유효 데이터 캐싱
+            // 1. 과거 데이터 캐싱 (어제 순위 및 과거 전체 누적 최신 평점)
             let previousRanks = {};
             let latestKnownScores = {};
 
@@ -61,7 +62,7 @@ jobs:
                 }
             }
 
-            // 2. 플레이스토어 랭킹 수집 (리스트 단계에서 평점 포함됨)
+            // 2. 플레이스토어 랭킹 수집 (리스트 단계에서 성인 앱 평점 포함)
             const topGamesList = await gplay.list({
                 category: gplay.category.GAME,
                 collection: collectionType,
@@ -70,13 +71,12 @@ jobs:
                 lang: 'ko'
             });
 
-            // 3. 앱 상세 정보 수집 (list 평점을 기본으로 삼고 app 상세로 보완)
+            // 3. 앱 상세 정보 수집 (list 평점을 기본으로 하고 app 상세로 보완, 딜레이 400ms)
             const topGames = [];
             process.stdout.write(`  - ${sheetNameSuffix} 장르 및 평점 데이터 수집 중...`);
             for (let i = 0; i < topGamesList.length; i += 10) {
                 const chunk = topGamesList.slice(i, i + 10);
                 const promises = chunk.map(async (game) => {
-                    // 리스트에서 제공하는 score를 기본값으로 확보 (성인앱 차단 우회)
                     let rawScore = (typeof game.score === 'number' && game.score > 0) ? game.score : null;
 
                     try {
@@ -87,7 +87,6 @@ jobs:
                         }
                     } catch (e) {
                         game.genre = '기타';
-                        // 상세 조회 실패 시에도 리스트에서 얻은 rawScore 유지
                     }
 
                     game.finalScore = (rawScore && rawScore > 0) ? rawScore.toFixed(1) : null;
@@ -100,15 +99,14 @@ jobs:
             }
             console.log(" 완료!");
 
-            // 4. 데이터 조립 (A~H열 순수 2차원 배열 매핑)
-            const rawRows = [];
+            // 4. 데이터 조립 (G열 '증감수치' 키를 완전히 제외하여 G열 셀 무손상 보장)
+            const dbRows = [];
             for (let i = 0; i < topGames.length; i++) {
                 const rank = i + 1;
                 const title = topGames[i].title;
                 const genre = topGames[i].genre;
                 const developer = topGames[i].developer ? `'${topGames[i].developer}` : `'알 수 없음`; 
                 
-                // 수집된 평점이 없으면 과거 누적 최신 평점 승계, 그래도 없으면 '-'
                 let score = topGames[i].finalScore;
                 if (!score && latestKnownScores[title]) {
                     score = latestKnownScores[title];
@@ -125,20 +123,20 @@ jobs:
                     else change = '-';
                 }
 
-                rawRows.push([
-                    todayStr,
-                    rank,
-                    change,
-                    title,
-                    genre,
-                    developer,
-                    '',       
-                    score     
-                ]);
+                dbRows.push({
+                    "날짜": todayStr,
+                    "순위": rank,
+                    "증감": change,
+                    "앱이름": title,
+                    "장르": genre,
+                    "개발사(퍼블리셔)": developer,
+                    "평점": score
+                });
             }
 
-            if (rawRows.length > 0) {
-                await dbSheet.addRows(rawRows, { raw: true });
+            // 5. 시트 데이터 추가
+            if (dbRows.length > 0) {
+                await dbSheet.addRows(dbRows);
                 console.log(`[완료] ${sheetNameSuffix} DB 시트에 데이터 기록 완료!`);
             }
         }
