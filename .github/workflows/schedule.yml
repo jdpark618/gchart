@@ -32,21 +32,22 @@ jobs:
         const gplay = require('google-play-scraper');
 
         async function processCategory(doc, docId, todayStr, yesterdayStr, collectionType, sheetNameSuffix) {
-            const dbSheetName = `DB_${sheetNameSuffix}`; // 누적 DB 시트 이름
+            const dbSheetName = `DB_${sheetNameSuffix}`;
 
-            // 1. DB 시트 준비 (없으면 새로 생성)
+            // 1. DB 시트 연결
             let dbSheet = doc.sheetsByTitle[dbSheetName];
-            const dbHeaders = ["날짜", "순위", "증감", "앱이름", "장르", "개발사(퍼블리셔)"];
+            // 새 시트를 생성할 일이 생길 경우를 대비한 기본 헤더 (실제로는 기존 시트 구조를 따름)
+            const dbHeaders = ["날짜", "순위", "앱이름", "장르", "플랫폼", "개발사(퍼블리셔)", "증감수치", "평점"];
             if (!dbSheet) {
                 dbSheet = await doc.addSheet({ title: dbSheetName, headerValues: dbHeaders });
             }
 
-            // 2. 어제 순위 파악 (이제 일일 시트 대신 DB 시트에서 어제 날짜 데이터를 찾음)
+            // 2. 어제 순위 파악 (증감 계산용)
             let previousRanks = {};
             const rows = await dbSheet.getRows();
             for (const row of rows) {
                 const rowDate = row.get('날짜');
-                if (rowDate === yesterdayStr) { // 어제 날짜 데이터만 필터링
+                if (rowDate === yesterdayStr) { 
                     const appName = row.get('앱이름');
                     const rank = row.get('순위');
                     if (appName && rank) {
@@ -64,17 +65,20 @@ jobs:
                 lang: 'ko'
             });
 
-            // 4. 앱 상세 정보(장르) 수집 (10개씩 딜레이)
+            // 4. 앱 상세 정보(장르, 평점) 수집
             const topGames = [];
-            process.stdout.write(`  - ${sheetNameSuffix} 장르 데이터 수집 중...`);
+            process.stdout.write(`  - ${sheetNameSuffix} 장르 및 평점 데이터 수집 중...`);
             for (let i = 0; i < topGamesList.length; i += 10) {
                 const chunk = topGamesList.slice(i, i + 10);
                 const promises = chunk.map(async (game) => {
                     try {
                         const detail = await gplay.app({ appId: game.appId, country: 'kr', lang: 'ko' });
                         game.genre = detail.genre || '기타';
+                        // 평점(score) 추출 후 소수점 1자리 포맷팅 (리뷰가 없어 평점이 없는 경우 '-')
+                        game.score = detail.score ? detail.score.toFixed(1) : '-'; 
                     } catch (e) {
                         game.genre = '기타';
+                        game.score = '-';
                     }
                     return game;
                 });
@@ -92,6 +96,7 @@ jobs:
                 const title = topGames[i].title;
                 const genre = topGames[i].genre;
                 const developer = topGames[i].developer ? `'${topGames[i].developer}` : `'알 수 없음`; 
+                const score = topGames[i].score; 
                 
                 let change = 'NEW';
                 if (previousRanks[title]) {
@@ -101,18 +106,19 @@ jobs:
                     else change = '-';
                 }
 
-                // 누적 DB용 데이터 (날짜 포함)
+                // 이미지 구조에 맞춘 Key 매핑 (G열: 증감수치, H열: 평점)
                 dbRows.push({
                     "날짜": todayStr,
                     "순위": rank, 
-                    "증감": change, 
                     "앱이름": title, 
                     "장르": genre, 
-                    "개발사(퍼블리셔)": developer
+                    "개발사(퍼블리셔)": developer,
+                    "증감수치": change, 
+                    "평점": score
                 });
             }
 
-            // 6. DB 시트에 데이터 한 번에 이어붙이기 (Append)
+            // 6. DB 시트에 데이터 한 번에 이어붙이기
             if (dbRows.length > 0) {
                 await dbSheet.addRows(dbRows);
                 console.log(`[완료] ${sheetNameSuffix} DB 시트에 데이터 기록 완료!`);
@@ -132,7 +138,7 @@ jobs:
             const doc = new GoogleSpreadsheet(docId, serviceAccountAuth);
             await doc.loadInfo();
 
-            const now = new Date(new Date().getTime() + 9 * 60 * 60 * 1000); // KST 시간
+            const now = new Date(new Date().getTime() + 9 * 60 * 60 * 1000); 
             const todayStr = now.toISOString().split('T')[0];
             const yesterdayStr = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
