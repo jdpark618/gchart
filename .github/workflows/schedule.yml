@@ -35,13 +35,14 @@ jobs:
             const dbSheetName = `DB_${sheetNameSuffix}`;
 
             let dbSheet = doc.sheetsByTitle[dbSheetName];
-            const dbHeaders = ["날짜", "순위", "증감", "앱이름", "장르", "개발사(퍼블리셔)", "증감수치", "평점"];
+            // 헤더에 패키지명 추가 (A:날짜, B:순위, C:증감, D:앱이름, E:패키지명, F:장르, G:개발사, H:증감수치, I:평점)
+            const dbHeaders = ["날짜", "순위", "증감", "앱이름", "패키지명", "장르", "개발사(퍼블리셔)", "증감수치", "평점"];
             if (!dbSheet) {
                 dbSheet = await doc.addSheet({ title: dbSheetName, headerValues: dbHeaders });
             }
             await dbSheet.loadHeaderRow();
 
-            // 1. 과거 데이터 캐싱 (어제 순위 및 과거 전체 누적 최신 평점)
+            // 1. 과거 데이터 캐싱 (어제 순위 및 과거 최신 평점 - appId 또는 앱이름 기준)
             let previousRanks = {};
             let latestKnownScores = {};
 
@@ -49,20 +50,22 @@ jobs:
             for (const row of rows) {
                 const rowDate = row.get('날짜');
                 const appName = row.get('앱이름');
+                const appId = row.get('패키지명');
                 const rank = row.get('순위');
                 const score = row.get('평점');
 
-                if (appName) {
+                const key = appId || appName;
+                if (key) {
                     if (rowDate === yesterdayStr && rank) {
-                        previousRanks[appName] = parseInt(rank, 10);
+                        previousRanks[key] = parseInt(rank, 10);
                     }
                     if (score && score !== '-' && score !== '0' && score !== '') {
-                        latestKnownScores[appName] = score;
+                        latestKnownScores[key] = score;
                     }
                 }
             }
 
-            // 2. 플레이스토어 랭킹 수집 (리스트 단계에서 성인 앱 평점 포함)
+            // 2. 플레이스토어 랭킹 수집
             const topGamesList = await gplay.list({
                 category: gplay.category.GAME,
                 collection: collectionType,
@@ -71,7 +74,7 @@ jobs:
                 lang: 'ko'
             });
 
-            // 3. 앱 상세 정보 수집 (list 평점을 기본으로 하고 app 상세로 보완, 딜레이 400ms)
+            // 3. 앱 상세 정보 수집 (딜레이 400ms)
             const topGames = [];
             process.stdout.write(`  - ${sheetNameSuffix} 장르 및 평점 데이터 수집 중...`);
             for (let i = 0; i < topGamesList.length; i += 10) {
@@ -99,25 +102,27 @@ jobs:
             }
             console.log(" 완료!");
 
-            // 4. 데이터 조립 (G열 '증감수치' 키를 완전히 제외하여 G열 셀 무손상 보장)
+            // 4. 데이터 조립 (패키지명 포함, G열 증감수치 키 제외하여 수식 보호)
             const dbRows = [];
             for (let i = 0; i < topGames.length; i++) {
                 const rank = i + 1;
                 const title = topGames[i].title;
+                const appId = topGames[i].appId ? `'${topGames[i].appId}` : `'-`;
                 const genre = topGames[i].genre;
                 const developer = topGames[i].developer ? `'${topGames[i].developer}` : `'알 수 없음`; 
                 
+                const lookupKey = topGames[i].appId || title;
                 let score = topGames[i].finalScore;
-                if (!score && latestKnownScores[title]) {
-                    score = latestKnownScores[title];
+                if (!score && latestKnownScores[lookupKey]) {
+                    score = latestKnownScores[lookupKey];
                 }
                 if (!score) {
                     score = '-';
                 }
                 
                 let change = 'NEW';
-                if (previousRanks[title]) {
-                    const diff = previousRanks[title] - rank;
+                if (previousRanks[lookupKey]) {
+                    const diff = previousRanks[lookupKey] - rank;
                     if (diff > 0) change = `▲ ${diff}`;
                     else if (diff < 0) change = `▼ ${Math.abs(diff)}`;
                     else change = '-';
@@ -128,6 +133,7 @@ jobs:
                     "순위": rank,
                     "증감": change,
                     "앱이름": title,
+                    "패키지명": appId,
                     "장르": genre,
                     "개발사(퍼블리셔)": developer,
                     "평점": score
