@@ -23,7 +23,7 @@ def get_dates_in_month(year, month):
         current += timedelta(days=1)
     return date_list
 
-# --- 2. 크롤링 함수 (목록 + 상세 페이지 메타데이터 정밀 확장) ---
+# --- 2. 크롤링 함수 (목록 기본 정보 5개 컬럼 수집) ---
 def scrape_calendar_by_url(year_months):
     target_dates = []
     for year, month in year_months:
@@ -80,71 +80,12 @@ def scrape_calendar_by_url(year_months):
                             if len(parts) > 1:
                                 release_type = parts[-1].strip()
 
-                    icon_url = ""
-                    img_elem = card.find("img")
-                    if img_elem and img_elem.get('src'):
-                        icon_url = img_elem['src']
-
-                    description = ""
-                    screenshots = []
-                    
-                    detail_url = "https://www.wame.is" + link_href if link_href.startswith('/') else link_href
-                    
-                    detail_page = browser.new_page()
-                    try:
-                        detail_page.goto(detail_url, timeout=6000)
-                        detail_page.wait_for_load_state("networkidle", timeout=4000)
-                        detail_html = detail_page.content()
-                        detail_soup = BeautifulSoup(detail_html, "html.parser")
-                        
-                        # 1. 아이콘 URL (object-fill 클래스 및 고해상도 srcset 우선 추출)
-                        icon_elem = detail_soup.find("img", class_="object-fill")
-                        if icon_elem:
-                            srcset = icon_elem.get('srcset')
-                            if srcset:
-                                sources = [s.strip().split(' ')[0] for s in srcset.split(',')]
-                                icon_url = sources[-1] if sources else icon_elem.get('src', '')
-                            else:
-                                icon_url = icon_elem.get('src', '')
-
-                        # 2. 상세 설명 텍스트 파싱
-                        desc_elem = detail_soup.find("p", class_=lambda c: c and "text-" in c and not "line-clamp" in c)
-                        if desc_elem:
-                            description = desc_elem.text.strip()
-
-                        # 3. 스크린샷 URL ("스크린샷" 타이틀 하단 슬라이더 컨테이너 추출)
-                        screenshot_heading = detail_soup.find(lambda tag: tag.name == "h2" and "스크린샷" in tag.text)
-                        if screenshot_heading:
-                            parent_section = screenshot_heading.find_parent("div")
-                            if parent_section:
-                                shot_cards = parent_section.find_all("div", class_=lambda c: c and "shrink-0" in c)
-                                for card_elem in shot_cards:
-                                    shot_img = card_elem.find("img")
-                                    if shot_img:
-                                        srcset = shot_img.get('srcset')
-                                        if srcset:
-                                            sources = [s.strip().split(' ')[0] for s in srcset.split(',')]
-                                            img_url = sources[-1] if sources else shot_img.get('src', '')
-                                        else:
-                                            img_url = shot_img.get('src', '')
-                                        
-                                        if img_url and img_url not in screenshots:
-                                            screenshots.append(img_url)
-                                            
-                    except Exception as e:
-                        print(f"상세 페이지 수집 중 오류 ({detail_url}): {e}")
-                    finally:
-                        detail_page.close()
-
                     monthly_games.append({
                         "출시일": date_str,
                         "게임명": title,
                         "플랫폼": platform,
                         "퍼블리셔": publisher,
-                        "출시유형": release_type,
-                        "아이콘url": icon_url,
-                        "설명": description,
-                        "스크린샷url": ",".join(screenshots)
+                        "출시유형": release_type
                     })
                 except Exception as card_err:
                     continue
@@ -152,7 +93,7 @@ def scrape_calendar_by_url(year_months):
         browser.close()
     return monthly_games
 
-# --- 3. DB 업데이트 및 발송 트리거 함수 ---
+# --- 3. DB 누적 업데이트 및 발송 트리거 함수 ---
 def update_db_and_trigger(scraped_data):
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
     
@@ -171,30 +112,52 @@ def update_db_and_trigger(scraped_data):
     db_sheet = sheet.worksheet("월간신작DB")
     config_sheet = sheet.worksheet("설정")
     
+    # 기존 시트 데이터 읽어오기
     existing_records = db_sheet.get_all_records()
-    existing_keys = {f"{r.get('게임명', '')}_{r.get('플랫폼', '')}": r for r in existing_records if r.get('게임명')}
-    new_keys = {f"{r['게임명']}_{r['플랫폼']}": r for r in scraped_data}
     
+    # 헤더가 아예 없거나 비어있는 경우 초기화 후 헤더 생성
+    if not existing_records:
+        db_sheet.clear()
+        db_sheet.append_row(["출시일", "게임명", "플랫폼", "퍼블리셔", "출시유형"])
+        existing_records = []
+
+    # 기존 데이터를 딕셔너리 형태로 관리 (키: "게임명_플랫폼")
+    db_dict = {}
+    for r in existing_records:
+        g_name = r.get('게임명', '')
+        g_plat = r.get('플랫폼', '')
+        if g_name:
+            db_dict[f"{g_name}_{g_plat}"] = r
+
     has_changes = False
-    if set(existing_keys.keys()) != set(new_keys.keys()):
-        has_changes = True
-    else:
-        for k, v in new_keys.items():
-            if existing_keys.get(k, {}).get('출시일') != v['출시일']:
+    
+    # 새로 수집된 데이터 병합 (기존에 없으면 추가, 있으면 출시일 등 변경여부 확인)
+    for item in scraped_data:
+        key = f"{item['게임명']}_{item['플랫폼']}"
+        if key not in db_dict:
+            # 신규 데이터 추가
+            db_dict[key] = item
+            has_changes = True
+        else:
+            # 기존 데이터가 있으나 출시일 등이 변경된 경우 업데이트
+            if db_dict[key].get('출시일') != item['출시일'] or db_dict[key].get('퍼블리셔') != item['퍼블리셔']:
+                db_dict[key] = item
                 has_changes = True
-                break
-                
+
+    # 최종 병합된 데이터를 시트에 다시 기록 (전체 클리어 후 5개 컬럼 기준으로 재적재하여 데이터 누적 유지)
+    final_rows = [[d['출시일'], d['게임명'], d['플랫폼'], d['퍼블리셔'], d['출시유형']] for d in db_dict.values()]
+    
+    # 날짜 기준 또는 게임명 기준으로 정렬하여 시트 가독성 높이기 (선택 사항)
+    final_rows.sort(key=lambda x: x[0])
+
+    db_sheet.clear()
+    db_sheet.append_row(["출시일", "게임명", "플랫폼", "퍼블리셔", "출시유형"])
+    if final_rows:
+        db_sheet.append_rows(final_rows)
+        
     is_month_start = (datetime.now().day == 1)
     
-    db_sheet.clear()
-    db_sheet.append_row(["출시일", "게임명", "플랫폼", "퍼블리셔", "출시유형", "아이콘 url", "설명", "스크린샷 url"])
-    if scraped_data:
-        db_sheet.append_rows([[
-            d['출시일'], d['게임명'], d['플랫폼'], d['퍼블리셔'], d['출시유형'],
-            d['아이콘url'], d['설명'], d['스크린샷url']
-        ] for d in scraped_data])
-        
-    if existing_records == [] or has_changes or is_month_start:
+    if has_changes or is_month_start:
         config_sheet.update_acell('B1', '발송요청')
         print("트리거 발동: B1 셀을 '발송요청'으로 변경했습니다.")
     else:
@@ -215,7 +178,7 @@ if __name__ == "__main__":
     target_months = [(curr_year, curr_month), (next_year, next_month)]
     scraped_data = scrape_calendar_by_url(target_months)
     
-    print(f"총 {len(scraped_data)}건 수집 완료. DB 업데이트 시작...")
+    print(f"총 {len(scraped_data)}건 수집 완료. DB 누적 업데이트 시작...")
     
     update_db_and_trigger(scraped_data)
     print("모든 작업 완료.")
