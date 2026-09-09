@@ -23,7 +23,7 @@ def get_dates_in_month(year, month):
         current += timedelta(days=1)
     return date_list
 
-# --- 2. 크롤링 함수 (목록 + 상세 페이지 메타데이터 확장) ---
+# --- 2. 크롤링 함수 (목록 + 상세 페이지 메타데이터 정밀 확장) ---
 def scrape_calendar_by_url(year_months):
     target_dates = []
     for year, month in year_months:
@@ -40,77 +40,101 @@ def scrape_calendar_by_url(year_months):
             page.goto(url)
             
             try:
-                page.wait_for_selector(".px-5.pt-5", timeout=3000)
+                page.wait_for_load_state("networkidle", timeout=5000)
             except:
                 continue
                 
             html = page.content()
             soup = BeautifulSoup(html, "html.parser")
             
-            game_cards = soup.find_all("div", class_=lambda c: c and "px-5" in c and "pt-5" in c)
+            game_cards = soup.select("a[href*='/game/']")
+            seen_links = set()
             
             for card in game_cards:
                 try:
+                    link_href = card.get('href')
+                    if not link_href or link_href in seen_links:
+                        continue
+                    seen_links.add(link_href)
+                    
                     title_elem = card.find("p", class_="line-clamp-2")
+                    if not title_elem:
+                        title_elem = card.find("p")
                     title = title_elem.text.strip() if title_elem else "N/A"
                     
-                    platform_elem = card.find("span", class_=lambda c: c and "text-xs" in c and "text-black" in c)
+                    platform_elem = card.find("span", class_=lambda c: c and "text-xs" in c)
                     platform = platform_elem.text.strip() if platform_elem else "N/A"
                     
                     publisher = "N/A"
                     release_type = "N/A"
                     
-                    info_rows = card.find_all("div", class_="gap-3")
+                    info_rows = card.find_all("div", class_=lambda c: c and "gap" in c)
                     for row in info_rows:
-                        label_elem = row.find("div", class_="shrink-0")
-                        value_elem = row.find("span", class_="truncate")
-                        
-                        if label_elem and value_elem:
-                            label = label_elem.text.strip()
-                            val = value_elem.text.strip()
-                            
-                            if label == "퍼블리셔":
-                                publisher = val
-                            elif label == "출시 유형":
-                                release_type = val
+                        text_content = row.text.strip()
+                        if "퍼블리셔" in text_content:
+                            parts = text_content.split("퍼블리셔")
+                            if len(parts) > 1:
+                                publisher = parts[-1].strip()
+                        if "출시 유형" in text_content:
+                            parts = text_content.split("출시 유형")
+                            if len(parts) > 1:
+                                release_type = parts[-1].strip()
 
-                    # 1차: 기본 썸네일 아이콘 추출 (목록 카드 내 이미지)
                     icon_url = ""
                     img_elem = card.find("img")
                     if img_elem and img_elem.get('src'):
                         icon_url = img_elem['src']
 
-                    # 2차: 상세 페이지 링크 진입하여 상세 설명 및 스크린샷 갤러리 수집
                     description = ""
                     screenshots = []
                     
-                    link_elem = card.find("a", href=True)
-                    if link_elem:
-                        detail_url = "https://www.wame.is" + link_elem['href'] if link_elem['href'].startswith('/') else link_elem['href']
+                    detail_url = "https://www.wame.is" + link_href if link_href.startswith('/') else link_href
+                    
+                    detail_page = browser.new_page()
+                    try:
+                        detail_page.goto(detail_url, timeout=6000)
+                        detail_page.wait_for_load_state("networkidle", timeout=4000)
+                        detail_html = detail_page.content()
+                        detail_soup = BeautifulSoup(detail_html, "html.parser")
                         
-                        detail_page = browser.new_page()
-                        try:
-                            detail_page.goto(detail_url, timeout=6000)
-                            detail_page.wait_for_selector("img", timeout=4000)
-                            detail_html = detail_page.content()
-                            detail_soup = BeautifulSoup(detail_html, "html.parser")
-                            
-                            # 상세 설명 텍스트 파싱
-                            desc_elem = detail_soup.find("p", class_=lambda c: c and "text-" in c)
-                            if desc_elem:
-                                description = desc_elem.text.strip()
+                        # 1. 아이콘 URL (object-fill 클래스 및 고해상도 srcset 우선 추출)
+                        icon_elem = detail_soup.find("img", class_="object-fill")
+                        if icon_elem:
+                            srcset = icon_elem.get('srcset')
+                            if srcset:
+                                sources = [s.strip().split(' ')[0] for s in srcset.split(',')]
+                                icon_url = sources[-1] if sources else icon_elem.get('src', '')
+                            else:
+                                icon_url = icon_elem.get('src', '')
 
-                            # 인게임 스크린샷 이미지들 수집 (아이콘과 중복되지 않는 고화질 플레이 샷 필터링)
-                            shot_imgs = detail_soup.find_all("img")
-                            for img in shot_imgs:
-                                src = img.get('src')
-                                if src and src.startswith('http') and src != icon_url:
-                                    if src not in screenshots:
-                                        screenshots.append(src)
-                        except:
-                            pass
-                        finally:
-                            detail_page.close()
+                        # 2. 상세 설명 텍스트 파싱
+                        desc_elem = detail_soup.find("p", class_=lambda c: c and "text-" in c and not "line-clamp" in c)
+                        if desc_elem:
+                            description = desc_elem.text.strip()
+
+                        # 3. 스크린샷 URL ("스크린샷" 타이틀 하단 슬라이더 컨테이너 추출)
+                        screenshot_heading = detail_soup.find(lambda tag: tag.name == "h2" and "스크린샷" in tag.text)
+                        if screenshot_heading:
+                            parent_section = screenshot_heading.find_parent("div")
+                            if parent_section:
+                                shot_cards = parent_section.find_all("div", class_=lambda c: c and "shrink-0" in c)
+                                for card_elem in shot_cards:
+                                    shot_img = card_elem.find("img")
+                                    if shot_img:
+                                        srcset = shot_img.get('srcset')
+                                        if srcset:
+                                            sources = [s.strip().split(' ')[0] for s in srcset.split(',')]
+                                            img_url = sources[-1] if sources else shot_img.get('src', '')
+                                        else:
+                                            img_url = shot_img.get('src', '')
+                                        
+                                        if img_url and img_url not in screenshots:
+                                            screenshots.append(img_url)
+                                            
+                    except Exception as e:
+                        print(f"상세 페이지 수집 중 오류 ({detail_url}): {e}")
+                    finally:
+                        detail_page.close()
 
                     monthly_games.append({
                         "출시일": date_str,
@@ -120,9 +144,9 @@ def scrape_calendar_by_url(year_months):
                         "출시유형": release_type,
                         "아이콘url": icon_url,
                         "설명": description,
-                        "스크린샷url": ",".join(screenshots)  # 여러 장을 콤마로 연결하여 저장
+                        "스크린샷url": ",".join(screenshots)
                     })
-                except:
+                except Exception as card_err:
                     continue
                     
         browser.close()
@@ -162,7 +186,6 @@ def update_db_and_trigger(scraped_data):
                 
     is_month_start = (datetime.now().day == 1)
     
-    # 시트 초기화 및 F, G, H열 매칭에 맞는 8개 컬럼 헤더 적용
     db_sheet.clear()
     db_sheet.append_row(["출시일", "게임명", "플랫폼", "퍼블리셔", "출시유형", "아이콘 url", "설명", "스크린샷 url"])
     if scraped_data:
