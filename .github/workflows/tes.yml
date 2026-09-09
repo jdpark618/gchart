@@ -1,0 +1,48 @@
+name: Test PlayStore Scraper (Log Only)
+
+on:
+  workflow_dispatch: 
+
+jobs:
+  test-scraper:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Node.js 환경 설정
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: 라이브러리 설치
+      run: npm install google-play-scraper@9.2.0
+
+    - name: 순위 데이터 15개 수집 및 로그 출력
+      run: |
+        cat << 'EOF' > test.js
+        const gplay = require('google-play-scraper');
+
+        async function test() {
+            try {
+                const topFree = await gplay.list({
+                    category: gplay.category.GAME, collection: gplay.collection.TOP_FREE,
+                    num: 15, country: 'kr', lang: 'ko'
+                });
+                console.log("\n📊 [현재 인기 순위 TOP 15]");
+                console.log("-".repeat(40));
+                topFree.forEach((g, i) => console.log(`${String(i + 1).padStart(2, ' ')}위: ${g.title}`));
+
+                const topGrossing = await gplay.list({
+                    category: gplay.category.GAME, collection: gplay.collection.GROSSING,
+                    num: 15, country: 'kr', lang: 'ko'
+                });
+                console.log("\n💰 [현재 매출 순위 TOP 15]");
+                console.log("-".repeat(40));
+                topGrossing.forEach((g, i) => console.log(`${String(i + 1).padStart(2, ' ')}위: ${g.title}`));
+            } catch (err) {
+                console.error("에러 발생:", err);
+            }
+        }
+        test();
+        EOF
+        
+        node test.js
