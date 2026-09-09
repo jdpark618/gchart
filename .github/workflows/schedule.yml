@@ -49,7 +49,13 @@ jobs:
             for (const row of rows) {
                 const rowDate = row.get('날짜');
                 const appName = row.get('앱이름');
-                const appId = row.get('패키지명');
+                let appId = row.get('패키지명');
+
+                // [수정1] 시트에 저장된 따옴표(') 제거 처리로 매칭률 100% 보장
+                if (appId && appId.startsWith("'")) {
+                    appId = appId.substring(1);
+                }
+
                 const rank = row.get('순위');
                 const score = row.get('평점');
 
@@ -122,14 +128,19 @@ jobs:
                 }
                 
                 let change = 'NEW';
+                let numericDiff = ''; // [수정2] 증감수치 누락분 변수 추가
+
                 const prevRank = previousRanks[rawAppId] || previousRanks[title];
                 if (prevRank) {
                     const diff = prevRank - rank;
+                    numericDiff = diff; // 실제 연산된 증감수치 할당
+
                     if (diff > 0) change = `▲ ${diff}`;
                     else if (diff < 0) change = `▼ ${Math.abs(diff)}`;
                     else change = '-';
                 }
 
+                // [수정3] dbRows.push 객체에 "증감수치" 키값 할당
                 dbRows.push({
                     "날짜": todayStr,
                     "순위": rank,
@@ -138,6 +149,7 @@ jobs:
                     "패키지명": appId,
                     "장르": genre,
                     "개발사(퍼블리셔)": developer,
+                    "증감수치": numericDiff,
                     "평점": score
                 });
             }
