@@ -155,7 +155,7 @@ jobs:
                     "패키지명": appId,
                     "장르": genre,
                     "개발사(퍼블리셔)": developer,
-                    "증감수치": numericDiff,
+                    // "증감수치": numericDiff,
                     "평점": score,
                     "아이콘url": iconUrl
                 });
