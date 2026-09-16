@@ -25,7 +25,7 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install playwright beautifulsoup4 gspread oauth2client
+        pip install playwright beautifulsoup4 gspread oauth2client requests
         
     - name: Install Playwright Browsers
       run: playwright install chromium
