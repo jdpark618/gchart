@@ -47,12 +47,23 @@ HEADERS = [
 LAST_COL = chr(ord("A") + len(HEADERS) - 1)  # "K"
 
 # ── 설계 결정 1 ────────────────────────────────────────────────
-# 같은 게임(게임ID)·같은 플랫폼인데 출시유형만 다른 카드(사전예약 / 정식출시)를
-# 별개 행으로 둘지 여부.
-#   False(기본) = 한 행으로 병합, 출시유형은 최신 관측값으로 덮어씀
-#                 → 사전예약에서 정식출시로 바뀔 때 중복이 생기지 않음
-#   True        = 별개 행으로 유지 (대신 유형 전환 시 옛 행이 남음)
-INCLUDE_RELEASE_TYPE_IN_KEY = False
+# 같은 게임(게임ID)인데 출시유형만 다른 카드를 별개 행으로 둘지 여부.
+#   True(기본) = 별개 행으로 유지.
+#                wame는 한 게임을 "테스트 9/8", "정식 출시 9/21" 처럼
+#                복수 일정으로 등재하므로 병합하면 한쪽이 유실된다.
+#                유형이 제자리에서 바뀌는 경우(사전예약→정식출시)는
+#                옛 행이 삭제 로직에 걸려 정리되므로 중복이 남지 않는다.
+#   False      = 한 행으로 병합, 출시유형은 최신 관측값으로 덮어씀
+INCLUDE_RELEASE_TYPE_IN_KEY = True
+
+# ── 설계 결정 1-b ──────────────────────────────────────────────
+# 플랫폼을 중복 판정 키에 포함할지 여부.
+#   False(기본) = 키에서 제외하고 갱신 대상 속성으로 취급.
+#                 wame는 "PC / 모바일" 처럼 결합 문자열로 표기하므로
+#                 플랫폼은 행을 가르는 차원이 아니다. 키에 넣으면
+#                 표기가 바뀔 때마다 삭제+신규로 churn이 발생한다.
+#   True       = 플랫폼별 별개 행 (플랫폼이 안정적으로 분리될 때만)
+INCLUDE_PLATFORM_IN_KEY = False
 
 # ── 설계 결정 2 ────────────────────────────────────────────────
 # 게임ID를 못 뽑은 행의 중복 판정을 정규화한 게임명+플랫폼으로 폴백할지 여부.
@@ -89,6 +100,8 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 )
+# 러너가 UTC이므로 로그 접두 타임스탬프도 KST로 맞춘다
+logging.Formatter.converter = lambda *args: datetime.now(ZoneInfo("Asia/Seoul")).timetuple()
 log = logging.getLogger("wame")
 
 
@@ -306,7 +319,14 @@ def scrape_game_detail(game_id, session):
 # 4. 중복 판정 및 병합 저장소
 # ──────────────────────────────────────────────────────────────
 
-CAL_FIELDS = ["출시일", "게임명", "퍼블리셔", "출시유형"]
+# 이번 실행의 관측값으로 덮어쓸 필드.
+# 키에 포함된 필드는 애초에 매칭 조건이므로 갱신 대상에서 제외한다.
+CAL_FIELDS = ["출시일", "게임명", "퍼블리셔"]
+if not INCLUDE_PLATFORM_IN_KEY:
+    CAL_FIELDS.append("플랫폼")
+if not INCLUDE_RELEASE_TYPE_IN_KEY:
+    CAL_FIELDS.append("출시유형")
+
 DETAIL_FIELDS = ["아이콘", "한줄설명", "스크린샷"]
 
 
@@ -321,14 +341,20 @@ def norm_name(name):
     return v.strip()
 
 
+def key_suffix(rec):
+    parts = []
+    if INCLUDE_PLATFORM_IN_KEY:
+        parts.append(s(rec, "플랫폼"))
+    if INCLUDE_RELEASE_TYPE_IN_KEY:
+        parts.append(s(rec, "출시유형"))
+    return parts
+
+
 def id_key(rec):
     gid = s(rec, "게임ID")
     if not gid:
         return None
-    parts = [f"id:{gid}", s(rec, "플랫폼")]
-    if INCLUDE_RELEASE_TYPE_IN_KEY:
-        parts.append(s(rec, "출시유형"))
-    return "|".join(parts)
+    return "|".join([f"id:{gid}"] + key_suffix(rec))
 
 
 def name_key(rec):
@@ -337,10 +363,7 @@ def name_key(rec):
     nm = norm_name(rec.get("게임명"))
     if not nm or nm in ("na", "n a"):
         return None
-    parts = [f"nm:{nm}", s(rec, "플랫폼")]
-    if INCLUDE_RELEASE_TYPE_IN_KEY:
-        parts.append(s(rec, "출시유형"))
-    return "|".join(parts)
+    return "|".join([f"nm:{nm}"] + key_suffix(rec))
 
 
 def completeness(rec):
@@ -640,6 +663,12 @@ def run(scraped, scanned_ok, failed_dates):
         time.sleep(DETAIL_SLEEP)
 
     log.info("상세정보 수집 시도: %d건", fetched)
+
+    no_id = sum(1 for r in store.records.values() if not s(r, "게임ID"))
+    no_detail = sum(1 for r in store.records.values()
+                    if not s(r, "아이콘") or not s(r, "한줄설명"))
+    log.info("건강 지표 — 게임ID 없음 %d행 / 상세정보 미보강 %d행 (전체 %d행)",
+             no_id, no_detail, len(store.records))
 
     # ── 쓰기 ──
     rows = store.rows()
