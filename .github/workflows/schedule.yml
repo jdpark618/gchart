@@ -34,6 +34,65 @@ jobs:
         const { JWT } = require('google-auth-library');
         const gplay = require('google-play-scraper');
 
+        // ── 조회 윈도우 설정 ──────────────────────────────────────
+        // 필요한 과거 데이터는 두 가지뿐이다.
+        //   1) 증감 계산용 = 어제 1일치
+        //   2) 평점 폴백용 = 최근 이력 중 유효한 마지막 값
+        // 따라서 DB 전체가 아니라 최근 LOOKBACK_DAYS 일치만 읽는다.
+        const LOOKBACK_DAYS = 14;
+        const ROWS_PER_DAY = 100;
+
+        function addDays(dateStr, delta) {
+            const d = new Date(`${dateStr}T00:00:00Z`);
+            d.setUTCDate(d.getUTCDate() + delta);
+            return d.toISOString().split('T')[0];
+        }
+
+        /**
+         * 날짜 컬럼(A)만 먼저 읽어 윈도우의 시작 위치를 찾은 뒤,
+         * 그 구간의 행만 getRows로 가져온다.
+         * 시트 끝부분만 탐침하고, 탐침 범위가 부족하면 전체 스캔으로 폴백한다.
+         */
+        async function loadRecentRows(dbSheet, cutoffStr) {
+            const gridRows = dbSheet.rowCount;
+            if (gridRows < 2) return { rows: [], scanned: 0, mode: 'empty' };
+
+            const probeRows = LOOKBACK_DAYS * ROWS_PER_DAY * 2 + 200;
+            let startRow = Math.max(2, gridRows - probeRows);
+            let dateCol = null;
+            let mode = 'probe';
+
+            if (startRow > 2) {
+                dateCol = await dbSheet.getCellsInRange(`A${startRow}:A${gridRows}`);
+                const first = (dateCol && dateCol[0] && dateCol[0][0]) ? dateCol[0][0] : '';
+                // 탐침 구간이 비었거나(데이터가 훨씬 앞에서 끝남),
+                // 구간 시작이 이미 cutoff 이후라면(충분히 과거까지 못 감) 전체 스캔
+                if (!dateCol || dateCol.length === 0 || first > cutoffStr) {
+                    dateCol = null;
+                }
+            }
+
+            if (!dateCol) {
+                startRow = 2;
+                mode = 'full';
+                dateCol = await dbSheet.getCellsInRange(`A2:A${gridRows}`);
+            }
+
+            if (!dateCol || dateCol.length === 0) return { rows: [], scanned: 0, mode: 'empty' };
+
+            let idx = dateCol.findIndex(r => ((r && r[0]) ? r[0] : '') >= cutoffStr);
+            if (idx === -1) {
+                // cutoff 이후 데이터가 전혀 없음 → 최소한 끝부분만 확보
+                idx = Math.max(0, dateCol.length - ROWS_PER_DAY * 2);
+            }
+
+            const offset = (startRow - 2) + idx;
+            const limit = dateCol.length - idx;
+            const rows = await dbSheet.getRows({ offset, limit });
+
+            return { rows, scanned: dateCol.length, mode, offset, limit };
+        }
+
         async function processCategory(doc, docId, todayStr, yesterdayStr, collectionType, sheetNameSuffix) {
             const dbSheetName = `DB_${sheetNameSuffix}`;
 
@@ -47,7 +106,11 @@ jobs:
             let previousRanks = {};
             let latestKnownScores = {};
 
-            const rows = await dbSheet.getRows();
+            const cutoffStr = addDays(todayStr, -LOOKBACK_DAYS);
+            const { rows, scanned, mode, limit } = await loadRecentRows(dbSheet, cutoffStr);
+            console.log(`  - ${sheetNameSuffix}: 날짜열 ${scanned}행 스캔(${mode}) → 최근 ${rows.length}행 로드 (${cutoffStr} 이후)`);
+
+            let yesterdayRowCount = 0;
             for (const row of rows) {
                 const rowDate = row.get('날짜');
                 const appName = row.get('앱이름');
@@ -64,6 +127,8 @@ jobs:
                 if (appId && appId.trim() !== '-' && appId.trim() !== '') keys.push(appId.trim());
                 if (appName && appName.trim() !== '') keys.push(appName.trim());
 
+                if (rowDate === yesterdayStr) yesterdayRowCount++;
+
                 keys.forEach(k => {
                     if (rowDate === yesterdayStr && rank) {
                         previousRanks[k] = parseInt(rank, 10);
@@ -72,6 +137,10 @@ jobs:
                         latestKnownScores[k] = score;
                     }
                 });
+            }
+
+            if (yesterdayRowCount === 0) {
+                console.warn(`  [경고] ${sheetNameSuffix}: 어제(${yesterdayStr}) 데이터가 없습니다. 증감이 전부 NEW로 기록됩니다.`);
             }
 
             const topGamesList = await gplay.list({
