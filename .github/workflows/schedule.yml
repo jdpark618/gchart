@@ -2,9 +2,9 @@ name: Daily PlayStore Rank Scraper
 
 on:
   schedule:
-    # UTC 20:42 = 한국 시간 다음 날 05:22
+    # UTC 20:42 = 한국 시간 다음 날 05:42
     # wame 크롤러(20:12)와 30분 간격을 둬 keepalive push 충돌을 피한다
-    - cron: '22 20 * * *'
+    - cron: '42 20 * * *'
   workflow_dispatch: 
 
 permissions:
