@@ -86,6 +86,7 @@ CARD_SELECTOR = ".px-5.pt-5"
 NAV_TIMEOUT_MS = 20000
 CARD_WAIT_MS = 5000
 NAV_RETRIES = 3
+EMPTY_CONFIRM_ATTEMPTS = 2   # "그날 0건"으로 확정하기 전 재확인 횟수
 DETAIL_RETRY_DAYS = 14       # 상세정보 수집 실패 후 재시도까지 대기일
 MAX_DETAIL_FETCH = 250       # 1회 실행당 상세페이지 요청 상한
 DETAIL_SLEEP = 0.3
@@ -158,6 +159,7 @@ def extract_game_id(card):
 
 
 def parse_cards(html, date_str):
+    """(파싱된 항목 리스트, 발견된 카드 개수)를 반환한다."""
     soup = BeautifulSoup(html, "html.parser")
     cards = soup.find_all(
         "div", class_=lambda c: c and "px-5" in c and "pt-5" in c
@@ -204,11 +206,16 @@ def parse_cards(html, date_str):
             log.warning("[%s] 카드 파싱 오류: %s", date_str, e)
             continue
 
-    return items
+    return items, len(cards)
 
 
 def scrape_one_date(page, date_str):
-    """성공 시 리스트(0건 포함), 실패 시 None을 반환한다."""
+    """성공 시 리스트(0건 포함), 실패 시 None을 반환한다.
+
+    None은 "확인 못 함"이고 [] 는 "확인 결과 0건"이다.
+    [] 를 반환하면 그 날짜 행들이 삭제 대상이 되므로,
+    카드가 안 보일 때는 EMPTY_CONFIRM_ATTEMPTS 회까지 다시 확인한다.
+    """
     url = f"https://www.wame.is/ko/calendar?date={date_str}"
 
     for attempt in range(1, NAV_RETRIES + 1):
@@ -223,16 +230,30 @@ def scrape_one_date(page, date_str):
         try:
             page.wait_for_selector(CARD_SELECTOR, timeout=CARD_WAIT_MS)
         except PlaywrightTimeout:
-            # 페이지는 정상적으로 떴으나 카드가 없음 → 그날 신작 0건으로 확정
+            # 응답이 느려서 못 본 것인지, 정말 0건인지 구분이 안 된다.
+            # 확정 전에 한 번 더 확인한다 (오판하면 그날 행이 통째로 삭제됨).
+            if attempt < EMPTY_CONFIRM_ATTEMPTS:
+                time.sleep(1.0 + random.random())
+                continue
             return []
 
         try:
-            return parse_cards(page.content(), date_str)
+            items, card_count = parse_cards(page.content(), date_str)
         except Exception as e:
             log.warning("[%s] 본문 파싱 실패 (%d/%d): %s",
                         date_str, attempt, NAV_RETRIES, e)
             time.sleep(1.5 * attempt)
             continue
+
+        # 카드는 있는데 한 건도 못 뽑았다면 파싱이 깨진 것이다.
+        # 0건으로 확정하면 삭제로 이어지므로 실패로 처리한다.
+        if card_count > 0 and not items:
+            log.warning("[%s] 카드 %d개를 찾았으나 파싱 결과 0건 (%d/%d)",
+                        date_str, card_count, attempt, NAV_RETRIES)
+            time.sleep(1.5 * attempt)
+            continue
+
+        return items
 
     return None
 
@@ -378,7 +399,7 @@ def is_newer(a, b):
 
 
 class Store:
-    """게임ID(폴백: 정규화 게임명) + 플랫폼 기준으로 행을 유일하게 유지한다."""
+    """게임ID(폴백: 정규화 게임명)와 key_suffix() 기준으로 행을 유일하게 유지한다."""
 
     def __init__(self):
         self.records = {}     # seq -> record
@@ -673,7 +694,9 @@ def run(scraped, scanned_ok, failed_dates):
     # ── 쓰기 ──
     rows = store.rows()
     log.info("최종 %d행 기록 (이전 %d행)", len(rows), len(existing))
-    write_db(db_sheet, rows, len(existing))
+    # 꼬리 정리 기준은 파싱된 행 수가 아니라 시트의 실제 마지막 행이어야 한다
+    # (중간에 빈 행이 있으면 len(existing)이 실제보다 작아 잔여 데이터가 남는다)
+    write_db(db_sheet, rows, max(len(raw) - 1, 0))
 
     # ── 발송 트리거 ──
     is_month_start = now_kst().day == 1
