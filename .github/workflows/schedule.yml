@@ -273,6 +273,38 @@ jobs:
                 await dbSheet.addRows(dbRows);
                 console.log(`[완료] ${sheetNameSuffix} DB 시트에 데이터 기록 완료!`);
             }
+
+            // 오늘 제대로 받은 장르: 패키지명·앱이름 → 장르 (과거 '기타' 행 보정용)
+            const genreByKey = {};
+            topGames.forEach(g => {
+                if (!g.genre || g.genre === '기타') return;
+                if (g.appId) genreByKey[g.appId] = g.genre;
+                if (g.title) genreByKey[g.title.trim()] = g.genre;
+            });
+            return genreByKey;
+        }
+
+        /**
+         * 과거 행 중 장르가 '기타'인데 같은 앱(패키지명, 패키지명이 없던 초기 행은 앱이름)의
+         * 장르를 오늘 제대로 받았다면 그 장르로 바꾼다. 앱이름·패키지명·장르(D:F)만 읽고
+         * 바꿀 칸만 저장한다. 이미 고친 행은 다음 실행에서 대상이 아니므로 하루 한 번 돌아도 안전하다.
+         */
+        async function backfillGenres(dbSheet, genreByKey) {
+            const last = dbSheet.rowCount;
+            if (last < 2) return 0;
+            const cols = await dbSheet.getCellsInRange(`D2:F${last}`);
+            const targets = [];
+            (cols || []).forEach((r, i) => {
+                if (!r || (r[2] || '').trim() !== '기타') return;
+                const name = (r[0] || '').trim(), pkg = (r[1] || '').replace(/^'/, '').trim();
+                const g = (pkg && genreByKey[pkg]) || genreByKey[name];
+                if (g) targets.push([i + 2, g]);
+            });
+            if (!targets.length) return 0;
+            await dbSheet.loadCells(`F${targets[0][0]}:F${targets[targets.length - 1][0]}`);
+            targets.forEach(([row, g]) => { dbSheet.getCellByA1(`F${row}`).value = g; });
+            await dbSheet.saveUpdatedCells();
+            return targets.length;
         }
 
         async function main() {
@@ -293,10 +325,24 @@ jobs:
             const yesterdayStr = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
             console.log("=== 1. 게임 인기순위 수집 시작 ===");
-            await processCategory(doc, docId, todayStr, yesterdayStr, gplay.collection.TOP_FREE, '인기순위');
+            const popGenres = await processCategory(doc, docId, todayStr, yesterdayStr, gplay.collection.TOP_FREE, '인기순위');
 
             console.log("\n=== 2. 게임 매출순위 수집 시작 ===");
-            await processCategory(doc, docId, todayStr, yesterdayStr, gplay.collection.GROSSING, '매출순위');
+            const salesGenres = await processCategory(doc, docId, todayStr, yesterdayStr, gplay.collection.GROSSING, '매출순위');
+
+            // 3. 두 시트에서 받은 장르를 합쳐 과거 '기타' 행 보정 (한쪽 차트에만 있는 게임도 다른 시트 이력까지 고침)
+            // 보정 실패가 오늘 수집 결과에는 영향을 주지 않도록 따로 잡는다
+            console.log("\n=== 3. 과거 '기타' 장르 보정 ===");
+            const genreByKey = { ...popGenres, ...salesGenres };
+            await doc.loadInfo();   // 오늘 행이 붙은 뒤의 행 수로 갱신
+            for (const name of ['DB_인기순위', 'DB_매출순위']) {
+                try {
+                    const n = await backfillGenres(doc.sheetsByTitle[name], genreByKey);
+                    console.log(`  - ${name}: ${n}행 보정`);
+                } catch (e) {
+                    console.warn(`  [경고] ${name} 장르 보정 실패: ${e.message}`);
+                }
+            }
         }
 
         main().catch(e => { console.error(e); process.exit(1); });
