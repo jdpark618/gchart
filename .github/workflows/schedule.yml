@@ -52,6 +52,27 @@ jobs:
         const LOOKBACK_DAYS = 14;
         const ROWS_PER_DAY = 100;
 
+        // ── 장르 폴백 ──────────────────────────────────────────────
+        // gplay.app 상세 조회가 일부 게임(주로 청소년 이용불가 MMO)에서 매번 실패해
+        // 장르가 '기타'로 쌓였다. 상세 조회가 실패하면 스토어 페이지의 applicationCategory를
+        // 직접 읽고, 그래도 없으면 최근 이력의 마지막 장르를 쓴다.
+        const GENRE_KO = {
+            GAME_ACTION: '액션', GAME_ADVENTURE: '어드벤처', GAME_ARCADE: '아케이드', GAME_BOARD: '보드',
+            GAME_CARD: '카드', GAME_CASINO: '카지노', GAME_CASUAL: '캐주얼', GAME_EDUCATIONAL: '교육',
+            GAME_MUSIC: '음악', GAME_PUZZLE: '퍼즐', GAME_RACING: '레이싱', GAME_ROLE_PLAYING: '롤플레잉',
+            GAME_SIMULATION: '시뮬레이션', GAME_SPORTS: '스포츠', GAME_STRATEGY: '전략', GAME_TRIVIA: '퀴즈', GAME_WORD: '단어'
+        };
+        async function genreFromPage(appId) {
+            try {
+                const res = await fetch(`https://play.google.com/store/apps/details?id=${encodeURIComponent(appId)}&hl=ko&gl=kr`);
+                if (!res.ok) return null;
+                const m = (await res.text()).match(/"applicationCategory":"(GAME_[A-Z_]+)"/);
+                return m ? (GENRE_KO[m[1]] || null) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
         function addDays(dateStr, delta) {
             const d = new Date(`${dateStr}T00:00:00Z`);
             d.setUTCDate(d.getUTCDate() + delta);
@@ -115,6 +136,7 @@ jobs:
 
             let previousRanks = {};
             let latestKnownScores = {};
+            let latestKnownGenres = {};
 
             const cutoffStr = addDays(todayStr, -LOOKBACK_DAYS);
             const { rows, scanned, mode, limit } = await loadRecentRows(dbSheet, cutoffStr);
@@ -132,6 +154,7 @@ jobs:
 
                 const rank = row.get('순위');
                 const score = row.get('평점');
+                const genre = row.get('장르');
 
                 const keys = [];
                 if (appId && appId.trim() !== '-' && appId.trim() !== '') keys.push(appId.trim());
@@ -145,6 +168,9 @@ jobs:
                     }
                     if (score && score !== '-' && score !== '0' && score !== '') {
                         latestKnownScores[k] = score;
+                    }
+                    if (genre && genre !== '기타') {
+                        latestKnownGenres[k] = genre;
                     }
                 });
             }
@@ -161,7 +187,7 @@ jobs:
                 lang: 'ko'
             });
 
-            const topGames = [];
+            const topGames = [], genreFails = [], genreFixed = [];
             process.stdout.write(`  - ${sheetNameSuffix} 장르, 평점 및 아이콘 데이터 수집 중...`);
             for (let i = 0; i < topGamesList.length; i += 10) {
                 const chunk = topGamesList.slice(i, i + 10);
@@ -169,9 +195,10 @@ jobs:
                     let rawScore = (typeof game.score === 'number' && game.score > 0) ? game.score : null;
                     let iconUrl = game.icon || '';
 
+                    game.genre = null;
                     try {
                         const detail = await gplay.app({ appId: game.appId, country: 'kr', lang: 'ko' });
-                        game.genre = detail.genre || '기타';
+                        game.genre = detail.genre || null;
                         if (detail.icon) {
                             iconUrl = detail.icon;
                         }
@@ -179,7 +206,12 @@ jobs:
                             rawScore = detail.score;
                         }
                     } catch (e) {
-                        game.genre = '기타';
+                        genreFails.push(`${game.title} (${game.appId}): ${e.message}`);
+                    }
+                    if (!game.genre) {
+                        game.genre = await genreFromPage(game.appId)
+                            || latestKnownGenres[game.appId] || latestKnownGenres[game.title] || '기타';
+                        genreFixed.push(`${game.title} → ${game.genre}`);
                     }
 
                     game.finalScore = (rawScore && rawScore > 0) ? rawScore.toFixed(1) : null;
@@ -192,6 +224,8 @@ jobs:
                 await new Promise(r => setTimeout(r, 400));
             }
             console.log(" 완료!");
+            if (genreFails.length) console.log(`  - 상세 조회 실패 ${genreFails.length}개:\n    ` + genreFails.join('\n    '));
+            if (genreFixed.length) console.log(`  - 장르 폴백 ${genreFixed.length}개:\n    ` + genreFixed.join('\n    '));
 
             const dbRows = [];
             for (let i = 0; i < topGames.length; i++) {
