@@ -71,6 +71,28 @@ jobs:
             const desc = String(detail.description || '').trim();
             if (desc || shots.length) appInfo[appId] = { title, desc, shots };
         }
+        // 상세 조회가 실패하는 게임(장르 폴백과 같은 게임들)은 스토어 페이지에서 직접 읽는다.
+        // 설명 = data-g-id="description" 블록(<br> → 줄바꿈), 스크린샷 = alt="스크린샷 이미지" 인 이미지 (크기 접미사 뗀 주소)
+        function decodeHtml(t) {
+            return t.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '')
+                .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n)).replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+                .replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
+        }
+        async function appInfoFromPage(appId, title) {
+            try {
+                const res = await fetch(`https://play.google.com/store/apps/details?id=${encodeURIComponent(appId)}&hl=ko&gl=kr`);
+                if (!res.ok) return false;
+                const html = await res.text();
+                const m = html.match(/data-g-id="description"[^>]*>([\s\S]*?)<\/div>/);
+                const desc = m ? decodeHtml(m[1]).trim() : '';
+                const shots = [...new Set([...html.matchAll(/<img src="(https:\/\/play-lh\.googleusercontent\.com\/[^"=]+)=[^"]*"[^>]*alt="스크린샷 이미지"/g)].map(x => x[1]))].slice(0, APPINFO_SHOTS);
+                if (!desc && !shots.length) return false;
+                appInfo[appId] = { title, desc, shots };
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
 
         // ── 장르 폴백 ──────────────────────────────────────────────
         // gplay.app 상세 조회가 일부 게임(주로 청소년 이용불가 MMO)에서 매번 실패해
@@ -228,6 +250,7 @@ jobs:
                         }
                     } catch (e) {
                         genreFails.push(`${game.title} (${game.appId}): ${e.message}`);
+                        await appInfoFromPage(game.appId, game.title);
                     }
                     if (!game.genre) {
                         game.genre = await genreFromPage(game.appId)
@@ -360,18 +383,22 @@ jobs:
                 const list = await gplay.list({ category: gplay.category.GAME, collection, num: 100, country: 'kr', lang: 'ko' });
                 list.forEach(g => { if (g.appId && !seen.has(g.appId)) seen.set(g.appId, g.title); });
             }
-            const entries = [...seen.entries()], fails = [];
+            const entries = [...seen.entries()], fails = [], fixed = [];
             process.stdout.write(`  - 상세 조회 ${entries.length}개 `);
             for (let i = 0; i < entries.length; i += 10) {
                 await Promise.all(entries.slice(i, i + 10).map(async ([appId, title]) => {
                     try { keepAppInfo(appId, title, await gplay.app({ appId, country: 'kr', lang: 'ko' })); }
-                    catch (e) { fails.push(`${title} (${appId}): ${e.message}`); }
+                    catch (e) {
+                        if (await appInfoFromPage(appId, title)) fixed.push(title);
+                        else fails.push(`${title} (${appId}): ${e.message}`);
+                    }
                 }));
                 process.stdout.write('.');
                 await new Promise(r => setTimeout(r, 400));
             }
             console.log(' 완료!');
-            if (fails.length) console.log(`  - 상세 조회 실패 ${fails.length}개:\n    ` + fails.join('\n    '));
+            if (fixed.length) console.log(`  - 스토어 페이지로 보완 ${fixed.length}개: ${fixed.join(', ')}`);
+            if (fails.length) console.log(`  - 앱 정보 없음 ${fails.length}개:\n    ` + fails.join('\n    '));
             await saveAppInfo(doc, todayStr);
         }
 
