@@ -5,7 +5,12 @@ on:
     # UTC 20:42 = 한국 시간 다음 날 05:42
     # wame 크롤러(20:12)와 30분 간격을 둬 keepalive push 충돌을 피한다
     - cron: '42 20 * * *'
-  workflow_dispatch: 
+  workflow_dispatch:
+    inputs:
+      appinfo_only:
+        description: '앱 정보(설명·스크린샷)만 채우기 — 순위 수집·기록은 하지 않음'
+        type: boolean
+        default: false
 
 permissions:
   contents: write   # keepalive 커밋을 push 하기 위해 필요
@@ -38,6 +43,7 @@ jobs:
       env:
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         SHEET_URL: ${{ secrets.SHEET_URL }}
+        APPINFO_ONLY: ${{ inputs.appinfo_only && '1' || '' }}
       run: |
         cat << 'EOF' > run.js
         const { GoogleSpreadsheet } = require('google-spreadsheet');
@@ -51,6 +57,20 @@ jobs:
         // 따라서 DB 전체가 아니라 최근 LOOKBACK_DAYS 일치만 읽는다.
         const LOOKBACK_DAYS = 14;
         const ROWS_PER_DAY = 100;
+
+        // ── 앱 정보 (게임 설명·스크린샷) ──────────────────────────
+        // 순위 수집 때 받은 상세 조회 결과에서 설명·스크린샷만 모아 DB_앱정보 시트에 게임당 한 줄로 저장한다.
+        // 사이트의 게임 상세 창이 패키지명으로 한 줄만 읽어 간다. 순위 시트와는 따로라 실패해도 순위 기록에 영향 없음.
+        const APPINFO_SHEET = 'DB_앱정보';
+        const APPINFO_HEADERS = ['패키지명', '앱이름', '설명', '스크린샷', '갱신일'];
+        const APPINFO_SHOTS = 6;
+        const appInfo = {};
+        function keepAppInfo(appId, title, detail) {
+            if (!appId || !detail) return;
+            const shots = (detail.screenshots || []).filter(u => typeof u === 'string' && u.startsWith('http')).slice(0, APPINFO_SHOTS);
+            const desc = String(detail.description || '').trim();
+            if (desc || shots.length) appInfo[appId] = { title, desc, shots };
+        }
 
         // ── 장르 폴백 ──────────────────────────────────────────────
         // gplay.app 상세 조회가 일부 게임(주로 청소년 이용불가 MMO)에서 매번 실패해
@@ -198,6 +218,7 @@ jobs:
                     game.genre = null;
                     try {
                         const detail = await gplay.app({ appId: game.appId, country: 'kr', lang: 'ko' });
+                        keepAppInfo(game.appId, game.title, detail);
                         game.genre = detail.genre || null;
                         if (detail.icon) {
                             iconUrl = detail.icon;
@@ -307,6 +328,53 @@ jobs:
             return targets.length;
         }
 
+        /**
+         * DB_앱정보: 게임당 한 줄. 기존 줄은 남기고(차트에서 빠진 게임도 상세는 볼 수 있게) 오늘 받은 게임만 최신으로 바꾼다.
+         * 수백 줄이라 통째로 다시 쓴다 (설명 첫 글자가 '-'·'=' 이어도 수식으로 읽히지 않게 raw 로 기록).
+         */
+        async function saveAppInfo(doc, todayStr) {
+            const ids = Object.keys(appInfo);
+            if (!ids.length) { console.log('  - 저장할 앱 정보 없음'); return; }
+            let sh = doc.sheetsByTitle[APPINFO_SHEET];
+            if (!sh) sh = await doc.addSheet({ title: APPINFO_SHEET, headerValues: APPINFO_HEADERS, gridProperties: { rowCount: 2, columnCount: APPINFO_HEADERS.length } });
+            await sh.loadHeaderRow();
+            const all = new Map();
+            for (const r of await sh.getRows()) {
+                const id = String(r.get('패키지명') || '').trim();
+                if (id) all.set(id, Object.fromEntries(APPINFO_HEADERS.map(h => [h, r.get(h) ?? ''])));
+            }
+            const before = all.size;
+            ids.forEach(id => {
+                const a = appInfo[id];
+                all.set(id, { '패키지명': id, '앱이름': a.title, '설명': a.desc, '스크린샷': a.shots.join('\n'), '갱신일': todayStr });
+            });
+            await sh.clearRows();
+            await sh.addRows([...all.values()], { raw: true });
+            console.log(`  - ${APPINFO_SHEET}: ${ids.length}개 갱신 · 전체 ${all.size}개 (새로 추가 ${all.size - before}개)`);
+        }
+
+        /** 수동 실행(appinfo_only): 지금 두 차트의 게임 상세만 받아 앱 정보를 채운다. 순위 시트는 읽지도 쓰지도 않음 */
+        async function fillAppInfoOnly(doc, todayStr) {
+            const seen = new Map();
+            for (const collection of [gplay.collection.TOP_FREE, gplay.collection.GROSSING]) {
+                const list = await gplay.list({ category: gplay.category.GAME, collection, num: 100, country: 'kr', lang: 'ko' });
+                list.forEach(g => { if (g.appId && !seen.has(g.appId)) seen.set(g.appId, g.title); });
+            }
+            const entries = [...seen.entries()], fails = [];
+            process.stdout.write(`  - 상세 조회 ${entries.length}개 `);
+            for (let i = 0; i < entries.length; i += 10) {
+                await Promise.all(entries.slice(i, i + 10).map(async ([appId, title]) => {
+                    try { keepAppInfo(appId, title, await gplay.app({ appId, country: 'kr', lang: 'ko' })); }
+                    catch (e) { fails.push(`${title} (${appId}): ${e.message}`); }
+                }));
+                process.stdout.write('.');
+                await new Promise(r => setTimeout(r, 400));
+            }
+            console.log(' 완료!');
+            if (fails.length) console.log(`  - 상세 조회 실패 ${fails.length}개:\n    ` + fails.join('\n    '));
+            await saveAppInfo(doc, todayStr);
+        }
+
         async function main() {
             const creds = JSON.parse(process.env.GCP_CREDENTIALS);
             const serviceAccountAuth = new JWT({
@@ -323,6 +391,12 @@ jobs:
             const now = new Date(new Date().getTime() + 9 * 60 * 60 * 1000); 
             const todayStr = now.toISOString().split('T')[0];
             const yesterdayStr = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+
+            if (process.env.APPINFO_ONLY === '1') {
+                console.log("=== 앱 정보만 채우기 (순위 수집 안 함) ===");
+                await fillAppInfoOnly(doc, todayStr);
+                return;
+            }
 
             console.log("=== 1. 게임 인기순위 수집 시작 ===");
             const popGenres = await processCategory(doc, docId, todayStr, yesterdayStr, gplay.collection.TOP_FREE, '인기순위');
@@ -342,6 +416,15 @@ jobs:
                 } catch (e) {
                     console.warn(`  [경고] ${name} 장르 보정 실패: ${e.message}`);
                 }
+            }
+
+            // 4. 게임 설명·스크린샷 (실패해도 순위 기록은 이미 끝났으므로 경고만)
+            console.log("\n=== 4. 앱 정보(설명·스크린샷) 저장 ===");
+            try {
+                await doc.loadInfo();
+                await saveAppInfo(doc, todayStr);
+            } catch (e) {
+                console.warn(`  [경고] ${APPINFO_SHEET} 저장 실패: ${e.message}`);
             }
         }
 
