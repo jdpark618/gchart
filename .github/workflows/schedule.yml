@@ -166,6 +166,9 @@ jobs:
             return { rows, scanned: dateCol.length, mode, offset, limit };
         }
 
+        const EXPECTED_RANKS = 100;
+        const shortfalls = [];   // 수집 건수가 모자란 차트 (main 끝에서 실패 처리)
+
         async function processCategory(doc, docId, todayStr, yesterdayStr, collectionType, sheetNameSuffix) {
             const dbSheetName = `DB_${sheetNameSuffix}`;
 
@@ -235,6 +238,11 @@ jobs:
                 country: 'kr',
                 lang: 'ko'
             });
+
+            // 차트는 매일 100위까지 온다. 모자라면 기록은 하되 실행을 실패로 표시해 알림이 오게 한다
+            if (topGamesList.length < EXPECTED_RANKS) {
+                shortfalls.push(`${sheetNameSuffix} ${topGamesList.length}건 (기대 ${EXPECTED_RANKS}건)`);
+            }
 
             const topGames = [], genreFails = [], genreFixed = [];
             process.stdout.write(`  - ${sheetNameSuffix} 장르, 평점 및 아이콘 데이터 수집 중...`);
@@ -459,6 +467,11 @@ jobs:
                 await saveAppInfo(doc, todayStr);
             } catch (e) {
                 console.warn(`  [경고] ${APPINFO_SHEET} 저장 실패: ${e.message}`);
+            }
+
+            if (shortfalls.length) {
+                console.error(`[실패] 순위 수집 건수 부족: ${shortfalls.join(' · ')}`);
+                process.exit(1);
             }
         }
 

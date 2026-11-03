@@ -16,6 +16,7 @@ import os
 import json
 import random
 import re
+import sys
 import time
 from datetime import datetime, timedelta
 from urllib.parse import parse_qs, urlparse
@@ -629,10 +630,10 @@ def run(scraped, scanned_ok, failed_dates):
     # ── 가드 1: 수집 0건이면 아무것도 쓰지 않는다 ──
     if not scraped and not db_empty:
         log.error("수집 0건 — 셀렉터 파손 또는 네트워크 문제로 판단하여 쓰기를 중단합니다.")
-        return
+        sys.exit(1)   # 쓰기 중단 = 실행 실패로 표시 (GitHub 실패 알림이 오도록)
     if not scanned_ok and not db_empty:
         log.error("성공적으로 스캔된 날짜가 없습니다 — 쓰기를 중단합니다.")
-        return
+        sys.exit(1)   # 쓰기 중단 = 실행 실패로 표시 (GitHub 실패 알림이 오도록)
 
     # ── 가드 2: 스캔 범위 내 수집량이 급감하면 중단 ──
     in_range_existing = [r for r in existing if s(r, "출시일") in scanned_ok]
@@ -643,7 +644,7 @@ def run(scraped, scanned_ok, failed_dates):
                 "수집량 급감 (기존 %d행 → 수집 %d건, %.0f%%) — 쓰기를 중단합니다.",
                 len(in_range_existing), len(scraped), ratio * 100,
             )
-            return
+            sys.exit(1)   # 쓰기 중단 = 실행 실패로 표시 (GitHub 실패 알림이 오도록)
 
     write_backup(sheet, raw)
 
