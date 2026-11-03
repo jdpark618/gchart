@@ -184,6 +184,13 @@ jobs:
             const { rows, scanned, mode, limit } = await loadRecentRows(dbSheet, cutoffStr);
             console.log(`  - ${sheetNameSuffix}: 날짜열 ${scanned}행 스캔(${mode}) → 최근 ${rows.length}행 로드 (${cutoffStr} 이후)`);
 
+            // 같은 날 두 번 돌아도(수동 실행 뒤 예약 실행 등) 오늘 순위가 두 벌 쌓이지 않게, 이미 있으면 건너뛴다
+            const todayRowCount = rows.filter(r => r.get('날짜') === todayStr).length;
+            if (todayRowCount > 0) {
+                console.log(`  [건너뜀] ${sheetNameSuffix}: 오늘(${todayStr}) 행 ${todayRowCount}개가 이미 있습니다.`);
+                return {};
+            }
+
             let yesterdayRowCount = 0;
             for (const row of rows) {
                 const rowDate = row.get('날짜');
