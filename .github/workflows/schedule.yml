@@ -399,12 +399,24 @@ jobs:
             7018: '퀴즈', 7019: '단어'
         };
         const APPLE_FEEDS = [['topfreeapplications', '인기순위'], ['topgrossingapplications', '매출순위']];
+        // 애플 응답은 가끔 받는 도중 끊긴다(terminated) → 본문까지 다 읽는 것을 최대 3번 시도
+        async function appleJson(url, tries = 3) {
+            for (let i = 1; ; i++) {
+                try {
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    return await res.json();
+                } catch (e) {
+                    if (i >= tries) throw e;
+                    await new Promise(r => setTimeout(r, 1500 * i));
+                }
+            }
+        }
         async function appleLookup(ids, cc) {
             const out = new Map();
             for (let i = 0; i < ids.length; i += 100) {
-                const res = await fetch(`https://itunes.apple.com/lookup?id=${ids.slice(i, i + 100).join(',')}&country=${cc}`);
-                if (!res.ok) throw new Error(`조회 API HTTP ${res.status}`);
-                ((await res.json()).results || []).forEach(x => out.set(String(x.trackId), x));
+                const j = await appleJson(`https://itunes.apple.com/lookup?id=${ids.slice(i, i + 100).join(',')}&country=${cc}`);
+                (j.results || []).forEach(x => out.set(String(x.trackId), x));
             }
             return out;
         }
@@ -423,9 +435,7 @@ jobs:
             const prev = {};
             rows.forEach(r => { if (r.get('날짜') === yesterdayStr) prev[String(r.get('패키지명') || '').replace(/^'/, '')] = parseInt(r.get('순위'), 10); });
 
-            const res = await fetch(`https://itunes.apple.com/${country.code}/rss/${feed}/limit=100/genre=6014/json`);
-            if (!res.ok) throw new Error(`피드 HTTP ${res.status}`);
-            const entries = (await res.json())?.feed?.entry || [];
+            const entries = (await appleJson(`https://itunes.apple.com/${country.code}/rss/${feed}/limit=100/genre=6014/json`))?.feed?.entry || [];
             if (entries.length < EXPECTED_RANKS) shortfalls.push(`${label} ${entries.length}건 (기대 ${EXPECTED_RANKS}건)`);
             const info = await appleLookup(entries.map(e => e.id.attributes['im:id']), country.code);
 
