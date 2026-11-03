@@ -646,8 +646,17 @@ jobs:
         git add .github/.keepalive-rank data/snapshot.json data/version.json 2>/dev/null || git add .github/.keepalive-rank
         git diff --cached --quiet && exit 0
         git commit -m "chore: keepalive (rank) + 사이트용 스냅샷"
-        for i in 1 2 3; do
-          git pull --rebase --autostash && git push && exit 0
-          sleep $((RANDOM % 10 + 5))
+        pushed=0
+        for i in 1 2 3 4 5; do
+          git pull --rebase --autostash && git push && { pushed=1; break; }
+          echo "push 재시도 $i/5"; sleep $((i * 15 + RANDOM % 10))
         done
-        echo "keepalive push 실패 (본 작업에는 영향 없음)"
+        [ "$pushed" = 1 ] || { echo "::error::스냅샷 push 실패 — 사이트가 어제 스냅샷·캐시를 계속 씀. 이 워크플로를 다시 실행하세요"; exit 1; }
+        # Pages 배포 확인: 사이트가 읽는 version.json 이 이번 값으로 바뀔 때까지 (최대 약 8분)
+        [ -f data/version.json ] || exit 0
+        want=$(cat data/version.json)
+        for i in $(seq 1 32); do
+          [ "$(curl -s "https://jdpark618.github.io/gchart/data/version.json?t=$RANDOM$i")" = "$want" ] && { echo "Pages 반영 확인 (${i}회째)"; exit 0; }
+          sleep 15
+        done
+        echo "::error::Pages 에 스냅샷이 반영되지 않음 — GitHub Pages 배포 상태를 확인하세요"; exit 1
