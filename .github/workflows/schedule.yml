@@ -58,38 +58,51 @@ jobs:
         const LOOKBACK_DAYS = 14;
         const ROWS_PER_DAY = 100;
 
+        // ── 수집 국가 ─────────────────────────────────────────────
+        // 한국은 접미사 없는 기존 시트(DB_매출순위·DB_앱정보)를 그대로 쓰고, 다른 나라는 DB_매출순위_US 처럼 나라별 시트.
+        // 앱이름·설명·스크린샷은 그 나라 스토어 언어 그대로 받는다 (미국=영어, 일본=일본어, 대만=번체).
+        // 장르만은 사이트의 장르 색·필터가 맞도록 genreId 를 한국어 분류명으로 바꿔 적는다.
+        // 날짜는 나라와 상관없이 수집한 날의 한국 날짜.
+        // shotAlt = 스토어 페이지에서 스크린샷 이미지의 alt 문구 (상세 조회 실패 시 폴백용, 언어마다 다름)
+        const COUNTRIES = [
+            { code: 'kr', suffix: '',    name: '한국', lang: 'ko',    shotAlt: '스크린샷 이미지' },
+            { code: 'us', suffix: '_US', name: '미국', lang: 'en',    shotAlt: 'Screenshot image' },
+            { code: 'jp', suffix: '_JP', name: '일본', lang: 'ja',    shotAlt: 'スクリーンショット画像' },
+            { code: 'tw', suffix: '_TW', name: '대만', lang: 'zh-TW', shotAlt: '螢幕截圖圖片' },
+        ];
+
         // ── 앱 정보 (게임 설명·스크린샷) ──────────────────────────
-        // 순위 수집 때 받은 상세 조회 결과에서 설명·스크린샷만 모아 DB_앱정보 시트에 게임당 한 줄로 저장한다.
+        // 순위 수집 때 받은 상세 조회 결과에서 설명·스크린샷만 모아 나라별 DB_앱정보(_US…) 시트에 게임당 한 줄로 저장한다.
         // 사이트의 게임 상세 창이 패키지명으로 한 줄만 읽어 간다. 순위 시트와는 따로라 실패해도 순위 기록에 영향 없음.
-        const APPINFO_SHEET = 'DB_앱정보';
+        const APPINFO_SHEET = 'DB_앱정보';   // + 나라 접미사
         const APPINFO_HEADERS = ['패키지명', '앱이름', '설명', '스크린샷', '갱신일'];
         const APPINFO_SHOTS = 6;
-        const appInfo = {};
-        // primary=false(해외 차트)면 한국 차트에서 이미 받은 게임은 덮어쓰지 않는다 (한국 스토어 정보 우선)
-        function keepAppInfo(appId, title, detail, primary = true) {
+        const appInfoBy = {};   // 나라 코드 → { 패키지명 → 정보 }
+        const infoOf = code => (appInfoBy[code] ||= {});
+        function keepAppInfo(country, appId, title, detail) {
             if (!appId || !detail) return;
-            if (!primary && appInfo[appId]) return;
             const shots = (detail.screenshots || []).filter(u => typeof u === 'string' && u.startsWith('http')).slice(0, APPINFO_SHOTS);
             const desc = String(detail.description || '').trim();
-            if (desc || shots.length) appInfo[appId] = { title, desc, shots };
+            if (desc || shots.length) infoOf(country.code)[appId] = { title, desc, shots };
         }
         // 상세 조회가 실패하는 게임(장르 폴백과 같은 게임들)은 스토어 페이지에서 직접 읽는다.
-        // 설명 = data-g-id="description" 블록(<br> → 줄바꿈), 스크린샷 = alt="스크린샷 이미지" 인 이미지 (크기 접미사 뗀 주소)
+        // 설명 = data-g-id="description" 블록(<br> → 줄바꿈), 스크린샷 = alt 가 그 나라 언어의 '스크린샷 이미지'인 이미지 (크기 접미사 뗀 주소)
         function decodeHtml(t) {
             return t.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '')
                 .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n)).replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
                 .replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
         }
-        async function appInfoFromPage(appId, title, gl = 'kr') {
+        async function appInfoFromPage(country, appId, title) {
             try {
-                const res = await fetch(`https://play.google.com/store/apps/details?id=${encodeURIComponent(appId)}&hl=ko&gl=${gl}`);
+                const res = await fetch(`https://play.google.com/store/apps/details?id=${encodeURIComponent(appId)}&hl=${country.lang}&gl=${country.code}`);
                 if (!res.ok) return false;
                 const html = await res.text();
                 const m = html.match(/data-g-id="description"[^>]*>([\s\S]*?)<\/div>/);
                 const desc = m ? decodeHtml(m[1]).trim() : '';
-                const shots = [...new Set([...html.matchAll(/<img src="(https:\/\/play-lh\.googleusercontent\.com\/[^"=]+)=[^"]*"[^>]*alt="스크린샷 이미지"/g)].map(x => x[1]))].slice(0, APPINFO_SHOTS);
+                const shots = [...new Set([...html.matchAll(/<img src="(https:\/\/play-lh\.googleusercontent\.com\/[^"=]+)=[^"]*"[^>]*alt="([^"]*)"/g)]
+                    .filter(x => x[2] === country.shotAlt).map(x => x[1]))].slice(0, APPINFO_SHOTS);
                 if (!desc && !shots.length) return false;
-                appInfo[appId] = { title, desc, shots };
+                infoOf(country.code)[appId] = { title, desc, shots };
                 return true;
             } catch (e) {
                 return false;
@@ -171,17 +184,6 @@ jobs:
         const EXPECTED_RANKS = 100;
         const shortfalls = [];   // 수집 건수가 모자란 차트 (main 끝에서 실패 처리)
 
-        // ── 수집 국가 ─────────────────────────────────────────────
-        // 한국은 접미사 없는 기존 시트(DB_매출순위)를 그대로 쓰고, 다른 나라는 DB_매출순위_US 처럼 나라별 시트.
-        // 언어는 모두 ko: 장르가 한국어로 와야 사이트의 장르 색·필터가 그대로 맞고, 게임명도 한국어 표기가 있으면 그걸로 온다.
-        // 날짜는 나라와 상관없이 수집한 날의 한국 날짜.
-        const COUNTRIES = [
-            { code: 'kr', suffix: '',    name: '한국' },
-            { code: 'us', suffix: '_US', name: '미국' },
-            { code: 'jp', suffix: '_JP', name: '일본' },
-            { code: 'tw', suffix: '_TW', name: '대만' },
-        ];
-
         async function processCategory(doc, docId, todayStr, yesterdayStr, collectionType, sheetNameSuffix, country) {
             const dbSheetName = `DB_${sheetNameSuffix}${country.suffix}`;
             const label = `${country.name} ${sheetNameSuffix}`;
@@ -252,7 +254,7 @@ jobs:
                 collection: collectionType,
                 num: 100,
                 country: country.code,
-                lang: 'ko'
+                lang: country.lang
             });
 
             // 차트는 매일 100위까지 온다. 모자라면 기록은 하되 실행을 실패로 표시해 알림이 오게 한다
@@ -270,9 +272,10 @@ jobs:
 
                     game.genre = null;
                     try {
-                        const detail = await gplay.app({ appId: game.appId, country: country.code, lang: 'ko' });
-                        keepAppInfo(game.appId, game.title, detail, country.code === 'kr');
-                        game.genre = detail.genre || null;
+                        const detail = await gplay.app({ appId: game.appId, country: country.code, lang: country.lang });
+                        keepAppInfo(country, game.appId, game.title, detail);
+                        // 장르: 한국은 받은 그대로(한국어), 해외는 genreId 를 한국어 분류명으로
+                        game.genre = (country.lang === 'ko' ? detail.genre : GENRE_KO[detail.genreId]) || null;
                         if (detail.icon) {
                             iconUrl = detail.icon;
                         }
@@ -281,7 +284,7 @@ jobs:
                         }
                     } catch (e) {
                         genreFails.push(`${game.title} (${game.appId}): ${e.message}`);
-                        if (!appInfo[game.appId]) await appInfoFromPage(game.appId, game.title, country.code);
+                        if (!infoOf(country.code)[game.appId]) await appInfoFromPage(country, game.appId, game.title);
                     }
                     if (!game.genre) {
                         game.genre = await genreFromPage(game.appId, country.code)
@@ -386,11 +389,12 @@ jobs:
          * DB_앱정보: 게임당 한 줄. 기존 줄은 남기고(차트에서 빠진 게임도 상세는 볼 수 있게) 오늘 받은 게임만 최신으로 바꾼다.
          * 수백 줄이라 통째로 다시 쓴다 (설명 첫 글자가 '-'·'=' 이어도 수식으로 읽히지 않게 raw 로 기록).
          */
-        async function saveAppInfo(doc, todayStr) {
-            const ids = Object.keys(appInfo);
-            if (!ids.length) { console.log('  - 저장할 앱 정보 없음'); return; }
-            let sh = doc.sheetsByTitle[APPINFO_SHEET];
-            if (!sh) sh = await doc.addSheet({ title: APPINFO_SHEET, headerValues: APPINFO_HEADERS, gridProperties: { rowCount: 2, columnCount: APPINFO_HEADERS.length } });
+        async function saveAppInfo(doc, todayStr, country) {
+            const sheetName = APPINFO_SHEET + country.suffix, info = infoOf(country.code);
+            const ids = Object.keys(info);
+            if (!ids.length) { console.log(`  - ${sheetName}: 저장할 앱 정보 없음`); return; }
+            let sh = doc.sheetsByTitle[sheetName];
+            if (!sh) sh = await doc.addSheet({ title: sheetName, headerValues: APPINFO_HEADERS, gridProperties: { rowCount: 2, columnCount: APPINFO_HEADERS.length } });
             await sh.loadHeaderRow();
             const all = new Map();
             for (const r of await sh.getRows()) {
@@ -399,28 +403,35 @@ jobs:
             }
             const before = all.size;
             ids.forEach(id => {
-                const a = appInfo[id];
+                const a = info[id];
                 all.set(id, { '패키지명': id, '앱이름': a.title, '설명': a.desc, '스크린샷': a.shots.join('\n'), '갱신일': todayStr });
             });
             await sh.clearRows();
             await sh.addRows([...all.values()], { raw: true });
-            console.log(`  - ${APPINFO_SHEET}: ${ids.length}개 갱신 · 전체 ${all.size}개 (새로 추가 ${all.size - before}개)`);
+            console.log(`  - ${sheetName}: ${ids.length}개 갱신 · 전체 ${all.size}개 (새로 추가 ${all.size - before}개)`);
         }
 
         /** 수동 실행(appinfo_only): 지금 두 차트의 게임 상세만 받아 앱 정보를 채운다. 순위 시트는 읽지도 쓰지도 않음 */
         async function fillAppInfoOnly(doc, todayStr) {
+            for (const country of COUNTRIES) {
+              try { await fillAppInfoCountry(doc, todayStr, country); }
+              catch (e) { console.warn(`  [경고] ${country.name} 앱 정보 실패: ${e.message}`); }
+            }
+        }
+        async function fillAppInfoCountry(doc, todayStr, country) {
+            console.log(`  [${country.name}]`);
             const seen = new Map();
             for (const collection of [gplay.collection.TOP_FREE, gplay.collection.GROSSING]) {
-                const list = await gplay.list({ category: gplay.category.GAME, collection, num: 100, country: 'kr', lang: 'ko' });
+                const list = await gplay.list({ category: gplay.category.GAME, collection, num: 100, country: country.code, lang: country.lang });
                 list.forEach(g => { if (g.appId && !seen.has(g.appId)) seen.set(g.appId, g.title); });
             }
             const entries = [...seen.entries()], fails = [], fixed = [];
             process.stdout.write(`  - 상세 조회 ${entries.length}개 `);
             for (let i = 0; i < entries.length; i += 10) {
                 await Promise.all(entries.slice(i, i + 10).map(async ([appId, title]) => {
-                    try { keepAppInfo(appId, title, await gplay.app({ appId, country: 'kr', lang: 'ko' })); }
+                    try { keepAppInfo(country, appId, title, await gplay.app({ appId, country: country.code, lang: country.lang })); }
                     catch (e) {
-                        if (await appInfoFromPage(appId, title)) fixed.push(title);
+                        if (await appInfoFromPage(country, appId, title)) fixed.push(title);
                         else fails.push(`${title} (${appId}): ${e.message}`);
                     }
                 }));
@@ -430,7 +441,7 @@ jobs:
             console.log(' 완료!');
             if (fixed.length) console.log(`  - 스토어 페이지로 보완 ${fixed.length}개: ${fixed.join(', ')}`);
             if (fails.length) console.log(`  - 앱 정보 없음 ${fails.length}개:\n    ` + fails.join('\n    '));
-            await saveAppInfo(doc, todayStr);
+            await saveAppInfo(doc, todayStr, country);
         }
 
         async function main() {
@@ -486,11 +497,13 @@ jobs:
 
             // 4. 게임 설명·스크린샷 (실패해도 순위 기록은 이미 끝났으므로 경고만)
             console.log("\n=== 4. 앱 정보(설명·스크린샷) 저장 ===");
-            try {
-                await doc.loadInfo();
-                await saveAppInfo(doc, todayStr);
-            } catch (e) {
-                console.warn(`  [경고] ${APPINFO_SHEET} 저장 실패: ${e.message}`);
+            await doc.loadInfo();
+            for (const country of COUNTRIES) {
+                try {
+                    await saveAppInfo(doc, todayStr, country);
+                } catch (e) {
+                    console.warn(`  [경고] ${APPINFO_SHEET}${country.suffix} 저장 실패: ${e.message}`);
+                }
             }
 
             if (failures.length) console.error(`[실패] 수집 오류: ${failures.join(' · ')}`);
