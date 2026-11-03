@@ -18,6 +18,7 @@ import random
 import re
 import time
 from datetime import datetime, timedelta
+from urllib.parse import parse_qs, urlparse
 from zoneinfo import ZoneInfo
 
 import gspread
@@ -82,7 +83,10 @@ MAX_DELETE_ABS = 20          # 위 비율 계산의 하한 (소규모일 때 과
 CREATE_BACKUP = True
 
 # ── 크롤링 ────────────────────────────────────────────────────
-CARD_SELECTOR = ".px-5.pt-5"
+CARD_SELECTOR = 'a.line-clamp-2[href*="/game/"]'   # 2026-11 개편 후 카드 제목 링크
+# 개편 후 플랫폼·출시유형 표기를 기존 DB 표기로 맞춘다 (표기가 바뀌면 행이 churn 되므로)
+PLATFORM_ALIAS = {"닌텐도": "NS", "플레이스테이션": "PS", "엑스박스": "Xbox"}
+RELEASE_TYPE_ALIAS = {"얼리 액세스": "얼리액세스", "소프트 런칭": "소프트런칭"}
 NAV_TIMEOUT_MS = 20000
 CARD_WAIT_MS = 5000
 NAV_RETRIES = 3
@@ -158,41 +162,50 @@ def extract_game_id(card):
     return ""
 
 
+def card_date_matches(card, date_str):
+    """카드에 적힌 날짜("2026. 11. 3.")가 요청 날짜와 같은지. 날짜 표기가 없으면 통과."""
+    elem = card.find("span", class_=lambda c: c and "tabular" in c)
+    nums = re.findall(r"\d+", elem.text) if elem else []
+    if len(nums) < 3:
+        return True
+    return "%04d-%02d-%02d" % tuple(int(n) for n in nums[:3]) == date_str
+
+
 def parse_cards(html, date_str):
-    """(파싱된 항목 리스트, 발견된 카드 개수)를 반환한다."""
+    """(파싱된 항목 리스트, 발견된 카드 개수)를 반환한다.
+
+    2026-11 개편 후 카드 = 게임 링크(a.line-clamp-2)를 감싼 div.relative 한 줄
+      - 제목: a 텍스트 / 퍼블리셔: p 의 "퍼블리셔 · 지역 · 스토어" 첫 칸
+      - 플랫폼: ul > li 들 (기존 DB 표기 "PC / NS / PS" 로 맞춤)
+      - 출시유형: 오른쪽 배지 span
+    """
     soup = BeautifulSoup(html, "html.parser")
-    cards = soup.find_all(
-        "div", class_=lambda c: c and "px-5" in c and "pt-5" in c
-    )
+    links = soup.find_all("a", href=re.compile(r"/game/\d+"),
+                          class_=lambda c: c and "line-clamp-2" in c)
+    cards = [a.find_parent("div", class_=lambda c: c and "relative" in c.split()) for a in links]
+    cards = [c for c in cards if c and card_date_matches(c, date_str)]
 
     items = []
     for card in cards:
         try:
-            title_elem = card.find("p", class_="line-clamp-2")
+            title_elem = card.find("a", class_=lambda c: c and "line-clamp-2" in c)
             title = title_elem.text.strip() if title_elem else ""
 
             if not title or title == "N/A":
                 log.warning("[%s] 게임명 파싱 실패 카드 1건 스킵", date_str)
                 continue
 
-            platform_elem = card.find(
-                "span", class_=lambda c: c and "text-xs" in c and "text-black" in c
+            platform = " / ".join(
+                PLATFORM_ALIAS.get(li.text.strip(), li.text.strip())
+                for li in card.select("ul li") if li.text.strip()
             )
-            platform = platform_elem.text.strip() if platform_elem else ""
 
-            publisher = ""
-            release_type = ""
-            for row in card.find_all("div", class_="gap-3"):
-                label_elem = row.find("div", class_="shrink-0")
-                value_elem = row.find("span", class_="truncate")
-                if not (label_elem and value_elem):
-                    continue
-                label = label_elem.text.strip()
-                val = value_elem.text.strip()
-                if label == "퍼블리셔":
-                    publisher = val
-                elif label == "출시 유형":
-                    release_type = val
+            sub = card.find("p")
+            publisher = sub.text.split("·")[0].strip() if sub else ""
+
+            badge = card.find("span", class_=lambda c: c and "whitespace-nowrap" in c)
+            release_type = badge.text.strip() if badge else ""
+            release_type = RELEASE_TYPE_ALIAS.get(release_type, release_type)
 
             items.append({
                 "출시일": date_str,
@@ -237,6 +250,12 @@ def scrape_one_date(page, date_str):
                 continue
             return []
 
+        # 개편 후 배지·날짜는 제목보다 늦게 스트리밍되어 들어온다 → 문서 로드 완료까지 기다린다
+        try:
+            page.wait_for_load_state("load", timeout=NAV_TIMEOUT_MS)
+        except PlaywrightTimeout:
+            pass
+
         try:
             items, card_count = parse_cards(page.content(), date_str)
         except Exception as e:
@@ -250,6 +269,12 @@ def scrape_one_date(page, date_str):
         if card_count > 0 and not items:
             log.warning("[%s] 카드 %d개를 찾았으나 파싱 결과 0건 (%d/%d)",
                         date_str, card_count, attempt, NAV_RETRIES)
+            time.sleep(1.5 * attempt)
+            continue
+
+        # 출시유형은 중복 판정 키라 빈 값으로 저장되면 행이 갈린다 → 배지가 덜 들어왔으면 다시 읽는다
+        if any(not it["출시유형"] for it in items) and attempt < NAV_RETRIES:
+            log.warning("[%s] 출시유형 빈 카드가 있어 다시 읽음 (%d/%d)", date_str, attempt, NAV_RETRIES)
             time.sleep(1.5 * attempt)
             continue
 
@@ -319,6 +344,9 @@ def scrape_game_detail(game_id, session):
     for img in soup.find_all("img"):
         alt = (img.get("alt") or "").lower()
         src = (img.get("src") or img.get("data-src") or "").strip()
+        # 개편 후 일부 이미지는 /_next/image?url=<원본 인코딩> 형태 → 원본 주소로 되돌린다
+        if src.startswith("/_next/image"):
+            src = parse_qs(urlparse(src).query).get("url", [""])[0]
         if not src or src in seen:
             continue
         if "screenshot" in alt or "/screenshot/" in src:
