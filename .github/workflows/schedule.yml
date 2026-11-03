@@ -65,8 +65,10 @@ jobs:
         const APPINFO_HEADERS = ['패키지명', '앱이름', '설명', '스크린샷', '갱신일'];
         const APPINFO_SHOTS = 6;
         const appInfo = {};
-        function keepAppInfo(appId, title, detail) {
+        // primary=false(해외 차트)면 한국 차트에서 이미 받은 게임은 덮어쓰지 않는다 (한국 스토어 정보 우선)
+        function keepAppInfo(appId, title, detail, primary = true) {
             if (!appId || !detail) return;
+            if (!primary && appInfo[appId]) return;
             const shots = (detail.screenshots || []).filter(u => typeof u === 'string' && u.startsWith('http')).slice(0, APPINFO_SHOTS);
             const desc = String(detail.description || '').trim();
             if (desc || shots.length) appInfo[appId] = { title, desc, shots };
@@ -78,9 +80,9 @@ jobs:
                 .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n)).replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
                 .replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
         }
-        async function appInfoFromPage(appId, title) {
+        async function appInfoFromPage(appId, title, gl = 'kr') {
             try {
-                const res = await fetch(`https://play.google.com/store/apps/details?id=${encodeURIComponent(appId)}&hl=ko&gl=kr`);
+                const res = await fetch(`https://play.google.com/store/apps/details?id=${encodeURIComponent(appId)}&hl=ko&gl=${gl}`);
                 if (!res.ok) return false;
                 const html = await res.text();
                 const m = html.match(/data-g-id="description"[^>]*>([\s\S]*?)<\/div>/);
@@ -104,9 +106,9 @@ jobs:
             GAME_MUSIC: '음악', GAME_PUZZLE: '퍼즐', GAME_RACING: '레이싱', GAME_ROLE_PLAYING: '롤플레잉',
             GAME_SIMULATION: '시뮬레이션', GAME_SPORTS: '스포츠', GAME_STRATEGY: '전략', GAME_TRIVIA: '퀴즈', GAME_WORD: '단어'
         };
-        async function genreFromPage(appId) {
+        async function genreFromPage(appId, gl = 'kr') {
             try {
-                const res = await fetch(`https://play.google.com/store/apps/details?id=${encodeURIComponent(appId)}&hl=ko&gl=kr`);
+                const res = await fetch(`https://play.google.com/store/apps/details?id=${encodeURIComponent(appId)}&hl=ko&gl=${gl}`);
                 if (!res.ok) return null;
                 const m = (await res.text()).match(/"applicationCategory":"(GAME_[A-Z_]+)"/);
                 return m ? (GENRE_KO[m[1]] || null) : null;
@@ -169,13 +171,27 @@ jobs:
         const EXPECTED_RANKS = 100;
         const shortfalls = [];   // 수집 건수가 모자란 차트 (main 끝에서 실패 처리)
 
-        async function processCategory(doc, docId, todayStr, yesterdayStr, collectionType, sheetNameSuffix) {
-            const dbSheetName = `DB_${sheetNameSuffix}`;
+        // ── 수집 국가 ─────────────────────────────────────────────
+        // 한국은 접미사 없는 기존 시트(DB_매출순위)를 그대로 쓰고, 다른 나라는 DB_매출순위_US 처럼 나라별 시트.
+        // 언어는 모두 ko: 장르가 한국어로 와야 사이트의 장르 색·필터가 그대로 맞고, 게임명도 한국어 표기가 있으면 그걸로 온다.
+        // 날짜는 나라와 상관없이 수집한 날의 한국 날짜.
+        const COUNTRIES = [
+            { code: 'kr', suffix: '',    name: '한국' },
+            { code: 'us', suffix: '_US', name: '미국' },
+            { code: 'jp', suffix: '_JP', name: '일본' },
+            { code: 'tw', suffix: '_TW', name: '대만' },
+        ];
+
+        async function processCategory(doc, docId, todayStr, yesterdayStr, collectionType, sheetNameSuffix, country) {
+            const dbSheetName = `DB_${sheetNameSuffix}${country.suffix}`;
+            const label = `${country.name} ${sheetNameSuffix}`;
 
             let dbSheet = doc.sheetsByTitle[dbSheetName];
             const dbHeaders = ["날짜", "순위", "증감", "앱이름", "패키지명", "장르", "개발사(퍼블리셔)", "증감수치", "평점", "아이콘url"];
             if (!dbSheet) {
-                dbSheet = await doc.addSheet({ title: dbSheetName, headerValues: dbHeaders });
+                // 새 시트는 열을 헤더 수만큼만 (기본 26열은 시트 전체 1천만 칸 한도를 낭비)
+                dbSheet = await doc.addSheet({ title: dbSheetName, headerValues: dbHeaders, gridProperties: { rowCount: 2, columnCount: dbHeaders.length } });
+                console.log(`  - 새 시트 생성: ${dbSheetName}`);
             }
             await dbSheet.loadHeaderRow();
 
@@ -185,12 +201,12 @@ jobs:
 
             const cutoffStr = addDays(todayStr, -LOOKBACK_DAYS);
             const { rows, scanned, mode, limit } = await loadRecentRows(dbSheet, cutoffStr);
-            console.log(`  - ${sheetNameSuffix}: 날짜열 ${scanned}행 스캔(${mode}) → 최근 ${rows.length}행 로드 (${cutoffStr} 이후)`);
+            console.log(`  - ${label}: 날짜열 ${scanned}행 스캔(${mode}) → 최근 ${rows.length}행 로드 (${cutoffStr} 이후)`);
 
             // 같은 날 두 번 돌아도(수동 실행 뒤 예약 실행 등) 오늘 순위가 두 벌 쌓이지 않게, 이미 있으면 건너뛴다
             const todayRowCount = rows.filter(r => r.get('날짜') === todayStr).length;
             if (todayRowCount > 0) {
-                console.log(`  [건너뜀] ${sheetNameSuffix}: 오늘(${todayStr}) 행 ${todayRowCount}개가 이미 있습니다.`);
+                console.log(`  [건너뜀] ${label}: 오늘(${todayStr}) 행 ${todayRowCount}개가 이미 있습니다.`);
                 return {};
             }
 
@@ -228,24 +244,24 @@ jobs:
             }
 
             if (yesterdayRowCount === 0) {
-                console.warn(`  [경고] ${sheetNameSuffix}: 어제(${yesterdayStr}) 데이터가 없습니다. 증감이 전부 NEW로 기록됩니다.`);
+                console.warn(`  [경고] ${label}: 어제(${yesterdayStr}) 데이터가 없습니다. 증감이 전부 NEW로 기록됩니다.`);
             }
 
             const topGamesList = await gplay.list({
                 category: gplay.category.GAME,
                 collection: collectionType,
                 num: 100,
-                country: 'kr',
+                country: country.code,
                 lang: 'ko'
             });
 
             // 차트는 매일 100위까지 온다. 모자라면 기록은 하되 실행을 실패로 표시해 알림이 오게 한다
             if (topGamesList.length < EXPECTED_RANKS) {
-                shortfalls.push(`${sheetNameSuffix} ${topGamesList.length}건 (기대 ${EXPECTED_RANKS}건)`);
+                shortfalls.push(`${label} ${topGamesList.length}건 (기대 ${EXPECTED_RANKS}건)`);
             }
 
             const topGames = [], genreFails = [], genreFixed = [];
-            process.stdout.write(`  - ${sheetNameSuffix} 장르, 평점 및 아이콘 데이터 수집 중...`);
+            process.stdout.write(`  - ${label} 장르, 평점 및 아이콘 데이터 수집 중...`);
             for (let i = 0; i < topGamesList.length; i += 10) {
                 const chunk = topGamesList.slice(i, i + 10);
                 const promises = chunk.map(async (game) => {
@@ -254,8 +270,8 @@ jobs:
 
                     game.genre = null;
                     try {
-                        const detail = await gplay.app({ appId: game.appId, country: 'kr', lang: 'ko' });
-                        keepAppInfo(game.appId, game.title, detail);
+                        const detail = await gplay.app({ appId: game.appId, country: country.code, lang: 'ko' });
+                        keepAppInfo(game.appId, game.title, detail, country.code === 'kr');
                         game.genre = detail.genre || null;
                         if (detail.icon) {
                             iconUrl = detail.icon;
@@ -265,10 +281,10 @@ jobs:
                         }
                     } catch (e) {
                         genreFails.push(`${game.title} (${game.appId}): ${e.message}`);
-                        await appInfoFromPage(game.appId, game.title);
+                        if (!appInfo[game.appId]) await appInfoFromPage(game.appId, game.title, country.code);
                     }
                     if (!game.genre) {
-                        game.genre = await genreFromPage(game.appId)
+                        game.genre = await genreFromPage(game.appId, country.code)
                             || latestKnownGenres[game.appId] || latestKnownGenres[game.title] || '기타';
                         genreFixed.push(`${game.title} → ${game.genre}`);
                     }
@@ -330,7 +346,7 @@ jobs:
 
             if (dbRows.length > 0) {
                 await dbSheet.addRows(dbRows);
-                console.log(`[완료] ${sheetNameSuffix} DB 시트에 데이터 기록 완료!`);
+                console.log(`[완료] ${label} DB 시트에 데이터 기록 완료!`);
             }
 
             // 오늘 제대로 받은 장르: 패키지명·앱이름 → 장르 (과거 '기타' 행 보정용)
@@ -440,18 +456,26 @@ jobs:
                 return;
             }
 
-            console.log("=== 1. 게임 인기순위 수집 시작 ===");
-            const popGenres = await processCategory(doc, docId, todayStr, yesterdayStr, gplay.collection.TOP_FREE, '인기순위');
+            // 1~2. 나라별 인기·매출 순위 (한국 먼저). 한 나라가 실패해도 나머지는 계속하고, 끝에서 실행을 실패로 표시
+            const genreByKey = {}, failures = [];
+            for (const country of COUNTRIES) {
+                console.log(`\n=== ${country.name}(${country.code}) 인기순위 · 매출순위 수집 ===`);
+                for (const [collection, suffix] of [[gplay.collection.TOP_FREE, '인기순위'], [gplay.collection.GROSSING, '매출순위']]) {
+                    try {
+                        Object.assign(genreByKey, await processCategory(doc, docId, todayStr, yesterdayStr, collection, suffix, country));
+                    } catch (e) {
+                        failures.push(`${country.name} ${suffix}: ${e.message}`);
+                        console.error(`  [실패] ${country.name} ${suffix}: ${e.message}`);
+                    }
+                }
+            }
 
-            console.log("\n=== 2. 게임 매출순위 수집 시작 ===");
-            const salesGenres = await processCategory(doc, docId, todayStr, yesterdayStr, gplay.collection.GROSSING, '매출순위');
-
-            // 3. 두 시트에서 받은 장르를 합쳐 과거 '기타' 행 보정 (한쪽 차트에만 있는 게임도 다른 시트 이력까지 고침)
+            // 3. 모든 나라에서 받은 장르를 합쳐 과거 '기타' 행 보정 (장르는 패키지 단위라 나라와 무관)
             // 보정 실패가 오늘 수집 결과에는 영향을 주지 않도록 따로 잡는다
             console.log("\n=== 3. 과거 '기타' 장르 보정 ===");
-            const genreByKey = { ...popGenres, ...salesGenres };
             await doc.loadInfo();   // 오늘 행이 붙은 뒤의 행 수로 갱신
-            for (const name of ['DB_인기순위', 'DB_매출순위']) {
+            for (const name of COUNTRIES.flatMap(c => [`DB_인기순위${c.suffix}`, `DB_매출순위${c.suffix}`])) {
+                if (!doc.sheetsByTitle[name]) continue;
                 try {
                     const n = await backfillGenres(doc.sheetsByTitle[name], genreByKey);
                     console.log(`  - ${name}: ${n}행 보정`);
@@ -469,10 +493,9 @@ jobs:
                 console.warn(`  [경고] ${APPINFO_SHEET} 저장 실패: ${e.message}`);
             }
 
-            if (shortfalls.length) {
-                console.error(`[실패] 순위 수집 건수 부족: ${shortfalls.join(' · ')}`);
-                process.exit(1);
-            }
+            if (failures.length) console.error(`[실패] 수집 오류: ${failures.join(' · ')}`);
+            if (shortfalls.length) console.error(`[실패] 순위 수집 건수 부족: ${shortfalls.join(' · ')}`);
+            if (failures.length || shortfalls.length) process.exit(1);
         }
 
         main().catch(e => { console.error(e); process.exit(1); });
