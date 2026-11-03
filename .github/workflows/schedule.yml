@@ -49,6 +49,7 @@ jobs:
         const { GoogleSpreadsheet } = require('google-spreadsheet');
         const { JWT } = require('google-auth-library');
         const gplay = require('google-play-scraper');
+        const fs = require('fs');
 
         // ── 조회 윈도우 설정 ──────────────────────────────────────
         // 필요한 과거 데이터는 두 가지뿐이다.
@@ -181,6 +182,32 @@ jobs:
             return { rows, scanned: dateCol.length, mode, offset, limit };
         }
 
+        // ── 사이트용 스냅샷 (data/snapshot.json) ──────────────────
+        // 사이트가 구글 시트를 수십 번 조회하지 않도록, 4개국 × 2스토어의 최신 차트와 최근 앱 목록을
+        // 수집 중에 이미 읽은 행으로 만들어 GitHub Pages 에 올린다 (시트 API 를 더 부르지 않음).
+        // 행 모양은 시트와 같은 10칸: [날짜, 순위, 증감, 앱이름, 패키지명, 장르, 퍼블리셔, 증감수치, 평점, 아이콘]
+        const snapRows = {};
+        const unq = v => String(v ?? '').replace(/^'/, '').trim();
+        function snapAdd(sheetName, arr) { (snapRows[sheetName] ||= []).push(...arr); }
+        const rowToArr = r => [unq(r.get('날짜')), Number(r.get('순위')) || 0, unq(r.get('증감')), unq(r.get('앱이름')), unq(r.get('패키지명')), unq(r.get('장르')), unq(r.get('개발사(퍼블리셔)')), unq(r.get('증감수치')), unq(r.get('평점')), unq(r.get('아이콘url'))];
+        const objToArr = o => [unq(o['날짜']), Number(o['순위']) || 0, unq(o['증감']), unq(o['앱이름']), unq(o['패키지명']), unq(o['장르']), unq(o['개발사(퍼블리셔)']), unq(o['증감수치']), unq(o['평점']), unq(o['아이콘url'])];
+        function exportSnapshot(todayStr) {
+            const snap = { v: new Date().toISOString(), today: todayStr, charts: {}, apps: {} };
+            for (const st of ['gp', 'ios']) for (const country of COUNTRIES) for (const [k, base] of [['sales', '매출순위'], ['popular', '인기순위']]) {
+                const arr = snapRows[`DB_${base}${st === 'ios' ? '_iOS' : ''}${country.suffix}`];
+                if (!arr || !arr.length) continue;
+                const latest = arr.reduce((m, r) => r[0] > m ? r[0] : m, '');
+                ((snap.charts[st] ||= {})[country.code] ||= {})[k] = { date: latest, rows: arr.filter(r => r[0] === latest).sort((a, b) => a[1] - b[1]) };
+                const apps = ((snap.apps[st] ||= {})[country.code] ||= {});   // 패키지명 → [이름, 퍼블리셔, 마지막 날짜]
+                arr.forEach(r => { if (!r[4].includes('.')) return; const a = apps[r[4]]; if (!a || r[0] >= a[2]) apps[r[4]] = [r[3], r[6], r[0]]; });
+            }
+            fs.mkdirSync('data', { recursive: true });
+            fs.writeFileSync('data/snapshot.json', JSON.stringify(snap));
+            fs.writeFileSync('data/version.json', JSON.stringify({ v: snap.v, today: todayStr }));
+            const n = Object.values(snap.charts).flatMap(x => Object.values(x)).flatMap(x => Object.values(x)).length;
+            console.log(`  - data/snapshot.json: 차트 ${n}개 · ${Math.round(fs.statSync('data/snapshot.json').size / 1024)}KB`);
+        }
+
         const EXPECTED_RANKS = 100;
         const shortfalls = [];   // 수집 건수가 모자란 차트 (main 끝에서 실패 처리)
 
@@ -203,6 +230,7 @@ jobs:
 
             const cutoffStr = addDays(todayStr, -LOOKBACK_DAYS);
             const { rows, scanned, mode, limit } = await loadRecentRows(dbSheet, cutoffStr);
+            snapAdd(dbSheetName, rows.map(rowToArr));
             console.log(`  - ${label}: 날짜열 ${scanned}행 스캔(${mode}) → 최근 ${rows.length}행 로드 (${cutoffStr} 이후)`);
 
             // 같은 날 두 번 돌아도(수동 실행 뒤 예약 실행 등) 오늘 순위가 두 벌 쌓이지 않게, 이미 있으면 건너뛴다
@@ -349,6 +377,7 @@ jobs:
 
             if (dbRows.length > 0) {
                 await dbSheet.addRows(dbRows);
+                snapAdd(dbSheetName, dbRows.map(objToArr));
                 console.log(`[완료] ${label} DB 시트에 데이터 기록 완료!`);
             }
 
@@ -430,6 +459,7 @@ jobs:
             }
             await dbSheet.loadHeaderRow();
             const { rows } = await loadRecentRows(dbSheet, addDays(todayStr, -LOOKBACK_DAYS));
+            snapAdd(dbSheetName, rows.map(rowToArr));
             const todayRowCount = rows.filter(r => r.get('날짜') === todayStr).length;
             if (todayRowCount > 0) { console.log(`  [건너뜀] ${label}: 오늘(${todayStr}) 행 ${todayRowCount}개가 이미 있습니다.`); return; }
             const prev = {};
@@ -457,7 +487,7 @@ jobs:
                     "아이콘url": icon ? `'${icon}` : `'-`
                 };
             });
-            if (dbRows.length) { await dbSheet.addRows(dbRows); console.log(`[완료] ${label} ${dbRows.length}행 기록 (조회 ${info.size}개)`); }
+            if (dbRows.length) { await dbSheet.addRows(dbRows); snapAdd(dbSheetName, dbRows.map(objToArr)); console.log(`[완료] ${label} ${dbRows.length}행 기록 (조회 ${info.size}개)`); }
         }
 
         async function saveAppInfo(doc, todayStr, country, ios = false) {
@@ -592,6 +622,10 @@ jobs:
                 }
             }
 
+            // 5. 사이트용 스냅샷 (실패해도 수집 결과에는 영향 없음)
+            console.log("\n=== 5. 사이트용 스냅샷 ===");
+            try { exportSnapshot(todayStr); } catch (e) { console.warn(`  [경고] 스냅샷 저장 실패: ${e.message}`); }
+
             if (failures.length) console.error(`[실패] 수집 오류: ${failures.join(' · ')}`);
             if (shortfalls.length) console.error(`[실패] 순위 수집 건수 부족: ${shortfalls.join(' · ')}`);
             if (failures.length || shortfalls.length) process.exit(1);
@@ -609,9 +643,9 @@ jobs:
         date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/.keepalive-rank
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add .github/.keepalive-rank
+        git add .github/.keepalive-rank data/snapshot.json data/version.json 2>/dev/null || git add .github/.keepalive-rank
         git diff --cached --quiet && exit 0
-        git commit -m "chore: keepalive (rank)"
+        git commit -m "chore: keepalive (rank) + 사이트용 스냅샷"
         for i in 1 2 3; do
           git pull --rebase --autostash && git push && exit 0
           sleep $((RANDOM % 10 + 5))
