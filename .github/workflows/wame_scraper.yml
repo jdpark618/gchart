@@ -2,8 +2,8 @@ name: Wame Calendar Scraper
 
 on:
   schedule:
-    # UTC 20:12 = 한국 시간 다음 날 05:12
-    - cron: '12 20 * * *'
+    # UTC 18:12 = 한국 시간 다음 날 03:12 (예약 지연 대비 앞당김, 11/05)
+    - cron: '12 18 * * *'
   workflow_dispatch: # 수동 실행 버튼 활성화
 
 permissions:
