@@ -1,0 +1,116 @@
+{
+ "when_utc": "2026-11-05 08:26:48",
+ "meta": {
+  "query": "제우스",
+  "tries": [
+   {
+    "variant": "default",
+    "status": 403,
+    "title": "광고 라이브러리",
+    "count": 366,
+    "got": 29,
+    "sec": 3.6
+   },
+   {
+    "variant": "&sort_data[mode]=total_impressions&sort_data[direction]=desc",
+    "status": 200,
+    "title": "광고 라이브러리",
+    "count": 366,
+    "got": 29,
+    "sec": 1.9
+   },
+   {
+    "variant": "&media_type=video",
+    "status": 200,
+    "title": "광고 라이브러리",
+    "count": 355,
+    "got": 30,
+    "sec": 7.4
+   },
+   {
+    "variant": "&media_type=image",
+    "status": 200,
+    "title": "광고 라이브러리",
+    "count": 1,
+    "got": 1,
+    "sec": 1.4
+   }
+  ],
+  "unique_ads": 36,
+  "sample": [
+   {
+    "id": "1788635858510924",
+    "page": "wow_campingcar_",
+    "start": 1766995200,
+    "active": true,
+    "body": "오늘은 제우스640을소개합니다\n캠핑카의 끝판왕이죠!!!\n널은공간.수납공간.럭셔리캠핑카^^♡\n즐거운캠핑!!!!"
+   },
+   {
+    "id": "2338148683058033",
+    "page": "wow_campingcar_",
+    "start": 1718002800,
+    "active": true,
+    "body": "오늘은 제우스640을소개합니다\n캠핑카의 끝판왕이죠!!!\n널은공간.수납공간.럭셔리캠핑카^^♡\n즐거운캠핑!!!!"
+   },
+   {
+    "id": "1640198934159137",
+    "page": "갓바디",
+    "start": 1793343600,
+    "active": true,
+    "body": "블프 반값 할인 ✨안착팬티 3+3✨\n\n갓바디만의 특허 받은 끼임방지 패턴으로\n엉덩이 사이로 팬티가 전혀 끼지"
+   },
+   {
+    "id": "1534910578395313",
+    "page": "星辰劇場",
+    "start": 1791961200,
+    "active": false,
+    "body": "身染頑疾的她，和系統簽下契約，任務是在韓國頂級貴族名校，扮演財閥二代生活整整一年。這所學校，依照家世財富劃分學生等級，財"
+   },
+   {
+    "id": "2335543957264439",
+    "page": "권조",
+    "start": 1793084400,
+    "active": true,
+    "body": "기존/신규회원 모두 무료배송, 10% 할인 쿠폰 한정수량 지급 !\n\n나만의 특별한 코디\n3040대를 위한 유"
+   }
+  ]
+ },
+ "google": {
+  "advertiser_query": "com2us",
+  "pkg": "com.com2us.es.android.google.kr.normal",
+  "status": 200,
+  "advertisers": [
+   {
+    "name": " Com2uS",
+    "id": "AR10540700525865730049",
+    "region": "KR"
+   },
+   {
+    "name": "Com2uS USA, Inc.",
+    "id": "AR11233032486428606465",
+    "region": "US"
+   }
+  ],
+  "perAdv": [
+   {
+    "name": " Com2uS",
+    "id": "AR10540700525865730049",
+    "region": "KR",
+    "creativesKR": 49,
+    "previewsChecked": 49,
+    "matchPkg": 0,
+    "sample": []
+   },
+   {
+    "name": "Com2uS USA, Inc.",
+    "id": "AR11233032486428606465",
+    "region": "US",
+    "creativesKR": 0,
+    "previewsChecked": 0,
+    "matchPkg": 0,
+    "sample": []
+   }
+  ],
+  "sec": 6.8
+ }
+}
