@@ -1,5 +1,13 @@
 [
  {
+  "pkg": "com.gof.global",
+  "name": "WOS",
+  "tracked_at": "2026-11-05T08:52:18Z",
+  "meta": 57,
+  "meta_total": 14543,
+  "google": 92
+ },
+ {
   "pkg": "jp.co.applibot.chiikawapocketgl",
   "name": "먼작귀 포켓",
   "tracked_at": "2026-11-05T08:46:13Z",
