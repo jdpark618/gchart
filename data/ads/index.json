@@ -1,5 +1,13 @@
 [
  {
+  "pkg": "jp.co.applibot.chiikawapocketgl",
+  "name": "먼작귀 포켓",
+  "tracked_at": "2026-11-05T08:46:13Z",
+  "meta": 0,
+  "meta_total": 0,
+  "google": 2
+ },
+ {
   "pkg": "com.kakaogames.dokkaebi",
   "name": "도깨비의세계",
   "tracked_at": "2026-11-05T08:35:12Z",
