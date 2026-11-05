@@ -138,6 +138,16 @@ def save_thumb(url, d):
             print('thumb fail', url[:70], e); return ''
     return key + '.jpg'
 
+nz = lambda v: re.sub(r'[\s:：·\-]', '', v or '').lower()   # 이름 비교용: 띄어쓰기·콜론 무시
+STORE_LB = re.compile(r'^(출시 예정|속도감 있는 게임|등록|사전 등록|지금 예약|예약하기|설치|받기|열기|앱 열기|개발자)$')
+
+async def play_title(ctx, pkg):
+    """Google Play 정식 이름 (문구에서 게임 이름 줄을 거르는 데 씀)"""
+    pg = await ctx.new_page()
+    await pg.goto(f'https://play.google.com/store/apps/details?id={pkg}&hl=ko&gl=KR', wait_until='domcontentloaded', timeout=45000)
+    t = await pg.title()
+    return re.sub(r'\s*-\s*Google Play.*$', '', t).strip()
+
 async def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--name', required=True); ap.add_argument('--pkg', required=True)
@@ -152,7 +162,14 @@ async def main():
         except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
         try: res['google'] = await google(ctx, clean(a.google_adv), clean(a.google_adv_id), pkg)
         except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
+        try: res['title'] = await play_title(ctx, pkg)
+        except Exception: res['title'] = ''
         await b.close()
+    # Google 문구 정리: 게임 이름(검색어·Play 정식 이름)과 그 조각 · 스토어 카드 라벨 · 깨진 따옴표(x22 등) 제거 → 실제 광고 문구만
+    names = [nz(v) for v in keys + [res['title']] if nz(v)]
+    for x in res['google'].get('ads', []):
+        x['lines'] = [l for l in (re.sub(r'^x(22|27|3e)', '', s).strip() for s in x.get('lines', []))
+                      if nz(l) and not STORE_LB.match(l) and not any(nz(l) in n for n in names)]
     # 썸네일: 앱별 폴더를 새로 (최신 1회분만 보관)
     d = os.path.join(ROOT, 'data', 'ads', 'img', pkg); shutil.rmtree(d, ignore_errors=True); os.makedirs(d, exist_ok=True)
     for x in res['meta'].get('ads', []): x['thumb'] = save_thumb(x.pop('thumb', ''), d)
