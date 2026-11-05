@@ -4,7 +4,7 @@ name: Ad Tracker (마케팅 추적)
 on:
   workflow_dispatch:
     inputs:
-      name: { description: '게임명 (Meta 검색어)', required: true }
+      name: { description: '게임명 · Meta 검색어 (여러 개면 쉼표로, 첫 값이 표시 이름 예: 먼작귀 포켓, 먼작귀, 치이카와)', required: true }
       pkg: { description: 'Google Play 패키지명 (예 com.survivor.ace)', required: true }
       google_adv: { description: 'Google 광고주 검색어 (퍼블리셔명, 비우면 Google 건너뜀)', default: '' }
       meta_page: { description: 'Meta 페이지 ID (알면 입력, 비우면 자동)', default: '' }

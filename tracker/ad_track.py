@@ -50,28 +50,29 @@ def meta_norm(a):
             'variants': a.get('collation_count') or 1,
             'thumb': v.get('video_preview_image_url') or img.get('resized_image_url') or img.get('original_image_url') or card.get('resized_image_url') or ''}
 
-async def meta(ctx, name, pkg, page_id):
-    pg = await ctx.new_page(); out = {'query': name, 'pages': [], 'count': 0, 'ads': [], 'log': []}
+async def meta(ctx, keys, pkg, page_id):
+    pg = await ctx.new_page(); out = {'query': ', '.join(keys), 'pages': [], 'count': 0, 'ads': [], 'log': []}
     pages = {}
     if page_id:
         pages[page_id] = '(지정)'
     else:
-        # 1) 게임명 키워드(원래 이름 · 콜론 뒤 부제 · 콜론 앞) → 패키지가 링크에 든 광고의 페이지
-        ads = []
-        names = list(dict.fromkeys([name, name.split(':')[0].strip(), name.split(':')[-1].strip(), name.replace(':', ' ')]))
+        # 1) 게임명 키워드(쉼표로 여러 개 · 각각 콜론 앞/뒤 · 콜론 뺀 형태) → 패키지가 링크에 든 광고의 페이지
+        ads, seen = [], []
+        names = list(dict.fromkeys(v for k in keys for v in [k, k.split(':')[0].strip(), k.split(':')[-1].strip(), k.replace(':', ' ')]))
         for q in names:
             if len(q) < 2: continue
             cnt, ads = await meta_query(pg, f'&q={quote(q)}&search_type=keyword_unordered')
+            seen += ads
             hit = [a for a in ads if pkg in json.dumps(a['snapshot'], ensure_ascii=False)]
             out['log'].append({'keyword': q, 'count': cnt, 'got': len(ads), 'pkg_hit': len(hit)})
             for a in hit: pages[a.get('page_id')] = a['snapshot'].get('page_name')
             if pages: break
             await pg.wait_for_timeout(1200)
         # 패키지가 걸린 광고가 없으면(전부 iOS 링크 등) 페이지 이름이 게임명과 같은 페이지로
-        if not pages and ads:
-            nk = re.sub(r'\W', '', name).lower()
-            for a in ads:
-                if re.sub(r'\W', '', a['snapshot'].get('page_name') or '').lower() == nk: pages[a.get('page_id')] = a['snapshot'].get('page_name')
+        if not pages and seen:
+            nks = {re.sub(r'\W', '', k).lower() for k in keys}
+            for a in seen:
+                if re.sub(r'\W', '', a['snapshot'].get('page_name') or '').lower() in nks: pages[a.get('page_id')] = a['snapshot'].get('page_name')
             if pages: out['log'].append({'fallback': 'page_name'})
     # 2) 페이지 광고 전체 (비로그인 1회 30개 → 정렬·형식을 바꿔 여러 번)
     ads = {}
@@ -103,7 +104,7 @@ async ([q, advId, pkg]) => {
       await Promise.all(all.slice(i, i + 15).map(async c => {
         const u = c[3]?.[1]?.[4]; if (!u) return;
         let t = ''; try { t = await (await fetch(u)).text(); } catch (e) { return; }
-        const m = t.match(/com\.[a-z0-9_]+\.[a-z0-9_.]+/i); if (m) pk[m[0]] = (pk[m[0]] || 0) + 1;
+        new Set((t.match(/(?:com|jp|kr|net|io|co)\.[a-z0-9_]+\.[a-z0-9_.]+/gi) || []).map(x => x.replace(/\.+$/, '')).filter(x => !/^com\.(google|android)\./i.test(x))).forEach(x => { pk[x] = (pk[x] || 0) + 1; });
         if (!t.includes(pkg)) return; hit++;
         const yt = (t.match(/ytimg\.com\/vi\/([\w-]+)/) || [])[1] || '';
         const img = ((t.match(/https:\\?\/\\?\/tpc\.googlesyndication\.com\\?\/(?:archive\\?\/)?simgad[^"'\\\s)]+/) || [])[0] || '').replace(/\\\//g, '/');
@@ -141,12 +142,13 @@ async def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--name', required=True); ap.add_argument('--pkg', required=True)
     ap.add_argument('--google-adv', default=''); ap.add_argument('--meta-page', default=''); ap.add_argument('--google-adv-id', default='')
-    a = ap.parse_args(); name, pkg = clean(a.name), clean(a.pkg)
+    a = ap.parse_args(); pkg = clean(a.pkg)
+    keys = [clean(k) for k in a.name.split(',') if clean(k)]; name = keys[0]   # '먼작귀 포켓, 먼작귀' → 검색어 여러 개, 첫 값이 표시 이름
     t0 = time.time(); res = {'name': name, 'pkg': pkg, 'country': 'KR', 'tracked_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
     async with async_playwright() as p:
         b = await p.chromium.launch()
         ctx = await b.new_context(locale='ko-KR', user_agent=UA, viewport={'width': 1366, 'height': 900})
-        try: res['meta'] = await meta(ctx, name, pkg, clean(a.meta_page))
+        try: res['meta'] = await meta(ctx, keys, pkg, clean(a.meta_page))
         except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
         try: res['google'] = await google(ctx, clean(a.google_adv), clean(a.google_adv_id), pkg)
         except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
