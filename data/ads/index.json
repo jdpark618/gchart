@@ -1,0 +1,18 @@
+[
+ {
+  "pkg": "com.kakaogames.dokkaebi",
+  "name": "도깨비의세계",
+  "tracked_at": "2026-11-05T08:35:12Z",
+  "meta": 0,
+  "meta_total": 0,
+  "google": 32
+ },
+ {
+  "pkg": "com.survivor.ace",
+  "name": "탕탕에이스",
+  "tracked_at": "2026-11-05T08:34:08Z",
+  "meta": 31,
+  "meta_total": 98,
+  "google": 0
+ }
+]
