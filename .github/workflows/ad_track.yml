@@ -1,0 +1,53 @@
+name: Ad Tracker (마케팅 추적)
+# 게임 하나의 KR 광고(Meta · Google)를 모아 data/ads/ 에 저장 → 사이트가 Pages 로 읽음 (tracker/ad_track.py 설명 참고)
+# 실행: Actions 탭에서 수동 실행(게임명 · 패키지명 입력) 또는 tracker/test.json 수정 후 push (목록의 게임을 차례로)
+on:
+  workflow_dispatch:
+    inputs:
+      name: { description: '게임명 (Meta 검색어)', required: true }
+      pkg: { description: 'Google Play 패키지명 (예 com.survivor.ace)', required: true }
+      google_adv: { description: 'Google 광고주 검색어 (퍼블리셔명, 비우면 Google 건너뜀)', default: '' }
+      meta_page: { description: 'Meta 페이지 ID (알면 입력, 비우면 자동)', default: '' }
+      google_adv_id: { description: 'Google 광고주 ID AR... (알면 입력)', default: '' }
+  push:
+    branches: [main]
+    paths: ['tracker/test.json']
+concurrency: { group: ad-track, cancel-in-progress: false }
+permissions:
+  contents: write
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install playwright==1.48.0 pillow && python -m playwright install --with-deps chromium
+      - name: Track
+        env:
+          IN_NAME: ${{ inputs.name }}
+          IN_PKG: ${{ inputs.pkg }}
+          IN_GADV: ${{ inputs.google_adv }}
+          IN_MPAGE: ${{ inputs.meta_page }}
+          IN_GADVID: ${{ inputs.google_adv_id }}
+        run: |
+          if [ -n "$IN_PKG" ]; then
+            python tracker/ad_track.py --name "$IN_NAME" --pkg "$IN_PKG" --google-adv "$IN_GADV" --meta-page "$IN_MPAGE" --google-adv-id "$IN_GADVID"
+          else
+            python - <<'PY'
+          import json, subprocess
+          for g in json.load(open('tracker/test.json', encoding='utf-8')):
+              subprocess.run(['python', 'tracker/ad_track.py', '--name', g['name'], '--pkg', g['pkg'], '--google-adv', g.get('google_adv', ''),
+                              '--meta-page', g.get('meta_page', ''), '--google-adv-id', g.get('google_adv_id', '')], check=False)
+          PY
+          fi
+      - name: Save to main (Pages)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ads
+          git diff --cached --quiet && { echo "변경 없음"; exit 0; }
+          git commit -qm "ads: 마케팅 추적 결과 $(date -u +%FT%TZ)"
+          for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && exit 0; sleep $((i*5)); done
+          exit 1
