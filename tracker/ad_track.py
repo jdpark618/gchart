@@ -104,7 +104,7 @@ async ([q, advId, pkg]) => {
       await Promise.all(all.slice(i, i + 15).map(async c => {
         const u = c[3]?.[1]?.[4]; if (!u) return;
         let t = ''; try { t = await (await fetch(u)).text(); } catch (e) { return; }
-        new Set((t.match(/(?:com|jp|kr|net|io|co)\.[a-z0-9_]+\.[a-z0-9_.]+/gi) || []).map(x => x.replace(/\.+$/, '')).filter(x => !/^com\.(google|android)\./i.test(x))).forEach(x => { pk[x] = (pk[x] || 0) + 1; });
+        new Set((t.match(/(?:com|jp|kr|net|io|co)\.[a-z0-9_]+\.[a-z0-9_.]+/gi) || []).map(x => x.replace(/\.+$/, '')).filter(x => !/^com\.(google|android)\./i.test(x))).forEach(x => { pk[x] = (pk[x] || 0) + 1; });
         if (!t.includes(pkg)) return; hit++;
         const yt = (t.match(/ytimg\.com\/vi\/([\w-]+)/) || [])[1] || '';
         const img = ((t.match(/https:\\?\/\\?\/tpc\.googlesyndication\.com\\?\/(?:archive\\?\/)?simgad[^"'\\\s)]+/) || [])[0] || '').replace(/\\\//g, '/');
