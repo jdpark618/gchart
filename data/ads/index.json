@@ -1,10 +1,82 @@
 [
  {
+  "pkg": "com.garena.game.mho",
+  "name": "몬스터헌터 아웃랜더스",
+  "tracked_at": "2026-11-06T02:11:51Z",
+  "meta": 30,
+  "meta_total": 61,
+  "google": 36
+ },
+ {
+  "pkg": "com.farlightgames.warline.gp.global",
+  "name": "워라인: 스나이퍼",
+  "tracked_at": "2026-11-06T02:11:23Z",
+  "meta": 37,
+  "meta_total": 442,
+  "google": 0
+ },
+ {
   "pkg": "com.zjcs.android.kr",
   "name": "소드 x 스태프: 화산귀환 콜라보",
-  "tracked_at": "2026-11-05T09:13:37Z",
-  "meta": 110,
-  "meta_total": 388,
+  "tracked_at": "2026-11-06T02:09:54Z",
+  "meta": 107,
+  "meta_total": 375,
+  "google": 24
+ },
+ {
+  "pkg": "com.cookapps.catshinobi",
+  "name": "냥냥 시노비 : 미소녀 닌자 로그라이크 디펜스 RPG",
+  "tracked_at": "2026-11-06T02:08:57Z",
+  "meta": 59,
+  "meta_total": 100,
+  "google": 64
+ },
+ {
+  "pkg": "com.superpixel.scrap",
+  "name": "고물 히어로",
+  "tracked_at": "2026-11-06T02:08:40Z",
+  "meta": 0,
+  "meta_total": 0,
+  "google": 4
+ },
+ {
+  "pkg": "com.gof.global",
+  "name": "WOS: 화이트아웃 서바이벌",
+  "tracked_at": "2026-11-06T02:04:58Z",
+  "meta": 57,
+  "meta_total": 14322,
+  "google": 120
+ },
+ {
+  "pkg": "com.com2us.es.android.google.kr.normal",
+  "name": "제우스: 오만의 신",
+  "tracked_at": "2026-11-06T02:02:11Z",
+  "meta": 0,
+  "meta_total": 0,
+  "google": 56
+ },
+ {
+  "pkg": "com.kakaogames.dokkaebi",
+  "name": "도깨비의세계",
+  "tracked_at": "2026-11-06T02:01:19Z",
+  "meta": 0,
+  "meta_total": 0,
+  "google": 38
+ },
+ {
+  "pkg": "com.ncsoft.lineagem19",
+  "name": "리니지M",
+  "tracked_at": "2026-11-06T02:00:12Z",
+  "meta": 0,
+  "meta_total": 0,
+  "google": 68
+ },
+ {
+  "pkg": "com.proximabeta.nikke",
+  "name": "승리의 여신: 니케",
+  "tracked_at": "2026-11-06T01:59:50Z",
+  "meta": 48,
+  "meta_total": 96,
   "google": 0
  },
  {
@@ -24,28 +96,12 @@
   "google": 0
  },
  {
-  "pkg": "com.gof.global",
-  "name": "WOS",
-  "tracked_at": "2026-11-05T08:52:18Z",
-  "meta": 57,
-  "meta_total": 14543,
-  "google": 92
- },
- {
   "pkg": "jp.co.applibot.chiikawapocketgl",
   "name": "먼작귀 포켓",
   "tracked_at": "2026-11-05T08:46:13Z",
   "meta": 0,
   "meta_total": 0,
   "google": 2
- },
- {
-  "pkg": "com.kakaogames.dokkaebi",
-  "name": "도깨비의세계",
-  "tracked_at": "2026-11-05T08:35:12Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 32
  },
  {
   "pkg": "com.survivor.ace",
