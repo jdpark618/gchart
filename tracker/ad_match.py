@@ -98,20 +98,27 @@ async ([names, domains, ids]) => {
     const sg = await rpc('SearchService/SearchSuggestions', { 1: n, 2: 10, 3: 10 });
     (sg[1] || []).filter(x => x[1] && (x[1][3] === 'KR' || !x[1][3])).slice(0, 4).forEach(x => { if (!cand.has(x[1][2])) cand.set(x[1][2], { name: (x[1][1] || '').trim(), from: `도메인→이름 '${n}'` }); });
   }
-  const out = { matched: [], checked: [] };
-  for (const [id, a] of cand) {
+  /* 확인 순서: 이름으로 찾은 계정(퍼블리셔·법인) → 도메인→이름 → 도메인만(대행사 가능성).
+     미리보기 요청이 너무 많으면 구글이 막아(429) 뒤 계정이 모두 '없음'으로 나오므로: 게임당 미리보기 2000건 한도 · 10건씩 · 실패는 따로 셈 */
+  const rank = f => f.startsWith('이름') ? 0 : f.startsWith('도메인→') ? 1 : 2;
+  const order = [...cand.entries()].sort((x, y) => rank(x[1].from) - rank(y[1].from));
+  const out = { matched: [], checked: [] }; let budget = 2000;
+  for (const [id, a] of order) {
+    if (budget <= 0) { out.checked.push({ id, name: a.name, from: a.from, skipped: '미리보기 한도' }); continue; }
     let all = [], tok = null;
-    for (let p = 0; p < 15; p++) {   // 소재가 많은 계정(예 Proxima Beta)도 1500개까지
+    for (let p = 0; p < 15; p++) {   // 소재가 많은 계정(예 Proxima Beta)도 1500개까지 (최근 노출순)
       const req = { 2: 100, 3: { 12: { 1: '', 2: true }, 13: { 1: [id] }, 8: [2410] }, 7: { 1: 1, 2: 0, 3: 2410 } };
       if (tok) req[4] = tok;
       const j = await rpc('SearchService/SearchCreatives', req); all = all.concat(j[1] || []); tok = j[2]; if (!tok) break;
     }
-    let hit = 0;
-    for (let i = 0; i < all.length && !hit; i += 20) {
-      const res = await Promise.all(all.slice(i, i + 20).map(async c => { const u = c[3]?.[1]?.[4]; if (!u) return 0; try { const t = await (await fetch(u)).text(); return ids.some(x => t.includes(x)) ? 1 : 0; } catch (e) { return 0; } }));
+    let hit = 0, seen = 0, fail = 0;
+    for (let i = 0; i < all.length && !hit && budget > 0; i += 10) {
+      const res = await Promise.all(all.slice(i, i + 10).map(async c => { const u = c[3]?.[1]?.[4]; if (!u) return 0; seen++; budget--;
+        try { const r = await fetch(u); if (!r.ok) { fail++; return 0; } const t = await r.text(); return ids.some(x => t.includes(x)) ? 1 : 0; } catch (e) { fail++; return 0; } }));
       hit += res.reduce((s, v) => s + v, 0);
+      await new Promise(r => setTimeout(r, 120));
     }
-    out.checked.push({ id, name: a.name, from: a.from, creativesKR: all.length, hit: hit > 0 });
+    out.checked.push({ id, name: a.name, from: a.from, creativesKR: all.length, previews: seen, failed: fail, hit: hit > 0 });
     if (hit) out.matched.push({ id, name: a.name, by: `${a.from} → 소재에 패키지/iOS ID` });
   }
   return out;
