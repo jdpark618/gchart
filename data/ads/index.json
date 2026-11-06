@@ -2,39 +2,39 @@
  {
   "pkg": "com.garena.game.mho",
   "name": "몬스터헌터 아웃랜더스",
-  "tracked_at": "2026-11-06T07:33:58Z",
+  "tracked_at": "2026-11-06T08:19:37Z",
   "meta": 30,
-  "meta_total": 61,
+  "meta_total": 0,
   "google": 36
  },
  {
   "pkg": "com.farlightgames.warline.gp.global",
   "name": "워라인: 스나이퍼",
-  "tracked_at": "2026-11-06T07:33:40Z",
+  "tracked_at": "2026-11-06T08:19:35Z",
   "meta": 32,
-  "meta_total": 600,
+  "meta_total": 0,
   "google": 0
  },
  {
   "pkg": "com.zjcs.android.kr",
   "name": "소드 x 스태프: 화산귀환 콜라보",
-  "tracked_at": "2026-11-06T07:32:29Z",
+  "tracked_at": "2026-11-06T08:19:04Z",
   "meta": 105,
-  "meta_total": 263,
+  "meta_total": 0,
   "google": 24
  },
  {
   "pkg": "com.cookapps.catshinobi",
   "name": "냥냥 시노비 : 미소녀 닌자 로그라이크 디펜스 RPG",
-  "tracked_at": "2026-11-06T07:31:56Z",
+  "tracked_at": "2026-11-06T08:18:54Z",
   "meta": 49,
-  "meta_total": 72,
+  "meta_total": 0,
   "google": 64
  },
  {
   "pkg": "com.superpixel.scrap",
   "name": "고물 히어로",
-  "tracked_at": "2026-11-06T07:31:42Z",
+  "tracked_at": "2026-11-06T08:18:47Z",
   "meta": 0,
   "meta_total": 0,
   "google": 4
@@ -42,7 +42,7 @@
  {
   "pkg": "com.gof.global",
   "name": "WOS: 화이트아웃 서바이벌",
-  "tracked_at": "2026-11-06T07:30:33Z",
+  "tracked_at": "2026-11-06T08:18:01Z",
   "meta": 47,
   "meta_total": 131,
   "google": 120
@@ -50,7 +50,7 @@
  {
   "pkg": "com.com2us.es.android.google.kr.normal",
   "name": "제우스: 오만의 신",
-  "tracked_at": "2026-11-06T07:30:24Z",
+  "tracked_at": "2026-11-06T08:17:53Z",
   "meta": 0,
   "meta_total": 0,
   "google": 56
@@ -58,7 +58,7 @@
  {
   "pkg": "com.kakaogames.dokkaebi",
   "name": "도깨비의세계",
-  "tracked_at": "2026-11-06T07:30:17Z",
+  "tracked_at": "2026-11-06T08:17:46Z",
   "meta": 0,
   "meta_total": 0,
   "google": 38
@@ -66,7 +66,7 @@
  {
   "pkg": "com.ncsoft.lineagem19",
   "name": "리니지M",
-  "tracked_at": "2026-11-06T07:30:09Z",
+  "tracked_at": "2026-11-06T08:17:35Z",
   "meta": 0,
   "meta_total": 0,
   "google": 68
@@ -74,7 +74,7 @@
  {
   "pkg": "com.proximabeta.nikke",
   "name": "승리의 여신: 니케",
-  "tracked_at": "2026-11-06T07:29:54Z",
+  "tracked_at": "2026-11-06T08:17:16Z",
   "meta": 48,
   "meta_total": 96,
   "google": 0
