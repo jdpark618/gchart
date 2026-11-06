@@ -76,16 +76,18 @@ async def meta(ctx, keys, pkg, page_id):
             for a in seen:
                 if re.sub(r'\W', '', a['snapshot'].get('page_name') or '').lower() in nks: pages[a.get('page_id')] = a['snapshot'].get('page_name')
             if pages: out['log'].append({'fallback': 'page_name'})
-    # 2) 페이지 광고 전체 (비로그인 1회 30개 → 정렬·형식을 바꿔 여러 번)
+    # 2) 페이지의 한국어 광고 (비로그인 1회 30개 → 정렬·형식·상태를 바꿔 여러 번)
+    #    국가 KR 조건은 '한국에 한 번이라도 노출된 광고'라 글로벌 공용(영어 등) 소재가 상위를 덮음 → 광고 언어 한국어로 한정 (11/06)
     ads = {}
     for pid in list(pages)[:3]:
-        for v in ['', '&sort_data[mode]=total_impressions&sort_data[direction]=desc', '&media_type=video', '&media_type=image', '&active_status=active']:
-            cnt, got = await meta_query(pg, f'&search_type=page&view_all_page_id={pid}{v}')
+        for v in ['', '&sort_data[mode]=total_impressions&sort_data[direction]=desc', '&media_type=video', '&media_type=image', '&active_status=active', '&active_status=inactive']:
+            cnt, got = await meta_query(pg, f'&search_type=page&view_all_page_id={pid}&content_languages[0]=ko{v}')
             if v == '' and cnt: out['count'] += cnt
             for a in got: ads[a['ad_archive_id']] = a
             await pg.wait_for_timeout(1000)
         out['pages'].append({'id': pid, 'name': pages[pid] or next((a['snapshot'].get('page_name') for a in ads.values() if a.get('page_id') == pid), '')})
     out['ads'] = sorted((meta_norm(a) for a in ads.values()), key=lambda x: -(x['start'] or 0))
+    out['lang'] = 'ko'
     return out
 
 GOOGLE_JS = r"""
@@ -211,7 +213,8 @@ async def main():
     for x in res['google'].get('ads', []): x['thumb'] = save_thumb(f"https://i.ytimg.com/vi/{x['yt']}/hqdefault.jpg" if x.get('yt') else x.get('img'), d)
     # 이전 결과와 병합: Meta 는 ID 기준 최신 값으로, Google 은 저장된 소재의 날짜를 목록 값으로 갱신 + 새 소재 추가
     if prev:
-        mm = {x['id']: x for x in prev.get('meta', {}).get('ads', [])}; mm.update({x['id']: x for x in res['meta'].get('ads', [])})
+        mm = {x['id']: x for x in prev.get('meta', {}).get('ads', [])} if prev.get('meta', {}).get('lang') == 'ko' else {}   # 한국어 조회 이전(전체 언어) 결과는 버림
+        mm.update({x['id']: x for x in res['meta'].get('ads', [])})
         res['meta']['ads'] = sorted(mm.values(), key=lambda x: -(x.get('start') or 0))
         gm = {x['id']: x for x in prev.get('google', {}).get('ads', [])}
         for s in res['google'].get('seen', []):
@@ -219,6 +222,10 @@ async def main():
         gm.update({x['id']: x for x in res['google'].get('ads', [])})
         res['google']['ads'] = sorted(gm.values(), key=lambda x: -(x.get('last') or 0))
         res['google'].pop('seen', None)
+    # 더 이상 쓰지 않는 썸네일 파일 정리 (예: 한국어 조회로 바뀌며 빠진 소재)
+    used = {x.get('thumb') for k in ('meta', 'google') for x in res[k].get('ads', [])}
+    for f in os.listdir(d):
+        if f not in used: os.remove(os.path.join(d, f))
     res['google']['advertisers'] = res['google'].get('advertisers') or [{'id': g['id'], 'name': g.get('name', '')} for g in acc.get('google', [])]
     json.dump(accounts, open(ACC, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     res['sec'] = round(time.time() - t0, 1)
