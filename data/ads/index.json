@@ -1,56 +1,89 @@
 [
  {
-  "pkg": "com.gof.global",
-  "name": "WOS: 화이트아웃 서바이벌",
-  "tracked_at": "2026-11-06T08:33:52Z",
-  "meta": 47,
-  "meta_total": 131,
-  "google": 120
- },
- {
   "pkg": "com.garena.game.mho",
   "name": "몬스터헌터 아웃랜더스",
-  "tracked_at": "2026-11-06T08:19:37Z",
+  "publisher": "Garena Online Private Limited",
+  "aliases": [
+   "Garena Online Private Limited",
+   "아이루"
+  ],
+  "tracked_at": "2026-11-06T09:10:36Z",
   "meta": 30,
-  "meta_total": 0,
+  "meta_total": 61,
   "google": 36
  },
  {
   "pkg": "com.farlightgames.warline.gp.global",
   "name": "워라인: 스나이퍼",
-  "tracked_at": "2026-11-06T08:19:35Z",
+  "publisher": "Powerfantasy HK Limited",
+  "aliases": [
+   "Warline:Sniper Strike"
+  ],
+  "tracked_at": "2026-11-06T09:10:20Z",
   "meta": 32,
-  "meta_total": 0,
+  "meta_total": 601,
   "google": 0
  },
  {
   "pkg": "com.zjcs.android.kr",
   "name": "소드 x 스태프: 화산귀환 콜라보",
-  "tracked_at": "2026-11-06T08:19:04Z",
-  "meta": 105,
-  "meta_total": 0,
-  "google": 24
+  "publisher": "BOLTRAY GAMES",
+  "aliases": [
+   "广州天狐网络科技信息服务有限公司",
+   "소드 x 스태프",
+   "소드 x 스태프KR"
+  ],
+  "tracked_at": "2026-11-06T09:09:24Z",
+  "meta": 106,
+  "meta_total": 264,
+  "google": 25
  },
  {
   "pkg": "com.cookapps.catshinobi",
   "name": "냥냥 시노비 : 미소녀 닌자 로그라이크 디펜스 RPG",
-  "tracked_at": "2026-11-06T08:18:54Z",
+  "publisher": "CookApps",
+  "aliases": [
+   "(주) 쿡앱스",
+   "Ninja Defenders"
+  ],
+  "tracked_at": "2026-11-06T09:08:32Z",
   "meta": 49,
-  "meta_total": 0,
+  "meta_total": 72,
   "google": 64
  },
  {
   "pkg": "com.superpixel.scrap",
   "name": "고물 히어로",
-  "tracked_at": "2026-11-06T08:18:47Z",
+  "publisher": "SUPERBOX Inc",
+  "aliases": [
+   "(주)슈퍼박스"
+  ],
+  "tracked_at": "2026-11-06T09:08:25Z",
   "meta": 0,
   "meta_total": 0,
   "google": 4
  },
  {
+  "pkg": "com.gof.global",
+  "name": "WOS: 화이트아웃 서바이벌",
+  "publisher": "Century Games PTE. LTD.",
+  "aliases": [
+   "CENTURY GAMES PTE. LTD.",
+   "Whiteout Survival"
+  ],
+  "tracked_at": "2026-11-06T09:07:12Z",
+  "meta": 47,
+  "meta_total": 131,
+  "google": 120
+ },
+ {
   "pkg": "com.com2us.es.android.google.kr.normal",
   "name": "제우스: 오만의 신",
-  "tracked_at": "2026-11-06T08:17:53Z",
+  "publisher": "Com2uS",
+  "aliases": [
+   "(주) 컴투스"
+  ],
+  "tracked_at": "2026-11-06T09:07:05Z",
   "meta": 0,
   "meta_total": 0,
   "google": 56
@@ -58,7 +91,11 @@
  {
   "pkg": "com.kakaogames.dokkaebi",
   "name": "도깨비의세계",
-  "tracked_at": "2026-11-06T08:17:46Z",
+  "publisher": "Kakao Games Corp.",
+  "aliases": [
+   "주식회사 카카오게임즈"
+  ],
+  "tracked_at": "2026-11-06T09:06:59Z",
   "meta": 0,
   "meta_total": 0,
   "google": 38
@@ -66,7 +103,11 @@
  {
   "pkg": "com.ncsoft.lineagem19",
   "name": "리니지M",
-  "tracked_at": "2026-11-06T08:17:35Z",
+  "publisher": "NC Corporation",
+  "aliases": [
+   "주식회사 엔씨"
+  ],
+  "tracked_at": "2026-11-06T09:06:53Z",
   "meta": 0,
   "meta_total": 0,
   "google": 68
@@ -74,7 +115,11 @@
  {
   "pkg": "com.proximabeta.nikke",
   "name": "승리의 여신: 니케",
-  "tracked_at": "2026-11-06T08:17:16Z",
+  "publisher": "Level Infinite",
+  "aliases": [
+   "승리의 여신: 니케"
+  ],
+  "tracked_at": "2026-11-06T09:06:38Z",
   "meta": 48,
   "meta_total": 96,
   "google": 0
