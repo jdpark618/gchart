@@ -78,37 +78,5 @@
   "meta": 48,
   "meta_total": 96,
   "google": 0
- },
- {
-  "pkg": "com.t3.luna",
-  "name": "루나 모바일(12): 부스팅 서버 소환권 1000장",
-  "tracked_at": "2026-11-05T09:10:52Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 0
- },
- {
-  "pkg": "com.mrtgd2kr.google",
-  "name": "후더덕 서바이벌-777뽑기 증정",
-  "tracked_at": "2026-11-05T09:07:38Z",
-  "meta": 42,
-  "meta_total": 106,
-  "google": 0
- },
- {
-  "pkg": "jp.co.applibot.chiikawapocketgl",
-  "name": "먼작귀 포켓",
-  "tracked_at": "2026-11-05T08:46:13Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 2
- },
- {
-  "pkg": "com.survivor.ace",
-  "name": "탕탕에이스",
-  "tracked_at": "2026-11-05T08:34:08Z",
-  "meta": 31,
-  "meta_total": 98,
-  "google": 0
  }
 ]
