@@ -1,6 +1,6 @@
 {
- "at": "2026-11-06T01:19:56Z",
- "sec": 167,
+ "at": "2026-11-06T01:28:28Z",
+ "sec": 127,
  "games": [
   {
    "name": "승리의 여신: 니케",
@@ -10,8 +10,8 @@
     "매출 1위"
    ],
    "play": {
-    "legal": "",
-    "site": "https://www.ftc.go.kr/selectBizOvrCommPop.do?apvPermMgtNo=2022%EA%B3%B5%EC%A0%950001"
+    "legal": "PROXIMA BETA PTE. LIMITED",
+    "site": ""
    },
    "appstore": {
     "ios_id": "1585915174",
@@ -41,28 +41,28 @@
      {
       "id": "AR16639096672168706049",
       "name": "Proxima Beta Pte. Limited",
-      "from": "이름 'PROXIMA BETA PTE.LIMITED'",
-      "creativesKR": 600,
+      "from": "이름 'PROXIMA BETA PTE. LIMITED'",
+      "creativesKR": 614,
       "hit": false
      },
      {
       "id": "AR17344519229193322497",
       "name": "PROXIMA BETA PTE. LIMITED",
-      "from": "이름 'PROXIMA BETA PTE.LIMITED'",
+      "from": "이름 'PROXIMA BETA PTE. LIMITED'",
       "creativesKR": 62,
       "hit": false
      },
      {
       "id": "AR12460761223136280577",
       "name": "PROXIMA BETA PTE. LIMITED",
-      "from": "이름 'PROXIMA BETA PTE.LIMITED'",
+      "from": "이름 'PROXIMA BETA PTE. LIMITED'",
       "creativesKR": 0,
       "hit": false
      },
      {
       "id": "AR06104660459183407105",
       "name": "PROXIMA BETA PTE. LIMITED",
-      "from": "이름 'PROXIMA BETA PTE.LIMITED'",
+      "from": "이름 'PROXIMA BETA PTE. LIMITED'",
       "creativesKR": 32,
       "hit": false
      },
@@ -76,14 +76,14 @@
     ],
     "names": [
      "Level Infinite",
+     "PROXIMA BETA PTE. LIMITED",
      "PROXIMA BETA PTE.LIMITED"
     ],
     "domains": [
-     "ftc.go.kr",
      "nikke-kr.com"
     ]
    },
-   "sec": 67.1
+   "sec": 8.3
   },
   {
    "name": "리니지M",
@@ -93,7 +93,7 @@
     "매출 2위"
    ],
    "play": {
-    "legal": "",
+    "legal": "주식회사 엔씨",
     "site": "http://www.ncsoft.com/"
    },
    "appstore": {
@@ -150,6 +150,34 @@
       "hit": false
      },
      {
+      "id": "AR17718232829063593985",
+      "name": "주식회사 엔씨",
+      "from": "이름 '주식회사 엔씨'",
+      "creativesKR": 1500,
+      "hit": false
+     },
+     {
+      "id": "AR05851260455326056449",
+      "name": "주식회사 엔씨",
+      "from": "이름 '주식회사 엔씨'",
+      "creativesKR": 3,
+      "hit": false
+     },
+     {
+      "id": "AR00709866774434152449",
+      "name": "주식회사 엔씨",
+      "from": "이름 '주식회사 엔씨'",
+      "creativesKR": 780,
+      "hit": false
+     },
+     {
+      "id": "AR08233267038722719745",
+      "name": "주식회사 엔씨",
+      "from": "이름 '주식회사 엔씨'",
+      "creativesKR": 393,
+      "hit": false
+     },
+     {
       "id": "AR17508881485808009217",
       "name": "NC CORPORATE",
       "from": "이름 'NC Corp.'",
@@ -174,20 +202,78 @@
       "id": "AR00700598776175263745",
       "name": "인크로스 주식회사",
       "from": "도메인 'ncsoft.com'",
-      "creativesKR": 600,
+      "creativesKR": 1500,
+      "hit": false
+     },
+     {
+      "id": "AR10271241673648373761",
+      "name": "주식회사 엔씨",
+      "from": "도메인 'plaync.com'",
+      "creativesKR": 58,
+      "hit": false
+     },
+     {
+      "id": "AR14250319390657478657",
+      "name": "엔씨소프트",
+      "from": "도메인 'plaync.com'",
+      "creativesKR": 322,
+      "hit": false
+     },
+     {
+      "id": "AR05848728511975522305",
+      "name": "인크로스 주식회사",
+      "from": "도메인→이름 '인크로스 주식회사'",
+      "creativesKR": 386,
+      "hit": false
+     },
+     {
+      "id": "AR16327858551349313537",
+      "name": "인크로스 주식회사",
+      "from": "도메인→이름 '인크로스 주식회사'",
+      "creativesKR": 303,
+      "hit": false
+     },
+     {
+      "id": "AR02919644490656382977",
+      "name": "인크로스 주식회사",
+      "from": "도메인→이름 '인크로스 주식회사'",
+      "creativesKR": 3,
+      "hit": false
+     },
+     {
+      "id": "AR17927689905824071681",
+      "name": "엔씨소프트",
+      "from": "도메인→이름 '엔씨소프트'",
+      "creativesKR": 1500,
+      "hit": false
+     },
+     {
+      "id": "AR17504893600083738625",
+      "name": "주식회사 엔씨소프트",
+      "from": "도메인→이름 '엔씨소프트'",
+      "creativesKR": 59,
+      "hit": false
+     },
+     {
+      "id": "AR13781696840430780417",
+      "name": "주식회사 엔씨소프트",
+      "from": "도메인→이름 '엔씨소프트'",
+      "creativesKR": 44,
       "hit": false
      }
     ],
     "names": [
      "NC Corporation",
+     "주식회사 엔씨",
      "NC Corp."
     ],
     "domains": [
      "ncsoft.com",
-     "lineagem.plaync.com"
+     "lineagem.plaync.com",
+     "plaync.com"
     ]
    },
-   "sec": 41.9
+   "sec": 40.9
   },
   {
    "name": "도깨비의세계",
@@ -197,8 +283,8 @@
     "매출 3위"
    ],
    "play": {
-    "legal": "",
-    "site": "https://web-data-cdn.kakaogames.com/real/www/html/terms/index.html?service=S0018&type=T003&country=kr&lang=ko"
+    "legal": "Kakao Games Corp.",
+    "site": ""
    },
    "appstore": {
     "ios_id": "6758975161",
@@ -224,16 +310,59 @@
    },
    "google": {
     "matched": [],
-    "checked": [],
+    "checked": [
+     {
+      "id": "AR06205126495925436417",
+      "name": "카카오게임즈",
+      "from": "도메인 'kakaogames.com'",
+      "creativesKR": 73,
+      "hit": false
+     },
+     {
+      "id": "AR08357167980399820801",
+      "name": "KT Nasmedia Co., Ltd.",
+      "from": "도메인 'kakaogames.com'",
+      "creativesKR": 1500,
+      "hit": false
+     },
+     {
+      "id": "AR03969887680996573185",
+      "name": "주식회사 카카오게임즈",
+      "from": "도메인→이름 '카카오게임즈'",
+      "creativesKR": 307,
+      "hit": false
+     },
+     {
+      "id": "AR02237522114032697345",
+      "name": "KT Nasmedia Co., Ltd.",
+      "from": "도메인→이름 'KT Nasmedia Co., Ltd.'",
+      "creativesKR": 1,
+      "hit": false
+     },
+     {
+      "id": "AR12802199415087431681",
+      "name": "kt nasmedia Co., Ltd.",
+      "from": "도메인→이름 'KT Nasmedia Co., Ltd.'",
+      "creativesKR": 0,
+      "hit": false
+     },
+     {
+      "id": "AR07543000493572751361",
+      "name": "KT Nasmedia Co., Ltd.",
+      "from": "도메인→이름 'KT Nasmedia Co., Ltd.'",
+      "creativesKR": 0,
+      "hit": false
+     }
+    ],
     "names": [
      "Kakao Games Corp."
     ],
     "domains": [
-     "web-data-cdn.kakaogames.com",
-     "dokkaebi.kakaogames.com"
+     "dokkaebi.kakaogames.com",
+     "kakaogames.com"
     ]
    },
-   "sec": 5.6
+   "sec": 10.1
   },
   {
    "name": "제우스: 오만의 신",
@@ -243,7 +372,7 @@
     "매출 4위"
    ],
    "play": {
-    "legal": "",
+    "legal": "(주)컴투스",
     "site": "https://www.com2us.com/"
    },
    "appstore": {
@@ -279,13 +408,7 @@
     ]
    },
    "google": {
-    "matched": [
-     {
-      "id": "AR07442528701574545409",
-      "name": "(주) 컴투스",
-      "by": "도메인 'com2us.com' → 소재에 패키지/iOS ID"
-     }
-    ],
+    "matched": [],
     "checked": [
      {
       "id": "AR10540700525865730049",
@@ -304,20 +427,42 @@
      {
       "id": "AR07442528701574545409",
       "name": "(주) 컴투스",
-      "from": "도메인 'com2us.com'",
-      "creativesKR": 600,
-      "hit": true
+      "from": "이름 '(주)컴투스'",
+      "creativesKR": 926,
+      "hit": false
+     },
+     {
+      "id": "AR04382826590115987457",
+      "name": "(주) 컴투스",
+      "from": "이름 '(주)컴투스'",
+      "creativesKR": 18,
+      "hit": false
+     },
+     {
+      "id": "AR05335432366225620993",
+      "name": "(주) 컴투스",
+      "from": "이름 '(주)컴투스'",
+      "creativesKR": 0,
+      "hit": false
+     },
+     {
+      "id": "AR08598790591226052609",
+      "name": "(주)컴투스로카",
+      "from": "이름 '(주)컴투스'",
+      "creativesKR": 0,
+      "hit": false
      }
     ],
     "names": [
      "Com2uS",
+     "(주)컴투스",
      "Com2uS Corp."
     ],
     "domains": [
      "com2us.com"
     ]
    },
-   "sec": 17.2
+   "sec": 21.3
   },
   {
    "name": "WOS: 화이트아웃 서바이벌",
@@ -327,7 +472,7 @@
     "매출 5위"
    ],
    "play": {
-    "legal": "",
+    "legal": "CENTURY GAMES PTE. LTD.",
     "site": "https://www.centurygames.com/games/whiteout-survival/"
    },
    "appstore": {
@@ -370,7 +515,7 @@
       "id": "AR15528579328135659521",
       "name": "CENTURY GAMES PTE. LTD.",
       "from": "이름 'Century Games PTE. LTD.'",
-      "creativesKR": 600,
+      "creativesKR": 1093,
       "hit": true
      },
      {
@@ -390,13 +535,14 @@
     ],
     "names": [
      "Century Games PTE. LTD.",
+     "CENTURY GAMES PTE. LTD.",
      "Century Games Pte. Ltd."
     ],
     "domains": [
      "centurygames.com"
     ]
    },
-   "sec": 8.7
+   "sec": 11.1
   },
   {
    "name": "고물 히어로",
@@ -406,7 +552,7 @@
     "인기 1위"
    ],
    "play": {
-    "legal": "",
+    "legal": "(주)슈퍼박스",
     "site": "https://superboxgo.com/"
    },
    "appstore": {
@@ -433,16 +579,25 @@
    },
    "google": {
     "matched": [],
-    "checked": [],
+    "checked": [
+     {
+      "id": "AR10576281512414543873",
+      "name": "(주)슈퍼박스",
+      "from": "이름 '(주)슈퍼박스'",
+      "creativesKR": 46,
+      "hit": false
+     }
+    ],
     "names": [
      "SUPERBOX Inc",
+     "(주)슈퍼박스",
      "SUPERBOX. Inc"
     ],
     "domains": [
      "superboxgo.com"
     ]
    },
-   "sec": 5.2
+   "sec": 5.4
   },
   {
    "name": "냥냥 시노비 : 미소녀 닌자 로그라이크 디펜스 RPG",
@@ -452,7 +607,7 @@
     "인기 2위"
    ],
    "play": {
-    "legal": "",
+    "legal": "(주)쿡앱스",
     "site": "https://cookapps.com/"
    },
    "appstore": {},
@@ -482,26 +637,27 @@
      {
       "id": "AR07840379442122719233",
       "name": "(주) 쿡앱스",
-      "by": "도메인 'cookapps.com' → 소재에 패키지/iOS ID"
+      "by": "이름 '(주)쿡앱스' → 소재에 패키지/iOS ID"
      }
     ],
     "checked": [
      {
       "id": "AR07840379442122719233",
       "name": "(주) 쿡앱스",
-      "from": "도메인 'cookapps.com'",
+      "from": "이름 '(주)쿡앱스'",
       "creativesKR": 181,
       "hit": true
      }
     ],
     "names": [
-     "CookApps"
+     "CookApps",
+     "(주)쿡앱스"
     ],
     "domains": [
      "cookapps.com"
     ]
    },
-   "sec": 7.0
+   "sec": 5.7
   },
   {
    "name": "소드 x 스태프: 화산귀환 콜라보",
@@ -511,8 +667,8 @@
     "인기 3위"
    ],
    "play": {
-    "legal": "",
-    "site": "https://www.ftc.go.kr/selectBizOvrCommPop.do?apvPermMgtNo=2022%EA%B3%B5%EC%A0%950001"
+    "legal": "BOLTRAY PTE. LTD.",
+    "site": ""
    },
    "appstore": {
     "ios_id": "6762359394",
@@ -542,17 +698,32 @@
    },
    "google": {
     "matched": [],
-    "checked": [],
+    "checked": [
+     {
+      "id": "AR15583489291014111233",
+      "name": "广州天狐网络科技信息服务有限公司",
+      "from": "도메인 'boltray.com'",
+      "creativesKR": 300,
+      "hit": false
+     },
+     {
+      "id": "AR10378390524884156417",
+      "name": "广州天狐网络科技信息服务有限公司",
+      "from": "도메인 'boltray.com'",
+      "creativesKR": 94,
+      "hit": false
+     }
+    ],
     "names": [
      "BOLTRAY GAMES",
      "BOLTRAY PTE. LTD."
     ],
     "domains": [
-     "ftc.go.kr",
-     "swordxstaffkr.boltray.com"
+     "swordxstaffkr.boltray.com",
+     "boltray.com"
     ]
    },
-   "sec": 3.1
+   "sec": 13.8
   },
   {
    "name": "워라인: 스나이퍼",
@@ -562,7 +733,7 @@
     "인기 4위"
    ],
    "play": {
-    "legal": "",
+    "legal": "Powerfantasy HK Limited",
     "site": "https://warline.powerfantasygames.com/"
    },
    "appstore": {
@@ -594,10 +765,11 @@
      "Powerfantasy HK Limited"
     ],
     "domains": [
-     "warline.powerfantasygames.com"
+     "warline.powerfantasygames.com",
+     "powerfantasygames.com"
     ]
    },
-   "sec": 2.7
+   "sec": 2.2
   },
   {
    "name": "몬스터헌터 아웃랜더스",
@@ -607,8 +779,8 @@
     "인기 5위"
    ],
    "play": {
-    "legal": "",
-    "site": "https://contentgarena-a.akamaihd.net/legal/pp/pp_en.html"
+    "legal": "GARENA ONLINE PRIVATE LIMITED",
+    "site": ""
    },
    "appstore": {
     "ios_id": "6763262759",
@@ -651,14 +823,14 @@
     ],
     "names": [
      "Garena Online Private Limited",
+     "GARENA ONLINE PRIVATE LIMITED",
      "Garena Online Private Ltd."
     ],
     "domains": [
-     "contentgarena-a.akamaihd.net",
      "monsterhunteroutlanders.com"
     ]
    },
-   "sec": 5.2
+   "sec": 3.9
   }
  ]
 }
