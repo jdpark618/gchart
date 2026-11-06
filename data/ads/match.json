@@ -1,0 +1,664 @@
+{
+ "at": "2026-11-06T01:19:56Z",
+ "sec": 167,
+ "games": [
+  {
+   "name": "승리의 여신: 니케",
+   "pkg": "com.proximabeta.nikke",
+   "publisher": "Level Infinite",
+   "ranks": [
+    "매출 1위"
+   ],
+   "play": {
+    "legal": "",
+    "site": "https://www.ftc.go.kr/selectBizOvrCommPop.do?apvPermMgtNo=2022%EA%B3%B5%EC%A0%950001"
+   },
+   "appstore": {
+    "ios_id": "1585915174",
+    "ios_name": "승리의 여신: 니케",
+    "seller": "PROXIMA BETA PTE.LIMITED",
+    "seller_url": "https://nikke-kr.com"
+   },
+   "meta": {
+    "pages": [
+     {
+      "id": "100232432466330",
+      "name": "승리의 여신: 니케"
+     }
+    ],
+    "by": "검색어 '승리의 여신: 니케' → 광고 링크의 iOS 앱 ID",
+    "tried": [
+     {
+      "q": "승리의 여신: 니케",
+      "count": 98,
+      "hit": 1
+     }
+    ]
+   },
+   "google": {
+    "matched": [],
+    "checked": [
+     {
+      "id": "AR16639096672168706049",
+      "name": "Proxima Beta Pte. Limited",
+      "from": "이름 'PROXIMA BETA PTE.LIMITED'",
+      "creativesKR": 600,
+      "hit": false
+     },
+     {
+      "id": "AR17344519229193322497",
+      "name": "PROXIMA BETA PTE. LIMITED",
+      "from": "이름 'PROXIMA BETA PTE.LIMITED'",
+      "creativesKR": 62,
+      "hit": false
+     },
+     {
+      "id": "AR12460761223136280577",
+      "name": "PROXIMA BETA PTE. LIMITED",
+      "from": "이름 'PROXIMA BETA PTE.LIMITED'",
+      "creativesKR": 0,
+      "hit": false
+     },
+     {
+      "id": "AR06104660459183407105",
+      "name": "PROXIMA BETA PTE. LIMITED",
+      "from": "이름 'PROXIMA BETA PTE.LIMITED'",
+      "creativesKR": 32,
+      "hit": false
+     },
+     {
+      "id": "AR02965941824335642625",
+      "name": "RPL Digital, SIA",
+      "from": "도메인 'nikke-kr.com'",
+      "creativesKR": 8,
+      "hit": false
+     }
+    ],
+    "names": [
+     "Level Infinite",
+     "PROXIMA BETA PTE.LIMITED"
+    ],
+    "domains": [
+     "ftc.go.kr",
+     "nikke-kr.com"
+    ]
+   },
+   "sec": 67.1
+  },
+  {
+   "name": "리니지M",
+   "pkg": "com.ncsoft.lineagem19",
+   "publisher": "NC Corporation",
+   "ranks": [
+    "매출 2위"
+   ],
+   "play": {
+    "legal": "",
+    "site": "http://www.ncsoft.com/"
+   },
+   "appstore": {
+    "ios_id": "1474589366",
+    "ios_name": "리니지M",
+    "seller": "NC Corp.",
+    "seller_url": "https://lineagem.plaync.com/"
+   },
+   "meta": {
+    "pages": [],
+    "by": "",
+    "tried": [
+     {
+      "q": "리니지M",
+      "count": 7,
+      "hit": 0
+     },
+     {
+      "q": "NC Corporation",
+      "count": 41,
+      "hit": 0
+     }
+    ]
+   },
+   "google": {
+    "matched": [],
+    "checked": [
+     {
+      "id": "AR01553284208317693953",
+      "name": "NCE CORPORATION LTD",
+      "from": "이름 'NC Corporation'",
+      "creativesKR": 0,
+      "hit": false
+     },
+     {
+      "id": "AR17113162225859690497",
+      "name": "NCL Corporation Ltd.",
+      "from": "이름 'NC Corporation'",
+      "creativesKR": 115,
+      "hit": false
+     },
+     {
+      "id": "AR15993806612225589249",
+      "name": "NCL Corporation Ltd.",
+      "from": "이름 'NC Corporation'",
+      "creativesKR": 0,
+      "hit": false
+     },
+     {
+      "id": "AR10620780465977556993",
+      "name": "NCR VOYIX CORPORATION",
+      "from": "이름 'NC Corporation'",
+      "creativesKR": 0,
+      "hit": false
+     },
+     {
+      "id": "AR17508881485808009217",
+      "name": "NC CORPORATE",
+      "from": "이름 'NC Corp.'",
+      "creativesKR": 0,
+      "hit": false
+     },
+     {
+      "id": "AR00603975120255451137",
+      "name": "NCS CORP PTY LTD",
+      "from": "이름 'NC Corp.'",
+      "creativesKR": 0,
+      "hit": false
+     },
+     {
+      "id": "AR00019189510151602177",
+      "name": "NC Plate Pros Corp",
+      "from": "이름 'NC Corp.'",
+      "creativesKR": 0,
+      "hit": false
+     },
+     {
+      "id": "AR00700598776175263745",
+      "name": "인크로스 주식회사",
+      "from": "도메인 'ncsoft.com'",
+      "creativesKR": 600,
+      "hit": false
+     }
+    ],
+    "names": [
+     "NC Corporation",
+     "NC Corp."
+    ],
+    "domains": [
+     "ncsoft.com",
+     "lineagem.plaync.com"
+    ]
+   },
+   "sec": 41.9
+  },
+  {
+   "name": "도깨비의세계",
+   "pkg": "com.kakaogames.dokkaebi",
+   "publisher": "Kakao Games Corp.",
+   "ranks": [
+    "매출 3위"
+   ],
+   "play": {
+    "legal": "",
+    "site": "https://web-data-cdn.kakaogames.com/real/www/html/terms/index.html?service=S0018&type=T003&country=kr&lang=ko"
+   },
+   "appstore": {
+    "ios_id": "6758975161",
+    "ios_name": "도깨비의세계",
+    "seller": "Kakao Games Corp.",
+    "seller_url": "https://dokkaebi.kakaogames.com/"
+   },
+   "meta": {
+    "pages": [],
+    "by": "",
+    "tried": [
+     {
+      "q": "도깨비의세계",
+      "count": 0,
+      "hit": 0
+     },
+     {
+      "q": "Kakao Games Corp.",
+      "count": 0,
+      "hit": 0
+     }
+    ]
+   },
+   "google": {
+    "matched": [],
+    "checked": [],
+    "names": [
+     "Kakao Games Corp."
+    ],
+    "domains": [
+     "web-data-cdn.kakaogames.com",
+     "dokkaebi.kakaogames.com"
+    ]
+   },
+   "sec": 5.6
+  },
+  {
+   "name": "제우스: 오만의 신",
+   "pkg": "com.com2us.es.android.google.kr.normal",
+   "publisher": "Com2uS",
+   "ranks": [
+    "매출 4위"
+   ],
+   "play": {
+    "legal": "",
+    "site": "https://www.com2us.com/"
+   },
+   "appstore": {
+    "ios_id": "6504389641",
+    "ios_name": "제우스: 오만의 신",
+    "seller": "Com2uS Corp.",
+    "seller_url": "https://www.com2us.com"
+   },
+   "meta": {
+    "pages": [],
+    "by": "",
+    "tried": [
+     {
+      "q": "제우스: 오만의 신",
+      "count": 0,
+      "hit": 0
+     },
+     {
+      "q": "제우스",
+      "count": 373,
+      "hit": 0
+     },
+     {
+      "q": "오만의 신",
+      "count": 1,
+      "hit": 0
+     },
+     {
+      "q": "Com2uS",
+      "count": 43758,
+      "hit": 0
+     }
+    ]
+   },
+   "google": {
+    "matched": [
+     {
+      "id": "AR07442528701574545409",
+      "name": "(주) 컴투스",
+      "by": "도메인 'com2us.com' → 소재에 패키지/iOS ID"
+     }
+    ],
+    "checked": [
+     {
+      "id": "AR10540700525865730049",
+      "name": "Com2uS",
+      "from": "이름 'Com2uS'",
+      "creativesKR": 49,
+      "hit": false
+     },
+     {
+      "id": "AR11233032486428606465",
+      "name": "Com2uS USA, Inc.",
+      "from": "이름 'Com2uS'",
+      "creativesKR": 0,
+      "hit": false
+     },
+     {
+      "id": "AR07442528701574545409",
+      "name": "(주) 컴투스",
+      "from": "도메인 'com2us.com'",
+      "creativesKR": 600,
+      "hit": true
+     }
+    ],
+    "names": [
+     "Com2uS",
+     "Com2uS Corp."
+    ],
+    "domains": [
+     "com2us.com"
+    ]
+   },
+   "sec": 17.2
+  },
+  {
+   "name": "WOS: 화이트아웃 서바이벌",
+   "pkg": "com.gof.global",
+   "publisher": "Century Games PTE. LTD.",
+   "ranks": [
+    "매출 5위"
+   ],
+   "play": {
+    "legal": "",
+    "site": "https://www.centurygames.com/games/whiteout-survival/"
+   },
+   "appstore": {
+    "ios_id": "6443575749",
+    "ios_name": "WOS: 화이트아웃 서바이벌",
+    "seller": "Century Games Pte. Ltd.",
+    "seller_url": "https://www.centurygames.com/"
+   },
+   "meta": {
+    "pages": [
+     {
+      "id": "101709235817625",
+      "name": "Whiteout Survival"
+     }
+    ],
+    "by": "검색어 'WOS' → 광고 링크의 Play 패키지",
+    "tried": [
+     {
+      "q": "WOS: 화이트아웃 서바이벌",
+      "count": 0,
+      "hit": 0
+     },
+     {
+      "q": "WOS",
+      "count": 3720,
+      "hit": 1
+     }
+    ]
+   },
+   "google": {
+    "matched": [
+     {
+      "id": "AR15528579328135659521",
+      "name": "CENTURY GAMES PTE. LTD.",
+      "by": "이름 'Century Games PTE. LTD.' → 소재에 패키지/iOS ID"
+     }
+    ],
+    "checked": [
+     {
+      "id": "AR15528579328135659521",
+      "name": "CENTURY GAMES PTE. LTD.",
+      "from": "이름 'Century Games PTE. LTD.'",
+      "creativesKR": 600,
+      "hit": true
+     },
+     {
+      "id": "AR07818381521575739393",
+      "name": "CENTURY GAMES PTE. LTD.",
+      "from": "이름 'Century Games PTE. LTD.'",
+      "creativesKR": 0,
+      "hit": false
+     },
+     {
+      "id": "AR14843309376139165697",
+      "name": "CENTURY GAMES PTE. LTD.",
+      "from": "이름 'Century Games PTE. LTD.'",
+      "creativesKR": 2,
+      "hit": false
+     }
+    ],
+    "names": [
+     "Century Games PTE. LTD.",
+     "Century Games Pte. Ltd."
+    ],
+    "domains": [
+     "centurygames.com"
+    ]
+   },
+   "sec": 8.7
+  },
+  {
+   "name": "고물 히어로",
+   "pkg": "com.superpixel.scrap",
+   "publisher": "SUPERBOX Inc",
+   "ranks": [
+    "인기 1위"
+   ],
+   "play": {
+    "legal": "",
+    "site": "https://superboxgo.com/"
+   },
+   "appstore": {
+    "ios_id": "6775388646",
+    "ios_name": "고물 히어로",
+    "seller": "SUPERBOX. Inc",
+    "seller_url": "https://superboxgo.com"
+   },
+   "meta": {
+    "pages": [],
+    "by": "",
+    "tried": [
+     {
+      "q": "고물 히어로",
+      "count": 0,
+      "hit": 0
+     },
+     {
+      "q": "SUPERBOX Inc",
+      "count": 0,
+      "hit": 0
+     }
+    ]
+   },
+   "google": {
+    "matched": [],
+    "checked": [],
+    "names": [
+     "SUPERBOX Inc",
+     "SUPERBOX. Inc"
+    ],
+    "domains": [
+     "superboxgo.com"
+    ]
+   },
+   "sec": 5.2
+  },
+  {
+   "name": "냥냥 시노비 : 미소녀 닌자 로그라이크 디펜스 RPG",
+   "pkg": "com.cookapps.catshinobi",
+   "publisher": "CookApps",
+   "ranks": [
+    "인기 2위"
+   ],
+   "play": {
+    "legal": "",
+    "site": "https://cookapps.com/"
+   },
+   "appstore": {},
+   "meta": {
+    "pages": [
+     {
+      "id": "253656837839088",
+      "name": "Ninja Defenders"
+     }
+    ],
+    "by": "검색어 '냥냥 시노비' → 광고 링크의 Play 패키지",
+    "tried": [
+     {
+      "q": "냥냥 시노비 : 미소녀 닌자 로그라이크 디펜스 RPG",
+      "count": 0,
+      "hit": 0
+     },
+     {
+      "q": "냥냥 시노비",
+      "count": 48,
+      "hit": 1
+     }
+    ]
+   },
+   "google": {
+    "matched": [
+     {
+      "id": "AR07840379442122719233",
+      "name": "(주) 쿡앱스",
+      "by": "도메인 'cookapps.com' → 소재에 패키지/iOS ID"
+     }
+    ],
+    "checked": [
+     {
+      "id": "AR07840379442122719233",
+      "name": "(주) 쿡앱스",
+      "from": "도메인 'cookapps.com'",
+      "creativesKR": 181,
+      "hit": true
+     }
+    ],
+    "names": [
+     "CookApps"
+    ],
+    "domains": [
+     "cookapps.com"
+    ]
+   },
+   "sec": 7.0
+  },
+  {
+   "name": "소드 x 스태프: 화산귀환 콜라보",
+   "pkg": "com.zjcs.android.kr",
+   "publisher": "BOLTRAY GAMES",
+   "ranks": [
+    "인기 3위"
+   ],
+   "play": {
+    "legal": "",
+    "site": "https://www.ftc.go.kr/selectBizOvrCommPop.do?apvPermMgtNo=2022%EA%B3%B5%EC%A0%950001"
+   },
+   "appstore": {
+    "ios_id": "6762359394",
+    "ios_name": "소드 x 스태프: 화산귀환 콜라보",
+    "seller": "BOLTRAY PTE. LTD.",
+    "seller_url": "https://swordxstaffkr.boltray.com/"
+   },
+   "meta": {
+    "pages": [
+     {
+      "id": "1044984982041893",
+      "name": "소드 x 스태프"
+     },
+     {
+      "id": "480813268439233",
+      "name": "소드 x 스태프KR"
+     }
+    ],
+    "by": "검색어 '소드 x 스태프: 화산귀환 콜라보' → 광고 링크의 iOS 앱 ID",
+    "tried": [
+     {
+      "q": "소드 x 스태프: 화산귀환 콜라보",
+      "count": 149,
+      "hit": 2
+     }
+    ]
+   },
+   "google": {
+    "matched": [],
+    "checked": [],
+    "names": [
+     "BOLTRAY GAMES",
+     "BOLTRAY PTE. LTD."
+    ],
+    "domains": [
+     "ftc.go.kr",
+     "swordxstaffkr.boltray.com"
+    ]
+   },
+   "sec": 3.1
+  },
+  {
+   "name": "워라인: 스나이퍼",
+   "pkg": "com.farlightgames.warline.gp.global",
+   "publisher": "Powerfantasy HK Limited",
+   "ranks": [
+    "인기 4위"
+   ],
+   "play": {
+    "legal": "",
+    "site": "https://warline.powerfantasygames.com/"
+   },
+   "appstore": {
+    "ios_id": "6742809194",
+    "ios_name": "워라인: 스나이퍼",
+    "seller": "Powerfantasy HK Limited",
+    "seller_url": "https://warline.powerfantasygames.com/"
+   },
+   "meta": {
+    "pages": [
+     {
+      "id": "682454681621003",
+      "name": "Warline:Sniper Strike"
+     }
+    ],
+    "by": "검색어 '워라인: 스나이퍼' → 광고 링크의 Play 패키지",
+    "tried": [
+     {
+      "q": "워라인: 스나이퍼",
+      "count": 17,
+      "hit": 1
+     }
+    ]
+   },
+   "google": {
+    "matched": [],
+    "checked": [],
+    "names": [
+     "Powerfantasy HK Limited"
+    ],
+    "domains": [
+     "warline.powerfantasygames.com"
+    ]
+   },
+   "sec": 2.7
+  },
+  {
+   "name": "몬스터헌터 아웃랜더스",
+   "pkg": "com.garena.game.mho",
+   "publisher": "Garena Online Private Limited",
+   "ranks": [
+    "인기 5위"
+   ],
+   "play": {
+    "legal": "",
+    "site": "https://contentgarena-a.akamaihd.net/legal/pp/pp_en.html"
+   },
+   "appstore": {
+    "ios_id": "6763262759",
+    "ios_name": "몬스터헌터 아웃랜더스",
+    "seller": "Garena Online Private Ltd.",
+    "seller_url": "http://monsterhunteroutlanders.com/"
+   },
+   "meta": {
+    "pages": [
+     {
+      "id": "100880604942850",
+      "name": "아이루"
+     }
+    ],
+    "by": "검색어 '몬스터헌터 아웃랜더스' → 광고 링크의 iOS 앱 ID",
+    "tried": [
+     {
+      "q": "몬스터헌터 아웃랜더스",
+      "count": 61,
+      "hit": 1
+     }
+    ]
+   },
+   "google": {
+    "matched": [
+     {
+      "id": "AR14110595394324922369",
+      "name": "Garena Online Private Limited",
+      "by": "이름 'Garena Online Private Limited' → 소재에 패키지/iOS ID"
+     }
+    ],
+    "checked": [
+     {
+      "id": "AR14110595394324922369",
+      "name": "Garena Online Private Limited",
+      "from": "이름 'Garena Online Private Limited'",
+      "creativesKR": 111,
+      "hit": true
+     }
+    ],
+    "names": [
+     "Garena Online Private Limited",
+     "Garena Online Private Ltd."
+    ],
+    "domains": [
+     "contentgarena-a.akamaihd.net",
+     "monsterhunteroutlanders.com"
+    ]
+   },
+   "sec": 5.2
+  }
+ ]
+}
