@@ -197,9 +197,19 @@ async def main():
         gadv = ','.join(f"{g['id']}|{g.get('name', '')}" for g in acc.get('google', []))
         try: res['meta'] = await meta(ctx, keys, pkg, meta_page) if meta_page else {'pages': [], 'count': 0, 'ads': [], 'log': [{'skip': 'Meta 계정 없음'}]}
         except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
+        # 재시도 (11/06): 이전엔 광고가 있었는데 이번 조회가 비면 일시 차단일 수 있어 30초 쉬고 한 번 더
+        if meta_page and not res['meta'].get('ads') and prev.get('meta', {}).get('ads'):
+            await asyncio.sleep(30)
+            try: res['meta'] = await meta(ctx, keys, pkg, meta_page); res['meta'].setdefault('log', []).append({'retry': True})
+            except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
         known = [x['id'] for x in prev.get('google', {}).get('ads', []) if x.get('yt') or x.get('img')]   # 썸네일 없는 소재는 다시 미리보기 (영상 ID 추출 보완분 반영)
         try: res['google'] = await google(ctx, '', gadv, pkg, acc.get('ios', '') or clean(a.ios), now - (30 if prev else 90) * 86400, known) if gadv else {'advertisers': [], 'candidates': [], 'ads': []}
         except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
+        # 재시도: 광고주 조회가 전부 0건(또는 오류)이면 일시 차단일 수 있어 30초 쉬고 한 번 더 (11/06 WOS 0건 사례)
+        if gadv and (res['google'].get('error') or not any(c.get('creativesKR') for c in res['google'].get('candidates', []))):
+            await asyncio.sleep(30)
+            try: res['google'] = await google(ctx, '', gadv, pkg, acc.get('ios', '') or clean(a.ios), now - (30 if prev else 90) * 86400, known); res['google']['retry'] = True
+            except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
         try: res['title'] = await play_title(ctx, pkg)
         except Exception: res['title'] = ''
         await b.close()
@@ -215,6 +225,8 @@ async def main():
     for x in res['meta'].get('ads', []): x['thumb'] = save_thumb(x.pop('thumb', ''), d)
     for x in res['google'].get('ads', []): x['thumb'] = save_thumb(f"https://i.ytimg.com/vi/{x['yt']}/hqdefault.jpg" if x.get('yt') else x.get('img'), d)
     # 이전 결과와 병합: Meta 는 ID 기준 최신 값으로, Google 은 저장된 소재의 날짜를 목록 값으로 갱신 + 새 소재 추가
+    # Meta 마지막 확인 시각: 비로그인 30개 한도로 그날 안 걸린 소재는 예전 '집행 중' 상태가 남으므로, 화면은 이 값이 마지막 추적일과 같을 때만 집행 중으로 봄
+    for x in res['meta'].get('ads', []): x['seen'] = now
     if prev:
         mm = {x['id']: x for x in prev.get('meta', {}).get('ads', [])} if prev.get('meta', {}).get('lang') == 'ko' else {}   # 한국어 조회 이전(전체 언어) 결과는 버림
         mm.update({x['id']: x for x in res['meta'].get('ads', [])})
