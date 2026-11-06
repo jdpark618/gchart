@@ -248,7 +248,13 @@ async def main():
     json.dump(res, open(os.path.join(ROOT, 'data', 'ads', f'{pkg}.json'), 'w', encoding='utf-8'), ensure_ascii=False)
     ip = os.path.join(ROOT, 'data', 'ads', 'index.json')
     idx = json.load(open(ip, encoding='utf-8')) if os.path.exists(ip) else []
-    idx = [x for x in idx if x['pkg'] != pkg] + [{'pkg': pkg, 'name': name, 'tracked_at': res['tracked_at'],
+    # 개발사명 (사이트 목록 검색용, 11/06): 입력값 → 순위 스냅샷(Play KR 매출·인기) → 이전 목록 값 → Google 광고주명
+    try: snap_pub = next((r[6] for c in ('sales', 'popular') for r in json.load(open(os.path.join(ROOT, 'data', 'snapshot.json'), encoding='utf-8'))['charts']['gp']['kr'][c]['rows'] if r[4] == pkg), '')
+    except Exception: snap_pub = ''
+    publisher = clean(a.publisher) or snap_pub or next((x.get('publisher', '') for x in idx if x['pkg'] == pkg), '') or ', '.join(g['name'] for g in res['google'].get('advertisers', []) if g.get('name'))
+    idx = [x for x in idx if x['pkg'] != pkg] + [{'pkg': pkg, 'name': name, 'publisher': publisher,
+           'aliases': sorted({g['name'] for g in res['google'].get('advertisers', []) if g.get('name')} | {p['name'] for p in res['meta'].get('pages', []) if p.get('name')}),   # 광고주 법인명(한글 포함) · Meta 페이지명 → 검색용
+           'tracked_at': res['tracked_at'],
            'meta': len(res['meta'].get('ads', [])), 'meta_total': res['meta'].get('count', 0), 'google': len(res['google'].get('ads', []))}]
     json.dump(sorted(idx, key=lambda x: x['tracked_at'], reverse=True), open(ip, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     summary = {'name': name, 'pkg': pkg, 'sec': res['sec'],
