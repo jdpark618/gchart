@@ -1,5 +1,13 @@
 [
  {
+  "pkg": "com.gof.global",
+  "name": "WOS: 화이트아웃 서바이벌",
+  "tracked_at": "2026-11-06T08:33:52Z",
+  "meta": 47,
+  "meta_total": 131,
+  "google": 120
+ },
+ {
   "pkg": "com.garena.game.mho",
   "name": "몬스터헌터 아웃랜더스",
   "tracked_at": "2026-11-06T08:19:37Z",
@@ -38,14 +46,6 @@
   "meta": 0,
   "meta_total": 0,
   "google": 4
- },
- {
-  "pkg": "com.gof.global",
-  "name": "WOS: 화이트아웃 서바이벌",
-  "tracked_at": "2026-11-06T08:18:01Z",
-  "meta": 47,
-  "meta_total": 131,
-  "google": 120
  },
  {
   "pkg": "com.com2us.es.android.google.kr.normal",
