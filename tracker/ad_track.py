@@ -120,7 +120,9 @@ async ([q, advId, pkg, ios, since, known]) => {
         if (!ids.some(x => t.includes(x))) return; hit++;
         // 유튜브 영상 ID: 썸네일 주소(ytimg.com/vi/ID) 또는 앱 광고 영상 설정값(video_videoId: 'ID') — 후자는 영상형 앱 광고에서만 보임 (11/06)
         const yt = (t.match(/ytimg\.com\/vi\/([\w-]+)/) || t.match(/videoId(?:\\x27|\\x22|['":\s=])+([\w-]{11})/) || [])[1] || '';
-        const img = ((t.match(/https:\\?\/\\?\/tpc\.googlesyndication\.com\\?\/(?:archive\\?\/)?simgad[^"'\\\s)]+/) || [])[0] || '').replace(/\\\//g, '/');
+        // 이미지: 배너(simgad) → 없으면 스토어 기반 앱 광고의 대표 이미지(coverImage) · 첫 스크린샷 (11/06: 영상 ID 도 배너도 없는 앱 광고 보완)
+        const asset = k => { const m = t.match(new RegExp(k + '(?:\\\\x27|\\\\x22|[\'":\\s=])+((?:https:)?//lh3\\.googleusercontent\\.com/[\\w-]+)')); return m ? (m[1].startsWith('//') ? 'https:' + m[1] : m[1]) : ''; };
+        const img = ((t.match(/https:\\?\/\\?\/tpc\.googlesyndication\.com\\?\/(?:archive\\?\/)?simgad[^"'\\\s)]+/) || [])[0] || '').replace(/\\\//g, '/') || (yt ? '' : asset('coverImage') || asset('screenshot1'));
         const lines = [...new Set((t.match(/[가-힣A-Za-z0-9][^"\\<>{}]{3,80}/g) || []).map(s => s.replace(/^x(27|3e)/, '').trim()).filter(s => /[가-힣]/.test(s) && !/광고|의견|사용자|검토|종료|감사|설치|계속|문제|다운로드 수|카테고리|앱 관련|신규 앱|평점|건너뛰기|초 후|이 광고|닫기|스폰서|개발자|받기|앱 열기/.test(s)))].slice(0, 4);
         res.ads.push({ id: c[2], adv: a.id, fmt: c[4], first: +c[6]?.[1], last: +c[7]?.[1], days: c[13], yt, img, lines });
       }));
