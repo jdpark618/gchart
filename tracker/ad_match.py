@@ -42,18 +42,27 @@ async def play_info(ctx, pkg):
     pg = await ctx.new_page(); info = {}
     try:
         await pg.goto(f'https://play.google.com/store/apps/details?id={pkg}&hl=ko&gl=KR', wait_until='domcontentloaded', timeout=45000)
-        try: await pg.get_by_text('앱 지원', exact=True).first.click(timeout=5000); await pg.wait_for_timeout(800)
-        except Exception: pass
-        t = await pg.inner_text('body')
-        m = re.search(r'개발자 소개\n(.+)', t); info['legal'] = m.group(1).strip() if m else ''
+        h = await pg.content(); i = h.find('개발자 소개')
+        toks = [x.strip() for x in re.sub(r'<[^>]+>', '\n', h[i:i + 3000]).split('\n') if x.strip()] if i >= 0 else []
+        info['legal'] = toks[1] if len(toks) > 1 else ''   # '개발자 소개' 다음 첫 줄 = 법인명 (클릭 없이 HTML에 있음)
         hrefs = await pg.eval_on_selector_all('a[href^="http"]', 'es => es.map(e => e.href)')
-        info['site'] = next((h for h in hrefs if not re.search(r'google\.|gstatic|youtube|android\.com|policies|privacy', h)), '')
+        info['site'] = next((u for u in hrefs if not JUNK.search(u)), '')
     except Exception as e: info['error'] = str(e)[:120]
     await pg.close(); return info
 
+JUNK = re.compile(r'google\.|gstatic|youtube|android\.com|apple\.com|ftc\.go\.kr|akamai|cloudfront|cdn|policies|privacy|facebook|instagram', re.I)
 def host(u):
     h = urlparse(u if '://' in u else 'http://' + u).hostname or ''
     return re.sub(r'^www\.', '', h)
+def domains_of(urls):
+    """주소 → 검색할 도메인: 원래 호스트 + 대표 도메인(dokkaebi.kakaogames.com → kakaogames.com), 공정위·CDN 등 엉뚱한 주소 제외"""
+    out = []
+    for u in urls:
+        h = host(u)
+        if not h or '.' not in h or JUNK.search(h): continue
+        parts = h.split('.'); n = 3 if len(parts) > 2 and parts[-2] in ('co', 'com', 'or', 'ne', 'go') else 2
+        out += [h, '.'.join(parts[-n:])]
+    return list(dict.fromkeys(out))
 
 async def meta_match(pg, g, ios_id):
     keys = name_variants(g['name']) + ([g['publisher']] if g.get('publisher') else [])
@@ -79,14 +88,20 @@ async ([names, domains, ids]) => {
     const sg = await rpc('SearchService/SearchSuggestions', { 1: n, 2: 10, 3: 10 });
     (sg[1] || []).filter(x => x[1]).slice(0, 4).forEach(x => { if (!cand.has(x[1][2])) cand.set(x[1][2], { name: (x[1][1] || '').trim(), from: `이름 '${n}'` }); });
   }
+  const viaDomain = new Set();
   for (const d of domains) {
     const r = await rpc('SearchService/SearchCreatives', { 2: 100, 3: { 12: { 1: d, 2: true }, 8: [2410] }, 7: { 1: 1, 2: 0, 3: 2410 } });
-    (r[1] || []).forEach(c => { if (!cand.has(c[1])) cand.set(c[1], { name: c[12], from: `도메인 '${d}'` }); });
+    (r[1] || []).forEach(c => { viaDomain.add(c[12]); if (!cand.has(c[1])) cand.set(c[1], { name: c[12], from: `도메인 '${d}'` }); });
+  }
+  /* 2차: 도메인에서 나온 광고주 이름(예 '카카오게임즈')으로 다시 이름 검색 → 같은 회사의 다른 계정(예 '주식회사 카카오게임즈')까지 */
+  for (const n of viaDomain) {
+    const sg = await rpc('SearchService/SearchSuggestions', { 1: n, 2: 10, 3: 10 });
+    (sg[1] || []).filter(x => x[1] && (x[1][3] === 'KR' || !x[1][3])).slice(0, 4).forEach(x => { if (!cand.has(x[1][2])) cand.set(x[1][2], { name: (x[1][1] || '').trim(), from: `도메인→이름 '${n}'` }); });
   }
   const out = { matched: [], checked: [] };
   for (const [id, a] of cand) {
     let all = [], tok = null;
-    for (let p = 0; p < 6; p++) {
+    for (let p = 0; p < 15; p++) {   // 소재가 많은 계정(예 Proxima Beta)도 1500개까지
       const req = { 2: 100, 3: { 12: { 1: '', 2: true }, 13: { 1: [id] }, 8: [2410] }, 7: { 1: 1, 2: 0, 3: 2410 } };
       if (tok) req[4] = tok;
       const j = await rpc('SearchService/SearchCreatives', req); all = all.concat(j[1] || []); tok = j[2]; if (!tok) break;
@@ -118,7 +133,7 @@ async def main():
             try: m = await meta_match(mpg, g, ios)
             except Exception as e: m = {'pages': [], 'by': '', 'error': str(e)[:160]}
             names = list(dict.fromkeys(v for v in [g['publisher'], pi.get('legal'), ap.get('seller')] if v))
-            domains = list(dict.fromkeys(h for h in [host(pi.get('site', '')), host(ap.get('seller_url', ''))] if h and '.' in h))
+            domains = domains_of([pi.get('site', ''), ap.get('seller_url', '')])
             try: gm = await gpg.evaluate(GOOGLE_MATCH_JS, [names, domains, [g['pkg']] + ([f'id{ios}'] if ios else [])])
             except Exception as e: gm = {'matched': [], 'checked': [], 'error': str(e)[:160]}
             results.append({**g, 'play': pi, 'appstore': ap, 'meta': m, 'google': {**gm, 'names': names, 'domains': domains}, 'sec': round(time.time() - s0, 1)})
