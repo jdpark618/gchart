@@ -1,6 +1,6 @@
 name: Ad Tracker (마케팅 추적)
 # 게임 하나의 KR 광고(Meta · Google)를 모아 data/ads/ 에 저장 → 사이트가 Pages 로 읽음 (tracker/ad_track.py 설명 참고)
-# 실행: Actions 탭에서 수동 실행(게임명 · 패키지명 입력) 또는 tracker/test.json 수정 후 push (목록의 게임을 차례로)
+# 실행: 매일 06:17 KST 자동(tracker/test.json 목록 전체) · Actions 탭에서 수동 실행(게임명 · 패키지명 입력) · tracker/test.json 수정 후 push
 on:
   workflow_dispatch:
     inputs:
@@ -12,6 +12,8 @@ on:
   push:
     branches: [main]
     paths: ['tracker/test.json']
+  schedule:
+    - cron: '17 21 * * *'   # 매일 06:17 KST — 순위 수집(03:42 KST 시작) 뒤 · 새벽대라 Meta/Google 제한 부담 적음. 목록은 tracker/test.json
 concurrency: { group: ad-track, cancel-in-progress: false }
 permissions:
   contents: write
