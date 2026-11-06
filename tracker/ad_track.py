@@ -118,7 +118,8 @@ async ([q, advId, pkg, ios, since, known]) => {
         let t = ''; try { const r = await fetch(u); if (!r.ok) { fail++; return; } t = await r.text(); } catch (e) { fail++; return; }
         new Set((t.match(/(?:com|jp|kr|net|io|co)\.[a-z0-9_]+\.[a-z0-9_.]+/gi) || []).map(x => x.replace(/\.+$/, '')).filter(x => !/^com\.(google|android)\./i.test(x))).forEach(x => { pk[x] = (pk[x] || 0) + 1; });
         if (!ids.some(x => t.includes(x))) return; hit++;
-        const yt = (t.match(/ytimg\.com\/vi\/([\w-]+)/) || [])[1] || '';
+        // 유튜브 영상 ID: 썸네일 주소(ytimg.com/vi/ID) 또는 앱 광고 영상 설정값(video_videoId: 'ID') — 후자는 영상형 앱 광고에서만 보임 (11/06)
+        const yt = (t.match(/ytimg\.com\/vi\/([\w-]+)/) || t.match(/videoId(?:\\x27|\\x22|['":\s=])+([\w-]{11})/) || [])[1] || '';
         const img = ((t.match(/https:\\?\/\\?\/tpc\.googlesyndication\.com\\?\/(?:archive\\?\/)?simgad[^"'\\\s)]+/) || [])[0] || '').replace(/\\\//g, '/');
         const lines = [...new Set((t.match(/[가-힣A-Za-z0-9][^"\\<>{}]{3,80}/g) || []).map(s => s.replace(/^x(27|3e)/, '').trim()).filter(s => /[가-힣]/.test(s) && !/광고|의견|사용자|검토|종료|감사|설치|계속|문제|다운로드 수|카테고리|앱 관련|신규 앱|평점|건너뛰기|초 후|이 광고|닫기|스폰서|개발자|받기|앱 열기/.test(s)))].slice(0, 4);
         res.ads.push({ id: c[2], adv: a.id, fmt: c[4], first: +c[6]?.[1], last: +c[7]?.[1], days: c[13], yt, img, lines });
@@ -194,7 +195,7 @@ async def main():
         gadv = ','.join(f"{g['id']}|{g.get('name', '')}" for g in acc.get('google', []))
         try: res['meta'] = await meta(ctx, keys, pkg, meta_page) if meta_page else {'pages': [], 'count': 0, 'ads': [], 'log': [{'skip': 'Meta 계정 없음'}]}
         except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
-        known = [x['id'] for x in prev.get('google', {}).get('ads', [])]
+        known = [x['id'] for x in prev.get('google', {}).get('ads', []) if x.get('yt') or x.get('img')]   # 썸네일 없는 소재는 다시 미리보기 (영상 ID 추출 보완분 반영)
         try: res['google'] = await google(ctx, '', gadv, pkg, acc.get('ios', '') or clean(a.ios), now - (30 if prev else 90) * 86400, known) if gadv else {'advertisers': [], 'candidates': [], 'ads': []}
         except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
         try: res['title'] = await play_title(ctx, pkg)
