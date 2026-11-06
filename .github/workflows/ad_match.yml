@@ -1,0 +1,31 @@
+name: Ad Match (게임-광고계정 매칭 시험)
+# 오늘 한국 구글 인기 TOP5 + 매출 TOP5 를 대상으로 Meta 페이지 · Google 광고주를 자동으로 찾아 data/ads/match.json 에 저장 (광고 수집은 안 함)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['tracker/ad_match.py', '.github/workflows/ad_match.yml']
+concurrency: { group: ad-track, cancel-in-progress: false }
+permissions:
+  contents: write
+jobs:
+  match:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install playwright==1.48.0 pillow && python -m playwright install --with-deps chromium
+      - name: Match
+        working-directory: tracker
+        run: python ad_match.py
+      - name: Save to main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ads/match.json
+          git diff --cached --quiet && exit 0
+          git commit -qm "ads: 매칭 시험 결과 $(date -u +%FT%TZ)"
+          for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && exit 0; sleep $((i*5)); done
+          exit 1

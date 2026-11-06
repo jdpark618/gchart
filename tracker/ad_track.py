@@ -187,4 +187,5 @@ async def main():
                'google': {'advertisers': res['google'].get('advertisers'), 'candidates': res['google'].get('candidates'), 'ads': len(res['google'].get('ads', [])), 'error': res['google'].get('error')}}
     print(json.dumps(summary, ensure_ascii=False, indent=1))
 
-asyncio.run(main())
+if __name__ == '__main__':   # ad_match.py 가 함수만 가져다 씀
+    asyncio.run(main())
