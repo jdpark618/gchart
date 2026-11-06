@@ -1,4 +1,82 @@
 [
- { "name": "탕탕에이스", "pkg": "com.survivor.ace", "google_adv": "Habby" },
- { "name": "도깨비의세계", "pkg": "com.kakaogames.dokkaebi", "google_adv": "카카오게임즈" }
+ {
+  "name": "승리의 여신: 니케",
+  "pkg": "com.proximabeta.nikke",
+  "ios": "1585915174",
+  "meta_page": "100232432466330",
+  "google_adv_id": "",
+  "google_adv": ""
+ },
+ {
+  "name": "리니지M",
+  "pkg": "com.ncsoft.lineagem19",
+  "ios": "1474589366",
+  "meta_page": "",
+  "google_adv_id": "AR08233267038722719745|주식회사 엔씨",
+  "google_adv": ""
+ },
+ {
+  "name": "도깨비의세계",
+  "pkg": "com.kakaogames.dokkaebi",
+  "ios": "6758975161",
+  "meta_page": "",
+  "google_adv_id": "AR03969887680996573185|주식회사 카카오게임즈",
+  "google_adv": ""
+ },
+ {
+  "name": "제우스: 오만의 신",
+  "pkg": "com.com2us.es.android.google.kr.normal",
+  "ios": "6504389641",
+  "meta_page": "",
+  "google_adv_id": "AR07442528701574545409|(주) 컴투스",
+  "google_adv": ""
+ },
+ {
+  "name": "WOS: 화이트아웃 서바이벌",
+  "pkg": "com.gof.global",
+  "ios": "6443575749",
+  "meta_page": "101709235817625",
+  "google_adv_id": "AR15528579328135659521|CENTURY GAMES PTE. LTD.",
+  "google_adv": ""
+ },
+ {
+  "name": "고물 히어로",
+  "pkg": "com.superpixel.scrap",
+  "ios": "6775388646",
+  "meta_page": "",
+  "google_adv_id": "AR10576281512414543873|(주)슈퍼박스",
+  "google_adv": ""
+ },
+ {
+  "name": "냥냥 시노비 : 미소녀 닌자 로그라이크 디펜스 RPG",
+  "pkg": "com.cookapps.catshinobi",
+  "ios": "",
+  "meta_page": "253656837839088",
+  "google_adv_id": "AR07840379442122719233|(주) 쿡앱스",
+  "google_adv": ""
+ },
+ {
+  "name": "소드 x 스태프: 화산귀환 콜라보",
+  "pkg": "com.zjcs.android.kr",
+  "ios": "6762359394",
+  "meta_page": "1044984982041893,480813268439233",
+  "google_adv_id": "AR15583489291014111233|广州天狐网络科技信息服务有限公司",
+  "google_adv": ""
+ },
+ {
+  "name": "워라인: 스나이퍼",
+  "pkg": "com.farlightgames.warline.gp.global",
+  "ios": "6742809194",
+  "meta_page": "682454681621003",
+  "google_adv_id": "",
+  "google_adv": ""
+ },
+ {
+  "name": "몬스터헌터 아웃랜더스",
+  "pkg": "com.garena.game.mho",
+  "ios": "6763262759",
+  "meta_page": "100880604942850",
+  "google_adv_id": "AR14110595394324922369|Garena Online Private Limited",
+  "google_adv": ""
+ }
 ]

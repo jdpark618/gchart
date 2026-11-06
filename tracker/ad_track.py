@@ -54,7 +54,7 @@ async def meta(ctx, keys, pkg, page_id):
     pg = await ctx.new_page(); out = {'query': ', '.join(keys), 'pages': [], 'count': 0, 'ads': [], 'log': []}
     pages = {}
     if page_id:
-        pages[page_id] = '(지정)'
+        for pid in page_id.split(','): pages[pid.strip()] = ''   # 매칭에서 찾은 페이지 ID (쉼표로 여러 개)
     else:
         # 1) 게임명 키워드(쉼표로 여러 개 · 각각 콜론 앞/뒤 · 콜론 뺀 형태) → 패키지가 링크에 든 광고의 페이지
         ads, seen = [], []
@@ -76,7 +76,7 @@ async def meta(ctx, keys, pkg, page_id):
             if pages: out['log'].append({'fallback': 'page_name'})
     # 2) 페이지 광고 전체 (비로그인 1회 30개 → 정렬·형식을 바꿔 여러 번)
     ads = {}
-    for pid in list(pages)[:2]:
+    for pid in list(pages)[:3]:
         for v in ['', '&sort_data[mode]=total_impressions&sort_data[direction]=desc', '&media_type=video', '&media_type=image', '&active_status=active']:
             cnt, got = await meta_query(pg, f'&search_type=page&view_all_page_id={pid}{v}')
             if v == '' and cnt: out['count'] += cnt
@@ -87,42 +87,45 @@ async def meta(ctx, keys, pkg, page_id):
     return out
 
 GOOGLE_JS = r"""
-async ([q, advId, pkg]) => {
+async ([q, advId, pkg, ios]) => {
+  const ids = [pkg].concat(ios ? ['id' + ios] : []);   // Play 패키지 또는 iOS 앱 ID 가 든 소재
   const rpc = async (name, req) => (await fetch(`/anji/_/rpc/${name}?authuser=`, { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: 'f.req=' + encodeURIComponent(JSON.stringify(req)) })).json();
-  let advs = advId ? [{ id: advId, name: '(지정)' }] : [];
+  let advs = advId ? advId.split(',').map(x => { const [id, name] = x.split('|'); return { id: id.trim(), name: (name || '').trim() }; }) : [];   // 'AR...|광고주명' 쉼표로 여러 개
   if (!advId && q) { const sg = await rpc('SearchService/SearchSuggestions', { 1: q, 2: 10, 3: 10 }); advs = (sg[1] || []).filter(x => x[1]).map(x => ({ id: x[1][2], name: (x[1][1] || '').trim(), region: x[1][3] })).slice(0, 5); }
   const res = { candidates: [], ads: [] };
   for (const a of advs) {
     let all = [], tok = null;
-    for (let p = 0; p < 10; p++) {
+    for (let p = 0; p < 12; p++) {
       const req = { 2: 100, 3: { 12: { 1: '', 2: true }, 13: { 1: [a.id] }, 8: [2410] }, 7: { 1: 1, 2: 0, 3: 2410 } };
       if (tok) req[4] = tok;
       const j = await rpc('SearchService/SearchCreatives', req); all = all.concat(j[1] || []); tok = j[2]; if (!tok) break;
     }
-    const pk = {}; let hit = 0;
-    for (let i = 0; i < all.length; i += 15) {
-      await Promise.all(all.slice(i, i + 15).map(async c => {
+    const pk = {}; let hit = 0, fail = 0;
+    /* 미리보기 요청이 너무 많으면 구글이 막으므로 10건씩 간격을 두고, 계정당 1200건까지 */
+    for (let i = 0; i < Math.min(all.length, 1200); i += 10) {
+      await new Promise(r => setTimeout(r, 120));
+      await Promise.all(all.slice(i, i + 10).map(async c => {
         const u = c[3]?.[1]?.[4]; if (!u) return;
-        let t = ''; try { t = await (await fetch(u)).text(); } catch (e) { return; }
+        let t = ''; try { const r = await fetch(u); if (!r.ok) { fail++; return; } t = await r.text(); } catch (e) { fail++; return; }
         new Set((t.match(/(?:com|jp|kr|net|io|co)\.[a-z0-9_]+\.[a-z0-9_.]+/gi) || []).map(x => x.replace(/\.+$/, '')).filter(x => !/^com\.(google|android)\./i.test(x))).forEach(x => { pk[x] = (pk[x] || 0) + 1; });
-        if (!t.includes(pkg)) return; hit++;
+        if (!ids.some(x => t.includes(x))) return; hit++;
         const yt = (t.match(/ytimg\.com\/vi\/([\w-]+)/) || [])[1] || '';
         const img = ((t.match(/https:\\?\/\\?\/tpc\.googlesyndication\.com\\?\/(?:archive\\?\/)?simgad[^"'\\\s)]+/) || [])[0] || '').replace(/\\\//g, '/');
         const lines = [...new Set((t.match(/[가-힣A-Za-z0-9][^"\\<>{}]{3,80}/g) || []).map(s => s.replace(/^x(27|3e)/, '').trim()).filter(s => /[가-힣]/.test(s) && !/광고|의견|사용자|검토|종료|감사|설치|계속|문제|다운로드 수|카테고리|앱 관련|신규 앱|평점|건너뛰기|초 후|이 광고|닫기|스폰서|개발자|받기|앱 열기/.test(s)))].slice(0, 4);
         res.ads.push({ id: c[2], adv: a.id, fmt: c[4], first: +c[6]?.[1], last: +c[7]?.[1], days: c[13], yt, img, lines });
       }));
     }
-    res.candidates.push({ ...a, creativesKR: all.length, matched: hit, topPkgs: Object.entries(pk).sort((x, y) => y[1] - x[1]).slice(0, 5) });
+    res.candidates.push({ ...a, creativesKR: all.length, matched: hit, failed: fail, topPkgs: Object.entries(pk).sort((x, y) => y[1] - x[1]).slice(0, 5) });
   }
   return res;
 }
 """
 
-async def google(ctx, adv_q, adv_id, pkg):
+async def google(ctx, adv_q, adv_id, pkg, ios=''):
     pg = await ctx.new_page(); out = {'query': adv_q, 'advertisers': [], 'candidates': [], 'ads': []}
     await pg.goto('https://adstransparency.google.com/?region=KR&hl=ko', wait_until='domcontentloaded', timeout=60000)
     await pg.wait_for_timeout(2500)
-    r = await pg.evaluate(GOOGLE_JS, [adv_q, adv_id, pkg])
+    r = await pg.evaluate(GOOGLE_JS, [adv_q, adv_id, pkg, ios])
     out['candidates'] = r['candidates']; out['ads'] = sorted(r['ads'], key=lambda x: -(x['last'] or 0))
     out['advertisers'] = [{'id': c['id'], 'name': c['name']} for c in r['candidates'] if c['matched']]
     return out
@@ -151,7 +154,7 @@ async def play_title(ctx, pkg):
 async def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--name', required=True); ap.add_argument('--pkg', required=True)
-    ap.add_argument('--google-adv', default=''); ap.add_argument('--meta-page', default=''); ap.add_argument('--google-adv-id', default='')
+    ap.add_argument('--google-adv', default=''); ap.add_argument('--meta-page', default=''); ap.add_argument('--google-adv-id', default=''); ap.add_argument('--ios', default='')
     a = ap.parse_args(); pkg = clean(a.pkg)
     keys = [clean(k) for k in a.name.split(',') if clean(k)]; name = keys[0]   # '먼작귀 포켓, 먼작귀' → 검색어 여러 개, 첫 값이 표시 이름
     t0 = time.time(); res = {'name': name, 'pkg': pkg, 'country': 'KR', 'tracked_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
@@ -160,7 +163,7 @@ async def main():
         ctx = await b.new_context(locale='ko-KR', user_agent=UA, viewport={'width': 1366, 'height': 900})
         try: res['meta'] = await meta(ctx, keys, pkg, clean(a.meta_page))
         except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
-        try: res['google'] = await google(ctx, clean(a.google_adv), clean(a.google_adv_id), pkg)
+        try: res['google'] = await google(ctx, clean(a.google_adv), clean(a.google_adv_id), pkg, clean(a.ios))
         except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
         try: res['title'] = await play_title(ctx, pkg)
         except Exception: res['title'] = ''

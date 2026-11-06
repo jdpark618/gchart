@@ -39,7 +39,7 @@ jobs:
           import json, subprocess
           for g in json.load(open('tracker/test.json', encoding='utf-8')):
               subprocess.run(['python', 'tracker/ad_track.py', '--name', g['name'], '--pkg', g['pkg'], '--google-adv', g.get('google_adv', ''),
-                              '--meta-page', g.get('meta_page', ''), '--google-adv-id', g.get('google_adv_id', '')], check=False)
+                              '--meta-page', g.get('meta_page', ''), '--google-adv-id', g.get('google_adv_id', ''), '--ios', g.get('ios', '')], check=False)
           PY
           fi
       - name: Save to main (Pages)
