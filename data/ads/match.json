@@ -1,6 +1,6 @@
 {
- "at": "2026-11-06T01:40:59Z",
- "sec": 656,
+ "at": "2026-11-06T02:23:06Z",
+ "sec": 423,
  "games": [
   {
    "name": "승리의 여신: 니케",
@@ -43,7 +43,8 @@
       "name": "Proxima Beta Pte. Limited",
       "from": "이름 'PROXIMA BETA PTE. LIMITED'",
       "creativesKR": 614,
-      "previews": 526,
+      "recent": 216,
+      "previews": 166,
       "failed": 0,
       "hit": false
      },
@@ -52,8 +53,9 @@
       "name": "PROXIMA BETA PTE. LIMITED",
       "from": "이름 'PROXIMA BETA PTE. LIMITED'",
       "creativesKR": 62,
-      "previews": 62,
-      "failed": 17,
+      "recent": 46,
+      "previews": 46,
+      "failed": 0,
       "hit": false
      },
      {
@@ -61,6 +63,7 @@
       "name": "PROXIMA BETA PTE. LIMITED",
       "from": "이름 'PROXIMA BETA PTE. LIMITED'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -70,7 +73,8 @@
       "name": "PROXIMA BETA PTE. LIMITED",
       "from": "이름 'PROXIMA BETA PTE. LIMITED'",
       "creativesKR": 32,
-      "previews": 16,
+      "recent": 0,
+      "previews": 0,
       "failed": 0,
       "hit": false
      },
@@ -79,6 +83,7 @@
       "name": "RPL Digital, SIA",
       "from": "도메인 'nikke-kr.com'",
       "creativesKR": 8,
+      "recent": 3,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -93,7 +98,7 @@
      "nikke-kr.com"
     ]
    },
-   "sec": 78.8
+   "sec": 37.7
   },
   {
    "name": "리니지M",
@@ -142,6 +147,7 @@
       "name": "NCE CORPORATION LTD",
       "from": "이름 'NC Corporation'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -151,7 +157,8 @@
       "name": "NCL Corporation Ltd.",
       "from": "이름 'NC Corporation'",
       "creativesKR": 115,
-      "previews": 14,
+      "recent": 28,
+      "previews": 0,
       "failed": 0,
       "hit": false
      },
@@ -160,6 +167,7 @@
       "name": "NCL Corporation Ltd.",
       "from": "이름 'NC Corporation'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -169,6 +177,7 @@
       "name": "NCR VOYIX CORPORATION",
       "from": "이름 'NC Corporation'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -178,7 +187,8 @@
       "name": "주식회사 엔씨",
       "from": "이름 '주식회사 엔씨'",
       "creativesKR": 1500,
-      "previews": 227,
+      "recent": 501,
+      "previews": 156,
       "failed": 0,
       "hit": false
      },
@@ -187,6 +197,7 @@
       "name": "주식회사 엔씨",
       "from": "이름 '주식회사 엔씨'",
       "creativesKR": 3,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -196,7 +207,8 @@
       "name": "주식회사 엔씨",
       "from": "이름 '주식회사 엔씨'",
       "creativesKR": 780,
-      "previews": 327,
+      "recent": 0,
+      "previews": 0,
       "failed": 0,
       "hit": false
      },
@@ -205,6 +217,7 @@
       "name": "주식회사 엔씨",
       "from": "이름 '주식회사 엔씨'",
       "creativesKR": 393,
+      "recent": 86,
       "previews": 27,
       "failed": 0,
       "hit": true
@@ -214,6 +227,7 @@
       "name": "NC CORPORATE",
       "from": "이름 'NC Corp.'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -223,6 +237,7 @@
       "name": "NCS CORP PTY LTD",
       "from": "이름 'NC Corp.'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -232,6 +247,7 @@
       "name": "NC Plate Pros Corp",
       "from": "이름 'NC Corp.'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -241,7 +257,8 @@
       "name": "인크로스 주식회사",
       "from": "도메인→이름 '인크로스 주식회사'",
       "creativesKR": 386,
-      "previews": 316,
+      "recent": 144,
+      "previews": 143,
       "failed": 0,
       "hit": false
      },
@@ -250,8 +267,9 @@
       "name": "인크로스 주식회사",
       "from": "도메인→이름 '인크로스 주식회사'",
       "creativesKR": 303,
-      "previews": 296,
-      "failed": 3,
+      "recent": 189,
+      "previews": 182,
+      "failed": 0,
       "hit": false
      },
      {
@@ -259,6 +277,7 @@
       "name": "인크로스 주식회사",
       "from": "도메인→이름 '인크로스 주식회사'",
       "creativesKR": 3,
+      "recent": 3,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -268,6 +287,7 @@
       "name": "엔씨소프트",
       "from": "도메인→이름 '엔씨소프트'",
       "creativesKR": 1500,
+      "recent": 1500,
       "previews": 203,
       "failed": 0,
       "hit": false
@@ -277,7 +297,8 @@
       "name": "주식회사 엔씨소프트",
       "from": "도메인→이름 '엔씨소프트'",
       "creativesKR": 59,
-      "previews": 43,
+      "recent": 0,
+      "previews": 0,
       "failed": 0,
       "hit": false
      },
@@ -286,6 +307,7 @@
       "name": "주식회사 엔씨소프트",
       "from": "도메인→이름 '엔씨소프트'",
       "creativesKR": 44,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -295,21 +317,30 @@
       "name": "인크로스 주식회사",
       "from": "도메인 'ncsoft.com'",
       "creativesKR": 1500,
-      "previews": 551,
-      "failed": 165,
+      "recent": 1500,
+      "previews": 597,
+      "failed": 0,
       "hit": false
      },
      {
       "id": "AR10271241673648373761",
       "name": "주식회사 엔씨",
       "from": "도메인 'plaync.com'",
-      "skipped": "미리보기 한도"
+      "creativesKR": 58,
+      "recent": 25,
+      "previews": 19,
+      "failed": 0,
+      "hit": false
      },
      {
       "id": "AR14250319390657478657",
       "name": "엔씨소프트",
       "from": "도메인 'plaync.com'",
-      "skipped": "미리보기 한도"
+      "creativesKR": 322,
+      "recent": 307,
+      "previews": 33,
+      "failed": 0,
+      "hit": false
      }
     ],
     "names": [
@@ -323,7 +354,7 @@
      "plaync.com"
     ]
    },
-   "sec": 423.0
+   "sec": 239.5
   },
   {
    "name": "도깨비의세계",
@@ -372,8 +403,9 @@
       "name": "주식회사 카카오게임즈",
       "from": "도메인→이름 '카카오게임즈'",
       "creativesKR": 307,
-      "previews": 58,
-      "failed": 50,
+      "recent": 164,
+      "previews": 10,
+      "failed": 0,
       "hit": true
      },
      {
@@ -381,6 +413,7 @@
       "name": "KT Nasmedia Co., Ltd.",
       "from": "도메인→이름 'KT Nasmedia Co., Ltd.'",
       "creativesKR": 1,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -390,6 +423,7 @@
       "name": "kt nasmedia Co., Ltd.",
       "from": "도메인→이름 'KT Nasmedia Co., Ltd.'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -399,6 +433,7 @@
       "name": "KT Nasmedia Co., Ltd.",
       "from": "도메인→이름 'KT Nasmedia Co., Ltd.'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -408,7 +443,8 @@
       "name": "카카오게임즈",
       "from": "도메인 'kakaogames.com'",
       "creativesKR": 73,
-      "previews": 40,
+      "recent": 26,
+      "previews": 18,
       "failed": 0,
       "hit": false
      },
@@ -417,8 +453,9 @@
       "name": "KT Nasmedia Co., Ltd.",
       "from": "도메인 'kakaogames.com'",
       "creativesKR": 1500,
+      "recent": 1500,
       "previews": 341,
-      "failed": 141,
+      "failed": 0,
       "hit": false
      }
     ],
@@ -430,7 +467,7 @@
      "kakaogames.com"
     ]
    },
-   "sec": 78.0
+   "sec": 79.6
   },
   {
    "name": "제우스: 오만의 신",
@@ -460,7 +497,7 @@
      },
      {
       "q": "제우스",
-      "count": 373,
+      "count": 372,
       "hit": 0
      },
      {
@@ -470,7 +507,7 @@
      },
      {
       "q": "Com2uS",
-      "count": 43758,
+      "count": 43754,
       "hit": 0
      }
     ]
@@ -489,7 +526,8 @@
       "name": "Com2uS",
       "from": "이름 'Com2uS'",
       "creativesKR": 49,
-      "previews": 49,
+      "recent": 21,
+      "previews": 21,
       "failed": 0,
       "hit": false
      },
@@ -498,6 +536,7 @@
       "name": "Com2uS USA, Inc.",
       "from": "이름 'Com2uS'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -507,6 +546,7 @@
       "name": "(주) 컴투스",
       "from": "이름 '(주)컴투스'",
       "creativesKR": 926,
+      "recent": 627,
       "previews": 10,
       "failed": 0,
       "hit": true
@@ -516,7 +556,8 @@
       "name": "(주) 컴투스",
       "from": "이름 '(주)컴투스'",
       "creativesKR": 18,
-      "previews": 18,
+      "recent": 5,
+      "previews": 5,
       "failed": 0,
       "hit": false
      },
@@ -525,6 +566,7 @@
       "name": "(주) 컴투스",
       "from": "이름 '(주)컴투스'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -534,6 +576,7 @@
       "name": "(주)컴투스로카",
       "from": "이름 '(주)컴투스'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -548,7 +591,7 @@
      "com2us.com"
     ]
    },
-   "sec": 28.4
+   "sec": 20.5
   },
   {
    "name": "WOS: 화이트아웃 서바이벌",
@@ -602,7 +645,8 @@
       "name": "CENTURY GAMES PTE. LTD.",
       "from": "이름 'Century Games PTE. LTD.'",
       "creativesKR": 1093,
-      "previews": 10,
+      "recent": 386,
+      "previews": 20,
       "failed": 0,
       "hit": true
      },
@@ -611,6 +655,7 @@
       "name": "CENTURY GAMES PTE. LTD.",
       "from": "이름 'Century Games PTE. LTD.'",
       "creativesKR": 0,
+      "recent": 0,
       "previews": 0,
       "failed": 0,
       "hit": false
@@ -620,7 +665,8 @@
       "name": "CENTURY GAMES PTE. LTD.",
       "from": "이름 'Century Games PTE. LTD.'",
       "creativesKR": 2,
-      "previews": 2,
+      "recent": 0,
+      "previews": 0,
       "failed": 0,
       "hit": false
      }
@@ -634,7 +680,7 @@
      "centurygames.com"
     ]
    },
-   "sec": 8.7
+   "sec": 9.8
   },
   {
    "name": "고물 히어로",
@@ -683,6 +729,7 @@
       "name": "(주)슈퍼박스",
       "from": "이름 '(주)슈퍼박스'",
       "creativesKR": 46,
+      "recent": 29,
       "previews": 10,
       "failed": 0,
       "hit": true
@@ -697,7 +744,7 @@
      "superboxgo.com"
     ]
    },
-   "sec": 5.6
+   "sec": 6.1
   },
   {
    "name": "냥냥 시노비 : 미소녀 닌자 로그라이크 디펜스 RPG",
@@ -746,8 +793,9 @@
       "name": "(주) 쿡앱스",
       "from": "이름 '(주)쿡앱스'",
       "creativesKR": 181,
+      "recent": 63,
       "previews": 10,
-      "failed": 6,
+      "failed": 0,
       "hit": true
      }
     ],
@@ -759,7 +807,7 @@
      "cookapps.com"
     ]
    },
-   "sec": 9.0
+   "sec": 7.0
   },
   {
    "name": "소드 x 스태프: 화산귀환 콜라보",
@@ -812,6 +860,7 @@
       "name": "广州天狐网络科技信息服务有限公司",
       "from": "도메인 'boltray.com'",
       "creativesKR": 454,
+      "recent": 454,
       "previews": 10,
       "failed": 0,
       "hit": true
@@ -821,6 +870,7 @@
       "name": "广州天狐网络科技信息服务有限公司",
       "from": "도메인 'boltray.com'",
       "creativesKR": 94,
+      "recent": 94,
       "previews": 33,
       "failed": 0,
       "hit": false
@@ -835,7 +885,7 @@
      "boltray.com"
     ]
    },
-   "sec": 13.4
+   "sec": 10.1
   },
   {
    "name": "워라인: 스나이퍼",
@@ -881,7 +931,7 @@
      "powerfantasygames.com"
     ]
    },
-   "sec": 2.5
+   "sec": 2.3
   },
   {
    "name": "몬스터헌터 아웃랜더스",
@@ -930,6 +980,7 @@
       "name": "Garena Online Private Limited",
       "from": "이름 'Garena Online Private Limited'",
       "creativesKR": 111,
+      "recent": 102,
       "previews": 10,
       "failed": 0,
       "hit": true
@@ -944,7 +995,7 @@
      "monsterhunteroutlanders.com"
     ]
    },
-   "sec": 5.1
+   "sec": 6.8
   }
  ]
 }
