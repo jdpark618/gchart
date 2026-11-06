@@ -48,7 +48,9 @@ def meta_norm(a):
             'body': ((s.get('body') or {}).get('text') or card.get('body') or '')[:300], 'title': (s.get('title') or card.get('title') or '')[:150],
             'store': 'iOS' if 'apple.com' in link else 'Play' if 'play.google' in link else '기타', 'link': link.split('?')[0][:200],
             'variants': a.get('collation_count') or 1,
-            'thumb': v.get('video_preview_image_url') or img.get('resized_image_url') or img.get('original_image_url') or card.get('resized_image_url') or ''}
+            'thumb': v.get('video_preview_image_url') or img.get('resized_image_url') or img.get('original_image_url') or card.get('resized_image_url')
+                     or card.get('video_preview_image_url') or card.get('original_image_url')   # 동적 소재(DCO)는 이미지가 카드·추가 소재 칸에 있음
+                     or ((s.get('extra_videos') or [{}])[0] or {}).get('video_preview_image_url') or ((s.get('extra_images') or [{}])[0] or {}).get('resized_image_url') or ''}
 
 async def meta(ctx, keys, pkg, page_id):
     pg = await ctx.new_page(); out = {'query': ', '.join(keys), 'pages': [], 'count': 0, 'ads': [], 'log': []}
@@ -87,12 +89,13 @@ async def meta(ctx, keys, pkg, page_id):
     return out
 
 GOOGLE_JS = r"""
-async ([q, advId, pkg, ios]) => {
+async ([q, advId, pkg, ios, since, known]) => {
+  const knownSet = new Set(known || []);   // 이미 저장된 소재 ID → 미리보기 없이 날짜만 갱신
   const ids = [pkg].concat(ios ? ['id' + ios] : []);   // Play 패키지 또는 iOS 앱 ID 가 든 소재
   const rpc = async (name, req) => (await fetch(`/anji/_/rpc/${name}?authuser=`, { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: 'f.req=' + encodeURIComponent(JSON.stringify(req)) })).json();
   let advs = advId ? advId.split(',').map(x => { const [id, name] = x.split('|'); return { id: id.trim(), name: (name || '').trim() }; }) : [];   // 'AR...|광고주명' 쉼표로 여러 개
   if (!advId && q) { const sg = await rpc('SearchService/SearchSuggestions', { 1: q, 2: 10, 3: 10 }); advs = (sg[1] || []).filter(x => x[1]).map(x => ({ id: x[1][2], name: (x[1][1] || '').trim(), region: x[1][3] })).slice(0, 5); }
-  const res = { candidates: [], ads: [] };
+  const res = { candidates: [], ads: [], seen: [] };
   for (const a of advs) {
     let all = [], tok = null;
     for (let p = 0; p < 12; p++) {
@@ -100,6 +103,10 @@ async ([q, advId, pkg, ios]) => {
       if (tok) req[4] = tok;
       const j = await rpc('SearchService/SearchCreatives', req); all = all.concat(j[1] || []); tok = j[2]; if (!tok) break;
     }
+    const total = all.length;
+    all = all.filter(c => +(c[7]?.[1] || 0) >= since);   // 최근 N일(기본 30일) 안에 노출된 소재만
+    all.filter(c => knownSet.has(c[2])).forEach(c => res.seen.push({ id: c[2], first: +c[6]?.[1], last: +c[7]?.[1], days: c[13] }));
+    all = all.filter(c => !knownSet.has(c[2]));   // 새 소재만 미리보기
     const pk = {}; let hit = 0, fail = 0;
     /* 미리보기 요청이 너무 많으면 구글이 막으므로 10건씩 간격을 두고, 계정당 1200건까지 */
     for (let i = 0; i < Math.min(all.length, 1200); i += 10) {
@@ -115,19 +122,19 @@ async ([q, advId, pkg, ios]) => {
         res.ads.push({ id: c[2], adv: a.id, fmt: c[4], first: +c[6]?.[1], last: +c[7]?.[1], days: c[13], yt, img, lines });
       }));
     }
-    res.candidates.push({ ...a, creativesKR: all.length, matched: hit, failed: fail, topPkgs: Object.entries(pk).sort((x, y) => y[1] - x[1]).slice(0, 5) });
+    res.candidates.push({ ...a, creativesKR: total, newRecent: all.length, matched: hit, failed: fail, topPkgs: Object.entries(pk).sort((x, y) => y[1] - x[1]).slice(0, 5) });
   }
   return res;
 }
 """
 
-async def google(ctx, adv_q, adv_id, pkg, ios=''):
+async def google(ctx, adv_q, adv_id, pkg, ios='', since=0, known=()):
     pg = await ctx.new_page(); out = {'query': adv_q, 'advertisers': [], 'candidates': [], 'ads': []}
     await pg.goto('https://adstransparency.google.com/?region=KR&hl=ko', wait_until='domcontentloaded', timeout=60000)
     await pg.wait_for_timeout(2500)
-    r = await pg.evaluate(GOOGLE_JS, [adv_q, adv_id, pkg, ios])
-    out['candidates'] = r['candidates']; out['ads'] = sorted(r['ads'], key=lambda x: -(x['last'] or 0))
-    out['advertisers'] = [{'id': c['id'], 'name': c['name']} for c in r['candidates'] if c['matched']]
+    r = await pg.evaluate(GOOGLE_JS, [adv_q, adv_id, pkg, ios, since, list(known)])
+    out['candidates'] = r['candidates']; out['ads'] = sorted(r['ads'], key=lambda x: -(x['last'] or 0)); out['seen'] = r.get('seen', [])
+    out['advertisers'] = [{'id': c['id'], 'name': c['name']} for c in r['candidates'] if c['matched'] or adv_id]
     return out
 
 def save_thumb(url, d):
@@ -155,15 +162,38 @@ async def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--name', required=True); ap.add_argument('--pkg', required=True)
     ap.add_argument('--google-adv', default=''); ap.add_argument('--meta-page', default=''); ap.add_argument('--google-adv-id', default=''); ap.add_argument('--ios', default='')
+    ap.add_argument('--publisher', default=''); ap.add_argument('--rematch', action='store_true')
     a = ap.parse_args(); pkg = clean(a.pkg)
     keys = [clean(k) for k in a.name.split(',') if clean(k)]; name = keys[0]   # '먼작귀 포켓, 먼작귀' → 검색어 여러 개, 첫 값이 표시 이름
-    t0 = time.time(); res = {'name': name, 'pkg': pkg, 'country': 'KR', 'tracked_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
+    t0 = time.time(); now = int(time.time()); res = {'name': name, 'pkg': pkg, 'country': 'KR', 'tracked_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
+    # 계정 목록(data/ads/accounts.json): 매칭된 게임은 저장된 계정으로 · 처음이면(또는 --rematch) 매칭 전체(최근 90일 기준)
+    ACC = os.path.join(ROOT, 'data', 'ads', 'accounts.json')
+    accounts = json.load(open(ACC, encoding='utf-8')) if os.path.exists(ACC) else {}
+    acc = None if a.rematch else accounts.get(pkg)
+    prev_p = os.path.join(ROOT, 'data', 'ads', f'{pkg}.json')
+    prev = json.load(open(prev_p, encoding='utf-8')) if os.path.exists(prev_p) and acc else {}   # 처음 매칭이면 이전 결과는 버리고 새로
     async with async_playwright() as p:
         b = await p.chromium.launch()
         ctx = await b.new_context(locale='ko-KR', user_agent=UA, viewport={'width': 1366, 'height': 900})
-        try: res['meta'] = await meta(ctx, keys, pkg, clean(a.meta_page))
+        if not acc and not (a.meta_page or a.google_adv_id):
+            from ad_match import match_game
+            mpg = await ctx.new_page(); gpg = await ctx.new_page()
+            await gpg.goto('https://adstransparency.google.com/?region=KR&hl=ko', wait_until='domcontentloaded', timeout=60000); await gpg.wait_for_timeout(2500)
+            pub = clean(a.publisher) or next((r[6] for c in ('sales', 'popular') for r in json.load(open(os.path.join(ROOT, 'data', 'snapshot.json'), encoding='utf-8'))['charts']['gp']['kr'][c]['rows'] if r[4] == pkg), '')
+            m = await match_game(ctx, mpg, gpg, {'name': name, 'pkg': pkg, 'publisher': pub}, days=90)
+            acc = {'meta_pages': [x['id'] for x in m['meta'].get('pages', [])], 'google': m['google'].get('matched', []), 'ios': m['appstore'].get('ios_id', ''),
+                   'meta_by': m['meta'].get('by', ''), 'matched_at': res['tracked_at']}
+            accounts[pkg] = acc; res['match'] = {'meta_by': acc['meta_by'], 'google_by': [g['by'] for g in acc['google']]}
+        elif not acc:
+            acc = {'meta_pages': [x for x in clean(a.meta_page).split(',') if x], 'google': [{'id': x.split('|')[0], 'name': (x.split('|') + [''])[1]} for x in clean(a.google_adv_id).split(',') if x],
+                   'ios': clean(a.ios), 'matched_at': res['tracked_at']}
+            accounts[pkg] = acc
+        meta_page = ','.join(acc.get('meta_pages', []))
+        gadv = ','.join(f"{g['id']}|{g.get('name', '')}" for g in acc.get('google', []))
+        try: res['meta'] = await meta(ctx, keys, pkg, meta_page) if meta_page else {'pages': [], 'count': 0, 'ads': [], 'log': [{'skip': 'Meta 계정 없음'}]}
         except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
-        try: res['google'] = await google(ctx, clean(a.google_adv), clean(a.google_adv_id), pkg, clean(a.ios))
+        known = [x['id'] for x in prev.get('google', {}).get('ads', [])]
+        try: res['google'] = await google(ctx, '', gadv, pkg, acc.get('ios', '') or clean(a.ios), now - (30 if prev else 90) * 86400, known) if gadv else {'advertisers': [], 'candidates': [], 'ads': []}
         except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
         try: res['title'] = await play_title(ctx, pkg)
         except Exception: res['title'] = ''
@@ -173,10 +203,24 @@ async def main():
     for x in res['google'].get('ads', []):
         x['lines'] = [l for l in (re.sub(r'^x(22|27|3e)', '', s).strip() for s in x.get('lines', []))
                       if nz(l) and not STORE_LB.match(l) and not any(nz(l) in n for n in names)]
-    # 썸네일: 앱별 폴더를 새로 (최신 1회분만 보관)
-    d = os.path.join(ROOT, 'data', 'ads', 'img', pkg); shutil.rmtree(d, ignore_errors=True); os.makedirs(d, exist_ok=True)
+    # 썸네일: 새 소재만 받음 (이미 받은 파일은 그대로 · 같은 소재면 같은 파일 이름)
+    d = os.path.join(ROOT, 'data', 'ads', 'img', pkg)
+    if not prev: shutil.rmtree(d, ignore_errors=True)
+    os.makedirs(d, exist_ok=True)
     for x in res['meta'].get('ads', []): x['thumb'] = save_thumb(x.pop('thumb', ''), d)
     for x in res['google'].get('ads', []): x['thumb'] = save_thumb(f"https://i.ytimg.com/vi/{x['yt']}/hqdefault.jpg" if x.get('yt') else x.get('img'), d)
+    # 이전 결과와 병합: Meta 는 ID 기준 최신 값으로, Google 은 저장된 소재의 날짜를 목록 값으로 갱신 + 새 소재 추가
+    if prev:
+        mm = {x['id']: x for x in prev.get('meta', {}).get('ads', [])}; mm.update({x['id']: x for x in res['meta'].get('ads', [])})
+        res['meta']['ads'] = sorted(mm.values(), key=lambda x: -(x.get('start') or 0))
+        gm = {x['id']: x for x in prev.get('google', {}).get('ads', [])}
+        for s in res['google'].get('seen', []):
+            if s['id'] in gm: gm[s['id']].update(s)
+        gm.update({x['id']: x for x in res['google'].get('ads', [])})
+        res['google']['ads'] = sorted(gm.values(), key=lambda x: -(x.get('last') or 0))
+        res['google'].pop('seen', None)
+    res['google']['advertisers'] = res['google'].get('advertisers') or [{'id': g['id'], 'name': g.get('name', '')} for g in acc.get('google', [])]
+    json.dump(accounts, open(ACC, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     res['sec'] = round(time.time() - t0, 1)
     os.makedirs(os.path.join(ROOT, 'data', 'ads'), exist_ok=True)
     json.dump(res, open(os.path.join(ROOT, 'data', 'ads', f'{pkg}.json'), 'w', encoding='utf-8'), ensure_ascii=False)

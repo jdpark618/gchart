@@ -81,7 +81,7 @@ async def meta_match(pg, g, ios_id):
     return {'pages': [], 'by': '', 'tried': tried}
 
 GOOGLE_MATCH_JS = r"""
-async ([names, domains, ids]) => {
+async ([names, domains, ids, since]) => {
   const rpc = async (name, req) => (await fetch(`/anji/_/rpc/${name}?authuser=`, { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: 'f.req=' + encodeURIComponent(JSON.stringify(req)) })).json();
   const cand = new Map();   // 광고주 ID → {name, from}
   for (const n of names) {
@@ -111,6 +111,7 @@ async ([names, domains, ids]) => {
       if (tok) req[4] = tok;
       const j = await rpc('SearchService/SearchCreatives', req); all = all.concat(j[1] || []); tok = j[2]; if (!tok) break;
     }
+    const total = all.length; all = all.filter(c => +(c[7]?.[1] || 0) >= since);   // 최근 N일(기본 90일) 안에 노출된 소재만 미리보기
     let hit = 0, seen = 0, fail = 0;
     for (let i = 0; i < all.length && !hit && budget > 0; i += 10) {
       const res = await Promise.all(all.slice(i, i + 10).map(async c => { const u = c[3]?.[1]?.[4]; if (!u) return 0; seen++; budget--;
@@ -118,12 +119,26 @@ async ([names, domains, ids]) => {
       hit += res.reduce((s, v) => s + v, 0);
       await new Promise(r => setTimeout(r, 120));
     }
-    out.checked.push({ id, name: a.name, from: a.from, creativesKR: all.length, previews: seen, failed: fail, hit: hit > 0 });
+    out.checked.push({ id, name: a.name, from: a.from, creativesKR: total, recent: all.length, previews: seen, failed: fail, hit: hit > 0 });
     if (hit) out.matched.push({ id, name: a.name, by: `${a.from} → 소재에 패키지/iOS ID` });
   }
   return out;
 }
 """
+
+async def match_game(ctx, mpg, gpg, g, days=90):
+    """게임 1개 매칭: Meta 페이지 · Google 광고주 (Google 은 최근 days 일 소재 기준)"""
+    s0 = time.time()
+    pi = await play_info(ctx, g['pkg'])
+    ap = appstore(g['name'], g.get('publisher', ''))
+    ios = ap.get('ios_id', '')
+    try: m = await meta_match(mpg, g, ios)
+    except Exception as e: m = {'pages': [], 'by': '', 'error': str(e)[:160]}
+    names = list(dict.fromkeys(v for v in [g.get('publisher'), pi.get('legal'), ap.get('seller')] if v))
+    domains = domains_of([pi.get('site', ''), ap.get('seller_url', '')])
+    try: gm = await gpg.evaluate(GOOGLE_MATCH_JS, [names, domains, [g['pkg']] + ([f'id{ios}'] if ios else []), int(time.time()) - days * 86400])
+    except Exception as e: gm = {'matched': [], 'checked': [], 'error': str(e)[:160]}
+    return {**g, 'play': pi, 'appstore': ap, 'meta': m, 'google': {**gm, 'names': names, 'domains': domains}, 'sec': round(time.time() - s0, 1)}
 
 async def main():
     T = targets(); t0 = time.time(); results = []
@@ -133,18 +148,9 @@ async def main():
         mpg = await ctx.new_page(); gpg = await ctx.new_page()
         await gpg.goto('https://adstransparency.google.com/?region=KR&hl=ko', wait_until='domcontentloaded', timeout=60000); await gpg.wait_for_timeout(2500)
         for g in T:
-            s0 = time.time()
-            pi = await play_info(ctx, g['pkg'])
-            ap = appstore(g['name'], g['publisher'])
-            ios = ap.get('ios_id', '')
-            try: m = await meta_match(mpg, g, ios)
-            except Exception as e: m = {'pages': [], 'by': '', 'error': str(e)[:160]}
-            names = list(dict.fromkeys(v for v in [g['publisher'], pi.get('legal'), ap.get('seller')] if v))
-            domains = domains_of([pi.get('site', ''), ap.get('seller_url', '')])
-            try: gm = await gpg.evaluate(GOOGLE_MATCH_JS, [names, domains, [g['pkg']] + ([f'id{ios}'] if ios else [])])
-            except Exception as e: gm = {'matched': [], 'checked': [], 'error': str(e)[:160]}
-            results.append({**g, 'play': pi, 'appstore': ap, 'meta': m, 'google': {**gm, 'names': names, 'domains': domains}, 'sec': round(time.time() - s0, 1)})
-            print(f"{g['name'][:20]} | Meta {'O' if m['pages'] else 'X'} | Google {'O' if gm.get('matched') else 'X'} | {round(time.time() - s0)}s", flush=True)
+            r = await match_game(ctx, mpg, gpg, g)
+            results.append(r)
+            print(f"{g['name'][:20]} | Meta {'O' if r['meta']['pages'] else 'X'} | Google {'O' if r['google'].get('matched') else 'X'} | {round(r['sec'])}s", flush=True)
         await b.close()
     os.makedirs(os.path.join(ROOT, 'data', 'ads'), exist_ok=True)
     json.dump({'at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()), 'sec': round(time.time() - t0), 'games': results},

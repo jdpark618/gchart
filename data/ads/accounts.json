@@ -1,0 +1,133 @@
+{
+ "com.proximabeta.nikke": {
+  "meta_pages": [
+   "100232432466330"
+  ],
+  "google": [],
+  "ios": "1585915174",
+  "meta_by": "검색어 '승리의 여신: 니케' → 광고 링크의 iOS 앱 ID",
+  "matched_at": "2026-11-06T01:40:59Z"
+ },
+ "com.ncsoft.lineagem19": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR08233267038722719745",
+    "name": "주식회사 엔씨",
+    "by": "이름 '주식회사 엔씨' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "1474589366",
+  "meta_by": "",
+  "matched_at": "2026-11-06T01:40:59Z"
+ },
+ "com.kakaogames.dokkaebi": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR03969887680996573185",
+    "name": "주식회사 카카오게임즈",
+    "by": "도메인→이름 '카카오게임즈' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6758975161",
+  "meta_by": "",
+  "matched_at": "2026-11-06T01:40:59Z"
+ },
+ "com.com2us.es.android.google.kr.normal": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR07442528701574545409",
+    "name": "(주) 컴투스",
+    "by": "이름 '(주)컴투스' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6504389641",
+  "meta_by": "",
+  "matched_at": "2026-11-06T01:40:59Z"
+ },
+ "com.gof.global": {
+  "meta_pages": [
+   "101709235817625"
+  ],
+  "google": [
+   {
+    "id": "AR15528579328135659521",
+    "name": "CENTURY GAMES PTE. LTD.",
+    "by": "이름 'Century Games PTE. LTD.' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6443575749",
+  "meta_by": "검색어 'WOS' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-06T01:40:59Z"
+ },
+ "com.superpixel.scrap": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR10576281512414543873",
+    "name": "(주)슈퍼박스",
+    "by": "이름 '(주)슈퍼박스' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6775388646",
+  "meta_by": "",
+  "matched_at": "2026-11-06T01:40:59Z"
+ },
+ "com.cookapps.catshinobi": {
+  "meta_pages": [
+   "253656837839088"
+  ],
+  "google": [
+   {
+    "id": "AR07840379442122719233",
+    "name": "(주) 쿡앱스",
+    "by": "이름 '(주)쿡앱스' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "",
+  "meta_by": "검색어 '냥냥 시노비' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-06T01:40:59Z"
+ },
+ "com.zjcs.android.kr": {
+  "meta_pages": [
+   "1044984982041893",
+   "480813268439233"
+  ],
+  "google": [
+   {
+    "id": "AR15583489291014111233",
+    "name": "广州天狐网络科技信息服务有限公司",
+    "by": "도메인 'boltray.com' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6762359394",
+  "meta_by": "검색어 '소드 x 스태프: 화산귀환 콜라보' → 광고 링크의 iOS 앱 ID",
+  "matched_at": "2026-11-06T01:40:59Z"
+ },
+ "com.farlightgames.warline.gp.global": {
+  "meta_pages": [
+   "682454681621003"
+  ],
+  "google": [],
+  "ios": "6742809194",
+  "meta_by": "검색어 '워라인: 스나이퍼' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-06T01:40:59Z"
+ },
+ "com.garena.game.mho": {
+  "meta_pages": [
+   "100880604942850"
+  ],
+  "google": [
+   {
+    "id": "AR14110595394324922369",
+    "name": "Garena Online Private Limited",
+    "by": "이름 'Garena Online Private Limited' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6763262759",
+  "meta_by": "검색어 '몬스터헌터 아웃랜더스' → 광고 링크의 iOS 앱 ID",
+  "matched_at": "2026-11-06T01:40:59Z"
+ }
+}
