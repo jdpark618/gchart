@@ -1,0 +1,30 @@
+name: Event Calendar (행사 달력)
+
+# 공개 구글 캘린더 → data/events.json (대시보드 행사 달력). 6시간마다 + 수동 실행 (11/09)
+on:
+  schedule:
+    - cron: '20 */6 * * *'   # UTC 0·6·12·18시 20분 = KST 9·15·21·3시 20분 (GitHub 예약은 늦어질 수 있음)
+  workflow_dispatch:
+
+concurrency: { group: events, cancel-in-progress: false }
+permissions:
+  contents: write
+
+jobs:
+  events:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python events.py
+      - name: Save (바뀐 경우만)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/events.json
+          git diff --cached --quiet && { echo "변경 없음"; exit 0; }
+          git commit -qm "events: 행사 달력 갱신 $(date -u +%FT%TZ)"
+          for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && exit 0; sleep $((i*5)); done
+          exit 1
