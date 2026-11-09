@@ -11,7 +11,7 @@ on:
       google_adv_id: { description: 'Google 광고주 ID AR... (알면 입력)', default: '' }
   push:
     branches: [main]
-    paths: ['tracker/test.json']
+    paths: ['tracker/test.json', 'tracker/daily_top5.py']   # daily_top5.py 를 고쳐 push 하면 그날 TOP5 를 바로 한 번 추적
   schedule:
     - cron: '17 21 * * *'   # 매일 06:17 KST — 순위 수집(03:42 KST 시작) 뒤 · 새벽대라 Meta/Google 제한 부담 적음. 대상은 그날 인기·매출 TOP5
 concurrency: { group: ad-track, cancel-in-progress: false }
@@ -23,6 +23,7 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }   # push 때 바뀐 파일을 보고 TOP5 / test.json 중 고르기 위함
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - run: pip install playwright==1.48.0 pillow && python -m playwright install --with-deps chromium
@@ -35,7 +36,8 @@ jobs:
           IN_GADVID: ${{ inputs.google_adv_id }}
           EVENT: ${{ github.event_name }}
         run: |
-          if [ "$EVENT" = "schedule" ]; then
+          CHANGED=$( [ "$EVENT" = "push" ] && git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" 2>/dev/null || true )
+          if [ "$EVENT" = "schedule" ] || { [ "$EVENT" = "push" ] && echo "$CHANGED" | grep -q 'tracker/daily_top5.py' && ! echo "$CHANGED" | grep -q 'tracker/test.json'; }; then
             python tracker/daily_top5.py   # 매일: 그날 인기 TOP5 + 매출 TOP5 (Play · 한국)
           elif [ -n "$IN_PKG" ]; then
             python tracker/ad_track.py --name "$IN_NAME" --pkg "$IN_PKG" --google-adv "$IN_GADV" --meta-page "$IN_MPAGE" --google-adv-id "$IN_GADVID"

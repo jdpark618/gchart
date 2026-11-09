@@ -6,7 +6,7 @@
   · Google: 광고주 이름 검색 → 후보 계정의 KR 소재 미리보기에 패키지가 든 것만 (광고주 ID 를 주면 그 계정만)
 저장: data/ads/<pkg>.json (최신 1회분만, 덮어씀) · data/ads/img/<pkg>/*.jpg (320px) · data/ads/index.json (추적한 앱 목록)
 실행: python tracker/ad_track.py --name 탕탕에이스 --pkg com.survivor.ace [--google-adv Habby] [--meta-page 123] [--google-adv-id AR...]"""
-import argparse, asyncio, hashlib, io, json, os, re, shutil, time, urllib.request
+import argparse, asyncio, calendar, hashlib, io, json, os, re, shutil, time, urllib.request
 from urllib.parse import quote
 from PIL import Image
 from playwright.async_api import async_playwright
@@ -181,12 +181,25 @@ async def main():
     async with async_playwright() as p:
         b = await p.chromium.launch()
         ctx = await b.new_context(locale='ko-KR', user_agent=UA, viewport={'width': 1366, 'height': 900})
-        if not acc and not (a.meta_page or a.google_adv_id):
+        async def do_match():
             from ad_match import match_game
             mpg = await ctx.new_page(); gpg = await ctx.new_page()
             await gpg.goto('https://adstransparency.google.com/?region=KR&hl=ko', wait_until='domcontentloaded', timeout=60000); await gpg.wait_for_timeout(2500)
             pub = clean(a.publisher) or next((r[6] for c in ('sales', 'popular') for r in json.load(open(os.path.join(ROOT, 'data', 'snapshot.json'), encoding='utf-8'))['charts']['gp']['kr'][c]['rows'] if r[4] == pkg), '')
-            m = await match_game(ctx, mpg, gpg, {'name': name, 'pkg': pkg, 'publisher': pub}, days=90)
+            return await match_game(ctx, mpg, gpg, {'name': name, 'pkg': pkg, 'publisher': pub}, days=90)
+        # 재매칭 (11/09): 처음 매칭에서 못 찾은 매체(Meta 페이지 또는 Google 광고주)는 7일마다 다시 찾음 — 출시 직후엔 광고가 없다가 나중에 시작하는 게임 대비
+        if acc and not (a.meta_page or a.google_adv_id) and (not acc.get('meta_pages') or not acc.get('google')):
+            last = acc.get('rematched_at') or acc.get('matched_at') or ''
+            try: due = time.time() - calendar.timegm(time.strptime(last[:19], '%Y-%m-%dT%H:%M:%S')) >= 7 * 86400
+            except Exception: due = True
+            if due:
+                m = await do_match(); got = []
+                if not acc.get('meta_pages') and m['meta'].get('pages'): acc['meta_pages'] = [x['id'] for x in m['meta']['pages']]; acc['meta_by'] = m['meta'].get('by', ''); got.append('meta')
+                if not acc.get('google') and m['google'].get('matched'): acc['google'] = m['google']['matched']; got.append('google')
+                if not acc.get('ios') and m['appstore'].get('ios_id'): acc['ios'] = m['appstore']['ios_id']
+                acc['rematched_at'] = res['tracked_at']; accounts[pkg] = acc; res['rematch'] = got
+        if not acc and not (a.meta_page or a.google_adv_id):
+            m = await do_match()
             acc = {'meta_pages': [x['id'] for x in m['meta'].get('pages', [])], 'google': m['google'].get('matched', []), 'ios': m['appstore'].get('ios_id', ''),
                    'meta_by': m['meta'].get('by', ''), 'matched_at': res['tracked_at']}
             accounts[pkg] = acc; res['match'] = {'meta_by': acc['meta_by'], 'google_by': [g['by'] for g in acc['google']]}
