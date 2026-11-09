@@ -10,7 +10,11 @@
   "tracked_at": "2026-11-09T01:02:14Z",
   "meta": 38,
   "meta_total": 58,
-  "google": 36
+  "google": 36,
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-06"
  },
  {
   "pkg": "com.farlightgames.warline.gp.global",
@@ -22,7 +26,11 @@
   "tracked_at": "2026-11-09T01:01:53Z",
   "meta": 44,
   "meta_total": 581,
-  "google": 0
+  "google": 0,
+  "charts": {
+   "popular": 2
+  },
+  "rank_date": "2026-11-09"
  },
  {
   "pkg": "com.zjcs.android.kr",
@@ -36,7 +44,11 @@
   "tracked_at": "2026-11-09T01:01:04Z",
   "meta": 136,
   "meta_total": 41,
-  "google": 25
+  "google": 25,
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-09"
  },
  {
   "pkg": "com.cookapps.catshinobi",
@@ -49,7 +61,11 @@
   "tracked_at": "2026-11-09T01:00:33Z",
   "meta": 51,
   "meta_total": 72,
-  "google": 64
+  "google": 64,
+  "charts": {
+   "popular": 2
+  },
+  "rank_date": "2026-11-06"
  },
  {
   "pkg": "com.superpixel.scrap",
@@ -61,7 +77,11 @@
   "tracked_at": "2026-11-09T01:00:25Z",
   "meta": 0,
   "meta_total": 0,
-  "google": 4
+  "google": 4,
+  "charts": {
+   "popular": 3
+  },
+  "rank_date": "2026-11-09"
  },
  {
   "pkg": "com.gof.global",
@@ -74,7 +94,11 @@
   "tracked_at": "2026-11-09T00:59:26Z",
   "meta": 51,
   "meta_total": 135,
-  "google": 120
+  "google": 120,
+  "charts": {
+   "sales": 5
+  },
+  "rank_date": "2026-11-06"
  },
  {
   "pkg": "com.com2us.es.android.google.kr.normal",
@@ -86,7 +110,11 @@
   "tracked_at": "2026-11-09T00:59:20Z",
   "meta": 0,
   "meta_total": 0,
-  "google": 56
+  "google": 56,
+  "charts": {
+   "sales": 3
+  },
+  "rank_date": "2026-11-09"
  },
  {
   "pkg": "com.kakaogames.dokkaebi",
@@ -98,7 +126,11 @@
   "tracked_at": "2026-11-09T00:59:14Z",
   "meta": 0,
   "meta_total": 0,
-  "google": 38
+  "google": 38,
+  "charts": {
+   "sales": 2
+  },
+  "rank_date": "2026-11-09"
  },
  {
   "pkg": "com.ncsoft.lineagem19",
@@ -110,7 +142,11 @@
   "tracked_at": "2026-11-09T00:59:07Z",
   "meta": 0,
   "meta_total": 0,
-  "google": 68
+  "google": 68,
+  "charts": {
+   "sales": 4
+  },
+  "rank_date": "2026-11-09"
  },
  {
   "pkg": "com.proximabeta.nikke",
@@ -122,6 +158,10 @@
   "tracked_at": "2026-11-09T00:58:38Z",
   "meta": 54,
   "meta_total": 96,
-  "google": 0
+  "google": 0,
+  "charts": {
+   "sales": 1
+  },
+  "rank_date": "2026-11-09"
  }
 ]

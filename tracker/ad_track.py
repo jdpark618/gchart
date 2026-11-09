@@ -168,6 +168,7 @@ async def main():
     ap.add_argument('--name', required=True); ap.add_argument('--pkg', required=True)
     ap.add_argument('--google-adv', default=''); ap.add_argument('--meta-page', default=''); ap.add_argument('--google-adv-id', default=''); ap.add_argument('--ios', default='')
     ap.add_argument('--publisher', default=''); ap.add_argument('--rematch', action='store_true')
+    ap.add_argument('--ranks', default=''); ap.add_argument('--rank-date', default='')   # 'popular:2,sales:3' — 매일 TOP5 추적(daily_top5.py)에서 넘김
     a = ap.parse_args(); pkg = clean(a.pkg)
     keys = [clean(k) for k in a.name.split(',') if clean(k)]; name = keys[0]   # '먼작귀 포켓, 먼작귀' → 검색어 여러 개, 첫 값이 표시 이름
     t0 = time.time(); now = int(time.time()); res = {'name': name, 'pkg': pkg, 'country': 'KR', 'tracked_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
@@ -252,7 +253,11 @@ async def main():
     try: snap_pub = next((r[6] for c in ('sales', 'popular') for r in json.load(open(os.path.join(ROOT, 'data', 'snapshot.json'), encoding='utf-8'))['charts']['gp']['kr'][c]['rows'] if r[4] == pkg), '')
     except Exception: snap_pub = ''
     publisher = clean(a.publisher) or snap_pub or next((x.get('publisher', '') for x in idx if x['pkg'] == pkg), '') or ', '.join(g['name'] for g in res['google'].get('advertisers', []) if g.get('name'))
-    idx = [x for x in idx if x['pkg'] != pkg] + [{'pkg': pkg, 'name': name, 'publisher': publisher,
+    # 순위 추적 구분 (11/09): 이번에 받은 순위가 있으면 그것, 없으면(수동 실행) 이전 목록 값 유지 → 사이트가 인기/매출 순위 추적으로 나눔
+    prev_ent = next((x for x in idx if x['pkg'] == pkg), {})
+    ranks = {k: int(v) for k, v in (kv.split(':') for kv in clean(a.ranks).split(',') if ':' in kv) if v.strip().isdigit()}
+    charts, rank_date = (ranks, clean(a.rank_date)) if ranks else (prev_ent.get('charts', {}), prev_ent.get('rank_date', ''))
+    idx = [x for x in idx if x['pkg'] != pkg] + [{'pkg': pkg, 'name': name, 'publisher': publisher, 'charts': charts, 'rank_date': rank_date,
            'aliases': sorted({g['name'] for g in res['google'].get('advertisers', []) if g.get('name')} | {p['name'] for p in res['meta'].get('pages', []) if p.get('name')}),   # 광고주 법인명(한글 포함) · Meta 페이지명 → 검색용
            'tracked_at': res['tracked_at'],
            'meta': len(res['meta'].get('ads', [])), 'meta_total': res['meta'].get('count', 0), 'google': len(res['google'].get('ads', []))}]
