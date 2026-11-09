@@ -52,7 +52,7 @@ def meta_norm(a):
                      or card.get('video_preview_image_url') or card.get('original_image_url')   # 동적 소재(DCO)는 이미지가 카드·추가 소재 칸에 있음
                      or ((s.get('extra_videos') or [{}])[0] or {}).get('video_preview_image_url') or ((s.get('extra_images') or [{}])[0] or {}).get('resized_image_url') or '',
             # 크게 보기용 원본 주소 (11/09): Meta 주소는 며칠 뒤 만료되지만 매일 다시 받으니 집행 중 소재는 늘 새 주소 · 파일은 저장하지 않음
-            'vsrc': (v.get('video_sd_url') or v.get('video_hd_url') or card.get('video_sd_url') or card.get('video_hd_url') or '')[:1500],
+            'vsrc': (v.get('video_hd_url') or v.get('video_sd_url') or card.get('video_hd_url') or card.get('video_sd_url') or '')[:1500],   # 고화질 우선 (11/09)
             'isrc': (img.get('original_image_url') or card.get('original_image_url') or v.get('video_preview_image_url') or card.get('video_preview_image_url') or '')[:1500]}
 
 async def meta(ctx, keys, pkg, page_id):
