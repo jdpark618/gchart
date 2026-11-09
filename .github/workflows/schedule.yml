@@ -211,6 +211,44 @@ jobs:
         const EXPECTED_RANKS = 100;
         const shortfalls = [];   // 수집 건수가 모자란 차트 (main 끝에서 실패 처리)
 
+        // ── 재시도 · 수집 로그 (11/09) ───────────────────────────
+        // 마켓 차트 갱신 중이면 건수가 모자랄 수 있어 워크플로가 1시간 간격으로 최대 3번 돌린다 (RANK_ATTEMPT 1~3).
+        // 마지막 시도가 아니면 모자란 차트는 기록하지 않고 넘겨서 다음 시도가 새로 받게 한다 (마지막 시도는 받은 만큼 기록).
+        const ATTEMPT = Number(process.env.RANK_ATTEMPT || 1);
+        const FINAL = !process.env.RANK_ATTEMPT || process.env.RANK_FINAL === '1';
+        const RUN_START = new Date();
+        const CAT_OF = { '인기순위': 'popular', '매출순위': 'sales' };
+        const RES = { popular: [], sales: [] };   // {store, country, n, st: ok|short|fail|skip, err, fb}
+        function note(base, store, country, st, n = 0, err = '', fb = 0) { (RES[CAT_OF[base]] ||= []).push({ store, country, n, st, err, fb }); }
+        function kstIso(d) { return new Date(d.getTime() + 9 * 3600e3).toISOString().slice(0, 19) + '+09:00'; }
+        function writeRunlog(todayStr, crash) {
+            for (const cat of ['popular', 'sales']) {
+                const L = RES[cat].filter(x => x.st !== 'skip');
+                if (!L.length && !crash) continue;   // 이번 시도에서 새로 받은 게 없으면(이미 오늘 기록 있음) 남기지 않음
+                const msgs = [];
+                if (crash) msgs.push(['x', `실행 오류: ${String(crash).slice(0, 160)}`]);
+                for (const store of ['Google Play', 'App Store']) {
+                    const S = L.filter(x => x.store === store); if (!S.length) continue;
+                    const line = x => x.st === 'ok' ? `${x.n}/${EXPECTED_RANKS}` : x.st === 'short' ? `${x.n}/${EXPECTED_RANKS} 건수 부족` : `오류 ${x.err.slice(0, 80)}`;
+                    const kr = S.find(x => x.country === '한국');
+                    if (kr) msgs.push([kr.st === 'ok' ? 'o' : 'x', `한국 ${store} ${line(kr)}`]);
+                    const ov = S.filter(x => x.country !== '한국');
+                    if (ov.length && ov.every(x => x.st === 'ok' && x.n >= EXPECTED_RANKS)) msgs.push(['o', `해외 ${store} (${ov.map(x => x.country).join('·')}) 모두 ${EXPECTED_RANKS}/${EXPECTED_RANKS}`]);
+                    else ov.forEach(x => msgs.push([x.st === 'ok' ? 'o' : 'x', `${x.country} ${store} ${line(x)}`]));
+                }
+                const fb = L.reduce((t, x) => t + (x.fb || 0), 0);
+                if (fb) msgs.push(['w', `장르 폴백 ${fb}건`]);
+                const bad = !!crash || L.some(x => x.st !== 'ok');
+                if (bad && !FINAL) msgs.push(['m', '모자란 차트는 기록하지 않고 1시간 뒤 다시 수집']);
+                if (bad && FINAL && L.some(x => x.st === 'short')) msgs.push(['m', '마지막 시도라 받은 만큼 기록']);
+                const dir = `data/runlog/${todayStr}`, f = `${dir}/${cat}.json`;
+                let rec; try { rec = JSON.parse(fs.readFileSync(f, 'utf8')); } catch (e) { rec = { cat, sched: '03:42', attempts: [] }; }
+                rec.attempts.push({ n: ATTEMPT, start: kstIso(RUN_START), end: kstIso(new Date()), ok: !bad, msgs: msgs.slice(0, 12) });
+                fs.mkdirSync(dir, { recursive: true }); fs.writeFileSync(f, JSON.stringify(rec, null, 1));
+                console.log(`[runlog] ${cat} 시도 ${ATTEMPT}${FINAL ? '(마지막)' : ''}: ${bad ? '실패' : '정상'} → ${f}`);
+            }
+        }
+
         async function processCategory(doc, docId, todayStr, yesterdayStr, collectionType, sheetNameSuffix, country) {
             const dbSheetName = `DB_${sheetNameSuffix}${country.suffix}`;
             const label = `${country.name} ${sheetNameSuffix}`;
@@ -237,6 +275,7 @@ jobs:
             const todayRowCount = rows.filter(r => r.get('날짜') === todayStr).length;
             if (todayRowCount > 0) {
                 console.log(`  [건너뜀] ${label}: 오늘(${todayStr}) 행 ${todayRowCount}개가 이미 있습니다.`);
+                note(sheetNameSuffix, 'Google Play', country.name, 'skip', todayRowCount);
                 return {};
             }
 
@@ -288,6 +327,8 @@ jobs:
             // 차트는 매일 100위까지 온다. 모자라면 기록은 하되 실행을 실패로 표시해 알림이 오게 한다
             if (topGamesList.length < EXPECTED_RANKS) {
                 shortfalls.push(`${label} ${topGamesList.length}건 (기대 ${EXPECTED_RANKS}건)`);
+                note(sheetNameSuffix, 'Google Play', country.name, 'short', topGamesList.length);
+                if (!FINAL) { console.log(`  [재시도 대기] ${label}: ${topGamesList.length}건 — 기록하지 않고 다음 시도에서 다시 받음`); return {}; }
             }
 
             const topGames = [], genreFails = [], genreFixed = [];
@@ -380,6 +421,8 @@ jobs:
                 snapAdd(dbSheetName, dbRows.map(objToArr));
                 console.log(`[완료] ${label} DB 시트에 데이터 기록 완료!`);
             }
+            if (dbRows.length >= EXPECTED_RANKS) note(sheetNameSuffix, 'Google Play', country.name, 'ok', dbRows.length, '', genreFixed.length);
+            else { const s = RES[CAT_OF[sheetNameSuffix]].find(x => x.store === 'Google Play' && x.country === country.name && x.st === 'short'); if (s) s.fb = genreFixed.length; }
 
             // 오늘 제대로 받은 장르: 패키지명·앱이름 → 장르 (과거 '기타' 행 보정용)
             const genreByKey = {};
@@ -461,12 +504,16 @@ jobs:
             const { rows } = await loadRecentRows(dbSheet, addDays(todayStr, -LOOKBACK_DAYS));
             snapAdd(dbSheetName, rows.map(rowToArr));
             const todayRowCount = rows.filter(r => r.get('날짜') === todayStr).length;
-            if (todayRowCount > 0) { console.log(`  [건너뜀] ${label}: 오늘(${todayStr}) 행 ${todayRowCount}개가 이미 있습니다.`); return; }
+            if (todayRowCount > 0) { console.log(`  [건너뜀] ${label}: 오늘(${todayStr}) 행 ${todayRowCount}개가 이미 있습니다.`); note(sheetBase, 'App Store', country.name, 'skip', todayRowCount); return; }
             const prev = {};
             rows.forEach(r => { if (r.get('날짜') === yesterdayStr) prev[String(r.get('패키지명') || '').replace(/^'/, '')] = parseInt(r.get('순위'), 10); });
 
             const entries = (await appleJson(`https://itunes.apple.com/${country.code}/rss/${feed}/limit=100/genre=6014/json`))?.feed?.entry || [];
-            if (entries.length < EXPECTED_RANKS) shortfalls.push(`${label} ${entries.length}건 (기대 ${EXPECTED_RANKS}건)`);
+            if (entries.length < EXPECTED_RANKS) {
+                shortfalls.push(`${label} ${entries.length}건 (기대 ${EXPECTED_RANKS}건)`);
+                note(sheetBase, 'App Store', country.name, 'short', entries.length);
+                if (!FINAL) { console.log(`  [재시도 대기] ${label}: ${entries.length}건 — 기록하지 않고 다음 시도에서 다시 받음`); return; }
+            }
             const info = await appleLookup(entries.map(e => e.id.attributes['im:id']), country.code);
 
             const dbRows = entries.map((e, i) => {
@@ -488,6 +535,7 @@ jobs:
                 };
             });
             if (dbRows.length) { await dbSheet.addRows(dbRows); snapAdd(dbSheetName, dbRows.map(objToArr)); console.log(`[완료] ${label} ${dbRows.length}행 기록 (조회 ${info.size}개)`); }
+            if (dbRows.length >= EXPECTED_RANKS) note(sheetBase, 'App Store', country.name, 'ok', dbRows.length);
         }
 
         async function saveAppInfo(doc, todayStr, country, ios = false) {
@@ -577,6 +625,7 @@ jobs:
                         Object.assign(genreByKey, await processCategory(doc, docId, todayStr, yesterdayStr, collection, suffix, country));
                     } catch (e) {
                         failures.push(`${country.name} ${suffix}: ${e.message}`);
+                        note(suffix, 'Google Play', country.name, 'fail', 0, e.message);
                         console.error(`  [실패] ${country.name} ${suffix}: ${e.message}`);
                     }
                 }
@@ -590,6 +639,7 @@ jobs:
                         await processAppleChart(doc, todayStr, yesterdayStr, country, feed, base);
                     } catch (e) {
                         failures.push(`${country.name} iOS ${base}: ${e.message}`);
+                        note(base, 'App Store', country.name, 'fail', 0, e.message);
                         console.error(`  [실패] ${country.name} iOS ${base}: ${e.message}`);
                     }
                 }
@@ -626,15 +676,37 @@ jobs:
             console.log("\n=== 5. 사이트용 스냅샷 ===");
             try { exportSnapshot(todayStr); } catch (e) { console.warn(`  [경고] 스냅샷 저장 실패: ${e.message}`); }
 
+            try { writeRunlog(todayStr); } catch (e) { console.warn(`  [경고] 수집 로그 저장 실패: ${e.message}`); }
             if (failures.length) console.error(`[실패] 수집 오류: ${failures.join(' · ')}`);
             if (shortfalls.length) console.error(`[실패] 순위 수집 건수 부족: ${shortfalls.join(' · ')}`);
             if (failures.length || shortfalls.length) process.exit(1);
         }
 
-        main().catch(e => { console.error(e); process.exit(1); });
+        main().catch(e => {
+            console.error(e);
+            try { writeRunlog(new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10), e.message || e); } catch (e2) {}
+            process.exit(1);
+        });
         EOF
-        
-        node run.js
+
+        # 1시간 간격 최대 3번 (마켓 차트 갱신 중이면 건수가 모자랄 수 있음, 11/09). 시도 사이에도 받은 데이터 · 수집 로그를 올려 둠
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        save() {
+          git add data/snapshot.json data/version.json data/runlog 2>/dev/null
+          git diff --cached --quiet && return 0
+          git commit -qm "rank: 수집 중간 저장 (시도 $1/3)"
+          for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && return 0; sleep $((i * 15)); done
+        }
+        ok=0
+        for a in 1 2 3; do
+          if RANK_ATTEMPT=$a RANK_FINAL=$([ $a = 3 ] && echo 1 || echo 0) node run.js; then ok=1; break; fi
+          [ $a = 3 ] && break
+          save $a || true
+          echo "::warning::순위 수집 실패 (시도 $a/3) — 1시간 뒤 다시 시도"
+          sleep 3600
+        done
+        [ $ok = 1 ] || exit 1
 
     - name: 저장소 활동 기록 (스케줄 자동 비활성화 방지)
       if: always()
@@ -643,7 +715,7 @@ jobs:
         date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/.keepalive-rank
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add .github/.keepalive-rank data/snapshot.json data/version.json 2>/dev/null || git add .github/.keepalive-rank
+        git add .github/.keepalive-rank data/snapshot.json data/version.json data/runlog 2>/dev/null || git add .github/.keepalive-rank
         git diff --cached --quiet && exit 0
         git commit -m "chore: keepalive (rank) + 사이트용 스냅샷"
         pushed=0

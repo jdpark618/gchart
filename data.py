@@ -110,6 +110,21 @@ logging.basicConfig(
 logging.Formatter.converter = lambda *args: datetime.now(ZoneInfo("Asia/Seoul")).timetuple()
 log = logging.getLogger("wame")
 
+# ── 수집 로그 (11/09): 대시보드 /admin 용. 경고·오류를 모아 끝에 data/runlog/<날짜>/new.json 으로 요약 ──
+RUNLOG = {"warn": [], "err": [], "info": []}
+
+
+class _RunlogHandler(logging.Handler):
+    def emit(self, record):
+        msg = record.getMessage()
+        if record.levelno >= logging.ERROR:
+            RUNLOG["err"].append(msg)
+        elif record.levelno >= logging.WARNING:
+            RUNLOG["warn"].append(msg)
+
+
+log.addHandler(_RunlogHandler())
+
 
 def now_kst():
     return datetime.now(KST)
@@ -723,6 +738,7 @@ def run(scraped, scanned_ok, failed_dates):
     # ── 쓰기 ──
     rows = store.rows()
     log.info("최종 %d행 기록 (이전 %d행)", len(rows), len(existing))
+    RUNLOG["info"].append(["o", f"시트 기록 {len(rows)}행 (이전 {len(existing)}행)"])
     # 꼬리 정리 기준은 파싱된 행 수가 아니라 시트의 실제 마지막 행이어야 한다
     # (중간에 빈 행이 있으면 len(existing)이 실제보다 작아 잔여 데이터가 남는다)
     write_db(db_sheet, rows, max(len(raw) - 1, 0))
@@ -733,11 +749,28 @@ def run(scraped, scanned_ok, failed_dates):
         with_retry(config_sheet.update_acell, "B1", "발송요청")
         log.info("트리거 발동 (변경=%s, 월초=%s, 최초=%s)",
                  store.changed, is_month_start, db_empty)
+        RUNLOG["info"].append(["m", "변경 있음 → 알림 메일 발송 요청" if store.changed else "알림 메일 발송 요청 (월초·최초)"])
     else:
         log.info("트리거 미발동: 변경점이 없습니다.")
 
 
-if __name__ == "__main__":
+def write_runlog(start, ok):
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import runlog
+        retry = [w for w in RUNLOG["warn"] if re.search(r"\(\d+/\d+\)|재시도|다시 읽음", w)]
+        other = [w for w in RUNLOG["warn"] if w not in retry and not w.startswith("실패 날짜")]
+        msgs = list(RUNLOG["info"])
+        if retry:
+            msgs.append(["r", f"실행 안 재시도 {len(retry)}회 (페이지 로드·파싱 등) · 예: {retry[0][:70]}"])
+        msgs += [["x", e[:140]] for e in dict.fromkeys(RUNLOG["err"])][:4]
+        msgs += [["w", w[:140]] for w in dict.fromkeys(other)][:3]
+        runlog.add("new", "03:12", start, ok, msgs)
+    except Exception as e:
+        log.info("수집 로그 저장 실패: %s", e)
+
+
+def main():
     now = now_kst()
     curr_year, curr_month = now.year, now.month
     if curr_month == 12:
@@ -758,5 +791,22 @@ if __name__ == "__main__":
     if failed_dates:
         log.warning("실패 날짜: %s", ", ".join(sorted(failed_dates)))
 
+    RUNLOG["info"].insert(0, ["x" if not scraped_data else "w" if failed_dates else "o",
+                              f"신작 일정 {len(scraped_data)}건 수집 · 정상 {len(ok_dates)}일 · 실패 {len(failed_dates)}일"])
     run(scraped_data, ok_dates, failed_dates)
     log.info("모든 작업 완료.")
+
+
+if __name__ == "__main__":
+    _start = now_kst()
+    try:
+        main()
+    except SystemExit as e:
+        write_runlog(_start, e.code in (0, None))
+        raise
+    except BaseException as e:
+        RUNLOG["err"].append(f"실행 오류: {e}")
+        write_runlog(_start, False)
+        raise
+    else:
+        write_runlog(_start, True)
