@@ -129,5 +129,42 @@
   "ios": "6763262759",
   "meta_by": "검색어 '몬스터헌터 아웃랜더스' → 광고 링크의 iOS 앱 ID",
   "matched_at": "2026-11-06T01:40:59Z"
+ },
+ "com.ryonggame.dragonknightidle": {
+  "meta_pages": [
+   "1417077438149670"
+  ],
+  "google": [],
+  "ios": "6776891493",
+  "meta_by": "검색어 '드래곤 나이트 키우기 : 방치형 RPG' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-09T01:13:33Z"
+ },
+ "com.davincinote.twomergesimul": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR02944734727526940673",
+    "name": "다빈치노트(주)",
+    "by": "이름 '다빈치노트(주)' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6754389442",
+  "meta_by": "",
+  "matched_at": "2026-11-09T01:13:59Z"
+ },
+ "com.nexon.ma": {
+  "meta_pages": [
+   "779158831955312"
+  ],
+  "google": [
+   {
+    "id": "AR17935783050138877953",
+    "name": "(주)넥슨코리아",
+    "by": "도메인 'nexon.com' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6739616715",
+  "meta_by": "검색어 '메이플 키우기' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-09T01:14:18Z"
  }
 }

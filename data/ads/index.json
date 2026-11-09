@@ -1,5 +1,54 @@
 [
  {
+  "pkg": "com.nexon.ma",
+  "name": "메이플 키우기",
+  "publisher": "NEXON Company",
+  "charts": {
+   "sales": 5
+  },
+  "rank_date": "2026-11-09",
+  "aliases": [
+   "(주)넥슨코리아",
+   "메이플 키우기"
+  ],
+  "tracked_at": "2026-11-09T01:14:18Z",
+  "meta": 8,
+  "meta_total": 243,
+  "google": 95
+ },
+ {
+  "pkg": "com.davincinote.twomergesimul",
+  "name": "머지 쿡토피아",
+  "publisher": "DaVinciNote",
+  "charts": {
+   "popular": 4
+  },
+  "rank_date": "2026-11-09",
+  "aliases": [
+   "다빈치노트(주)"
+  ],
+  "tracked_at": "2026-11-09T01:13:59Z",
+  "meta": 0,
+  "meta_total": 0,
+  "google": 6
+ },
+ {
+  "pkg": "com.ryonggame.dragonknightidle",
+  "name": "드래곤 나이트 키우기 : 방치형 RPG",
+  "publisher": "RyongGames",
+  "charts": {
+   "popular": 1
+  },
+  "rank_date": "2026-11-09",
+  "aliases": [
+   "Dragon knight idle"
+  ],
+  "tracked_at": "2026-11-09T01:13:33Z",
+  "meta": 47,
+  "meta_total": 99,
+  "google": 0
+ },
+ {
   "pkg": "com.garena.game.mho",
   "name": "몬스터헌터 아웃랜더스",
   "publisher": "Garena Online Private Limited",
