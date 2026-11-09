@@ -1,5 +1,22 @@
 [
  {
+  "pkg": "com.gof.global",
+  "name": "WOS: 화이트아웃 서바이벌",
+  "publisher": "Century Games PTE. LTD.",
+  "charts": {
+   "sales": 5
+  },
+  "rank_date": "2026-11-06",
+  "aliases": [
+   "CENTURY GAMES PTE. LTD.",
+   "Whiteout Survival"
+  ],
+  "tracked_at": "2026-11-09T09:59:58Z",
+  "meta": 51,
+  "meta_total": 131,
+  "google": 120
+ },
+ {
   "pkg": "com.nexon.ma",
   "name": "메이플 키우기",
   "publisher": "NEXON Company",
@@ -193,23 +210,6 @@
   "google": 64,
   "charts": {
    "popular": 2
-  },
-  "rank_date": "2026-11-06"
- },
- {
-  "pkg": "com.gof.global",
-  "name": "WOS: 화이트아웃 서바이벌",
-  "publisher": "Century Games PTE. LTD.",
-  "aliases": [
-   "CENTURY GAMES PTE. LTD.",
-   "Whiteout Survival"
-  ],
-  "tracked_at": "2026-11-09T00:59:26Z",
-  "meta": 51,
-  "meta_total": 135,
-  "google": 120,
-  "charts": {
-   "sales": 5
   },
   "rank_date": "2026-11-06"
  }
