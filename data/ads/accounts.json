@@ -166,5 +166,27 @@
   "ios": "6739616715",
   "meta_by": "검색어 '메이플 키우기' → 광고 링크의 Play 패키지",
   "matched_at": "2026-11-09T01:14:18Z"
+ },
+ "com.gnisoft.f4u.googlePlay": {
+  "meta_pages": [
+   "375006372373228"
+  ],
+  "google": [
+   {
+    "id": "AR12591753439286919169",
+    "name": "지앤아이소프트(주)",
+    "by": "이름 '지앤아이소프트(주)' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6790690966",
+  "meta_by": "검색어 '판타지포유' → 광고 링크의 iOS 앱 ID",
+  "matched_at": "2026-11-10T01:27:39Z"
+ },
+ "com.mainquest.randomdefense2d": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "",
+  "meta_by": "",
+  "matched_at": "2026-11-10T01:31:06Z"
  }
 }

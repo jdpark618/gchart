@@ -1,5 +1,165 @@
 [
  {
+  "pkg": "com.ncsoft.lineagem19",
+  "name": "리니지M",
+  "publisher": "NC Corporation",
+  "charts": {
+   "sales": 5
+  },
+  "rank_date": "2026-11-10",
+  "aliases": [
+   "주식회사 엔씨"
+  ],
+  "tracked_at": "2026-11-10T01:32:27Z",
+  "meta": 0,
+  "meta_total": 0,
+  "google": 68
+ },
+ {
+  "pkg": "com.nexon.ma",
+  "name": "메이플 키우기",
+  "publisher": "NEXON Company",
+  "charts": {
+   "sales": 4
+  },
+  "rank_date": "2026-11-10",
+  "aliases": [
+   "(주)넥슨코리아",
+   "메이플 키우기"
+  ],
+  "tracked_at": "2026-11-10T01:31:56Z",
+  "meta": 8,
+  "meta_total": 253,
+  "google": 126
+ },
+ {
+  "pkg": "com.com2us.es.android.google.kr.normal",
+  "name": "제우스: 오만의 신",
+  "publisher": "Com2uS",
+  "charts": {
+   "sales": 3
+  },
+  "rank_date": "2026-11-10",
+  "aliases": [
+   "(주) 컴투스"
+  ],
+  "tracked_at": "2026-11-10T01:31:50Z",
+  "meta": 0,
+  "meta_total": 0,
+  "google": 56
+ },
+ {
+  "pkg": "com.kakaogames.dokkaebi",
+  "name": "도깨비의세계",
+  "publisher": "Kakao Games Corp.",
+  "charts": {
+   "sales": 2
+  },
+  "rank_date": "2026-11-10",
+  "aliases": [
+   "주식회사 카카오게임즈"
+  ],
+  "tracked_at": "2026-11-10T01:31:43Z",
+  "meta": 0,
+  "meta_total": 0,
+  "google": 38
+ },
+ {
+  "pkg": "com.proximabeta.nikke",
+  "name": "승리의 여신: 니케",
+  "publisher": "Level Infinite",
+  "charts": {
+   "sales": 1
+  },
+  "rank_date": "2026-11-10",
+  "aliases": [
+   "승리의 여신: 니케"
+  ],
+  "tracked_at": "2026-11-10T01:31:26Z",
+  "meta": 55,
+  "meta_total": 96,
+  "google": 0
+ },
+ {
+  "pkg": "com.superpixel.scrap",
+  "name": "고물 히어로",
+  "publisher": "SUPERBOX Inc",
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-10",
+  "aliases": [
+   "(주)슈퍼박스"
+  ],
+  "tracked_at": "2026-11-10T01:31:18Z",
+  "meta": 0,
+  "meta_total": 0,
+  "google": 4
+ },
+ {
+  "pkg": "com.mainquest.randomdefense2d",
+  "name": "타워 디펜스 온라인",
+  "publisher": "MainQuest",
+  "charts": {
+   "popular": 4
+  },
+  "rank_date": "2026-11-10",
+  "aliases": [],
+  "tracked_at": "2026-11-10T01:31:06Z",
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.farlightgames.warline.gp.global",
+  "name": "워라인: 스나이퍼",
+  "publisher": "Powerfantasy HK Limited",
+  "charts": {
+   "popular": 3
+  },
+  "rank_date": "2026-11-10",
+  "aliases": [
+   "Warline:Sniper Strike"
+  ],
+  "tracked_at": "2026-11-10T01:30:47Z",
+  "meta": 47,
+  "meta_total": 609,
+  "google": 0
+ },
+ {
+  "pkg": "com.gnisoft.f4u.googlePlay",
+  "name": "판타지포유",
+  "publisher": "GNISoft",
+  "charts": {
+   "popular": 2
+  },
+  "rank_date": "2026-11-10",
+  "aliases": [
+   "Fantasy For You",
+   "지앤아이소프트(주)"
+  ],
+  "tracked_at": "2026-11-10T01:27:39Z",
+  "meta": 39,
+  "meta_total": 54,
+  "google": 3
+ },
+ {
+  "pkg": "com.ryonggame.dragonknightidle",
+  "name": "드래곤 나이트 키우기 : 방치형 RPG",
+  "publisher": "RyongGames",
+  "charts": {
+   "popular": 1
+  },
+  "rank_date": "2026-11-10",
+  "aliases": [
+   "Dragon knight idle"
+  ],
+  "tracked_at": "2026-11-10T01:27:20Z",
+  "meta": 47,
+  "meta_total": 99,
+  "google": 0
+ },
+ {
   "pkg": "com.gof.global",
   "name": "WOS: 화이트아웃 서바이벌",
   "publisher": "Century Games PTE. LTD.",
@@ -15,87 +175,6 @@
   "meta": 51,
   "meta_total": 131,
   "google": 120
- },
- {
-  "pkg": "com.nexon.ma",
-  "name": "메이플 키우기",
-  "publisher": "NEXON Company",
-  "charts": {
-   "sales": 5
-  },
-  "rank_date": "2026-11-09",
-  "aliases": [
-   "(주)넥슨코리아",
-   "메이플 키우기"
-  ],
-  "tracked_at": "2026-11-09T08:09:32Z",
-  "meta": 8,
-  "meta_total": 253,
-  "google": 126
- },
- {
-  "pkg": "com.ncsoft.lineagem19",
-  "name": "리니지M",
-  "publisher": "NC Corporation",
-  "charts": {
-   "sales": 4
-  },
-  "rank_date": "2026-11-09",
-  "aliases": [
-   "주식회사 엔씨"
-  ],
-  "tracked_at": "2026-11-09T08:09:24Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 68
- },
- {
-  "pkg": "com.com2us.es.android.google.kr.normal",
-  "name": "제우스: 오만의 신",
-  "publisher": "Com2uS",
-  "charts": {
-   "sales": 3
-  },
-  "rank_date": "2026-11-09",
-  "aliases": [
-   "(주) 컴투스"
-  ],
-  "tracked_at": "2026-11-09T08:09:16Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 56
- },
- {
-  "pkg": "com.kakaogames.dokkaebi",
-  "name": "도깨비의세계",
-  "publisher": "Kakao Games Corp.",
-  "charts": {
-   "sales": 2
-  },
-  "rank_date": "2026-11-09",
-  "aliases": [
-   "주식회사 카카오게임즈"
-  ],
-  "tracked_at": "2026-11-09T08:09:07Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 38
- },
- {
-  "pkg": "com.proximabeta.nikke",
-  "name": "승리의 여신: 니케",
-  "publisher": "Level Infinite",
-  "charts": {
-   "sales": 1
-  },
-  "rank_date": "2026-11-09",
-  "aliases": [
-   "승리의 여신: 니케"
-  ],
-  "tracked_at": "2026-11-09T08:08:46Z",
-  "meta": 55,
-  "meta_total": 96,
-  "google": 0
  },
  {
   "pkg": "com.zjcs.android.kr",
@@ -130,54 +209,6 @@
   "meta": 0,
   "meta_total": 0,
   "google": 6
- },
- {
-  "pkg": "com.superpixel.scrap",
-  "name": "고물 히어로",
-  "publisher": "SUPERBOX Inc",
-  "charts": {
-   "popular": 3
-  },
-  "rank_date": "2026-11-09",
-  "aliases": [
-   "(주)슈퍼박스"
-  ],
-  "tracked_at": "2026-11-09T08:07:43Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 4
- },
- {
-  "pkg": "com.farlightgames.warline.gp.global",
-  "name": "워라인: 스나이퍼",
-  "publisher": "Powerfantasy HK Limited",
-  "charts": {
-   "popular": 2
-  },
-  "rank_date": "2026-11-09",
-  "aliases": [
-   "Warline:Sniper Strike"
-  ],
-  "tracked_at": "2026-11-09T08:07:22Z",
-  "meta": 45,
-  "meta_total": 604,
-  "google": 0
- },
- {
-  "pkg": "com.ryonggame.dragonknightidle",
-  "name": "드래곤 나이트 키우기 : 방치형 RPG",
-  "publisher": "RyongGames",
-  "charts": {
-   "popular": 1
-  },
-  "rank_date": "2026-11-09",
-  "aliases": [
-   "Dragon knight idle"
-  ],
-  "tracked_at": "2026-11-09T08:07:08Z",
-  "meta": 47,
-  "meta_total": 99,
-  "google": 0
  },
  {
   "pkg": "com.garena.game.mho",
