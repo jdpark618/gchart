@@ -83,7 +83,10 @@ async def meta(ctx, keys, pkg, page_id):
     #    국가 KR 조건은 '한국에 한 번이라도 노출된 광고'라 글로벌 공용(영어 등) 소재가 상위를 덮음 → 광고 언어 한국어로 한정 (11/06)
     ads = {}
     for pid in list(pages)[:3]:
-        for v in ['', '&sort_data[mode]=total_impressions&sort_data[direction]=desc', '&media_type=video', '&media_type=image', '&active_status=active', '&active_status=inactive']:
+        # 11/10: 30개 한도 안에서 '많이 미는 소재'가 빠지지 않게 — 기본(최신 순, 신규 소재 확보) + 집행 중 노출순(전체 · 영상 · 이미지) + 집행 중 + 종료
+        #        노출 순위는 저장하지 않음 (모으는 범위만 바꿈). 노출순은 누적 기준이라 종료 소재가 상위를 덮지 않게 집행 중으로 한정
+        IMP = '&active_status=active&sort_data[mode]=total_impressions&sort_data[direction]=desc'
+        for v in ['', IMP, '&media_type=video' + IMP, '&media_type=image' + IMP, '&active_status=active', '&active_status=inactive']:
             cnt, got = await meta_query(pg, f'&search_type=page&view_all_page_id={pid}&content_languages[0]=ko{v}')
             if v == '' and cnt: out['count'] += cnt
             for a in got: ads[a['ad_archive_id']] = a
