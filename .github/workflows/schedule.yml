@@ -5,6 +5,7 @@ on:
     # UTC 18:42 = 한국 시간 다음 날 03:42 (GitHub 예약은 2~6시간씩 밀려 UTC 00시 혼잡대에 걸리던 것을 피해 앞당김, 11/05)
     # wame 크롤러(18:12)와 30분 간격을 둬 keepalive push 충돌을 피한다
     - cron: '42 18 * * *'
+    - cron: '42 1 * * *'    # 예비: 원래 + 7시간 = KST 10:42 (11/10) · 오늘 이미 성공했으면 gate 에서 끝남
   workflow_dispatch:
     inputs:
       appinfo_only:
@@ -21,7 +22,21 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # 예약 관문 (11/10): 예약은 하루 2번(원래 + 7시간 뒤 예비). 오늘 이미 성공했으면 뒤에 온 예약은 여기서 끝냄 · 수동 실행은 항상 진행
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.g.outputs.skip }}
+    steps:
+      - uses: actions/checkout@v4
+        if: github.event_name == 'schedule'
+      - id: g
+        if: github.event_name == 'schedule'
+        run: python3 gate.py popular sales
+
   scrape-and-update:
+    needs: gate
+    if: needs.gate.outputs.skip != 'true'
     # ubuntu-latest는 2026-10-19부터 Ubuntu 26으로 자동 전환됨
     runs-on: ubuntu-24.04
 

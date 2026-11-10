@@ -23,6 +23,11 @@ try:
 except Exception as e:
     runlog.add('ads', '05:30', START, False, [['x', f'순위 스냅샷을 읽지 못함: {str(e)[:120]}']])
     raise
+# 오늘 순위가 아직 없으면 끝냄 (11/10): 예약이 엇갈려 순위보다 먼저 돌면 어제 TOP5 를 추적하게 되므로. 기록은 남기지 않아 예비 예약이 다시 시도함
+rank_day = charts['popular'].get('date') or snap.get('today', '')
+if rank_day != START.strftime('%Y-%m-%d'):
+    print(f'오늘({START:%Y-%m-%d}) 순위가 아직 없음 (최신 {rank_day}) — 순위 수집 뒤에 다시 실행해야 함. 이번에는 추적하지 않고 끝냄', flush=True)
+    sys.exit(0)
 print(f"{snap.get('today', '')} 추적 대상 {len(games)}개:", ', '.join(f"{g['name']}({'/'.join(f'{k} {v}' for k, v in g['ranks'].items())})" for g in games.values()), flush=True)
 # 최근 6시간 안에 이미 추적한 게임은 건너뜀 (같은 날 수동으로 다시 돌릴 때 중복 조회로 차단당하지 않게)
 ip = os.path.join(ROOT, 'data', 'ads', 'index.json')

@@ -4,6 +4,7 @@ on:
   schedule:
     # UTC 18:12 = 한국 시간 다음 날 03:12 (예약 지연 대비 앞당김, 11/05)
     - cron: '12 18 * * *'
+    - cron: '12 1 * * *'    # 예비: 원래 + 7시간 = KST 10:12 (11/10) · 오늘 이미 성공했으면 gate 에서 끝남
   workflow_dispatch: # 수동 실행 버튼 활성화
 
 permissions:
@@ -15,7 +16,21 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # 예약 관문 (11/10): 예약은 하루 2번(원래 + 7시간 뒤 예비). 오늘 이미 성공했으면 뒤에 온 예약은 여기서 끝냄 · 수동 실행은 항상 진행
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.g.outputs.skip }}
+    steps:
+      - uses: actions/checkout@v4
+        if: github.event_name == 'schedule'
+      - id: g
+        if: github.event_name == 'schedule'
+        run: python3 gate.py new
+
   run-scraper:
+    needs: gate
+    if: needs.gate.outputs.skip != 'true'
     # ubuntu-latest는 2026-10-19부터 Ubuntu 26으로 자동 전환됨.
     # Playwright 시스템 의존성이 바뀔 수 있어 명시적으로 고정한다.
     # 전환 시에는 수동 실행으로 ubuntu-26 검증 후 올릴 것.
