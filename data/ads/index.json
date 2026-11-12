@@ -11,15 +11,15 @@
    "COGNOSPHERE PTE. LTD.",
    "Honkai: Star Rail"
   ],
-  "tracked_at": "2026-11-12T01:19:20Z",
-  "meta": 23,
-  "meta_total": 23,
-  "google": 212,
+  "tracked_at": "2026-11-12T08:34:18Z",
   "days": 1,
   "meta_live": 23,
-  "google_live": 185,
+  "google_live": 186,
   "meta_new7": 23,
-  "google_new7": 60
+  "google_new7": 60,
+  "meta": 23,
+  "meta_total": 23,
+  "google": 213
  },
  {
   "pkg": "com.nexon.ma",
@@ -33,15 +33,15 @@
    "(주)넥슨코리아",
    "메이플 키우기"
   ],
-  "tracked_at": "2026-11-12T01:18:25Z",
-  "meta": 8,
-  "meta_total": 253,
-  "google": 126,
+  "tracked_at": "2026-11-12T08:33:31Z",
   "days": 4,
   "meta_live": 0,
-  "google_live": 65,
+  "google_live": 66,
   "meta_new7": 0,
-  "google_new7": 1
+  "google_new7": 1,
+  "meta": 8,
+  "meta_total": 253,
+  "google": 126
  },
  {
   "pkg": "com.com2us.es.android.google.kr.normal",
@@ -54,15 +54,15 @@
   "aliases": [
    "(주) 컴투스"
   ],
-  "tracked_at": "2026-11-12T01:18:16Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 56,
+  "tracked_at": "2026-11-12T08:33:25Z",
   "days": 4,
   "meta_live": 0,
   "google_live": 6,
   "meta_new7": 0,
-  "google_new7": 0
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 56
  },
  {
   "pkg": "com.proximabeta.nikke",
@@ -75,15 +75,15 @@
   "aliases": [
    "승리의 여신: 니케"
   ],
-  "tracked_at": "2026-11-12T01:18:00Z",
-  "meta": 56,
-  "meta_total": 96,
-  "google": 0,
+  "tracked_at": "2026-11-12T08:33:06Z",
   "days": 4,
   "meta_live": 50,
   "google_live": 0,
   "meta_new7": 0,
-  "google_new7": 0
+  "google_new7": 0,
+  "meta": 56,
+  "meta_total": 96,
+  "google": 0
  },
  {
   "pkg": "com.kakaogames.dokkaebi",
@@ -96,15 +96,15 @@
   "aliases": [
    "주식회사 카카오게임즈"
   ],
-  "tracked_at": "2026-11-12T01:17:51Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 38,
+  "tracked_at": "2026-11-12T08:33:00Z",
   "days": 4,
   "meta_live": 0,
   "google_live": 14,
   "meta_new7": 0,
-  "google_new7": 0
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 38
  },
  {
   "pkg": "com.mainquest.randomdefense2d",
@@ -115,15 +115,15 @@
   },
   "rank_date": "2026-11-12",
   "aliases": [],
-  "tracked_at": "2026-11-12T01:17:50Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 0,
+  "tracked_at": "2026-11-12T08:32:58Z",
   "days": 3,
   "meta_live": 0,
   "google_live": 0,
   "meta_new7": 0,
-  "google_new7": 0
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
  },
  {
   "pkg": "com.farlightgames.warline.gp.global",
@@ -136,15 +136,15 @@
   "aliases": [
    "Warline:Sniper Strike"
   ],
-  "tracked_at": "2026-11-12T01:17:34Z",
-  "meta": 49,
-  "meta_total": 605,
-  "google": 0,
+  "tracked_at": "2026-11-12T08:32:41Z",
   "days": 4,
-  "meta_live": 34,
+  "meta_live": 38,
   "google_live": 0,
   "meta_new7": 0,
-  "google_new7": 0
+  "google_new7": 0,
+  "meta": 51,
+  "meta_total": 442,
+  "google": 0
  },
  {
   "pkg": "com.sesisoft.wildgirls.google",
@@ -157,15 +157,15 @@
   "aliases": [
    "주식회사 세시소프트"
   ],
-  "tracked_at": "2026-11-12T01:17:07Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 8,
+  "tracked_at": "2026-11-12T08:32:29Z",
   "days": 1,
   "meta_live": 0,
   "google_live": 6,
   "meta_new7": 0,
-  "google_new7": 6
+  "google_new7": 6,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 8
  },
  {
   "pkg": "com.gnisoft.f4u.googlePlay",
@@ -179,15 +179,15 @@
    "Fantasy For You",
    "지앤아이소프트(주)"
   ],
-  "tracked_at": "2026-11-12T01:16:40Z",
-  "meta": 76,
-  "meta_total": 52,
-  "google": 12,
+  "tracked_at": "2026-11-12T08:31:36Z",
   "days": 3,
-  "meta_live": 76,
+  "meta_live": 78,
   "google_live": 6,
-  "meta_new7": 76,
-  "google_new7": 6
+  "meta_new7": 78,
+  "google_new7": 6,
+  "meta": 78,
+  "meta_total": 54,
+  "google": 12
  },
  {
   "pkg": "com.badbeans.legendofmarmot",
@@ -198,15 +198,15 @@
   },
   "rank_date": "2026-11-12",
   "aliases": [],
-  "tracked_at": "2026-11-12T01:16:24Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 0,
+  "tracked_at": "2026-11-12T08:31:35Z",
   "days": 1,
   "meta_live": 0,
   "google_live": 0,
   "meta_new7": 0,
-  "google_new7": 0
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
  },
  {
   "pkg": "com.gof.global",
