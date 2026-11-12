@@ -752,6 +752,14 @@ def run(scraped, scanned_ok, failed_dates):
         RUNLOG["info"].append(["m", "변경 있음 → 알림 메일 발송 요청" if store.changed else "알림 메일 발송 요청 (월초·최초)"])
     else:
         log.info("트리거 미발동: 변경점이 없습니다.")
+    # 사이트 메뉴의 UPDATE 띠 (11/12): 이전 수집과 달라졌으면 바뀐 시각을 남김 (최초 채우기는 제외)
+    if store.changed and not db_empty:
+        try:
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            import changed
+            changed.mark("new")
+        except Exception as e:
+            log.info("바뀐 시각 저장 실패: %s", e)
 
 
 def write_runlog(start, ok):

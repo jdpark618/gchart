@@ -74,6 +74,9 @@ def main():
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump({'updated': datetime.now(KST).isoformat(timespec='minutes'), 'events': events}, open(OUT, 'w', encoding='utf-8'), ensure_ascii=False)
     print(f'저장: {len(events)}건 (이전 {len(prev.get("events", []))}건)')
+    if prev.get('events'):   # 사이트 메뉴의 UPDATE 띠 (11/12): 바뀐 시각을 남김 (처음 받을 때는 제외)
+        import changed
+        changed.mark('events')
 
 
 if __name__ == '__main__':
