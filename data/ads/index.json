@@ -1,25 +1,211 @@
 [
  {
+  "pkg": "com.ncsoft.lineagem19",
+  "name": "리니지M",
+  "publisher": "NC Corporation",
+  "charts": {
+   "sales": 5
+  },
+  "rank_date": "2026-11-13",
+  "aliases": [
+   "주식회사 엔씨"
+  ],
+  "tracked_at": "2026-11-12T23:57:50Z",
+  "days": 3,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 68
+ },
+ {
+  "pkg": "com.proximabeta.nikke",
+  "name": "승리의 여신: 니케",
+  "publisher": "Level Infinite",
+  "charts": {
+   "sales": 4
+  },
+  "rank_date": "2026-11-13",
+  "aliases": [
+   "승리의 여신: 니케"
+  ],
+  "tracked_at": "2026-11-12T23:57:35Z",
+  "days": 5,
+  "meta_live": 52,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 57,
+  "meta_total": 96,
+  "google": 0
+ },
+ {
+  "pkg": "com.com2us.es.android.google.kr.normal",
+  "name": "제우스: 오만의 신",
+  "publisher": "Com2uS",
+  "charts": {
+   "sales": 3
+  },
+  "rank_date": "2026-11-13",
+  "aliases": [
+   "(주) 컴투스"
+  ],
+  "tracked_at": "2026-11-12T23:57:25Z",
+  "days": 5,
+  "meta_live": 0,
+  "google_live": 8,
+  "meta_new7": 0,
+  "google_new7": 2,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 58
+ },
+ {
   "pkg": "com.HoYoverse.hkrpgoversea",
   "name": "붕괴: 스타레일",
   "publisher": "COGNOSPHERE PTE. LTD.",
   "charts": {
-   "sales": 5
+   "sales": 2
   },
-  "rank_date": "2026-11-12",
+  "rank_date": "2026-11-13",
   "aliases": [
    "COGNOSPHERE PTE. LTD.",
    "Honkai: Star Rail"
   ],
-  "tracked_at": "2026-11-12T08:34:18Z",
-  "days": 1,
-  "meta_live": 23,
-  "google_live": 186,
-  "meta_new7": 23,
-  "google_new7": 60,
-  "meta": 23,
-  "meta_total": 23,
-  "google": 213
+  "tracked_at": "2026-11-12T23:55:47Z",
+  "days": 2,
+  "meta_live": 34,
+  "google_live": 211,
+  "meta_new7": 34,
+  "google_new7": 33,
+  "meta": 34,
+  "meta_total": 38,
+  "google": 238
+ },
+ {
+  "pkg": "com.kakaogames.dokkaebi",
+  "name": "도깨비의세계",
+  "publisher": "Kakao Games Corp.",
+  "charts": {
+   "sales": 1
+  },
+  "rank_date": "2026-11-13",
+  "aliases": [
+   "주식회사 카카오게임즈"
+  ],
+  "tracked_at": "2026-11-12T23:55:38Z",
+  "days": 5,
+  "meta_live": 0,
+  "google_live": 14,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 38
+ },
+ {
+  "pkg": "com.mainquest.randomdefense2d",
+  "name": "타워 디펜스 온라인 : 둘이서 막자",
+  "publisher": "MainQuest",
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-13",
+  "aliases": [],
+  "tracked_at": "2026-11-12T23:55:37Z",
+  "days": 4,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.farlightgames.warline.gp.global",
+  "name": "워라인: 스나이퍼",
+  "publisher": "Powerfantasy HK Limited",
+  "charts": {
+   "popular": 4
+  },
+  "rank_date": "2026-11-13",
+  "aliases": [
+   "Warline:Sniper Strike"
+  ],
+  "tracked_at": "2026-11-12T23:55:18Z",
+  "days": 5,
+  "meta_live": 38,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 51,
+  "meta_total": 442,
+  "google": 0
+ },
+ {
+  "pkg": "com.gnisoft.f4u.googlePlay",
+  "name": "판타지포유",
+  "publisher": "GNISoft",
+  "charts": {
+   "popular": 3
+  },
+  "rank_date": "2026-11-13",
+  "aliases": [
+   "Fantasy For You",
+   "지앤아이소프트(주)"
+  ],
+  "tracked_at": "2026-11-12T23:54:51Z",
+  "days": 4,
+  "meta_live": 39,
+  "google_live": 6,
+  "meta_new7": 78,
+  "google_new7": 6,
+  "meta": 78,
+  "meta_total": 54,
+  "google": 12
+ },
+ {
+  "pkg": "com.sesisoft.wildgirls.google",
+  "name": "야생소녀: 리버스",
+  "publisher": "Sesisoft",
+  "charts": {
+   "popular": 2
+  },
+  "rank_date": "2026-11-13",
+  "aliases": [
+   "주식회사 세시소프트"
+  ],
+  "tracked_at": "2026-11-12T23:54:44Z",
+  "days": 2,
+  "meta_live": 0,
+  "google_live": 6,
+  "meta_new7": 0,
+  "google_new7": 6,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 8
+ },
+ {
+  "pkg": "com.badbeans.legendofmarmot",
+  "name": "마멋 키우기: 로그라이크 디펜스 RPG",
+  "publisher": "BAD BEANS CO., LTD",
+  "charts": {
+   "popular": 1
+  },
+  "rank_date": "2026-11-13",
+  "aliases": [],
+  "tracked_at": "2026-11-12T23:54:43Z",
+  "days": 2,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
  },
  {
   "pkg": "com.nexon.ma",
@@ -42,171 +228,6 @@
   "meta": 8,
   "meta_total": 253,
   "google": 126
- },
- {
-  "pkg": "com.com2us.es.android.google.kr.normal",
-  "name": "제우스: 오만의 신",
-  "publisher": "Com2uS",
-  "charts": {
-   "sales": 3
-  },
-  "rank_date": "2026-11-12",
-  "aliases": [
-   "(주) 컴투스"
-  ],
-  "tracked_at": "2026-11-12T08:33:25Z",
-  "days": 4,
-  "meta_live": 0,
-  "google_live": 6,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 56
- },
- {
-  "pkg": "com.proximabeta.nikke",
-  "name": "승리의 여신: 니케",
-  "publisher": "Level Infinite",
-  "charts": {
-   "sales": 2
-  },
-  "rank_date": "2026-11-12",
-  "aliases": [
-   "승리의 여신: 니케"
-  ],
-  "tracked_at": "2026-11-12T08:33:06Z",
-  "days": 4,
-  "meta_live": 50,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 56,
-  "meta_total": 96,
-  "google": 0
- },
- {
-  "pkg": "com.kakaogames.dokkaebi",
-  "name": "도깨비의세계",
-  "publisher": "Kakao Games Corp.",
-  "charts": {
-   "sales": 1
-  },
-  "rank_date": "2026-11-12",
-  "aliases": [
-   "주식회사 카카오게임즈"
-  ],
-  "tracked_at": "2026-11-12T08:33:00Z",
-  "days": 4,
-  "meta_live": 0,
-  "google_live": 14,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 38
- },
- {
-  "pkg": "com.mainquest.randomdefense2d",
-  "name": "타워 디펜스 온라인 : 둘이서 막자",
-  "publisher": "MainQuest",
-  "charts": {
-   "popular": 5
-  },
-  "rank_date": "2026-11-12",
-  "aliases": [],
-  "tracked_at": "2026-11-12T08:32:58Z",
-  "days": 3,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 0
- },
- {
-  "pkg": "com.farlightgames.warline.gp.global",
-  "name": "워라인: 스나이퍼",
-  "publisher": "Powerfantasy HK Limited",
-  "charts": {
-   "popular": 4
-  },
-  "rank_date": "2026-11-12",
-  "aliases": [
-   "Warline:Sniper Strike"
-  ],
-  "tracked_at": "2026-11-12T08:32:41Z",
-  "days": 4,
-  "meta_live": 38,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 51,
-  "meta_total": 442,
-  "google": 0
- },
- {
-  "pkg": "com.sesisoft.wildgirls.google",
-  "name": "야생소녀: 리버스",
-  "publisher": "Sesisoft",
-  "charts": {
-   "popular": 3
-  },
-  "rank_date": "2026-11-12",
-  "aliases": [
-   "주식회사 세시소프트"
-  ],
-  "tracked_at": "2026-11-12T08:32:29Z",
-  "days": 1,
-  "meta_live": 0,
-  "google_live": 6,
-  "meta_new7": 0,
-  "google_new7": 6,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 8
- },
- {
-  "pkg": "com.gnisoft.f4u.googlePlay",
-  "name": "판타지포유",
-  "publisher": "GNISoft",
-  "charts": {
-   "popular": 2
-  },
-  "rank_date": "2026-11-12",
-  "aliases": [
-   "Fantasy For You",
-   "지앤아이소프트(주)"
-  ],
-  "tracked_at": "2026-11-12T08:31:36Z",
-  "days": 3,
-  "meta_live": 78,
-  "google_live": 6,
-  "meta_new7": 78,
-  "google_new7": 6,
-  "meta": 78,
-  "meta_total": 54,
-  "google": 12
- },
- {
-  "pkg": "com.badbeans.legendofmarmot",
-  "name": "마멋 키우기: 로그라이크 디펜스 RPG",
-  "publisher": "BAD BEANS CO., LTD",
-  "charts": {
-   "popular": 1
-  },
-  "rank_date": "2026-11-12",
-  "aliases": [],
-  "tracked_at": "2026-11-12T08:31:35Z",
-  "days": 1,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 0
  },
  {
   "pkg": "com.gof.global",
@@ -270,27 +291,6 @@
   "meta_live": 47,
   "google_live": 0,
   "meta_new7": 2,
-  "google_new7": 0
- },
- {
-  "pkg": "com.ncsoft.lineagem19",
-  "name": "리니지M",
-  "publisher": "NC Corporation",
-  "charts": {
-   "sales": 5
-  },
-  "rank_date": "2026-11-10",
-  "aliases": [
-   "주식회사 엔씨"
-  ],
-  "tracked_at": "2026-11-10T01:32:27Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 68,
-  "days": 2,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
   "google_new7": 0
  },
  {
