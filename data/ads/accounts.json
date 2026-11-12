@@ -188,5 +188,40 @@
   "ios": "",
   "meta_by": "",
   "matched_at": "2026-11-10T01:31:06Z"
+ },
+ "com.badbeans.legendofmarmot": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "6749559874",
+  "meta_by": "",
+  "matched_at": "2026-11-12T01:16:24Z"
+ },
+ "com.sesisoft.wildgirls.google": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR14098561119299829761",
+    "name": "주식회사 세시소프트",
+    "by": "도메인 'sesisoft.com' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "",
+  "meta_by": "",
+  "matched_at": "2026-11-12T01:17:07Z"
+ },
+ "com.HoYoverse.hkrpgoversea": {
+  "meta_pages": [
+   "105900255098575"
+  ],
+  "google": [
+   {
+    "id": "AR11938981451824889857",
+    "name": "COGNOSPHERE PTE. LTD.",
+    "by": "이름 'COGNOSPHERE PTE. LTD.' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "1599719154",
+  "meta_by": "검색어 '붕괴: 스타레일' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-12T01:19:20Z"
  }
 }
