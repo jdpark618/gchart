@@ -14,7 +14,12 @@
   "tracked_at": "2026-11-12T01:19:20Z",
   "meta": 23,
   "meta_total": 23,
-  "google": 212
+  "google": 212,
+  "days": 1,
+  "meta_live": 23,
+  "google_live": 185,
+  "meta_new7": 23,
+  "google_new7": 60
  },
  {
   "pkg": "com.nexon.ma",
@@ -31,7 +36,12 @@
   "tracked_at": "2026-11-12T01:18:25Z",
   "meta": 8,
   "meta_total": 253,
-  "google": 126
+  "google": 126,
+  "days": 4,
+  "meta_live": 0,
+  "google_live": 65,
+  "meta_new7": 0,
+  "google_new7": 1
  },
  {
   "pkg": "com.com2us.es.android.google.kr.normal",
@@ -47,7 +57,12 @@
   "tracked_at": "2026-11-12T01:18:16Z",
   "meta": 0,
   "meta_total": 0,
-  "google": 56
+  "google": 56,
+  "days": 4,
+  "meta_live": 0,
+  "google_live": 6,
+  "meta_new7": 0,
+  "google_new7": 0
  },
  {
   "pkg": "com.proximabeta.nikke",
@@ -63,7 +78,12 @@
   "tracked_at": "2026-11-12T01:18:00Z",
   "meta": 56,
   "meta_total": 96,
-  "google": 0
+  "google": 0,
+  "days": 4,
+  "meta_live": 50,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0
  },
  {
   "pkg": "com.kakaogames.dokkaebi",
@@ -79,7 +99,12 @@
   "tracked_at": "2026-11-12T01:17:51Z",
   "meta": 0,
   "meta_total": 0,
-  "google": 38
+  "google": 38,
+  "days": 4,
+  "meta_live": 0,
+  "google_live": 14,
+  "meta_new7": 0,
+  "google_new7": 0
  },
  {
   "pkg": "com.mainquest.randomdefense2d",
@@ -93,7 +118,12 @@
   "tracked_at": "2026-11-12T01:17:50Z",
   "meta": 0,
   "meta_total": 0,
-  "google": 0
+  "google": 0,
+  "days": 3,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0
  },
  {
   "pkg": "com.farlightgames.warline.gp.global",
@@ -109,7 +139,12 @@
   "tracked_at": "2026-11-12T01:17:34Z",
   "meta": 49,
   "meta_total": 605,
-  "google": 0
+  "google": 0,
+  "days": 4,
+  "meta_live": 34,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0
  },
  {
   "pkg": "com.sesisoft.wildgirls.google",
@@ -125,7 +160,12 @@
   "tracked_at": "2026-11-12T01:17:07Z",
   "meta": 0,
   "meta_total": 0,
-  "google": 8
+  "google": 8,
+  "days": 1,
+  "meta_live": 0,
+  "google_live": 6,
+  "meta_new7": 0,
+  "google_new7": 6
  },
  {
   "pkg": "com.gnisoft.f4u.googlePlay",
@@ -142,7 +182,12 @@
   "tracked_at": "2026-11-12T01:16:40Z",
   "meta": 76,
   "meta_total": 52,
-  "google": 12
+  "google": 12,
+  "days": 3,
+  "meta_live": 76,
+  "google_live": 6,
+  "meta_new7": 76,
+  "google_new7": 6
  },
  {
   "pkg": "com.badbeans.legendofmarmot",
@@ -156,7 +201,12 @@
   "tracked_at": "2026-11-12T01:16:24Z",
   "meta": 0,
   "meta_total": 0,
-  "google": 0
+  "google": 0,
+  "days": 1,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0
  },
  {
   "pkg": "com.gof.global",
@@ -173,7 +223,12 @@
   "tracked_at": "2026-11-11T00:48:55Z",
   "meta": 51,
   "meta_total": 131,
-  "google": 120
+  "google": 120,
+  "days": 2,
+  "meta_live": 17,
+  "google_live": 23,
+  "meta_new7": 4,
+  "google_new7": 0
  },
  {
   "pkg": "com.superpixel.scrap",
@@ -189,7 +244,12 @@
   "tracked_at": "2026-11-11T00:47:57Z",
   "meta": 0,
   "meta_total": 0,
-  "google": 4
+  "google": 4,
+  "days": 3,
+  "meta_live": 0,
+  "google_live": 4,
+  "meta_new7": 0,
+  "google_new7": 0
  },
  {
   "pkg": "com.ryonggame.dragonknightidle",
@@ -205,7 +265,12 @@
   "tracked_at": "2026-11-11T00:47:27Z",
   "meta": 47,
   "meta_total": 133,
-  "google": 0
+  "google": 0,
+  "days": 3,
+  "meta_live": 47,
+  "google_live": 0,
+  "meta_new7": 2,
+  "google_new7": 0
  },
  {
   "pkg": "com.ncsoft.lineagem19",
@@ -221,7 +286,12 @@
   "tracked_at": "2026-11-10T01:32:27Z",
   "meta": 0,
   "meta_total": 0,
-  "google": 68
+  "google": 68,
+  "days": 2,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0
  },
  {
   "pkg": "com.zjcs.android.kr",
@@ -239,7 +309,12 @@
   "tracked_at": "2026-11-09T08:07:57Z",
   "meta": 136,
   "meta_total": 25,
-  "google": 25
+  "google": 25,
+  "days": 1,
+  "meta_live": 119,
+  "google_live": 13,
+  "meta_new7": 129,
+  "google_new7": 15
  },
  {
   "pkg": "com.davincinote.twomergesimul",
@@ -255,7 +330,12 @@
   "tracked_at": "2026-11-09T08:07:51Z",
   "meta": 0,
   "meta_total": 0,
-  "google": 6
+  "google": 6,
+  "days": 1,
+  "meta_live": 0,
+  "google_live": 1,
+  "meta_new7": 0,
+  "google_new7": 0
  },
  {
   "pkg": "com.garena.game.mho",
@@ -272,7 +352,12 @@
   "charts": {
    "popular": 5
   },
-  "rank_date": "2026-11-06"
+  "rank_date": "2026-11-06",
+  "days": 1,
+  "meta_live": 34,
+  "google_live": 8,
+  "meta_new7": 13,
+  "google_new7": 0
  },
  {
   "pkg": "com.cookapps.catshinobi",
@@ -289,6 +374,11 @@
   "charts": {
    "popular": 2
   },
-  "rank_date": "2026-11-06"
+  "rank_date": "2026-11-06",
+  "days": 1,
+  "meta_live": 51,
+  "google_live": 13,
+  "meta_new7": 17,
+  "google_new7": 3
  }
 ]

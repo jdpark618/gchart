@@ -40,7 +40,9 @@ for g in games.values():
         # 순위 정보만 갱신
         idx = json.load(open(ip, encoding='utf-8'))
         for x in idx:
-            if x['pkg'] == g['pkg']: x['charts'] = g['ranks']; x['rank_date'] = g['date']
+            if x['pkg'] == g['pkg']:
+                if x.get('rank_date') != g['date']: x['days'] = x.get('days', 0) + 1   # TOP5 에 든 날 수
+                x['charts'] = g['ranks']; x['rank_date'] = g['date']
         json.dump(idx, open(ip, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
         continue
     ran += 1

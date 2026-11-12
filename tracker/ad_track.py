@@ -276,15 +276,25 @@ async def main():
     prev_ent = next((x for x in idx if x['pkg'] == pkg), {})
     ranks = {k: int(v) for k, v in (kv.split(':') for kv in clean(a.ranks).split(',') if ':' in kv) if v.strip().isdigit()}
     charts, rank_date = (ranks, clean(a.rank_date)) if ranks else (prev_ent.get('charts', {}), prev_ent.get('rank_date', ''))
+    # TOP5 에 든 날 수 (11/12): 순위일이 새 날짜로 바뀔 때만 하루 더함 (수동 실행 · 같은 날 재실행은 그대로)
+    days = prev_ent.get('days', 0) + (1 if ranks and rank_date != prev_ent.get('rank_date') else 0)
     idx = [x for x in idx if x['pkg'] != pkg] + [{'pkg': pkg, 'name': name, 'publisher': publisher, 'charts': charts, 'rank_date': rank_date,
            'aliases': sorted({g['name'] for g in res['google'].get('advertisers', []) if g.get('name')} | {p['name'] for p in res['meta'].get('pages', []) if p.get('name')}),   # 광고주 법인명(한글 포함) · Meta 페이지명 → 검색용
-           'tracked_at': res['tracked_at'],
+           'tracked_at': res['tracked_at'], 'days': days, **live_stats(res, now),
            'meta': len(res['meta'].get('ads', [])), 'meta_total': res['meta'].get('count', 0), 'google': len(res['google'].get('ads', []))}]
     json.dump(sorted(idx, key=lambda x: x['tracked_at'], reverse=True), open(ip, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     summary = {'name': name, 'pkg': pkg, 'sec': res['sec'],
                'meta': {k: res['meta'].get(k) for k in ('pages', 'count', 'log', 'error')} | {'ads': len(res['meta'].get('ads', []))},
                'google': {'advertisers': res['google'].get('advertisers'), 'candidates': res['google'].get('candidates'), 'ads': len(res['google'].get('ads', [])), 'error': res['google'].get('error')}}
     print(json.dumps(summary, ensure_ascii=False, indent=1))
+
+def live_stats(res, now):
+    """목록(index)에 넣는 오늘의 신호 (11/12): 집행 중 소재 수 · 최근 7일 안에 시작한 소재 수. 사이트의 집행 중 기준과 같음
+    (Meta = 활성 + 최근 3일 안의 추적에서 확인 · Google = 최근 3일 안에 노출) · 날짜는 한국 시간"""
+    day = lambda ts: int((ts or 0) + 9 * 3600) // 86400
+    tk = day(now); m, g = res.get('meta', {}).get('ads', []), res.get('google', {}).get('ads', [])
+    return {'meta_live': sum(1 for x in m if x.get('active') and day(x.get('seen') or now) >= tk - 2), 'google_live': sum(1 for x in g if day(x.get('last')) >= tk - 2),
+            'meta_new7': sum(1 for x in m if day(x.get('start')) >= tk - 6), 'google_new7': sum(1 for x in g if day(x.get('first')) >= tk - 6)}
 
 if __name__ == '__main__':   # ad_match.py 가 함수만 가져다 씀
     asyncio.run(main())
