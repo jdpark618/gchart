@@ -32,7 +32,57 @@
   ],
   "ios": "6758975161",
   "meta_by": "",
-  "matched_at": "2026-11-06T01:40:59Z"
+  "matched_at": "2026-11-06T01:40:59Z",
+  "ver": 2,
+  "rematched_at": "2026-11-13T06:00:13Z",
+  "google_log": {
+   "meta": [
+    "도깨비의세계:2",
+    "Kakao Games Corp.:0"
+   ],
+   "names": [
+    "Kakao Games",
+    "Kakao Games Corp."
+   ],
+   "domains": [
+    "kakaogames.com"
+   ],
+   "candidates": 13,
+   "checked": [
+    {
+     "name": "Kakao Games Co., Ltd.",
+     "region": "KR",
+     "from": "이름 'Kakao Games'",
+     "recent": 16,
+     "previews": 16,
+     "hit": false
+    },
+    {
+     "name": "카카오게임즈",
+     "region": "",
+     "from": "도메인 'kakaogames.com'",
+     "recent": 20,
+     "previews": 18,
+     "hit": false
+    },
+    {
+     "name": "KT Nasmedia Co., Ltd.",
+     "region": "",
+     "from": "도메인 'kakaogames.com'",
+     "recent": 1500,
+     "previews": 303,
+     "hit": false
+    },
+    {
+     "name": "주식회사 카카오게임즈",
+     "region": "KR",
+     "from": "도메인→이름 '카카오게임즈'",
+     "recent": 164,
+     "previews": 10,
+     "hit": true
+    }
+   ]
+  }
  },
  "com.com2us.es.android.google.kr.normal": {
   "meta_pages": [],
@@ -110,10 +160,43 @@
   "meta_pages": [
    "682454681621003"
   ],
-  "google": [],
+  "google": [
+   {
+    "id": "AR06319184008215265281",
+    "name": "FARLIGHT PTE. LTD.",
+    "by": "도메인 'farlightgames.com' → 소재에 패키지/iOS ID"
+   }
+  ],
   "ios": "6742809194",
   "meta_by": "검색어 '워라인: 스나이퍼' → 광고 링크의 Play 패키지",
-  "matched_at": "2026-11-06T01:40:59Z"
+  "matched_at": "2026-11-06T01:40:59Z",
+  "ver": 2,
+  "rematched_at": "2026-11-13T05:58:50Z",
+  "google_log": {
+   "meta": [
+    "워라인: 스나이퍼:5"
+   ],
+   "names": [
+    "Powerfantasy HK",
+    "Powerfantasy HK Limited",
+    "Powerfantasy",
+    "Warline:Sniper Strike"
+   ],
+   "domains": [
+    "farlightgames.com"
+   ],
+   "candidates": 1,
+   "checked": [
+    {
+     "name": "FARLIGHT PTE. LTD.",
+     "region": "",
+     "from": "도메인 'farlightgames.com'",
+     "recent": 81,
+     "previews": 9,
+     "hit": true
+    }
+   ]
+  }
  },
  "com.garena.game.mho": {
   "meta_pages": [
@@ -193,7 +276,36 @@
   "google": [],
   "ios": "",
   "meta_by": "",
-  "matched_at": "2026-11-10T01:31:06Z"
+  "matched_at": "2026-11-10T01:31:06Z",
+  "ver": 2,
+  "rematched_at": "2026-11-13T05:59:23Z",
+  "google_log": {
+   "meta": [
+    "타워 디펜스 온라인 : 둘이서 막자:0",
+    "타워 디펜스 온라인:0",
+    "타워디펜스온라인:0",
+    "둘이서 막자:None",
+    "둘이서막자:0",
+    "타워 디펜스 온라인 둘이서 막자:0",
+    "MainQuest:50001"
+   ],
+   "names": [
+    "MainQuest",
+    "메인퀘스트"
+   ],
+   "domains": [],
+   "candidates": 1,
+   "checked": [
+    {
+     "name": "주식회사 메인퀘스트",
+     "region": "KR",
+     "from": "이름 '메인퀘스트'",
+     "recent": 3,
+     "previews": 3,
+     "hit": false
+    }
+   ]
+  }
  },
  "com.badbeans.legendofmarmot": {
   "meta_pages": [],
@@ -206,7 +318,46 @@
   ],
   "ios": "6749559874",
   "meta_by": "",
-  "matched_at": "2026-11-12T01:16:24Z"
+  "matched_at": "2026-11-12T01:16:24Z",
+  "ver": 2,
+  "rematched_at": "2026-11-13T05:57:25Z",
+  "google_log": {
+   "meta": [
+    "마멋 키우기: 로그라이크 디펜스 RPG:0",
+    "마멋 키우기:0",
+    "마멋키우기:0",
+    "로그라이크 디펜스 RPG:103",
+    "로그라이크디펜스RPG:0",
+    "마멋 키우기 로그라이크 디펜스 RPG:0",
+    "BAD BEANS CO., LTD:0"
+   ],
+   "names": [
+    "BAD BEANS",
+    "BAD BEANS CO., LTD",
+    "배드빈즈",
+    "Badbeans"
+   ],
+   "domains": [],
+   "candidates": 2,
+   "checked": [
+    {
+     "name": "배드빈즈",
+     "region": "KR",
+     "from": "이름 '배드빈즈'",
+     "recent": 3,
+     "previews": 3,
+     "hit": true
+    },
+    {
+     "name": "(주)배드빈즈",
+     "region": "KR",
+     "from": "이름 '배드빈즈'",
+     "recent": 1,
+     "previews": 1,
+     "hit": false
+    }
+   ]
+  }
  },
  "com.sesisoft.wildgirls.google": {
   "meta_pages": [],
@@ -219,7 +370,45 @@
   ],
   "ios": "",
   "meta_by": "",
-  "matched_at": "2026-11-12T01:17:07Z"
+  "matched_at": "2026-11-12T01:17:07Z",
+  "ver": 2,
+  "rematched_at": "2026-11-13T05:57:54Z",
+  "google_log": {
+   "meta": [
+    "야생소녀: 리버스:0",
+    "야생소녀:0",
+    "리버스:1861",
+    "야생소녀 리버스:0",
+    "야생소녀리버스:0",
+    "Sesisoft:0"
+   ],
+   "names": [
+    "Sesisoft",
+    "세시소프트"
+   ],
+   "domains": [
+    "sesisoft.com"
+   ],
+   "candidates": 3,
+   "checked": [
+    {
+     "name": "주식회사 세시소프트",
+     "region": "KR",
+     "from": "이름 '세시소프트'",
+     "recent": 23,
+     "previews": 10,
+     "hit": true
+    },
+    {
+     "name": "주식회사 세시소프트",
+     "region": "KR",
+     "from": "이름 '세시소프트'",
+     "recent": 31,
+     "previews": 31,
+     "hit": false
+    }
+   ]
+  }
  },
  "com.HoYoverse.hkrpgoversea": {
   "meta_pages": [
