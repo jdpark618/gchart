@@ -66,3 +66,71 @@ def pkg_hints(pkg):
     """패키지명의 회사 부분 (com.kakaogames.dokkaebi → kakaogames): 이 이름으로 추천되는 도메인을 찾는 데만 씀"""
     out = [p for p in (pkg or '').lower().split('.')[:3] if p not in PKG_TLD and p not in PKG_GENERIC and len(p) >= 4 and not p.isdigit()]
     return out[:1]
+
+
+# ---------- Meta (11/13 고도화) ----------
+# 광고 라이브러리의 키워드 검색은 '광고 문구'만 찾고 페이지 이름 · 링크 주소는 찾지 않는다. 그래서 검색어는 게임 이름을 여러 모양으로 넣고,
+# 찾은 광고가 이 게임 것인지는 근거의 세기로 나눠 본다:
+#   A  광고 링크에 Play 패키지 / iOS 앱 ID                      (가장 확실 — 예전부터 쓰던 기준)
+#   B  광고 링크가 게임 공식 사이트 (사전예약 · 이벤트 페이지로 보내는 광고 — 스토어 링크가 없음)
+#   C  추적 링크(onelink · adjust …)라 주소로는 알 수 없지만, 문구에 게임 이름이 있고 페이지 이름이 게임 · 회사 이름과 같음 (광고 2개 이상일 때만)
+TRACKERS = re.compile(r'onelink\.me|adjust\.com|adj\.st|go\.link|sng\.link|app\.link|appsflyer|smart\.link|kochava|branch\.io|abr\.ge|airbridge|bit\.ly|page\.link', re.I)
+
+def nzk(v):
+    return re.sub(r'[\W_]', '', v or '').lower()
+
+def game_queries(names):
+    """Meta 검색어: 게임 이름(순위 데이터 · App Store 표기)마다 원래 이름 · 괄호 뺀 것 · 부제 앞/뒤 · 띄어쓰기 없는 것"""
+    out = []
+    for n in names:
+        n = re.sub(r'\s+', ' ', n or '').strip()
+        if not n: continue
+        base = [n, re.sub(r'\s*\(.*?\)', '', n), re.sub(r'\s*[:：].*$', '', n), n.split(':')[-1], re.sub(r'\s*[-–]\s.*$', '', n), n.replace(':', ' ')]
+        for v in base:
+            v = re.sub(r'\s+', ' ', v).strip()
+            if len(v) >= 2: out += [v] + ([v.replace(' ', '')] if ' ' in v and ':' not in v and len(v.replace(' ', '')) <= 12 else [])
+    seen, res = set(), []
+    for v in out:
+        if v.lower() not in seen: seen.add(v.lower()); res.append(v)
+    return res
+
+def game_keys(names):
+    """문구에 게임 이름이 있는지 볼 때 쓰는 열쇠 (기호 · 띄어쓰기 뺀 소문자): 원래 이름과 부제 앞부분. 너무 짧은 것(한글 2자 미만 · 영문 4자 미만)은 뺌"""
+    out = set()
+    for n in names:
+        for v in [n or '', re.sub(r'\s*[:：(].*$', '', n or '')]:
+            k = nzk(v)
+            if len(k) >= (2 if re.search(r'[가-힣]', k) else 4): out.add(k)
+    return out
+
+def hosts_of(urls):
+    """게임 공식 사이트의 호스트 (www 뺌). 포털 · SNS · 무료 호스팅 최상위 주소는 제외"""
+    out = []
+    for u in urls:
+        h = host(u or '').lower()
+        if not h or '.' not in h or JUNK.search(h) or h in SHARED_HOST or h in SHARED_DROP or TRACKERS.search(h): continue
+        parts = h.split('.'); n = 3 if len(parts) > 2 and parts[-2] in ('co', 'com', 'or', 'ne', 'go') else 2
+        if '.'.join(parts[-n:]) in SHARED_DROP: continue
+        out.append(h)
+    return list(dict.fromkeys(out))
+
+def meta_evidence(snap, pkg, ios, hosts, keys, cores):
+    """광고 1개가 이 게임 것인지: ('A'|'B'|'C', 설명) 또는 None.
+    snap = 광고 라이브러리의 snapshot · hosts = 게임 공식 사이트 호스트 · keys = game_keys() · cores = 회사 이름 알맹이(nzk)"""
+    import json as _json
+    sj = _json.dumps(snap, ensure_ascii=False)
+    if pkg and pkg in sj: return ('A', 'Play 패키지')
+    if ios and f'id{ios}' in sj: return ('A', 'iOS 앱 ID')
+    cards = snap.get('cards') or []
+    links = [snap.get('link_url') or ''] + [c.get('link_url') or '' for c in cards]
+    text = nzk(' '.join([snap.get('title') or '', (snap.get('body') or {}).get('text') or '', snap.get('link_description') or ''] + [(c.get('title') or '') + ' ' + (c.get('body') or '') for c in cards]))
+    mention = any(k in text for k in keys)
+    for u in links:
+        h = host(u).lower() if u else ''
+        if h and h in hosts:
+            parts = h.split('.'); n = 3 if len(parts) > 2 and parts[-2] in ('co', 'com', 'or', 'ne', 'go') else 2
+            if len(parts) > n or mention: return ('B', f'게임 사이트 {h}')   # 회사 대표 주소(하위 주소 없음)면 다른 게임 광고일 수 있어 문구에 게임 이름도 있어야 함
+    page = nzk(snap.get('page_name'))
+    if mention and page and any(TRACKERS.search(u or '') for u in links) and (page in cores or page in keys or any(len(k) >= 3 and k in page for k in keys)):
+        return ('C', '페이지 이름 + 문구의 게임 이름')
+    return None

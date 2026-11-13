@@ -2,6 +2,7 @@
 대상: 오늘 한국 구글 인기 TOP5 + 매출 TOP5 (data/snapshot.json). 광고 수집은 하지 않고 '어느 계정이 이 게임 광고를 하나'만 찾는다.
   1) 기본 정보: 순위 데이터(이름·패키지·퍼블리셔) + Play 스토어(개발자 법인명·웹사이트) + App Store 검색 API(iOS 앱 ID·판매자·URL)
   2) Meta: 게임명 변형·퍼블리셔명으로 검색 → 광고 링크에 Play 패키지 또는 iOS 앱 ID 가 든 광고의 '페이지'를 확정
+     (없으면 게임 공식 사이트로 보내는 광고 → 추적 링크 + 페이지 · 문구의 이름 일치 순으로 — ad_terms.meta_evidence)
   3) Google: 이름(퍼블리셔 · 법인 · 판매자 · Meta 페이지 — 법인 표기를 뗀 알맹이 포함) + 도메인(웹사이트 · 문의 메일 · 패키지명으로 추천받은 것)으로 광고주 후보
      → KR 소재에 패키지/iOS ID 가 든 계정만 확정 (ad_terms.py · ad_google_match.js)
 결과: data/ads/match.json (게임별 매칭 결과 + 무엇으로 찾았는지 + 시도한 후보)
@@ -10,7 +11,7 @@ import asyncio, json, os, re, time, urllib.request
 from urllib.parse import quote, urlparse
 from playwright.async_api import async_playwright
 from ad_track import UA, meta_query, nz
-from ad_terms import JUNK, name_terms, domains_of, pkg_hints
+from ad_terms import JUNK, name_terms, domains_of, pkg_hints, core, nzk, game_queries, game_keys, hosts_of, meta_evidence
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -53,20 +54,40 @@ async def play_info(ctx, pkg):
     except Exception as e: info['error'] = str(e)[:120]
     await pg.close(); return info
 
-async def meta_match(pg, g, ios_id):
-    keys = name_variants(g['name']) + ([g['publisher']] if g.get('publisher') else [])
-    ids = [g['pkg']] + ([f'id{ios_id}'] if ios_id else [])
-    tried = []
-    for q in keys:
+async def meta_match(pg, g, ios_id, names=(), hosts=(), cores=()):
+    """Meta 페이지 찾기 (11/13 고도화 — 근거 A/B/C 는 ad_terms.meta_evidence).
+    names = 게임 이름들(순위 데이터 · App Store 표기) · hosts = 게임 공식 사이트 호스트 · cores = 회사 이름 알맹이"""
+    gn = [g['name']] + [n for n in names if n]
+    qs = game_queries(gn)[:7] + ([g['publisher']] if g.get('publisher') else [])
+    keys = game_keys(gn); cores = set(cores); hosts = set(hosts)
+    IMP = '&active_status=active&sort_data[mode]=total_impressions&sort_data[direction]=desc'
+    tried, weak = [], {}   # weak: 페이지 ID → {'name', 'B': n, 'C': n, 'q', 'why'}
+    for q in qs:
         cnt, ads = await meta_query(pg, f'&q={quote(q)}&search_type=keyword_unordered')
+        # 결과가 한 번에 30개까지만 보이므로, 더 있으면 '집행 중 · 노출순'으로 한 번 더 (흔한 낱말이라 남의 광고에 묻힌 경우)
+        if cnt and cnt > len(ads) and len(ads) >= 25:
+            await pg.wait_for_timeout(1000)
+            _, more = await meta_query(pg, f'&q={quote(q)}&search_type=keyword_unordered{IMP}')
+            got = {a.get('ad_archive_id') for a in ads}; ads = ads + [a for a in more if a.get('ad_archive_id') not in got]
         hit = {}
         for a in ads:
-            sj = json.dumps(a['snapshot'], ensure_ascii=False)
-            for i in ids:
-                if i in sj: hit[a.get('page_id')] = (a['snapshot'].get('page_name'), 'Play 패키지' if i == g['pkg'] else 'iOS 앱 ID')
-        tried.append({'q': q, 'count': cnt, 'hit': len(hit)})
+            ev = meta_evidence(a['snapshot'], g['pkg'], ios_id, hosts, keys, cores)
+            if not ev: continue
+            pid, pn = a.get('page_id'), a['snapshot'].get('page_name')
+            if ev[0] == 'A': hit[pid] = (pn, ev[1])
+            else:
+                w = weak.setdefault(pid, {'name': pn, 'B': 0, 'C': 0, 'q': q, 'why': ev[1]}); w[ev[0]] += 1
+                if ev[0] == 'B': w['why'] = ev[1]
+        tried.append({'q': q, 'count': cnt, 'got': len(ads), 'hit': len(hit), 'weak': len(weak)})
         if hit: return {'pages': [{'id': k, 'name': v[0]} for k, v in hit.items()], 'by': f"검색어 '{q}' → 광고 링크의 {next(iter(hit.values()))[1]}", 'tried': tried}
         await pg.wait_for_timeout(1200)
+    # 링크에 패키지가 없는 경우: 게임 사이트로 보내는 광고(B) → 없으면 추적 링크 + 이름 일치(C, 광고 2개 이상)
+    b = {k: v for k, v in weak.items() if v['B']}
+    c = {k: v for k, v in weak.items() if v['C'] >= 2}
+    pick, label = (b, '광고 링크가 ') if b else (c, '추적 링크 광고 · ') if c else ({}, '')
+    if pick:
+        first = next(iter(pick.values()))
+        return {'pages': [{'id': k, 'name': v['name']} for k, v in list(pick.items())[:3]], 'by': f"검색어 '{first['q']}' → {label}{first['why']}", 'tried': tried}
     return {'pages': [], 'by': '', 'tried': tried}
 
 # Google 광고주 찾기 (11/13 고도화): 페이지 안에서 도는 부분은 ad_google_match.js, 검색어 만들기는 ad_terms.py
@@ -79,10 +100,11 @@ async def match_game(ctx, mpg, gpg, g, days=90):
     pi = await play_info(ctx, g['pkg'])
     ap = appstore(g['name'], g.get('publisher', ''))
     ios = ap.get('ios_id', '')
-    try: m = await meta_match(mpg, g, ios)
+    company = [g.get('publisher'), pi.get('legal'), ap.get('seller'), ap.get('artist')]
+    try: m = await meta_match(mpg, g, ios, names=[ap.get('ios_name')], hosts=hosts_of([pi.get('site', ''), ap.get('seller_url', '')]), cores={nzk(core(n)) for n in company if n and len(nzk(core(n))) >= 2})
     except Exception as e: m = {'pages': [], 'by': '', 'error': str(e)[:160]}
     # 이름은 출처를 가리지 않고 모두: 순위 데이터의 퍼블리셔 · Play 법인명 · App Store 판매자/개발자 · 찾은 Meta 페이지 이름 (한글 · 영문이 섞여 들어옴)
-    names = name_terms([g.get('publisher'), pi.get('legal'), ap.get('seller'), ap.get('artist')] + [x.get('name') for x in m.get('pages', [])])
+    names = name_terms(company + [x.get('name') for x in m.get('pages', [])])
     domains = domains_of([pi.get('site', ''), ap.get('seller_url', '')], [pi.get('email', '')])
     hints = pkg_hints(g['pkg'])
     try: gm = await gpg.evaluate(GOOGLE_MATCH_JS, [names, hints, domains, [g['pkg']] + ([f'id{ios}'] if ios else []), int(time.time()) - days * 86400])

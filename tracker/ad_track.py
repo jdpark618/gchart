@@ -196,11 +196,11 @@ async def main():
             return await match_game(ctx, mpg, gpg, {'name': name, 'pkg': pkg, 'publisher': pub}, days=90)
         # 재매칭 (11/09): 처음 매칭에서 못 찾은 매체(Meta 페이지 또는 Google 광고주)는 7일마다 다시 찾음 — 출시 직후엔 광고가 없다가 나중에 시작하는 게임 대비
         # 찾는 방법이 바뀌면(MATCH_VER, 11/13) 예전 방법으로 찾은 게임은 다시 찾음 — 이미 찾은 Google 계정에 새로 찾은 계정을 더함 (한 회사가 계정 여러 개로 나눠 광고).
-        # Google 계정이 없는 게임은 바로, 이미 있는 게임은 마지막으로 찾은 지 7일이 지나면 (하루에 몰리면 광고 투명성 센터가 막으므로 나눠서)
+        # Google 계정이나 Meta 페이지가 없는 게임은 바로, 둘 다 있는 게임은 마지막으로 찾은 지 7일이 지나면 (하루에 몰리면 광고 투명성 센터가 막으므로 나눠서)
         stale = bool(acc) and acc.get('ver') != MATCH_VER
         if acc and not (a.meta_page or a.google_adv_id) and (stale or not acc.get('meta_pages') or not acc.get('google')):
             last = acc.get('rematched_at') or acc.get('matched_at') or ''
-            try: due = (stale and not acc.get('google')) or time.time() - calendar.timegm(time.strptime(last[:19], '%Y-%m-%dT%H:%M:%S')) >= 7 * 86400
+            try: due = (stale and (not acc.get('google') or not acc.get('meta_pages'))) or time.time() - calendar.timegm(time.strptime(last[:19], '%Y-%m-%dT%H:%M:%S')) >= 7 * 86400
             except Exception: due = True
             if due:
                 m = await do_match(); got = []
@@ -296,9 +296,9 @@ async def main():
     print(json.dumps(summary, ensure_ascii=False, indent=1))
 
 def match_log(m):
-    """Google 광고주를 무엇으로 찾아봤는지 요약 (accounts.json 에 남김 → '왜 못 찾았나'를 나중에 확인)"""
+    """Meta 검색어(검색어:광고 수) · Google 광고주를 무엇으로 찾아봤는지 요약 (accounts.json 에 남김 → '왜 못 찾았나'를 나중에 확인)"""
     g = m.get('google', {})
-    return {'names': g.get('names', []), 'domains': [d.get('d') for d in g.get('domainLog', []) if d.get('creatives')], 'candidates': g.get('candidates', 0), **({'error': g['error']} if g.get('error') else {}),
+    return {'meta': [f"{t.get('q')}:{t.get('count')}" for t in m.get('meta', {}).get('tried', [])][:12], 'names': g.get('names', []), 'domains': [d.get('d') for d in g.get('domainLog', []) if d.get('creatives')], 'candidates': g.get('candidates', 0), **({'error': g['error']} if g.get('error') else {}),
             'checked': [{'name': c.get('name'), 'region': c.get('region'), 'from': c.get('from'), 'recent': c.get('recent'), 'previews': c.get('previews'), 'hit': c.get('hit')} for c in g.get('checked', []) if c.get('recent') or c.get('hit')][:16]}
 
 def live_stats(res, now):
