@@ -10,6 +10,7 @@ import argparse, asyncio, calendar, hashlib, io, json, os, re, shutil, time, url
 from urllib.parse import quote
 from PIL import Image
 from playwright.async_api import async_playwright
+from ad_terms import MATCH_VER
 
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -194,20 +195,26 @@ async def main():
             pub = clean(a.publisher) or next((r[6] for c in ('sales', 'popular') for r in json.load(open(os.path.join(ROOT, 'data', 'snapshot.json'), encoding='utf-8'))['charts']['gp']['kr'][c]['rows'] if r[4] == pkg), '')
             return await match_game(ctx, mpg, gpg, {'name': name, 'pkg': pkg, 'publisher': pub}, days=90)
         # 재매칭 (11/09): 처음 매칭에서 못 찾은 매체(Meta 페이지 또는 Google 광고주)는 7일마다 다시 찾음 — 출시 직후엔 광고가 없다가 나중에 시작하는 게임 대비
-        if acc and not (a.meta_page or a.google_adv_id) and (not acc.get('meta_pages') or not acc.get('google')):
+        # 찾는 방법이 바뀌면(MATCH_VER, 11/13) 예전 방법으로 찾은 게임은 다시 찾음 — 이미 찾은 Google 계정에 새로 찾은 계정을 더함 (한 회사가 계정 여러 개로 나눠 광고).
+        # Google 계정이 없는 게임은 바로, 이미 있는 게임은 마지막으로 찾은 지 7일이 지나면 (하루에 몰리면 광고 투명성 센터가 막으므로 나눠서)
+        stale = bool(acc) and acc.get('ver') != MATCH_VER
+        if acc and not (a.meta_page or a.google_adv_id) and (stale or not acc.get('meta_pages') or not acc.get('google')):
             last = acc.get('rematched_at') or acc.get('matched_at') or ''
-            try: due = time.time() - calendar.timegm(time.strptime(last[:19], '%Y-%m-%dT%H:%M:%S')) >= 7 * 86400
+            try: due = (stale and not acc.get('google')) or time.time() - calendar.timegm(time.strptime(last[:19], '%Y-%m-%dT%H:%M:%S')) >= 7 * 86400
             except Exception: due = True
             if due:
                 m = await do_match(); got = []
                 if not acc.get('meta_pages') and m['meta'].get('pages'): acc['meta_pages'] = [x['id'] for x in m['meta']['pages']]; acc['meta_by'] = m['meta'].get('by', ''); got.append('meta')
-                if not acc.get('google') and m['google'].get('matched'): acc['google'] = m['google']['matched']; got.append('google')
+                have = {g['id'] for g in acc.get('google', [])}; new = [g for g in m['google'].get('matched', []) if g['id'] not in have]
+                if new: acc['google'] = acc.get('google', []) + new; got.append('google')
                 if not acc.get('ios') and m['appstore'].get('ios_id'): acc['ios'] = m['appstore']['ios_id']
-                acc['rematched_at'] = res['tracked_at']; accounts[pkg] = acc; res['rematch'] = got
+                if not m['google'].get('error'): acc['ver'] = MATCH_VER   # 조회가 통째로 실패했으면 다음 추적 때 다시
+                acc['rematched_at'] = res['tracked_at']; acc['google_log'] = match_log(m); accounts[pkg] = acc; res['rematch'] = got
         if not acc and not (a.meta_page or a.google_adv_id):
             m = await do_match()
             acc = {'meta_pages': [x['id'] for x in m['meta'].get('pages', [])], 'google': m['google'].get('matched', []), 'ios': m['appstore'].get('ios_id', ''),
-                   'meta_by': m['meta'].get('by', ''), 'matched_at': res['tracked_at']}
+                   'meta_by': m['meta'].get('by', ''), 'matched_at': res['tracked_at'], 'google_log': match_log(m)}
+            if not m['google'].get('error'): acc['ver'] = MATCH_VER
             accounts[pkg] = acc; res['match'] = {'meta_by': acc['meta_by'], 'google_by': [g['by'] for g in acc['google']]}
         elif not acc:
             acc = {'meta_pages': [x for x in clean(a.meta_page).split(',') if x], 'google': [{'id': x.split('|')[0], 'name': (x.split('|') + [''])[1]} for x in clean(a.google_adv_id).split(',') if x],
@@ -287,6 +294,12 @@ async def main():
                'meta': {k: res['meta'].get(k) for k in ('pages', 'count', 'log', 'error')} | {'ads': len(res['meta'].get('ads', []))},
                'google': {'advertisers': res['google'].get('advertisers'), 'candidates': res['google'].get('candidates'), 'ads': len(res['google'].get('ads', [])), 'error': res['google'].get('error')}}
     print(json.dumps(summary, ensure_ascii=False, indent=1))
+
+def match_log(m):
+    """Google 광고주를 무엇으로 찾아봤는지 요약 (accounts.json 에 남김 → '왜 못 찾았나'를 나중에 확인)"""
+    g = m.get('google', {})
+    return {'names': g.get('names', []), 'domains': [d.get('d') for d in g.get('domainLog', []) if d.get('creatives')], 'candidates': g.get('candidates', 0), **({'error': g['error']} if g.get('error') else {}),
+            'checked': [{'name': c.get('name'), 'region': c.get('region'), 'from': c.get('from'), 'recent': c.get('recent'), 'previews': c.get('previews'), 'hit': c.get('hit')} for c in g.get('checked', []) if c.get('recent') or c.get('hit')][:16]}
 
 def live_stats(res, now):
     """목록(index)에 넣는 오늘의 신호 (11/12): 집행 중 소재 수 · 최근 7일 안에 시작한 소재 수. 사이트의 집행 중 기준과 같음
