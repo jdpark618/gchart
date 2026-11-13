@@ -304,7 +304,7 @@ def match_log(m):
     """Meta 검색어(검색어:광고 수) · Google 광고주를 무엇으로 찾아봤는지 요약 (accounts.json 에 남김 → '왜 못 찾았나'를 나중에 확인)"""
     g = m.get('google', {})
     return {'meta': [f"{t.get('q')}:{t.get('count')}" for t in m.get('meta', {}).get('tried', [])][:12], 'names': g.get('names', []), 'domains': [d.get('d') for d in g.get('domainLog', []) if d.get('creatives')], 'candidates': g.get('candidates', 0), **({'error': g['error']} if g.get('error') else {}),
-            'checked': [{'name': c.get('name'), 'region': c.get('region'), 'from': c.get('from'), 'recent': c.get('recent'), 'previews': c.get('previews'), 'hit': c.get('hit')} for c in g.get('checked', []) if c.get('recent') or c.get('hit')][:16]}
+            'previews': g.get('previews'), 'failed': g.get('failed'), 'checked': [{'name': c.get('name'), 'region': c.get('region'), 'from': c.get('from'), 'recent': c.get('recent'), 'previews': c.get('previews'), 'failed': c.get('failed'), 'hit': c.get('hit')} for c in g.get('checked', []) if c.get('recent') or c.get('hit')][:16]}
 
 def live_stats(res, now):
     """목록(index)에 넣는 오늘의 신호 (11/12): 집행 중 소재 수 · 최근 7일 안에 시작한 소재 수. 사이트의 집행 중 기준과 같음

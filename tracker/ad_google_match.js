@@ -78,5 +78,9 @@ async ([names, hints, domains, ids, since]) => {
     out.checked.push({ id: o.id, name: o.a.name, region: o.a.region, from: o.a.from, rank: o.a.rank, creativesKR: o.total, recent: o.all.length, previews: o.seen, failed: o.fail, hit: o.hit > 0, ...(o.skipped ? { skipped: true } : {}) });
     if (o.hit) out.matched.push({ id: o.id, name: o.a.name, by: `${o.a.from} → 소재에 패키지/iOS ID` });
   }
+  /* 미리보기가 대부분 실패했는데 못 찾았으면 '광고주 없음'이 아니라 차단(429) → 오류로 돌려보내 다음 추적 때 다시 찾게 함 (11/13: GitHub 에서도 누적 2000건 안팎부터 실패) */
+  const pv = st.reduce((s, o) => s + o.seen, 0), pf = st.reduce((s, o) => s + o.fail, 0);
+  out.previews = pv; out.failed = pf;
+  if (!out.matched.length && pv && pf >= pv * .3) out.error = `소재 미리보기 ${pv}건 중 ${pf}건 실패 (일시 차단일 수 있음)`;
   return out;
 }

@@ -1,10 +1,7 @@
 name: Ad Match (게임-광고계정 매칭 시험)
 # 오늘 한국 구글 인기 TOP5 + 매출 TOP5 를 대상으로 Meta 페이지 · Google 광고주를 자동으로 찾아 data/ads/match.json 에 저장 (광고 수집은 안 함)
 on:
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['tracker/ad_match.py', '.github/workflows/ad_match.yml']
+  workflow_dispatch:   # 손으로만 실행 (11/13: ad_match.py 를 고칠 때마다 TOP5 전체를 다시 찾아 광고 투명성 센터 부담만 늘어서 push 실행은 끔)
 concurrency: { group: ad-track, cancel-in-progress: false }
 permissions:
   contents: write
