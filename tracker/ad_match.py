@@ -94,21 +94,25 @@ async def meta_match(pg, g, ios_id, names=(), hosts=(), cores=()):
 _js = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ad_google_match.js'), encoding='utf-8').read()
 GOOGLE_MATCH_JS = _js[_js.index('async ('):]
 
-async def match_game(ctx, mpg, gpg, g, days=90):
-    """게임 1개 매칭: Meta 페이지 · Google 광고주 (Google 은 최근 days 일 소재 기준)"""
+async def match_game(ctx, mpg, gpg, g, days=90, want=('meta', 'google')):
+    """게임 1개 매칭: Meta 페이지 · Google 광고주 (Google 은 최근 days 일 소재 기준). want = 찾을 매체 (재매칭 때는 빠진 쪽만, 11/13)"""
     s0 = time.time()
     pi = await play_info(ctx, g['pkg'])
     ap = appstore(g['name'], g.get('publisher', ''))
     ios = ap.get('ios_id', '')
     company = [g.get('publisher'), pi.get('legal'), ap.get('seller'), ap.get('artist')]
-    try: m = await meta_match(mpg, g, ios, names=[ap.get('ios_name')], hosts=hosts_of([pi.get('site', ''), ap.get('seller_url', '')]), cores={nzk(core(n)) for n in company if n and len(nzk(core(n))) >= 2})
-    except Exception as e: m = {'pages': [], 'by': '', 'error': str(e)[:160]}
+    if 'meta' not in want: m = {'pages': [], 'by': '', 'skipped': True}
+    else:
+     try: m = await meta_match(mpg, g, ios, names=[ap.get('ios_name')], hosts=hosts_of([pi.get('site', ''), ap.get('seller_url', '')]), cores={nzk(core(n)) for n in company if n and len(nzk(core(n))) >= 2})
+     except Exception as e: m = {'pages': [], 'by': '', 'error': str(e)[:160]}
     # 이름은 출처를 가리지 않고 모두: 순위 데이터의 퍼블리셔 · Play 법인명 · App Store 판매자/개발자 · 찾은 Meta 페이지 이름 (한글 · 영문이 섞여 들어옴)
     names = name_terms(company + [x.get('name') for x in m.get('pages', [])])
     domains = domains_of([pi.get('site', ''), ap.get('seller_url', '')], [pi.get('email', '')])
     hints = pkg_hints(g['pkg'])
-    try: gm = await gpg.evaluate(GOOGLE_MATCH_JS, [names, hints, domains, [g['pkg']] + ([f'id{ios}'] if ios else []), int(time.time()) - days * 86400])
-    except Exception as e: gm = {'matched': [], 'checked': [], 'error': str(e)[:160]}
+    if 'google' not in want: gm = {'matched': [], 'checked': [], 'skipped': True}
+    else:
+     try: gm = await gpg.evaluate(GOOGLE_MATCH_JS, [names, hints, domains, [g['pkg']] + ([f'id{ios}'] if ios else []), int(time.time()) - days * 86400])
+     except Exception as e: gm = {'matched': [], 'checked': [], 'error': str(e)[:160]}
     return {**g, 'play': pi, 'appstore': ap, 'meta': m, 'google': {**gm, 'names': names, 'hints': hints, 'domains': domains}, 'sec': round(time.time() - s0, 1)}
 
 async def main():

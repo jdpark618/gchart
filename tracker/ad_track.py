@@ -188,12 +188,15 @@ async def main():
     async with async_playwright() as p:
         b = await p.chromium.launch()
         ctx = await b.new_context(locale='ko-KR', user_agent=UA, viewport={'width': 1366, 'height': 900})
-        async def do_match():
+        async def do_match(want=('meta', 'google')):
             from ad_match import match_game
             mpg = await ctx.new_page(); gpg = await ctx.new_page()
-            await gpg.goto('https://adstransparency.google.com/?region=KR&hl=ko', wait_until='domcontentloaded', timeout=60000); await gpg.wait_for_timeout(2500)
+            if 'google' in want:
+                # 다시 찾기가 한 실행에 몰려도 광고 투명성 센터가 막지 않게, Google 을 뒤지기 전에 쉼 (게임마다 따로 실행되므로 게임 사이 간격이 됨)
+                if acc: await asyncio.sleep(40)
+                await gpg.goto('https://adstransparency.google.com/?region=KR&hl=ko', wait_until='domcontentloaded', timeout=60000); await gpg.wait_for_timeout(2500)
             pub = clean(a.publisher) or next((r[6] for c in ('sales', 'popular') for r in json.load(open(os.path.join(ROOT, 'data', 'snapshot.json'), encoding='utf-8'))['charts']['gp']['kr'][c]['rows'] if r[4] == pkg), '')
-            return await match_game(ctx, mpg, gpg, {'name': name, 'pkg': pkg, 'publisher': pub}, days=90)
+            return await match_game(ctx, mpg, gpg, {'name': name, 'pkg': pkg, 'publisher': pub}, days=90, want=want)
         # 재매칭 (11/09): 처음 매칭에서 못 찾은 매체(Meta 페이지 또는 Google 광고주)는 7일마다 다시 찾음 — 출시 직후엔 광고가 없다가 나중에 시작하는 게임 대비
         # 찾는 방법이 바뀌면(MATCH_VER, 11/13) 예전 방법으로 찾은 게임은 다시 찾음 — 이미 찾은 Google 계정에 새로 찾은 계정을 더함 (한 회사가 계정 여러 개로 나눠 광고).
         # Google 계정이나 Meta 페이지가 없는 게임은 바로, 둘 다 있는 게임은 마지막으로 찾은 지 7일이 지나면 (하루에 몰리면 광고 투명성 센터가 막으므로 나눠서)
@@ -203,12 +206,14 @@ async def main():
             try: due = (stale and (not acc.get('google') or not acc.get('meta_pages'))) or time.time() - calendar.timegm(time.strptime(last[:19], '%Y-%m-%dT%H:%M:%S')) >= 7 * 86400
             except Exception: due = True
             if due:
-                m = await do_match(); got = []
+                # 빠진 쪽만 다시 찾음 (Meta 만 없으면 Meta 만). 둘 다 있으면(7일마다) Google 만 — 한 회사가 계정을 나눠 쓰는 경우의 새 계정
+                want = [k for k, has in (('meta', acc.get('meta_pages')), ('google', acc.get('google'))) if not has] or ['google']
+                m = await do_match(want); got = []
                 if not acc.get('meta_pages') and m['meta'].get('pages'): acc['meta_pages'] = [x['id'] for x in m['meta']['pages']]; acc['meta_by'] = m['meta'].get('by', ''); got.append('meta')
                 have = {g['id'] for g in acc.get('google', [])}; new = [g for g in m['google'].get('matched', []) if g['id'] not in have]
                 if new: acc['google'] = acc.get('google', []) + new; got.append('google')
                 if not acc.get('ios') and m['appstore'].get('ios_id'): acc['ios'] = m['appstore']['ios_id']
-                if not m['google'].get('error'): acc['ver'] = MATCH_VER   # 조회가 통째로 실패했으면 다음 추적 때 다시
+                if not any(m[k].get('error') for k in ('meta', 'google')): acc['ver'] = MATCH_VER   # 조회가 실패했으면 다음 추적 때 다시
                 acc['rematched_at'] = res['tracked_at']; acc['google_log'] = match_log(m); accounts[pkg] = acc; res['rematch'] = got
         if not acc and not (a.meta_page or a.google_adv_id):
             m = await do_match()

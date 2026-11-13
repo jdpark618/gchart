@@ -47,9 +47,9 @@ async ([names, hints, domains, ids, since]) => {
   const tried = log.queries.length + log.domains.length, failed = log.queries.filter(q => q.error).length + log.domains.filter(d => d.error).length;
   if (tried && failed === tried) return { matched: [], checked: [], queries: log.queries, domainLog: log.domains, candidates: 0, error: '광고 투명성 센터 조회가 모두 실패 (일시 차단일 수 있음)' };
   const order = [...cand.entries()].sort((x, y) => x[1].rank - y[1].rank || (y[1].region === 'KR') - (x[1].region === 'KR')).slice(0, 40);
-  const out = { matched: [], checked: [], queries: log.queries, domainLog: log.domains, candidates: cand.size }; let budget = 2000, live = 0;
-  const T0 = Date.now(), LIMIT = 240000;   // 게임 하나에 4분까지 (계정이 수십 개인 회사 대비)
-  /* 미리보기가 너무 많으면 구글이 막으므로(429) 게임당 2000건 · 10건씩 · 4분. 1차는 계정마다 300건까지(계정이 여러 개인 회사도 고루 확인),
+  const out = { matched: [], checked: [], queries: log.queries, domainLog: log.domains, candidates: cand.size }; let budget = 1000, live = 0;
+  const T0 = Date.now(), LIMIT = 180000;   // 게임 하나에 3분 · 미리보기 1000건까지 (11/13: 10분 동안 게임 5개 · 미리보기 2000건 안팎을 몰아 조회하면 차단됨)
+  /* 미리보기가 너무 많으면 구글이 막으므로(429) 게임당 1000건 · 10건씩 · 3분. 1차는 계정마다 300건까지(계정이 여러 개인 회사도 고루 확인),
      하나도 못 찾았으면 2차로 앞 순위 계정을 남은 한도만큼 더 깊이 */
   const st = [];
   const scan = async (o, cap) => {
