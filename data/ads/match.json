@@ -1,6 +1,6 @@
 {
- "at": "2026-11-13T03:49:38Z",
- "sec": 427,
+ "at": "2026-11-13T04:03:05Z",
+ "sec": 310,
  "games": [
   {
    "name": "도깨비의세계",
@@ -28,12 +28,16 @@
      {
       "q": "도깨비의세계",
       "count": 2,
-      "hit": 0
+      "got": 2,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "Kakao Games Corp.",
       "count": 0,
-      "hit": 0
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      }
     ]
    },
@@ -55,7 +59,7 @@
       "creativesKR": 37,
       "recent": 16,
       "previews": 16,
-      "failed": 0,
+      "failed": 14,
       "hit": false
      },
      {
@@ -78,8 +82,8 @@
       "rank": 1,
       "creativesKR": 1500,
       "recent": 1500,
-      "previews": 300,
-      "failed": 0,
+      "previews": 301,
+      "failed": 167,
       "hit": false
      },
      {
@@ -90,8 +94,8 @@
       "rank": 3,
       "creativesKR": 305,
       "recent": 164,
-      "previews": 10,
-      "failed": 0,
+      "previews": 40,
+      "failed": 39,
       "hit": true
      },
      {
@@ -250,7 +254,7 @@
      "kakaogames.com"
     ]
    },
-   "sec": 85.1
+   "sec": 38.2
   },
   {
    "name": "붕괴: 스타레일",
@@ -282,8 +286,10 @@
     "tried": [
      {
       "q": "붕괴: 스타레일",
-      "count": 43,
-      "hit": 1
+      "count": 47,
+      "got": 30,
+      "hit": 1,
+      "weak": 0
      }
     ]
    },
@@ -327,9 +333,9 @@
       "from": "이름 'COGNOSPHERE'",
       "rank": 0,
       "creativesKR": 1500,
-      "recent": 1421,
+      "recent": 1422,
       "previews": 9,
-      "failed": 4,
+      "failed": 0,
       "hit": true
      },
      {
@@ -341,7 +347,7 @@
       "creativesKR": 95,
       "recent": 27,
       "previews": 27,
-      "failed": 0,
+      "failed": 27,
       "hit": false
      },
      {
@@ -353,7 +359,7 @@
       "creativesKR": 142,
       "recent": 34,
       "previews": 34,
-      "failed": 0,
+      "failed": 20,
       "hit": false
      },
      {
@@ -453,7 +459,7 @@
      "hoyoverse.com"
     ]
    },
-   "sec": 16.4
+   "sec": 10.6
   },
   {
    "name": "제우스: 오만의 신",
@@ -481,22 +487,51 @@
      {
       "q": "제우스: 오만의 신",
       "count": 1,
-      "hit": 0
+      "got": 1,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "제우스",
-      "count": 654,
-      "hit": 0
+      "count": 661,
+      "got": 48,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "오만의 신",
       "count": 2,
-      "hit": 0
+      "got": 2,
+      "hit": 0,
+      "weak": 0
+     },
+     {
+      "q": "오만의신",
+      "count": 0,
+      "got": 0,
+      "hit": 0,
+      "weak": 0
+     },
+     {
+      "q": "제우스 오만의 신",
+      "count": 1,
+      "got": 1,
+      "hit": 0,
+      "weak": 0
+     },
+     {
+      "q": "제우스오만의신",
+      "count": 0,
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "Com2uS",
-      "count": 45094,
-      "hit": 0
+      "count": 45099,
+      "got": 59,
+      "hit": 0,
+      "weak": 0
      }
     ]
    },
@@ -518,7 +553,7 @@
       "creativesKR": 49,
       "recent": 21,
       "previews": 21,
-      "failed": 0,
+      "failed": 1,
       "hit": false
      },
      {
@@ -529,8 +564,8 @@
       "rank": 0,
       "creativesKR": 948,
       "recent": 607,
-      "previews": 10,
-      "failed": 0,
+      "previews": 171,
+      "failed": 160,
       "hit": true
      },
      {
@@ -643,7 +678,7 @@
      "com2us.com"
     ]
    },
-   "sec": 24.0
+   "sec": 33.5
   },
   {
    "name": "승리의 여신: 니케",
@@ -676,7 +711,9 @@
      {
       "q": "승리의 여신: 니케",
       "count": 102,
-      "hit": 1
+      "got": 30,
+      "hit": 1,
+      "weak": 0
      }
     ]
    },
@@ -692,7 +729,7 @@
       "creativesKR": 620,
       "recent": 239,
       "previews": 188,
-      "failed": 0,
+      "failed": 132,
       "hit": false
      },
      {
@@ -704,7 +741,7 @@
       "creativesKR": 66,
       "recent": 50,
       "previews": 50,
-      "failed": 0,
+      "failed": 50,
       "hit": false
      },
      {
@@ -870,7 +907,7 @@
      "nikke-kr.com"
     ]
    },
-   "sec": 48.2
+   "sec": 15.2
   },
   {
    "name": "리니지M",
@@ -898,23 +935,21 @@
      {
       "q": "리니지M",
       "count": 13,
-      "hit": 0
+      "got": 11,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "NC Corporation",
       "count": 41,
-      "hit": 0
+      "got": 30,
+      "hit": 0,
+      "weak": 0
      }
     ]
    },
    "google": {
-    "matched": [
-     {
-      "id": "AR08233267038722719745",
-      "name": "주식회사 엔씨",
-      "by": "이름 '주식회사 엔씨' → 소재에 패키지/iOS ID"
-     }
-    ],
+    "matched": [],
     "checked": [
      {
       "id": "AR17222963520048463873",
@@ -925,7 +960,7 @@
       "creativesKR": 599,
       "recent": 433,
       "previews": 38,
-      "failed": 0,
+      "failed": 13,
       "hit": false
      },
      {
@@ -937,7 +972,7 @@
       "creativesKR": 1500,
       "recent": 485,
       "previews": 151,
-      "failed": 22,
+      "failed": 87,
       "hit": false
      },
      {
@@ -961,7 +996,7 @@
       "creativesKR": 829,
       "recent": 77,
       "previews": 64,
-      "failed": 0,
+      "failed": 64,
       "hit": false
      },
      {
@@ -972,9 +1007,9 @@
       "rank": 0,
       "creativesKR": 398,
       "recent": 102,
-      "previews": 36,
-      "failed": 0,
-      "hit": true
+      "previews": 79,
+      "failed": 78,
+      "hit": false
      },
      {
       "id": "AR14986915653540118529",
@@ -1009,7 +1044,7 @@
       "creativesKR": 59,
       "recent": 26,
       "previews": 18,
-      "failed": 0,
+      "failed": 10,
       "hit": false
      },
      {
@@ -1044,8 +1079,8 @@
       "rank": 1,
       "creativesKR": 1500,
       "recent": 1500,
-      "previews": 301,
-      "failed": 99,
+      "previews": 577,
+      "failed": 404,
       "hit": false
      },
      {
@@ -1057,7 +1092,7 @@
       "creativesKR": 1,
       "recent": 1,
       "previews": 1,
-      "failed": 0,
+      "failed": 1,
       "hit": false
      },
      {
@@ -1093,7 +1128,7 @@
       "creativesKR": 384,
       "recent": 126,
       "previews": 124,
-      "failed": 0,
+      "failed": 90,
       "hit": false
      },
      {
@@ -1105,7 +1140,7 @@
       "creativesKR": 309,
       "recent": 171,
       "previews": 164,
-      "failed": 7,
+      "failed": 98,
       "hit": false
      },
      {
@@ -1165,7 +1200,7 @@
       "creativesKR": 12,
       "recent": 4,
       "previews": 4,
-      "failed": 0,
+      "failed": 4,
       "hit": false
      },
      {
@@ -1201,7 +1236,7 @@
       "creativesKR": 17,
       "recent": 9,
       "previews": 6,
-      "failed": 0,
+      "failed": 6,
       "hit": false
      },
      {
@@ -1403,7 +1438,7 @@
      "plaync.com"
     ]
    },
-   "sec": 202.1
+   "sec": 142.6
   },
   {
    "name": "마멋 키우기: 로그라이크 디펜스 RPG",
@@ -1431,33 +1466,56 @@
      {
       "q": "마멋 키우기: 로그라이크 디펜스 RPG",
       "count": 0,
-      "hit": 0
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "마멋 키우기",
       "count": 0,
-      "hit": 0
+      "got": 0,
+      "hit": 0,
+      "weak": 0
+     },
+     {
+      "q": "마멋키우기",
+      "count": 0,
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "로그라이크 디펜스 RPG",
       "count": 102,
-      "hit": 0
+      "got": 30,
+      "hit": 0,
+      "weak": 0
+     },
+     {
+      "q": "로그라이크디펜스RPG",
+      "count": 0,
+      "got": 0,
+      "hit": 0,
+      "weak": 0
+     },
+     {
+      "q": "마멋 키우기 로그라이크 디펜스 RPG",
+      "count": 0,
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "BAD BEANS CO., LTD",
       "count": 0,
-      "hit": 0
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      }
     ]
    },
    "google": {
-    "matched": [
-     {
-      "id": "AR16104237239382310913",
-      "name": "배드빈즈",
-      "by": "이름 '배드빈즈' → 소재에 패키지/iOS ID"
-     }
-    ],
+    "matched": [],
     "checked": [
      {
       "id": "AR16104237239382310913",
@@ -1468,8 +1526,8 @@
       "creativesKR": 3,
       "recent": 3,
       "previews": 3,
-      "failed": 0,
-      "hit": true
+      "failed": 3,
+      "hit": false
      },
      {
       "id": "AR00782410593129725953",
@@ -1480,7 +1538,7 @@
       "creativesKR": 1,
       "recent": 1,
       "previews": 1,
-      "failed": 0,
+      "failed": 1,
       "hit": false
      }
     ],
@@ -1522,7 +1580,7 @@
      "badbeans.dev"
     ]
    },
-   "sec": 11.4
+   "sec": 16.2
   },
   {
    "name": "야생소녀: 리버스",
@@ -1544,22 +1602,44 @@
      {
       "q": "야생소녀: 리버스",
       "count": 0,
-      "hit": 0
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "야생소녀",
       "count": 0,
-      "hit": 0
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "리버스",
-      "count": 1859,
-      "hit": 0
+      "count": 1860,
+      "got": 50,
+      "hit": 0,
+      "weak": 0
+     },
+     {
+      "q": "야생소녀 리버스",
+      "count": 0,
+      "got": 0,
+      "hit": 0,
+      "weak": 0
+     },
+     {
+      "q": "야생소녀리버스",
+      "count": 0,
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "Sesisoft",
       "count": 0,
-      "hit": 0
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      }
     ]
    },
@@ -1593,7 +1673,7 @@
       "creativesKR": 31,
       "recent": 31,
       "previews": 31,
-      "failed": 1,
+      "failed": 0,
       "hit": false
      },
      {
@@ -1646,7 +1726,7 @@
      "sesisoft.com"
     ]
    },
-   "sec": 14.1
+   "sec": 23.5
   },
   {
    "name": "판타지포유",
@@ -1679,7 +1759,9 @@
      {
       "q": "판타지포유",
       "count": 39,
-      "hit": 1
+      "got": 30,
+      "hit": 1,
+      "weak": 0
      }
     ]
    },
@@ -1760,7 +1842,7 @@
      "gnisoft.co.kr"
     ]
    },
-   "sec": 4.5
+   "sec": 5.3
   },
   {
    "name": "워라인: 스나이퍼",
@@ -1793,7 +1875,9 @@
      {
       "q": "워라인: 스나이퍼",
       "count": 5,
-      "hit": 1
+      "got": 5,
+      "hit": 1,
+      "weak": 0
      }
     ]
    },
@@ -1815,7 +1899,7 @@
       "creativesKR": 111,
       "recent": 81,
       "previews": 9,
-      "failed": 0,
+      "failed": 1,
       "hit": true
      }
     ],
@@ -1883,7 +1967,7 @@
      "powerfantasygames.com"
     ]
    },
-   "sec": 4.1
+   "sec": 3.1
   },
   {
    "name": "타워 디펜스 온라인 : 둘이서 막자",
@@ -1905,22 +1989,51 @@
      {
       "q": "타워 디펜스 온라인 : 둘이서 막자",
       "count": 0,
-      "hit": 0
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "타워 디펜스 온라인",
       "count": 0,
-      "hit": 0
+      "got": 0,
+      "hit": 0,
+      "weak": 0
+     },
+     {
+      "q": "타워디펜스온라인",
+      "count": 0,
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "둘이서 막자",
       "count": 13,
-      "hit": 0
+      "got": 13,
+      "hit": 0,
+      "weak": 0
+     },
+     {
+      "q": "둘이서막자",
+      "count": 0,
+      "got": 0,
+      "hit": 0,
+      "weak": 0
+     },
+     {
+      "q": "타워 디펜스 온라인 둘이서 막자",
+      "count": 0,
+      "got": 0,
+      "hit": 0,
+      "weak": 0
      },
      {
       "q": "MainQuest",
       "count": 50001,
-      "hit": 0
+      "got": 59,
+      "hit": 0,
+      "weak": 0
      }
     ]
    },
@@ -1936,7 +2049,7 @@
       "creativesKR": 3,
       "recent": 3,
       "previews": 3,
-      "failed": 0,
+      "failed": 3,
       "hit": false
      }
     ],
@@ -1971,7 +2084,7 @@
      "mainquest.biz"
     ]
    },
-   "sec": 13.2
+   "sec": 18.6
   }
  ]
 }
