@@ -191,7 +191,13 @@
  },
  "com.badbeans.legendofmarmot": {
   "meta_pages": [],
-  "google": [],
+  "google": [
+   {
+    "id": "AR16104237239382310913",
+    "name": "배드빈즈",
+    "by": "이름 '배드빈즈' → 소재에 패키지/iOS ID"
+   }
+  ],
   "ios": "6749559874",
   "meta_by": "",
   "matched_at": "2026-11-12T01:16:24Z"

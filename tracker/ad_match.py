@@ -126,6 +126,17 @@ async ([names, domains, ids, since]) => {
 }
 """
 
+CORP = re.compile(r"\(주\)|㈜|주식회사|유한회사|\(유\)|[,\s]+(co\.?,?\s*ltd|corporation|corp|inc|ltd|limited|llc|pte|gmbh|company)\.?(?=[\s,.]|$)", re.I)
+def corp_variants(names):
+    """광고주 이름 검색어: 원래 이름 + 법인 표기를 뗀 이름 (11/13).
+    같은 회사가 '(주)배드빈즈' · '배드빈즈' 두 계정으로 게임마다 따로 광고하는 경우, 뗀 이름으로 찾아야 둘 다 후보에 오름"""
+    out = []
+    for n in names:
+        if not n: continue
+        out.append(n); v = re.sub(r'\s+', ' ', CORP.sub(' ', n)).strip(' ,.')
+        if len(v) >= 2: out.append(v)
+    return list(dict.fromkeys(out))
+
 async def match_game(ctx, mpg, gpg, g, days=90):
     """게임 1개 매칭: Meta 페이지 · Google 광고주 (Google 은 최근 days 일 소재 기준)"""
     s0 = time.time()
@@ -134,7 +145,7 @@ async def match_game(ctx, mpg, gpg, g, days=90):
     ios = ap.get('ios_id', '')
     try: m = await meta_match(mpg, g, ios)
     except Exception as e: m = {'pages': [], 'by': '', 'error': str(e)[:160]}
-    names = list(dict.fromkeys(v for v in [g.get('publisher'), pi.get('legal'), ap.get('seller')] if v))
+    names = corp_variants([g.get('publisher'), pi.get('legal'), ap.get('seller')])
     domains = domains_of([pi.get('site', ''), ap.get('seller_url', '')])
     try: gm = await gpg.evaluate(GOOGLE_MATCH_JS, [names, domains, [g['pkg']] + ([f'id{ios}'] if ios else []), int(time.time()) - days * 86400])
     except Exception as e: gm = {'matched': [], 'checked': [], 'error': str(e)[:160]}
