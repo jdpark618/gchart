@@ -1,376 +1,24 @@
 {
- "at": "2026-11-06T02:23:06Z",
- "sec": 423,
+ "at": "2026-11-13T03:49:38Z",
+ "sec": 427,
  "games": [
-  {
-   "name": "승리의 여신: 니케",
-   "pkg": "com.proximabeta.nikke",
-   "publisher": "Level Infinite",
-   "ranks": [
-    "매출 1위"
-   ],
-   "play": {
-    "legal": "PROXIMA BETA PTE. LIMITED",
-    "site": ""
-   },
-   "appstore": {
-    "ios_id": "1585915174",
-    "ios_name": "승리의 여신: 니케",
-    "seller": "PROXIMA BETA PTE.LIMITED",
-    "seller_url": "https://nikke-kr.com"
-   },
-   "meta": {
-    "pages": [
-     {
-      "id": "100232432466330",
-      "name": "승리의 여신: 니케"
-     }
-    ],
-    "by": "검색어 '승리의 여신: 니케' → 광고 링크의 iOS 앱 ID",
-    "tried": [
-     {
-      "q": "승리의 여신: 니케",
-      "count": 98,
-      "hit": 1
-     }
-    ]
-   },
-   "google": {
-    "matched": [],
-    "checked": [
-     {
-      "id": "AR16639096672168706049",
-      "name": "Proxima Beta Pte. Limited",
-      "from": "이름 'PROXIMA BETA PTE. LIMITED'",
-      "creativesKR": 614,
-      "recent": 216,
-      "previews": 166,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR17344519229193322497",
-      "name": "PROXIMA BETA PTE. LIMITED",
-      "from": "이름 'PROXIMA BETA PTE. LIMITED'",
-      "creativesKR": 62,
-      "recent": 46,
-      "previews": 46,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR12460761223136280577",
-      "name": "PROXIMA BETA PTE. LIMITED",
-      "from": "이름 'PROXIMA BETA PTE. LIMITED'",
-      "creativesKR": 0,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR06104660459183407105",
-      "name": "PROXIMA BETA PTE. LIMITED",
-      "from": "이름 'PROXIMA BETA PTE. LIMITED'",
-      "creativesKR": 32,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR02965941824335642625",
-      "name": "RPL Digital, SIA",
-      "from": "도메인 'nikke-kr.com'",
-      "creativesKR": 8,
-      "recent": 3,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     }
-    ],
-    "names": [
-     "Level Infinite",
-     "PROXIMA BETA PTE. LIMITED",
-     "PROXIMA BETA PTE.LIMITED"
-    ],
-    "domains": [
-     "nikke-kr.com"
-    ]
-   },
-   "sec": 37.7
-  },
-  {
-   "name": "리니지M",
-   "pkg": "com.ncsoft.lineagem19",
-   "publisher": "NC Corporation",
-   "ranks": [
-    "매출 2위"
-   ],
-   "play": {
-    "legal": "주식회사 엔씨",
-    "site": "http://www.ncsoft.com/"
-   },
-   "appstore": {
-    "ios_id": "1474589366",
-    "ios_name": "리니지M",
-    "seller": "NC Corp.",
-    "seller_url": "https://lineagem.plaync.com/"
-   },
-   "meta": {
-    "pages": [],
-    "by": "",
-    "tried": [
-     {
-      "q": "리니지M",
-      "count": 7,
-      "hit": 0
-     },
-     {
-      "q": "NC Corporation",
-      "count": 41,
-      "hit": 0
-     }
-    ]
-   },
-   "google": {
-    "matched": [
-     {
-      "id": "AR08233267038722719745",
-      "name": "주식회사 엔씨",
-      "by": "이름 '주식회사 엔씨' → 소재에 패키지/iOS ID"
-     }
-    ],
-    "checked": [
-     {
-      "id": "AR01553284208317693953",
-      "name": "NCE CORPORATION LTD",
-      "from": "이름 'NC Corporation'",
-      "creativesKR": 0,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR17113162225859690497",
-      "name": "NCL Corporation Ltd.",
-      "from": "이름 'NC Corporation'",
-      "creativesKR": 115,
-      "recent": 28,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR15993806612225589249",
-      "name": "NCL Corporation Ltd.",
-      "from": "이름 'NC Corporation'",
-      "creativesKR": 0,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR10620780465977556993",
-      "name": "NCR VOYIX CORPORATION",
-      "from": "이름 'NC Corporation'",
-      "creativesKR": 0,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR17718232829063593985",
-      "name": "주식회사 엔씨",
-      "from": "이름 '주식회사 엔씨'",
-      "creativesKR": 1500,
-      "recent": 501,
-      "previews": 156,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR05851260455326056449",
-      "name": "주식회사 엔씨",
-      "from": "이름 '주식회사 엔씨'",
-      "creativesKR": 3,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR00709866774434152449",
-      "name": "주식회사 엔씨",
-      "from": "이름 '주식회사 엔씨'",
-      "creativesKR": 780,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR08233267038722719745",
-      "name": "주식회사 엔씨",
-      "from": "이름 '주식회사 엔씨'",
-      "creativesKR": 393,
-      "recent": 86,
-      "previews": 27,
-      "failed": 0,
-      "hit": true
-     },
-     {
-      "id": "AR17508881485808009217",
-      "name": "NC CORPORATE",
-      "from": "이름 'NC Corp.'",
-      "creativesKR": 0,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR00603975120255451137",
-      "name": "NCS CORP PTY LTD",
-      "from": "이름 'NC Corp.'",
-      "creativesKR": 0,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR00019189510151602177",
-      "name": "NC Plate Pros Corp",
-      "from": "이름 'NC Corp.'",
-      "creativesKR": 0,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR05848728511975522305",
-      "name": "인크로스 주식회사",
-      "from": "도메인→이름 '인크로스 주식회사'",
-      "creativesKR": 386,
-      "recent": 144,
-      "previews": 143,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR16327858551349313537",
-      "name": "인크로스 주식회사",
-      "from": "도메인→이름 '인크로스 주식회사'",
-      "creativesKR": 303,
-      "recent": 189,
-      "previews": 182,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR02919644490656382977",
-      "name": "인크로스 주식회사",
-      "from": "도메인→이름 '인크로스 주식회사'",
-      "creativesKR": 3,
-      "recent": 3,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR17927689905824071681",
-      "name": "엔씨소프트",
-      "from": "도메인→이름 '엔씨소프트'",
-      "creativesKR": 1500,
-      "recent": 1500,
-      "previews": 203,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR17504893600083738625",
-      "name": "주식회사 엔씨소프트",
-      "from": "도메인→이름 '엔씨소프트'",
-      "creativesKR": 59,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR13781696840430780417",
-      "name": "주식회사 엔씨소프트",
-      "from": "도메인→이름 '엔씨소프트'",
-      "creativesKR": 44,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR00700598776175263745",
-      "name": "인크로스 주식회사",
-      "from": "도메인 'ncsoft.com'",
-      "creativesKR": 1500,
-      "recent": 1500,
-      "previews": 597,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR10271241673648373761",
-      "name": "주식회사 엔씨",
-      "from": "도메인 'plaync.com'",
-      "creativesKR": 58,
-      "recent": 25,
-      "previews": 19,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR14250319390657478657",
-      "name": "엔씨소프트",
-      "from": "도메인 'plaync.com'",
-      "creativesKR": 322,
-      "recent": 307,
-      "previews": 33,
-      "failed": 0,
-      "hit": false
-     }
-    ],
-    "names": [
-     "NC Corporation",
-     "주식회사 엔씨",
-     "NC Corp."
-    ],
-    "domains": [
-     "ncsoft.com",
-     "lineagem.plaync.com",
-     "plaync.com"
-    ]
-   },
-   "sec": 239.5
-  },
   {
    "name": "도깨비의세계",
    "pkg": "com.kakaogames.dokkaebi",
    "publisher": "Kakao Games Corp.",
    "ranks": [
-    "매출 3위"
+    "매출 1위"
    ],
    "play": {
     "legal": "Kakao Games Corp.",
+    "email": "mobile_help@kakaocorp.com",
     "site": ""
    },
    "appstore": {
     "ios_id": "6758975161",
     "ios_name": "도깨비의세계",
     "seller": "Kakao Games Corp.",
+    "artist": "Kakao Games Corp.",
     "seller_url": "https://dokkaebi.kakaogames.com/"
    },
    "meta": {
@@ -379,7 +27,7 @@
     "tried": [
      {
       "q": "도깨비의세계",
-      "count": 0,
+      "count": 2,
       "hit": 0
      },
      {
@@ -399,10 +47,48 @@
     ],
     "checked": [
      {
+      "id": "AR13750641160274051073",
+      "name": "Kakao Games Co., Ltd.",
+      "region": "KR",
+      "from": "이름 'Kakao Games'",
+      "rank": 0,
+      "creativesKR": 37,
+      "recent": 16,
+      "previews": 16,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR06205126495925436417",
+      "name": "카카오게임즈",
+      "region": "",
+      "from": "도메인 'kakaogames.com'",
+      "rank": 1,
+      "creativesKR": 72,
+      "recent": 20,
+      "previews": 18,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR08357167980399820801",
+      "name": "KT Nasmedia Co., Ltd.",
+      "region": "",
+      "from": "도메인 'kakaogames.com'",
+      "rank": 1,
+      "creativesKR": 1500,
+      "recent": 1500,
+      "previews": 300,
+      "failed": 0,
+      "hit": false
+     },
+     {
       "id": "AR03969887680996573185",
       "name": "주식회사 카카오게임즈",
+      "region": "KR",
       "from": "도메인→이름 '카카오게임즈'",
-      "creativesKR": 307,
+      "rank": 3,
+      "creativesKR": 305,
       "recent": 164,
       "previews": 10,
       "failed": 0,
@@ -411,7 +97,9 @@
      {
       "id": "AR02237522114032697345",
       "name": "KT Nasmedia Co., Ltd.",
-      "from": "도메인→이름 'KT Nasmedia Co., Ltd.'",
+      "region": "KR",
+      "from": "도메인→이름 'KT Nasmedia'",
+      "rank": 3,
       "creativesKR": 1,
       "recent": 0,
       "previews": 0,
@@ -421,7 +109,9 @@
      {
       "id": "AR12802199415087431681",
       "name": "kt nasmedia Co., Ltd.",
-      "from": "도메인→이름 'KT Nasmedia Co., Ltd.'",
+      "region": "KR",
+      "from": "도메인→이름 'KT Nasmedia'",
+      "rank": 3,
       "creativesKR": 0,
       "recent": 0,
       "previews": 0,
@@ -431,7 +121,9 @@
      {
       "id": "AR07543000493572751361",
       "name": "KT Nasmedia Co., Ltd.",
-      "from": "도메인→이름 'KT Nasmedia Co., Ltd.'",
+      "region": "KR",
+      "from": "도메인→이름 'KT Nasmedia'",
+      "rank": 3,
       "creativesKR": 0,
       "recent": 0,
       "previews": 0,
@@ -439,51 +131,347 @@
       "hit": false
      },
      {
-      "id": "AR06205126495925436417",
-      "name": "카카오게임즈",
-      "from": "도메인 'kakaogames.com'",
-      "creativesKR": 73,
-      "recent": 26,
-      "previews": 18,
+      "id": "AR11835051395109617665",
+      "name": "kt nasmedia Co., Ltd.",
+      "region": "KR",
+      "from": "도메인→이름 'KT Nasmedia'",
+      "rank": 3,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
       "failed": 0,
       "hit": false
      },
      {
-      "id": "AR08357167980399820801",
+      "id": "AR12661461926732103681",
+      "name": "kt nasmedia Co., Ltd.",
+      "region": "KR",
+      "from": "도메인→이름 'KT Nasmedia'",
+      "rank": 3,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR08849558914002321409",
       "name": "KT Nasmedia Co., Ltd.",
-      "from": "도메인 'kakaogames.com'",
-      "creativesKR": 1500,
-      "recent": 1500,
-      "previews": 341,
+      "region": "KR",
+      "from": "도메인→이름 'KT Nasmedia'",
+      "rank": 3,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR13856801155419471873",
+      "name": "KT Nasmedia Co., Ltd.",
+      "region": "KR",
+      "from": "도메인→이름 'KT Nasmedia'",
+      "rank": 3,
+      "creativesKR": 20,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR11000057775073001473",
+      "name": "KT Nasmedia Co., Ltd.",
+      "region": "KR",
+      "from": "도메인→이름 'KT Nasmedia'",
+      "rank": 3,
+      "creativesKR": 18,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR10789421025415135233",
+      "name": "KT Nasmedia Co., Ltd.",
+      "region": "KR",
+      "from": "도메인→이름 'KT Nasmedia'",
+      "rank": 3,
+      "creativesKR": 17,
+      "recent": 0,
+      "previews": 0,
       "failed": 0,
       "hit": false
      }
     ],
+    "queries": [
+     {
+      "q": "Kakao Games",
+      "adv": 1,
+      "dom": 1
+     },
+     {
+      "q": "Kakao Games Corp.",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "카카오게임즈",
+      "adv": 2,
+      "dom": 0
+     },
+     {
+      "q": "KT Nasmedia",
+      "adv": 10,
+      "dom": 0
+     }
+    ],
+    "domainLog": [
+     {
+      "d": "dokkaebi.kakaogames.com",
+      "creatives": 0,
+      "adv": 0
+     },
+     {
+      "d": "kakaogames.com",
+      "creatives": 38,
+      "adv": 2
+     }
+    ],
+    "candidates": 13,
     "names": [
+     "Kakao Games",
      "Kakao Games Corp."
+    ],
+    "hints": [
+     "kakaogames"
     ],
     "domains": [
      "dokkaebi.kakaogames.com",
      "kakaogames.com"
     ]
    },
-   "sec": 79.6
+   "sec": 85.1
+  },
+  {
+   "name": "붕괴: 스타레일",
+   "pkg": "com.HoYoverse.hkrpgoversea",
+   "publisher": "COGNOSPHERE PTE. LTD.",
+   "ranks": [
+    "매출 2위"
+   ],
+   "play": {
+    "legal": "COGNOSPHERE PTE. LTD.",
+    "email": "support_os@hoyoverse.com",
+    "site": "https://hsr.hoyoverse.com/"
+   },
+   "appstore": {
+    "ios_id": "1599719154",
+    "ios_name": "붕괴: 스타레일",
+    "seller": "COGNOSPHERE PTE. LTD.",
+    "artist": "COGNOSPHERE PTE. LTD.",
+    "seller_url": "https://hsr.hoyoverse.com/home"
+   },
+   "meta": {
+    "pages": [
+     {
+      "id": "105900255098575",
+      "name": "Honkai: Star Rail"
+     }
+    ],
+    "by": "검색어 '붕괴: 스타레일' → 광고 링크의 Play 패키지",
+    "tried": [
+     {
+      "q": "붕괴: 스타레일",
+      "count": 43,
+      "hit": 1
+     }
+    ]
+   },
+   "google": {
+    "matched": [
+     {
+      "id": "AR11938981451824889857",
+      "name": "COGNOSPHERE PTE. LTD.",
+      "by": "이름 'COGNOSPHERE' → 소재에 패키지/iOS ID"
+     }
+    ],
+    "checked": [
+     {
+      "id": "AR07694708041366634497",
+      "name": "株式会社COGNOSPHERE",
+      "region": "JP",
+      "from": "이름 'COGNOSPHERE'",
+      "rank": 0,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR01201431665566547969",
+      "name": "COGNOSPHERE PTE. LTD",
+      "region": "SG",
+      "from": "이름 'COGNOSPHERE'",
+      "rank": 0,
+      "creativesKR": 1,
+      "recent": 1,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR11938981451824889857",
+      "name": "COGNOSPHERE PTE. LTD.",
+      "region": "SG",
+      "from": "이름 'COGNOSPHERE'",
+      "rank": 0,
+      "creativesKR": 1500,
+      "recent": 1421,
+      "previews": 9,
+      "failed": 4,
+      "hit": true
+     },
+     {
+      "id": "AR12700490706867716097",
+      "name": "COGNOSPHERE PTE. LTD.",
+      "region": "SG",
+      "from": "이름 'COGNOSPHERE'",
+      "rank": 0,
+      "creativesKR": 95,
+      "recent": 27,
+      "previews": 27,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR07499557964525600769",
+      "name": "COGNOSPHERE PTE. LTD.",
+      "region": "SG",
+      "from": "이름 'COGNOSPHERE'",
+      "rank": 0,
+      "creativesKR": 142,
+      "recent": 34,
+      "previews": 34,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR11960444124957507585",
+      "name": "COGNOSPHERE PTE. LTD.",
+      "region": "SG",
+      "from": "이름 'COGNOSPHERE'",
+      "rank": 0,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR06858096240861642753",
+      "name": "COGNOSPHERE PTE. LTD.",
+      "region": "SG",
+      "from": "이름 'COGNOSPHERE'",
+      "rank": 0,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR00431367531454791681",
+      "name": "COGNOSPHERE PTE. LTD.",
+      "region": "SG",
+      "from": "이름 'COGNOSPHERE'",
+      "rank": 0,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR13477097141323169793",
+      "name": "COGNOSPHERE PTE. LTD.",
+      "region": "SG",
+      "from": "이름 'COGNOSPHERE'",
+      "rank": 0,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     }
+    ],
+    "queries": [
+     {
+      "q": "COGNOSPHERE",
+      "adv": 9,
+      "dom": 0
+     },
+     {
+      "q": "COGNOSPHERE PTE. LTD.",
+      "adv": 8,
+      "dom": 0
+     },
+     {
+      "q": "Honkai: Star Rail",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "hoyoverse",
+      "adv": 0,
+      "dom": 1
+     }
+    ],
+    "domainLog": [
+     {
+      "d": "hsr.hoyoverse.com",
+      "creatives": 0,
+      "adv": 0
+     },
+     {
+      "d": "hoyoverse.com",
+      "creatives": 100,
+      "adv": 2
+     }
+    ],
+    "candidates": 9,
+    "names": [
+     "COGNOSPHERE",
+     "COGNOSPHERE PTE. LTD.",
+     "Honkai: Star Rail"
+    ],
+    "hints": [
+     "hoyoverse"
+    ],
+    "domains": [
+     "hsr.hoyoverse.com",
+     "hoyoverse.com"
+    ]
+   },
+   "sec": 16.4
   },
   {
    "name": "제우스: 오만의 신",
    "pkg": "com.com2us.es.android.google.kr.normal",
    "publisher": "Com2uS",
    "ranks": [
-    "매출 4위"
+    "매출 3위"
    ],
    "play": {
     "legal": "(주)컴투스",
+    "email": "info@com2us.com",
     "site": "https://www.com2us.com/"
    },
    "appstore": {
     "ios_id": "6504389641",
     "ios_name": "제우스: 오만의 신",
     "seller": "Com2uS Corp.",
+    "artist": "Com2uS Corp.",
     "seller_url": "https://www.com2us.com"
    },
    "meta": {
@@ -492,22 +480,22 @@
     "tried": [
      {
       "q": "제우스: 오만의 신",
-      "count": 0,
-      "hit": 0
-     },
-     {
-      "q": "제우스",
-      "count": 372,
-      "hit": 0
-     },
-     {
-      "q": "오만의 신",
       "count": 1,
       "hit": 0
      },
      {
+      "q": "제우스",
+      "count": 654,
+      "hit": 0
+     },
+     {
+      "q": "오만의 신",
+      "count": 2,
+      "hit": 0
+     },
+     {
       "q": "Com2uS",
-      "count": 43754,
+      "count": 45094,
       "hit": 0
      }
     ]
@@ -517,14 +505,16 @@
      {
       "id": "AR07442528701574545409",
       "name": "(주) 컴투스",
-      "by": "이름 '(주)컴투스' → 소재에 패키지/iOS ID"
+      "by": "이름 '컴투스' → 소재에 패키지/iOS ID"
      }
     ],
     "checked": [
      {
       "id": "AR10540700525865730049",
       "name": "Com2uS",
+      "region": "KR",
       "from": "이름 'Com2uS'",
+      "rank": 0,
       "creativesKR": 49,
       "recent": 21,
       "previews": 21,
@@ -532,21 +522,13 @@
       "hit": false
      },
      {
-      "id": "AR11233032486428606465",
-      "name": "Com2uS USA, Inc.",
-      "from": "이름 'Com2uS'",
-      "creativesKR": 0,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
       "id": "AR07442528701574545409",
       "name": "(주) 컴투스",
-      "from": "이름 '(주)컴투스'",
-      "creativesKR": 926,
-      "recent": 627,
+      "region": "KR",
+      "from": "이름 '컴투스'",
+      "rank": 0,
+      "creativesKR": 948,
+      "recent": 607,
       "previews": 10,
       "failed": 0,
       "hit": true
@@ -554,8 +536,10 @@
      {
       "id": "AR04382826590115987457",
       "name": "(주) 컴투스",
-      "from": "이름 '(주)컴투스'",
-      "creativesKR": 18,
+      "region": "KR",
+      "from": "이름 '컴투스'",
+      "rank": 0,
+      "creativesKR": 17,
       "recent": 5,
       "previews": 5,
       "failed": 0,
@@ -564,7 +548,9 @@
      {
       "id": "AR05335432366225620993",
       "name": "(주) 컴투스",
-      "from": "이름 '(주)컴투스'",
+      "region": "KR",
+      "from": "이름 '컴투스'",
+      "rank": 0,
       "creativesKR": 0,
       "recent": 0,
       "previews": 0,
@@ -574,7 +560,45 @@
      {
       "id": "AR08598790591226052609",
       "name": "(주)컴투스로카",
-      "from": "이름 '(주)컴투스'",
+      "region": "KR",
+      "from": "이름 '컴투스'",
+      "rank": 2,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR11009653968962846721",
+      "name": "(주)컴투스타이젬",
+      "region": "KR",
+      "from": "이름 '컴투스'",
+      "rank": 2,
+      "creativesKR": 1,
+      "recent": 1,
+      "previews": 1,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR11596141837814857729",
+      "name": "주식회사 컴투스홀딩스",
+      "region": "KR",
+      "from": "이름 '컴투스'",
+      "rank": 2,
+      "creativesKR": 61,
+      "recent": 16,
+      "previews": 16,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR11233032486428606465",
+      "name": "Com2uS USA, Inc.",
+      "region": "US",
+      "from": "이름 'Com2uS'",
+      "rank": 2,
       "creativesKR": 0,
       "recent": 0,
       "previews": 0,
@@ -582,51 +606,1079 @@
       "hit": false
      }
     ],
+    "queries": [
+     {
+      "q": "Com2uS",
+      "adv": 2,
+      "dom": 1
+     },
+     {
+      "q": "컴투스",
+      "adv": 6,
+      "dom": 0
+     },
+     {
+      "q": "Com2uS Corp.",
+      "adv": 0,
+      "dom": 0
+     }
+    ],
+    "domainLog": [
+     {
+      "d": "com2us.com",
+      "creatives": 100,
+      "adv": 1
+     }
+    ],
+    "candidates": 8,
     "names": [
      "Com2uS",
-     "(주)컴투스",
+     "컴투스",
      "Com2uS Corp."
+    ],
+    "hints": [
+     "com2us"
     ],
     "domains": [
      "com2us.com"
     ]
    },
-   "sec": 20.5
+   "sec": 24.0
   },
   {
-   "name": "WOS: 화이트아웃 서바이벌",
-   "pkg": "com.gof.global",
-   "publisher": "Century Games PTE. LTD.",
+   "name": "승리의 여신: 니케",
+   "pkg": "com.proximabeta.nikke",
+   "publisher": "Level Infinite",
    "ranks": [
-    "매출 5위"
+    "매출 4위"
    ],
    "play": {
-    "legal": "CENTURY GAMES PTE. LTD.",
-    "site": "https://www.centurygames.com/games/whiteout-survival/"
+    "legal": "PROXIMA BETA PTE. LIMITED",
+    "email": "proximabeta8@gmail.com",
+    "site": ""
    },
    "appstore": {
-    "ios_id": "6443575749",
-    "ios_name": "WOS: 화이트아웃 서바이벌",
-    "seller": "Century Games Pte. Ltd.",
-    "seller_url": "https://www.centurygames.com/"
+    "ios_id": "1585915174",
+    "ios_name": "승리의 여신: 니케",
+    "seller": "PROXIMA BETA PTE.LIMITED",
+    "artist": "Level Infinite",
+    "seller_url": "https://nikke-kr.com"
    },
    "meta": {
     "pages": [
      {
-      "id": "101709235817625",
-      "name": "Whiteout Survival"
+      "id": "100232432466330",
+      "name": "승리의 여신: 니케"
      }
     ],
-    "by": "검색어 'WOS' → 광고 링크의 Play 패키지",
+    "by": "검색어 '승리의 여신: 니케' → 광고 링크의 iOS 앱 ID",
     "tried": [
      {
-      "q": "WOS: 화이트아웃 서바이벌",
+      "q": "승리의 여신: 니케",
+      "count": 102,
+      "hit": 1
+     }
+    ]
+   },
+   "google": {
+    "matched": [],
+    "checked": [
+     {
+      "id": "AR16639096672168706049",
+      "name": "Proxima Beta Pte. Limited",
+      "region": "SG",
+      "from": "이름 'PROXIMA BETA'",
+      "rank": 0,
+      "creativesKR": 620,
+      "recent": 239,
+      "previews": 188,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR17344519229193322497",
+      "name": "PROXIMA BETA PTE. LIMITED",
+      "region": "SG",
+      "from": "이름 'PROXIMA BETA'",
+      "rank": 0,
+      "creativesKR": 66,
+      "recent": 50,
+      "previews": 50,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR12460761223136280577",
+      "name": "PROXIMA BETA PTE. LIMITED",
+      "region": "SG",
+      "from": "이름 'PROXIMA BETA'",
+      "rank": 0,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR06104660459183407105",
+      "name": "PROXIMA BETA PTE. LIMITED",
+      "region": "SG",
+      "from": "이름 'PROXIMA BETA'",
+      "rank": 0,
+      "creativesKR": 32,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR10276224832144146433",
+      "name": "PROXIMA BETA PTE. LIMITED",
+      "region": "SG",
+      "from": "이름 'PROXIMA BETA'",
+      "rank": 0,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR09986610505860513793",
+      "name": "PROXIMA BETA PTE. LIMITED",
+      "region": "SG",
+      "from": "이름 'PROXIMA BETA'",
+      "rank": 0,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR07142370067370475521",
+      "name": "Proxima Beta Pte. Limited",
+      "region": "SG",
+      "from": "이름 'PROXIMA BETA'",
+      "rank": 0,
+      "creativesKR": 3,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR03070251169612824577",
+      "name": "Proxima BETA PTE. Limited",
+      "region": "SG",
+      "from": "이름 'PROXIMA BETA'",
+      "rank": 0,
+      "creativesKR": 5,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR07240693465187614721",
+      "name": "PROXIMA BETA PTE. LIMITED",
+      "region": "SG",
+      "from": "이름 'PROXIMA BETA'",
+      "rank": 0,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR14688761729681195009",
+      "name": "Proxima Beta Pte. Limited",
+      "region": "SG",
+      "from": "이름 'PROXIMA BETA'",
+      "rank": 0,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR02965941824335642625",
+      "name": "RPL Digital, SIA",
+      "region": "",
+      "from": "도메인 'nikke-kr.com'",
+      "rank": 1,
+      "creativesKR": 8,
+      "recent": 3,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     }
+    ],
+    "queries": [
+     {
+      "q": "Level Infinite",
+      "adv": 0,
+      "dom": 1
+     },
+     {
+      "q": "PROXIMA BETA",
+      "adv": 10,
+      "dom": 0
+     },
+     {
+      "q": "PROXIMA BETA PTE. LIMITED",
+      "adv": 10,
+      "dom": 0
+     },
+     {
+      "q": "승리의 여신: 니케",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "RPL Digital, SIA",
+      "adv": 0,
+      "dom": 0
+     }
+    ],
+    "domainLog": [
+     {
+      "d": "nikke-kr.com",
+      "creatives": 2,
+      "adv": 1
+     },
+     {
+      "d": "levelinfinite.com",
+      "creatives": 0,
+      "adv": 0
+     }
+    ],
+    "candidates": 11,
+    "names": [
+     "Level Infinite",
+     "PROXIMA BETA",
+     "PROXIMA BETA PTE. LIMITED",
+     "PROXIMA BETA PTE.LIMITED",
+     "승리의 여신: 니케"
+    ],
+    "hints": [
+     "proximabeta"
+    ],
+    "domains": [
+     "nikke-kr.com"
+    ]
+   },
+   "sec": 48.2
+  },
+  {
+   "name": "리니지M",
+   "pkg": "com.ncsoft.lineagem19",
+   "publisher": "NC Corporation",
+   "ranks": [
+    "매출 5위"
+   ],
+   "play": {
+    "legal": "주식회사 엔씨",
+    "email": "MobileCS@ncsoft.com",
+    "site": "http://www.ncsoft.com/"
+   },
+   "appstore": {
+    "ios_id": "1474589366",
+    "ios_name": "리니지M",
+    "seller": "NC Corp.",
+    "artist": "NC Corp.",
+    "seller_url": "https://lineagem.plaync.com/"
+   },
+   "meta": {
+    "pages": [],
+    "by": "",
+    "tried": [
+     {
+      "q": "리니지M",
+      "count": 13,
+      "hit": 0
+     },
+     {
+      "q": "NC Corporation",
+      "count": 41,
+      "hit": 0
+     }
+    ]
+   },
+   "google": {
+    "matched": [
+     {
+      "id": "AR08233267038722719745",
+      "name": "주식회사 엔씨",
+      "by": "이름 '주식회사 엔씨' → 소재에 패키지/iOS ID"
+     }
+    ],
+    "checked": [
+     {
+      "id": "AR17222963520048463873",
+      "name": "엔씨",
+      "region": "KR",
+      "from": "이름 '엔씨'",
+      "rank": 0,
+      "creativesKR": 599,
+      "recent": 433,
+      "previews": 38,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR17718232829063593985",
+      "name": "주식회사 엔씨",
+      "region": "KR",
+      "from": "이름 '주식회사 엔씨'",
+      "rank": 0,
+      "creativesKR": 1500,
+      "recent": 485,
+      "previews": 151,
+      "failed": 22,
+      "hit": false
+     },
+     {
+      "id": "AR05851260455326056449",
+      "name": "주식회사 엔씨",
+      "region": "KR",
+      "from": "이름 '주식회사 엔씨'",
+      "rank": 0,
+      "creativesKR": 5,
+      "recent": 2,
+      "previews": 2,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR00709866774434152449",
+      "name": "주식회사 엔씨",
+      "region": "KR",
+      "from": "이름 '주식회사 엔씨'",
+      "rank": 0,
+      "creativesKR": 829,
+      "recent": 77,
+      "previews": 64,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR08233267038722719745",
+      "name": "주식회사 엔씨",
+      "region": "KR",
+      "from": "이름 '주식회사 엔씨'",
+      "rank": 0,
+      "creativesKR": 398,
+      "recent": 102,
+      "previews": 36,
+      "failed": 0,
+      "hit": true
+     },
+     {
+      "id": "AR14986915653540118529",
+      "name": "주식회사 엔씨",
+      "region": "KR",
+      "from": "이름 '주식회사 엔씨'",
+      "rank": 0,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR14308676408388354049",
+      "name": "주식회사 엔씨",
+      "region": "KR",
+      "from": "이름 '주식회사 엔씨'",
+      "rank": 0,
+      "creativesKR": 281,
+      "recent": 120,
+      "previews": 70,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR10271241673648373761",
+      "name": "주식회사 엔씨",
+      "region": "KR",
+      "from": "이름 '주식회사 엔씨'",
+      "rank": 0,
+      "creativesKR": 59,
+      "recent": 26,
+      "previews": 18,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR16378341021420879873",
+      "name": "주식회사 엔씨",
+      "region": "KR",
+      "from": "이름 '주식회사 엔씨'",
+      "rank": 0,
+      "creativesKR": 1,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR14816166067591708673",
+      "name": "주식회사 엔씨",
+      "region": "KR",
+      "from": "이름 '주식회사 엔씨'",
+      "rank": 0,
+      "creativesKR": 4,
+      "recent": 4,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR00700598776175263745",
+      "name": "인크로스 주식회사",
+      "region": "",
+      "from": "도메인 'ncsoft.com'",
+      "rank": 1,
+      "creativesKR": 1500,
+      "recent": 1500,
+      "previews": 301,
+      "failed": 99,
+      "hit": false
+     },
+     {
+      "id": "AR17869310150536331265",
+      "name": "젤리피쉬코리아 유한회사",
+      "region": "",
+      "from": "도메인 'plaync.com'",
+      "rank": 1,
+      "creativesKR": 1,
+      "recent": 1,
+      "previews": 1,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR07585625312386351105",
+      "name": "FreakOut Inc.,",
+      "region": "",
+      "from": "도메인 'ncsoft.jp'",
+      "rank": 1,
+      "creativesKR": 20,
+      "recent": 1,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR04755570927536701441",
+      "name": "Clan Inc.",
+      "region": "",
+      "from": "도메인 'ncsoft.jp'",
+      "rank": 1,
+      "creativesKR": 3,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR05848728511975522305",
+      "name": "인크로스 주식회사",
+      "region": "KR",
+      "from": "도메인→이름 '인크로스'",
+      "rank": 3,
+      "creativesKR": 384,
+      "recent": 126,
+      "previews": 124,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR16327858551349313537",
+      "name": "인크로스 주식회사",
+      "region": "KR",
+      "from": "도메인→이름 '인크로스'",
+      "rank": 3,
+      "creativesKR": 309,
+      "recent": 171,
+      "previews": 164,
+      "failed": 7,
+      "hit": false
+     },
+     {
+      "id": "AR02919644490656382977",
+      "name": "인크로스 주식회사",
+      "region": "KR",
+      "from": "도메인→이름 '인크로스'",
+      "rank": 3,
+      "creativesKR": 3,
+      "recent": 3,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR14330373320447361025",
+      "name": "인크로스 주식회사",
+      "region": "KR",
+      "from": "도메인→이름 '인크로스'",
+      "rank": 3,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR10680731346071977985",
+      "name": "인크로스 주식회사",
+      "region": "KR",
+      "from": "도메인→이름 '인크로스'",
+      "rank": 3,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR17356840785990909953",
+      "name": "인크로스 주식회사",
+      "region": "KR",
+      "from": "도메인→이름 '인크로스'",
+      "rank": 3,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR10068654019120726017",
+      "name": "인크로스 주식회사",
+      "region": "KR",
+      "from": "도메인→이름 '인크로스'",
+      "rank": 3,
+      "creativesKR": 12,
+      "recent": 4,
+      "previews": 4,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR12932301404776693761",
+      "name": "인크로스 주식회사",
+      "region": "KR",
+      "from": "도메인→이름 '인크로스'",
+      "rank": 3,
+      "creativesKR": 8,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR00584656314408370177",
+      "name": "인크로스 주식회사",
+      "region": "KR",
+      "from": "도메인→이름 '인크로스'",
+      "rank": 3,
+      "creativesKR": 3,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR05350839771126038529",
+      "name": "엔씨티",
+      "region": "KR",
+      "from": "이름 '엔씨'",
+      "rank": 6,
+      "creativesKR": 17,
+      "recent": 9,
+      "previews": 6,
+      "failed": 0,
+      "hit": false
+     },
+     {
+      "id": "AR08463822188842057729",
+      "name": "케이엔씨",
+      "region": "KR",
+      "from": "이름 '엔씨'",
+      "rank": 6,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false,
+      "skipped": true
+     },
+     {
+      "id": "AR06620983079408238593",
+      "name": "케이엔씨",
+      "region": "KR",
+      "from": "이름 '엔씨'",
+      "rank": 6,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false,
+      "skipped": true
+     },
+     {
+      "id": "AR17927689905824071681",
+      "name": "엔씨소프트",
+      "region": "KR",
+      "from": "이름 '엔씨'",
+      "rank": 6,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false,
+      "skipped": true
+     },
+     {
+      "id": "AR14250319390657478657",
+      "name": "엔씨소프트",
+      "region": "KR",
+      "from": "이름 '엔씨'",
+      "rank": 6,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false,
+      "skipped": true
+     },
+     {
+      "id": "AR13430532067972612097",
+      "name": "엔씨미디어",
+      "region": "KR",
+      "from": "이름 '엔씨'",
+      "rank": 6,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false,
+      "skipped": true
+     },
+     {
+      "id": "AR06061573261370589185",
+      "name": "엔씨미디어",
+      "region": "KR",
+      "from": "이름 '엔씨'",
+      "rank": 6,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false,
+      "skipped": true
+     },
+     {
+      "id": "AR02374086878451204097",
+      "name": "엔씨미디어",
+      "region": "KR",
+      "from": "이름 '엔씨'",
+      "rank": 6,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false,
+      "skipped": true
+     },
+     {
+      "id": "AR07116374348314705921",
+      "name": "엔씨미디어",
+      "region": "KR",
+      "from": "이름 '엔씨'",
+      "rank": 6,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false,
+      "skipped": true
+     },
+     {
+      "id": "AR01863606040814157825",
+      "name": "주식회사 엔씨티",
+      "region": "KR",
+      "from": "이름 '주식회사 엔씨'",
+      "rank": 6,
+      "creativesKR": 0,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false,
+      "skipped": true
+     }
+    ],
+    "queries": [
+     {
+      "q": "NC",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "NC Corporation",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "엔씨",
+      "adv": 10,
+      "dom": 0
+     },
+     {
+      "q": "주식회사 엔씨",
+      "adv": 10,
+      "dom": 0
+     },
+     {
+      "q": "NC Corp.",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "ncsoft",
+      "adv": 0,
+      "dom": 2
+     },
+     {
+      "q": "인크로스",
+      "adv": 10,
+      "dom": 0
+     },
+     {
+      "q": "Clan",
+      "adv": 0,
+      "dom": 0
+     }
+    ],
+    "domainLog": [
+     {
+      "d": "ncsoft.com",
+      "creatives": 4,
+      "adv": 1
+     },
+     {
+      "d": "lineagem.plaync.com",
+      "creatives": 0,
+      "adv": 0
+     },
+     {
+      "d": "plaync.com",
+      "creatives": 100,
+      "adv": 3
+     },
+     {
+      "d": "ncsoft.jp",
+      "creatives": 4,
+      "adv": 2
+     }
+    ],
+    "candidates": 33,
+    "names": [
+     "NC",
+     "NC Corporation",
+     "엔씨",
+     "주식회사 엔씨",
+     "NC Corp."
+    ],
+    "hints": [
+     "ncsoft"
+    ],
+    "domains": [
+     "ncsoft.com",
+     "lineagem.plaync.com",
+     "plaync.com"
+    ]
+   },
+   "sec": 202.1
+  },
+  {
+   "name": "마멋 키우기: 로그라이크 디펜스 RPG",
+   "pkg": "com.badbeans.legendofmarmot",
+   "publisher": "BAD BEANS CO., LTD",
+   "ranks": [
+    "인기 1위"
+   ],
+   "play": {
+    "legal": "(주)배드빈즈",
+    "email": "biz@badbeans.dev",
+    "site": "https://badbeans.dev/"
+   },
+   "appstore": {
+    "ios_id": "6749559874",
+    "ios_name": "마멋 키우기: 로그라이크 디펜스 RPG",
+    "seller": "Bad Beans Co., Ltd",
+    "artist": "Badbeans",
+    "seller_url": "https://badbeans.dev/"
+   },
+   "meta": {
+    "pages": [],
+    "by": "",
+    "tried": [
+     {
+      "q": "마멋 키우기: 로그라이크 디펜스 RPG",
       "count": 0,
       "hit": 0
      },
      {
-      "q": "WOS",
-      "count": 3720,
+      "q": "마멋 키우기",
+      "count": 0,
+      "hit": 0
+     },
+     {
+      "q": "로그라이크 디펜스 RPG",
+      "count": 102,
+      "hit": 0
+     },
+     {
+      "q": "BAD BEANS CO., LTD",
+      "count": 0,
+      "hit": 0
+     }
+    ]
+   },
+   "google": {
+    "matched": [
+     {
+      "id": "AR16104237239382310913",
+      "name": "배드빈즈",
+      "by": "이름 '배드빈즈' → 소재에 패키지/iOS ID"
+     }
+    ],
+    "checked": [
+     {
+      "id": "AR16104237239382310913",
+      "name": "배드빈즈",
+      "region": "KR",
+      "from": "이름 '배드빈즈'",
+      "rank": 0,
+      "creativesKR": 3,
+      "recent": 3,
+      "previews": 3,
+      "failed": 0,
+      "hit": true
+     },
+     {
+      "id": "AR00782410593129725953",
+      "name": "(주)배드빈즈",
+      "region": "KR",
+      "from": "이름 '배드빈즈'",
+      "rank": 0,
+      "creativesKR": 1,
+      "recent": 1,
+      "previews": 1,
+      "failed": 0,
+      "hit": false
+     }
+    ],
+    "queries": [
+     {
+      "q": "BAD BEANS",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "BAD BEANS CO., LTD",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "배드빈즈",
+      "adv": 2,
+      "dom": 0
+     }
+    ],
+    "domainLog": [
+     {
+      "d": "badbeans.dev",
+      "creatives": 0,
+      "adv": 0
+     }
+    ],
+    "candidates": 2,
+    "names": [
+     "BAD BEANS",
+     "BAD BEANS CO., LTD",
+     "배드빈즈",
+     "Badbeans"
+    ],
+    "hints": [
+     "badbeans"
+    ],
+    "domains": [
+     "badbeans.dev"
+    ]
+   },
+   "sec": 11.4
+  },
+  {
+   "name": "야생소녀: 리버스",
+   "pkg": "com.sesisoft.wildgirls.google",
+   "publisher": "Sesisoft",
+   "ranks": [
+    "인기 2위"
+   ],
+   "play": {
+    "legal": "(주)세시소프트",
+    "email": "cs@sesisoft.com",
+    "site": "https://wildgirls.sesisoft.com/"
+   },
+   "appstore": {},
+   "meta": {
+    "pages": [],
+    "by": "",
+    "tried": [
+     {
+      "q": "야생소녀: 리버스",
+      "count": 0,
+      "hit": 0
+     },
+     {
+      "q": "야생소녀",
+      "count": 0,
+      "hit": 0
+     },
+     {
+      "q": "리버스",
+      "count": 1859,
+      "hit": 0
+     },
+     {
+      "q": "Sesisoft",
+      "count": 0,
+      "hit": 0
+     }
+    ]
+   },
+   "google": {
+    "matched": [
+     {
+      "id": "AR14098561119299829761",
+      "name": "주식회사 세시소프트",
+      "by": "이름 '세시소프트' → 소재에 패키지/iOS ID"
+     }
+    ],
+    "checked": [
+     {
+      "id": "AR14098561119299829761",
+      "name": "주식회사 세시소프트",
+      "region": "KR",
+      "from": "이름 '세시소프트'",
+      "rank": 0,
+      "creativesKR": 61,
+      "recent": 21,
+      "previews": 9,
+      "failed": 0,
+      "hit": true
+     },
+     {
+      "id": "AR14077752475197112321",
+      "name": "주식회사 세시소프트",
+      "region": "KR",
+      "from": "이름 '세시소프트'",
+      "rank": 0,
+      "creativesKR": 31,
+      "recent": 31,
+      "previews": 31,
+      "failed": 1,
+      "hit": false
+     },
+     {
+      "id": "AR10404284367315664897",
+      "name": "주식회사 세시소프트",
+      "region": "KR",
+      "from": "이름 '세시소프트'",
+      "rank": 0,
+      "creativesKR": 10,
+      "recent": 0,
+      "previews": 0,
+      "failed": 0,
+      "hit": false
+     }
+    ],
+    "queries": [
+     {
+      "q": "Sesisoft",
+      "adv": 0,
+      "dom": 1
+     },
+     {
+      "q": "세시소프트",
+      "adv": 3,
+      "dom": 0
+     }
+    ],
+    "domainLog": [
+     {
+      "d": "wildgirls.sesisoft.com",
+      "creatives": 0,
+      "adv": 0
+     },
+     {
+      "d": "sesisoft.com",
+      "creatives": 37,
+      "adv": 1
+     }
+    ],
+    "candidates": 3,
+    "names": [
+     "Sesisoft",
+     "세시소프트"
+    ],
+    "hints": [
+     "sesisoft"
+    ],
+    "domains": [
+     "wildgirls.sesisoft.com",
+     "sesisoft.com"
+    ]
+   },
+   "sec": 14.1
+  },
+  {
+   "name": "판타지포유",
+   "pkg": "com.gnisoft.f4u.googlePlay",
+   "publisher": "GNISoft",
+   "ranks": [
+    "인기 3위"
+   ],
+   "play": {
+    "legal": "지앤아이소프트(주)",
+    "email": "gnisoft@gnisoft.co.kr",
+    "site": "https://game.naver.com/lounge/F4U/home"
+   },
+   "appstore": {
+    "ios_id": "6790690966",
+    "ios_name": "판타지포유",
+    "seller": "GNISoft Co., Ltd",
+    "artist": "Gnisoft",
+    "seller_url": ""
+   },
+   "meta": {
+    "pages": [
+     {
+      "id": "375006372373228",
+      "name": "Fantasy For You"
+     }
+    ],
+    "by": "검색어 '판타지포유' → 광고 링크의 Play 패키지",
+    "tried": [
+     {
+      "q": "판타지포유",
+      "count": 39,
       "hit": 1
      }
     ]
@@ -634,36 +1686,30 @@
    "google": {
     "matched": [
      {
-      "id": "AR15528579328135659521",
-      "name": "CENTURY GAMES PTE. LTD.",
-      "by": "이름 'Century Games PTE. LTD.' → 소재에 패키지/iOS ID"
+      "id": "AR12591753439286919169",
+      "name": "지앤아이소프트(주)",
+      "by": "이름 '지앤아이소프트' → 소재에 패키지/iOS ID"
      }
     ],
     "checked": [
      {
-      "id": "AR15528579328135659521",
-      "name": "CENTURY GAMES PTE. LTD.",
-      "from": "이름 'Century Games PTE. LTD.'",
-      "creativesKR": 1093,
-      "recent": 386,
-      "previews": 20,
+      "id": "AR12591753439286919169",
+      "name": "지앤아이소프트(주)",
+      "region": "KR",
+      "from": "이름 '지앤아이소프트'",
+      "rank": 0,
+      "creativesKR": 88,
+      "recent": 88,
+      "previews": 10,
       "failed": 0,
       "hit": true
      },
      {
-      "id": "AR07818381521575739393",
-      "name": "CENTURY GAMES PTE. LTD.",
-      "from": "이름 'Century Games PTE. LTD.'",
-      "creativesKR": 0,
-      "recent": 0,
-      "previews": 0,
-      "failed": 0,
-      "hit": false
-     },
-     {
-      "id": "AR14843309376139165697",
-      "name": "CENTURY GAMES PTE. LTD.",
-      "from": "이름 'Century Games PTE. LTD.'",
+      "id": "AR07977776279145414657",
+      "name": "지앤아이소프트(주)",
+      "region": "KR",
+      "from": "이름 '지앤아이소프트'",
+      "rank": 0,
       "creativesKR": 2,
       "recent": 0,
       "previews": 0,
@@ -671,221 +1717,50 @@
       "hit": false
      }
     ],
-    "names": [
-     "Century Games PTE. LTD.",
-     "CENTURY GAMES PTE. LTD.",
-     "Century Games Pte. Ltd."
-    ],
-    "domains": [
-     "centurygames.com"
-    ]
-   },
-   "sec": 9.8
-  },
-  {
-   "name": "고물 히어로",
-   "pkg": "com.superpixel.scrap",
-   "publisher": "SUPERBOX Inc",
-   "ranks": [
-    "인기 1위"
-   ],
-   "play": {
-    "legal": "(주)슈퍼박스",
-    "site": "https://superboxgo.com/"
-   },
-   "appstore": {
-    "ios_id": "6775388646",
-    "ios_name": "고물 히어로",
-    "seller": "SUPERBOX. Inc",
-    "seller_url": "https://superboxgo.com"
-   },
-   "meta": {
-    "pages": [],
-    "by": "",
-    "tried": [
+    "queries": [
      {
-      "q": "고물 히어로",
-      "count": 0,
-      "hit": 0
+      "q": "GNISoft",
+      "adv": 0,
+      "dom": 0
      },
      {
-      "q": "SUPERBOX Inc",
-      "count": 0,
-      "hit": 0
-     }
-    ]
-   },
-   "google": {
-    "matched": [
-     {
-      "id": "AR10576281512414543873",
-      "name": "(주)슈퍼박스",
-      "by": "이름 '(주)슈퍼박스' → 소재에 패키지/iOS ID"
-     }
-    ],
-    "checked": [
-     {
-      "id": "AR10576281512414543873",
-      "name": "(주)슈퍼박스",
-      "from": "이름 '(주)슈퍼박스'",
-      "creativesKR": 46,
-      "recent": 29,
-      "previews": 10,
-      "failed": 0,
-      "hit": true
-     }
-    ],
-    "names": [
-     "SUPERBOX Inc",
-     "(주)슈퍼박스",
-     "SUPERBOX. Inc"
-    ],
-    "domains": [
-     "superboxgo.com"
-    ]
-   },
-   "sec": 6.1
-  },
-  {
-   "name": "냥냥 시노비 : 미소녀 닌자 로그라이크 디펜스 RPG",
-   "pkg": "com.cookapps.catshinobi",
-   "publisher": "CookApps",
-   "ranks": [
-    "인기 2위"
-   ],
-   "play": {
-    "legal": "(주)쿡앱스",
-    "site": "https://cookapps.com/"
-   },
-   "appstore": {},
-   "meta": {
-    "pages": [
-     {
-      "id": "253656837839088",
-      "name": "Ninja Defenders"
-     }
-    ],
-    "by": "검색어 '냥냥 시노비' → 광고 링크의 Play 패키지",
-    "tried": [
-     {
-      "q": "냥냥 시노비 : 미소녀 닌자 로그라이크 디펜스 RPG",
-      "count": 0,
-      "hit": 0
+      "q": "지앤아이소프트",
+      "adv": 2,
+      "dom": 0
      },
      {
-      "q": "냥냥 시노비",
-      "count": 48,
-      "hit": 1
-     }
-    ]
-   },
-   "google": {
-    "matched": [
-     {
-      "id": "AR07840379442122719233",
-      "name": "(주) 쿡앱스",
-      "by": "이름 '(주)쿡앱스' → 소재에 패키지/iOS ID"
-     }
-    ],
-    "checked": [
-     {
-      "id": "AR07840379442122719233",
-      "name": "(주) 쿡앱스",
-      "from": "이름 '(주)쿡앱스'",
-      "creativesKR": 181,
-      "recent": 63,
-      "previews": 10,
-      "failed": 0,
-      "hit": true
-     }
-    ],
-    "names": [
-     "CookApps",
-     "(주)쿡앱스"
-    ],
-    "domains": [
-     "cookapps.com"
-    ]
-   },
-   "sec": 7.0
-  },
-  {
-   "name": "소드 x 스태프: 화산귀환 콜라보",
-   "pkg": "com.zjcs.android.kr",
-   "publisher": "BOLTRAY GAMES",
-   "ranks": [
-    "인기 3위"
-   ],
-   "play": {
-    "legal": "BOLTRAY PTE. LTD.",
-    "site": ""
-   },
-   "appstore": {
-    "ios_id": "6762359394",
-    "ios_name": "소드 x 스태프: 화산귀환 콜라보",
-    "seller": "BOLTRAY PTE. LTD.",
-    "seller_url": "https://swordxstaffkr.boltray.com/"
-   },
-   "meta": {
-    "pages": [
-     {
-      "id": "1044984982041893",
-      "name": "소드 x 스태프"
+      "q": "GNISoft Co., Ltd",
+      "adv": 0,
+      "dom": 0
      },
      {
-      "id": "480813268439233",
-      "name": "소드 x 스태프KR"
+      "q": "Fantasy For You",
+      "adv": 0,
+      "dom": 0
      }
     ],
-    "by": "검색어 '소드 x 스태프: 화산귀환 콜라보' → 광고 링크의 iOS 앱 ID",
-    "tried": [
+    "domainLog": [
      {
-      "q": "소드 x 스태프: 화산귀환 콜라보",
-      "count": 149,
-      "hit": 2
-     }
-    ]
-   },
-   "google": {
-    "matched": [
-     {
-      "id": "AR15583489291014111233",
-      "name": "广州天狐网络科技信息服务有限公司",
-      "by": "도메인 'boltray.com' → 소재에 패키지/iOS ID"
+      "d": "gnisoft.co.kr",
+      "creatives": 0,
+      "adv": 0
      }
     ],
-    "checked": [
-     {
-      "id": "AR15583489291014111233",
-      "name": "广州天狐网络科技信息服务有限公司",
-      "from": "도메인 'boltray.com'",
-      "creativesKR": 454,
-      "recent": 454,
-      "previews": 10,
-      "failed": 0,
-      "hit": true
-     },
-     {
-      "id": "AR10378390524884156417",
-      "name": "广州天狐网络科技信息服务有限公司",
-      "from": "도메인 'boltray.com'",
-      "creativesKR": 94,
-      "recent": 94,
-      "previews": 33,
-      "failed": 0,
-      "hit": false
-     }
-    ],
+    "candidates": 2,
     "names": [
-     "BOLTRAY GAMES",
-     "BOLTRAY PTE. LTD."
+     "GNISoft",
+     "지앤아이소프트",
+     "GNISoft Co., Ltd",
+     "Fantasy For You"
+    ],
+    "hints": [
+     "gnisoft"
     ],
     "domains": [
-     "swordxstaffkr.boltray.com",
-     "boltray.com"
+     "gnisoft.co.kr"
     ]
    },
-   "sec": 10.1
+   "sec": 4.5
   },
   {
    "name": "워라인: 스나이퍼",
@@ -896,12 +1771,14 @@
    ],
    "play": {
     "legal": "Powerfantasy HK Limited",
+    "email": "service@powerfantasygames.com",
     "site": "https://warline.powerfantasygames.com/"
    },
    "appstore": {
     "ios_id": "6742809194",
     "ios_name": "워라인: 스나이퍼",
     "seller": "Powerfantasy HK Limited",
+    "artist": "Powerfantasy",
     "seller_url": "https://warline.powerfantasygames.com/"
    },
    "meta": {
@@ -915,53 +1792,7 @@
     "tried": [
      {
       "q": "워라인: 스나이퍼",
-      "count": 17,
-      "hit": 1
-     }
-    ]
-   },
-   "google": {
-    "matched": [],
-    "checked": [],
-    "names": [
-     "Powerfantasy HK Limited"
-    ],
-    "domains": [
-     "warline.powerfantasygames.com",
-     "powerfantasygames.com"
-    ]
-   },
-   "sec": 2.3
-  },
-  {
-   "name": "몬스터헌터 아웃랜더스",
-   "pkg": "com.garena.game.mho",
-   "publisher": "Garena Online Private Limited",
-   "ranks": [
-    "인기 5위"
-   ],
-   "play": {
-    "legal": "GARENA ONLINE PRIVATE LIMITED",
-    "site": ""
-   },
-   "appstore": {
-    "ios_id": "6763262759",
-    "ios_name": "몬스터헌터 아웃랜더스",
-    "seller": "Garena Online Private Ltd.",
-    "seller_url": "http://monsterhunteroutlanders.com/"
-   },
-   "meta": {
-    "pages": [
-     {
-      "id": "100880604942850",
-      "name": "아이루"
-     }
-    ],
-    "by": "검색어 '몬스터헌터 아웃랜더스' → 광고 링크의 iOS 앱 ID",
-    "tried": [
-     {
-      "q": "몬스터헌터 아웃랜더스",
-      "count": 61,
+      "count": 5,
       "hit": 1
      }
     ]
@@ -969,33 +1800,178 @@
    "google": {
     "matched": [
      {
-      "id": "AR14110595394324922369",
-      "name": "Garena Online Private Limited",
-      "by": "이름 'Garena Online Private Limited' → 소재에 패키지/iOS ID"
+      "id": "AR06319184008215265281",
+      "name": "FARLIGHT PTE. LTD.",
+      "by": "도메인 'farlightgames.com' → 소재에 패키지/iOS ID"
      }
     ],
     "checked": [
      {
-      "id": "AR14110595394324922369",
-      "name": "Garena Online Private Limited",
-      "from": "이름 'Garena Online Private Limited'",
+      "id": "AR06319184008215265281",
+      "name": "FARLIGHT PTE. LTD.",
+      "region": "",
+      "from": "도메인 'farlightgames.com'",
+      "rank": 1,
       "creativesKR": 111,
-      "recent": 102,
-      "previews": 10,
+      "recent": 81,
+      "previews": 9,
       "failed": 0,
       "hit": true
      }
     ],
+    "queries": [
+     {
+      "q": "Powerfantasy HK",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "Powerfantasy HK Limited",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "Powerfantasy",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "Warline:Sniper Strike",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "farlightgames",
+      "adv": 0,
+      "dom": 1
+     },
+     {
+      "q": "FARLIGHT",
+      "adv": 0,
+      "dom": 0
+     }
+    ],
+    "domainLog": [
+     {
+      "d": "warline.powerfantasygames.com",
+      "creatives": 0,
+      "adv": 0
+     },
+     {
+      "d": "powerfantasygames.com",
+      "creatives": 0,
+      "adv": 0
+     },
+     {
+      "d": "farlightgames.com",
+      "creatives": 47,
+      "adv": 1
+     }
+    ],
+    "candidates": 1,
     "names": [
-     "Garena Online Private Limited",
-     "GARENA ONLINE PRIVATE LIMITED",
-     "Garena Online Private Ltd."
+     "Powerfantasy HK",
+     "Powerfantasy HK Limited",
+     "Powerfantasy",
+     "Warline:Sniper Strike"
+    ],
+    "hints": [
+     "farlightgames"
     ],
     "domains": [
-     "monsterhunteroutlanders.com"
+     "warline.powerfantasygames.com",
+     "powerfantasygames.com"
     ]
    },
-   "sec": 6.8
+   "sec": 4.1
+  },
+  {
+   "name": "타워 디펜스 온라인 : 둘이서 막자",
+   "pkg": "com.mainquest.randomdefense2d",
+   "publisher": "MainQuest",
+   "ranks": [
+    "인기 5위"
+   ],
+   "play": {
+    "legal": "(주)메인퀘스트",
+    "email": "main@mainquest.biz",
+    "site": "https://mainquest.biz/"
+   },
+   "appstore": {},
+   "meta": {
+    "pages": [],
+    "by": "",
+    "tried": [
+     {
+      "q": "타워 디펜스 온라인 : 둘이서 막자",
+      "count": 0,
+      "hit": 0
+     },
+     {
+      "q": "타워 디펜스 온라인",
+      "count": 0,
+      "hit": 0
+     },
+     {
+      "q": "둘이서 막자",
+      "count": 13,
+      "hit": 0
+     },
+     {
+      "q": "MainQuest",
+      "count": 50001,
+      "hit": 0
+     }
+    ]
+   },
+   "google": {
+    "matched": [],
+    "checked": [
+     {
+      "id": "AR05721230457878609921",
+      "name": "주식회사 메인퀘스트",
+      "region": "KR",
+      "from": "이름 '메인퀘스트'",
+      "rank": 0,
+      "creativesKR": 3,
+      "recent": 3,
+      "previews": 3,
+      "failed": 0,
+      "hit": false
+     }
+    ],
+    "queries": [
+     {
+      "q": "MainQuest",
+      "adv": 0,
+      "dom": 0
+     },
+     {
+      "q": "메인퀘스트",
+      "adv": 1,
+      "dom": 0
+     }
+    ],
+    "domainLog": [
+     {
+      "d": "mainquest.biz",
+      "creatives": 0,
+      "adv": 0
+     }
+    ],
+    "candidates": 1,
+    "names": [
+     "MainQuest",
+     "메인퀘스트"
+    ],
+    "hints": [
+     "mainquest"
+    ],
+    "domains": [
+     "mainquest.biz"
+    ]
+   },
+   "sec": 13.2
   }
  ]
 }
