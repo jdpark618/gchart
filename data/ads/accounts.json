@@ -6,7 +6,53 @@
   "google": [],
   "ios": "1585915174",
   "meta_by": "검색어 '승리의 여신: 니케' → 광고 링크의 iOS 앱 ID",
-  "matched_at": "2026-11-06T01:40:59Z"
+  "matched_at": "2026-11-06T01:40:59Z",
+  "rematched_at": "2026-11-13T23:58:56Z",
+  "google_log": {
+   "meta": [],
+   "names": [
+    "Level Infinite",
+    "PROXIMA BETA",
+    "PROXIMA BETA PTE. LIMITED",
+    "PROXIMA BETA PTE.LIMITED"
+   ],
+   "domains": [
+    "nikke-kr.com"
+   ],
+   "candidates": 11,
+   "error": "소재 미리보기 238건 중 194건 실패 (일시 차단일 수 있음)",
+   "previews": 238,
+   "failed": 194,
+   "checked": [
+    {
+     "name": "Proxima Beta Pte. Limited",
+     "region": "SG",
+     "from": "이름 'PROXIMA BETA'",
+     "recent": 239,
+     "previews": 188,
+     "failed": 188,
+     "hit": false
+    },
+    {
+     "name": "PROXIMA BETA PTE. LIMITED",
+     "region": "SG",
+     "from": "이름 'PROXIMA BETA'",
+     "recent": 50,
+     "previews": 50,
+     "failed": 6,
+     "hit": false
+    },
+    {
+     "name": "RPL Digital, SIA",
+     "region": "",
+     "from": "도메인 'nikke-kr.com'",
+     "recent": 3,
+     "previews": 0,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  }
  },
  "com.ncsoft.lineagem19": {
   "meta_pages": [],
@@ -19,7 +65,23 @@
   ],
   "ios": "1474589366",
   "meta_by": "",
-  "matched_at": "2026-11-06T01:40:59Z"
+  "matched_at": "2026-11-06T01:40:59Z",
+  "rematched_at": "2026-11-14T00:00:36Z",
+  "google_log": {
+   "meta": [],
+   "names": [
+    "NC",
+    "NC Corporation",
+    "엔씨",
+    "주식회사 엔씨",
+    "NC Corp."
+   ],
+   "domains": [],
+   "candidates": 0,
+   "previews": null,
+   "failed": null,
+   "checked": []
+  }
  },
  "com.kakaogames.dokkaebi": {
   "meta_pages": [],
@@ -85,7 +147,9 @@
   }
  },
  "com.com2us.es.android.google.kr.normal": {
-  "meta_pages": [],
+  "meta_pages": [
+   "1156260724239514"
+  ],
   "google": [
    {
     "id": "AR07442528701574545409",
@@ -94,8 +158,26 @@
    }
   ],
   "ios": "6504389641",
-  "meta_by": "",
-  "matched_at": "2026-11-06T01:40:59Z"
+  "meta_by": "검색어 '제우스: 오만의 신' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-06T01:40:59Z",
+  "ver": 2,
+  "rematched_at": "2026-11-13T23:58:25Z",
+  "google_log": {
+   "meta": [
+    "제우스: 오만의 신:67"
+   ],
+   "names": [
+    "Com2uS",
+    "컴투스",
+    "Com2uS Corp.",
+    "제우스: 오만의 신"
+   ],
+   "domains": [],
+   "candidates": 0,
+   "previews": null,
+   "failed": null,
+   "checked": []
+  }
  },
  "com.gof.global": {
   "meta_pages": [
@@ -424,5 +506,61 @@
   "ios": "1599719154",
   "meta_by": "검색어 '붕괴: 스타레일' → 광고 링크의 Play 패키지",
   "matched_at": "2026-11-12T01:19:20Z"
+ },
+ "com.end9games.worldtreeggl": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR07615862990251753473",
+    "name": "주식회사 엔드나인게임즈",
+    "by": "이름 '엔드나인게임즈' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6775679985",
+  "meta_by": "",
+  "matched_at": "2026-11-13T23:55:05Z",
+  "google_log": {
+   "meta": [],
+   "names": [
+    "End9 Games",
+    "End9 Games Corp.",
+    "엔드나인게임즈",
+    "주식회사 엔드나인게임즈"
+   ],
+   "domains": [],
+   "candidates": 3,
+   "previews": 14,
+   "failed": 2,
+   "checked": [
+    {
+     "name": "주식회사 엔드나인게임즈",
+     "region": "KR",
+     "from": "이름 '엔드나인게임즈'",
+     "recent": 10,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    },
+    {
+     "name": "주식회사 엔드나인게임즈",
+     "region": "KR",
+     "from": "이름 '엔드나인게임즈'",
+     "recent": 2,
+     "previews": 2,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "주식회사 엔드나인게임즈",
+     "region": "KR",
+     "from": "이름 '엔드나인게임즈'",
+     "recent": 2,
+     "previews": 2,
+     "failed": 2,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
  }
 }
