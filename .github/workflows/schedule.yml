@@ -663,6 +663,7 @@ jobs:
             if (process.env.APPINFO_ONLY === '1') {
                 console.log("=== 앱 정보만 채우기 (순위 수집 안 함) ===");
                 await fillAppInfoOnly(doc, todayStr);
+                try { saveUpdates(todayStr); } catch (e) { console.warn(`  [경고] 업데이트 노트 저장 실패: ${e.message}`); }   // Play 만 (iOS 는 순위 수집 때)
                 return;
             }
 
