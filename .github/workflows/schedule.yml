@@ -105,9 +105,47 @@ jobs:
         const updNote = t => decodeHtml(String(t || '')).replace(/\r/g, '').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim().slice(0, 3000);
         const updVer = v => (/\d/.test(String(v || '')) ? String(v).trim().slice(0, 40) : '');   // Play 의 '기기에 따라 다름' 같은 값은 버림
         function keepUpdate(key, id, d, v, n) { id = String(id || '').replace(/^'/, '').trim(); if (!id || !(d || n)) return; updOf(key)[id] = { d: d || '', v: updVer(v), n: updNote(n) }; }
+        // iOS 과거 버전 기록 (11/16): App Store 웹 페이지에 최근 25개 버전(날짜 · 버전 · 노트)이 들어 있어, 게임마다 처음 한 번만 읽어 이력에 채움.
+        // Google Play 는 과거 이력을 공개하지 않아 수집한 날부터만 쌓임. 읽은 게임은 data/updates/_hist.json 에 적어 다시 읽지 않음 (이후는 매일 lookup 으로 쌓임)
+        const iosIds = {};    // 나라 → { 번들 ID → App Store 앱 ID } (오늘 차트에서)
+        const updHist = {};   // 'ios:kr' … → { 번들 ID → [ {d, v, n} ] }
+        const HIST_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36';
+        async function iosHistory(cc, tid) {
+            const res = await fetch(`https://apps.apple.com/${cc}/app/id${tid}`, { headers: { 'User-Agent': HIST_UA } });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const h = await res.text(), out = new Map();
+            for (const m of h.matchAll(/"text":"((?:[^"\\]|\\.)*)","style":"[a-z]+","wantsCollapsedNewlines":true,"primarySubtitle":"([^"]*)","secondarySubtitle":"([^"]*)"/g)) {
+                const v = m[2].replace(/^[^\d]+(?=\d)/, '').trim(), t = Date.parse(m[3]);   // '버전 1.18.0'(새로운 소식 칸) · '1.18.0'(버전 기록) 둘 다
+                if (!/^\d/.test(v) || !t) continue;
+                let n = ''; try { n = JSON.parse(`"${m[1]}"`); } catch (e) {}
+                const d = kstDay(t); if (!out.has(d)) out.set(d, { d, v: updVer(v), n: updNote(n) });
+            }
+            return [...out.values()];
+        }
+        async function backfillIosHistory(todayStr) {
+            const hf = 'data/updates/_hist.json';
+            let done = {}; try { done = JSON.parse(fs.readFileSync(hf, 'utf8')); } catch (e) {}
+            for (const country of COUNTRIES) {
+                const key = `ios:${country.code}`, ids = Object.entries(iosIds[country.code] || {}).filter(([b]) => !(done[key] || {})[b]);
+                if (!ids.length) continue;
+                let ok = 0, fail = 0, streak = 0;
+                for (const [bundle, tid] of ids.slice(0, 150)) {
+                    try {
+                        const list = await iosHistory(country.code, tid);
+                        if (list.length) { (updHist[key] ||= {})[bundle] = list; (done[key] ||= {})[bundle] = todayStr; ok++; }
+                        streak = 0;
+                    } catch (e) { fail++; if (++streak >= 3) { console.warn(`  [경고] ${country.name} iOS 버전 기록: 연속 실패로 이번엔 멈춤 (${e.message}) — 다음 수집 때 이어서`); break; } }
+                    await new Promise(r => setTimeout(r, 400));
+                }
+                console.log(`  - ${country.name} iOS 버전 기록: ${ok}개 게임 읽음${fail ? ` · 실패 ${fail}` : ''} (남은 ${Math.max(0, ids.length - ok - fail)})`);
+            }
+            fs.mkdirSync('data/updates', { recursive: true });
+            fs.writeFileSync(hf, JSON.stringify(done));
+        }
         function saveUpdates(todayStr) {
             fs.mkdirSync('data/updates', { recursive: true });
-            for (const [key, got] of Object.entries(updBy)) {
+            for (const key of new Set([...Object.keys(updBy), ...Object.keys(updHist)])) {
+                const got = updBy[key] || {};
                 const f = `data/updates/${key.replace(':', '_')}.json`;
                 let db = {}; try { db = JSON.parse(fs.readFileSync(f, 'utf8')); } catch (e) {}
                 let added = 0, edited = 0;
@@ -116,10 +154,17 @@ jobs:
                     if (top && top.d === d) { if (u.n && top.n !== u.n) { top.n = u.n; edited++; } if (u.v && !top.v) top.v = u.v; continue; }
                     if (top && top.d > d) continue;   // 예전 날짜가 다시 보이면(캐시 등) 무시
                     if (top && !u.n && !u.v) continue;
-                    list.unshift({ d, v: u.v, n: u.n, s: todayStr }); if (list.length > 60) list.length = 60; added++;
+                    list.unshift({ d, v: u.v, n: u.n, s: todayStr }); if (list.length > 80) list.length = 80; added++;
+                }
+                // 과거 버전 기록 합치기: 이미 있는 날짜는 그대로 두고(노트가 비었으면 채움), 없는 날짜만 h:1 로 넣고 날짜순 정렬
+                let hist = 0;
+                for (const [id, past] of Object.entries(updHist[key] || {})) {
+                    const list = (db[id] ||= []), byD = new Map(list.map(u => [u.d, u]));
+                    for (const u of past) { const o = byD.get(u.d); if (o) { if (!o.n && u.n) o.n = u.n; if (!o.v && u.v) o.v = u.v; continue; } list.push({ d: u.d, v: u.v, n: u.n, s: todayStr, h: 1 }); hist++; }
+                    list.sort((a, b) => b.d.localeCompare(a.d)); if (list.length > 80) list.length = 80;
                 }
                 fs.writeFileSync(f, JSON.stringify(db));
-                console.log(`  - ${f}: 게임 ${Object.keys(db).length}개 · 새 업데이트 ${added}건${edited ? ` · 노트 수정 ${edited}건` : ''}`);
+                console.log(`  - ${f}: 게임 ${Object.keys(db).length}개 · 새 업데이트 ${added}건${edited ? ` · 노트 수정 ${edited}건` : ''}${hist ? ` · 과거 버전 기록 ${hist}건` : ''}`);
             }
         }
         function keepAppInfo(country, appId, title, detail) {
@@ -575,6 +620,7 @@ jobs:
                 const shots = (x.screenshotUrls && x.screenshotUrls.length ? x.screenshotUrls : x.ipadScreenshotUrls || []).slice(0, APPINFO_SHOTS);
                 const desc = String(x.description || '').trim();
                 if (desc || shots.length) infoOf(`ios:${country.code}`)[bundle] = { title, desc, shots };
+                if (tid && bundle) (iosIds[country.code] ||= {})[bundle] = tid;
                 if (x.currentVersionReleaseDate) keepUpdate(`ios:${country.code}`, bundle, kstDay(Date.parse(x.currentVersionReleaseDate)), x.version, x.releaseNotes);
                 const icon = x.artworkUrl512 || (e['im:image'] || []).at(-1)?.label || '';
                 return {
@@ -663,7 +709,13 @@ jobs:
             if (process.env.APPINFO_ONLY === '1') {
                 console.log("=== 앱 정보만 채우기 (순위 수집 안 함) ===");
                 await fillAppInfoOnly(doc, todayStr);
-                try { saveUpdates(todayStr); } catch (e) { console.warn(`  [경고] 업데이트 노트 저장 실패: ${e.message}`); }   // Play 만 (iOS 는 순위 수집 때)
+                // iOS: 오늘 차트(무료 · 매출)의 앱 ID 만 RSS 로 받아 과거 버전 기록 채우기 (순위 시트는 건드리지 않음)
+                for (const country of COUNTRIES) for (const [feed] of APPLE_FEEDS) {
+                    try { ((await appleJson(`https://itunes.apple.com/${country.code}/rss/${feed}/limit=100/genre=6014/json`))?.feed?.entry || []).forEach(e => { const b = e.id?.attributes?.['im:bundleId'], t = e.id?.attributes?.['im:id']; if (b && t) (iosIds[country.code] ||= {})[b] = t; }); }
+                    catch (e) { console.warn(`  [경고] ${country.name} iOS 차트 목록 실패: ${e.message}`); }
+                }
+                try { await backfillIosHistory(todayStr); } catch (e) { console.warn(`  [경고] iOS 버전 기록 실패: ${e.message}`); }
+                try { saveUpdates(todayStr); } catch (e) { console.warn(`  [경고] 업데이트 노트 저장 실패: ${e.message}`); }
                 return;
             }
 
@@ -725,6 +777,7 @@ jobs:
 
             // 4-b. 업데이트 노트 이력 (실패해도 순위 기록에는 영향 없음)
             console.log("\n=== 4-b. 업데이트 노트 ===");
+            try { await backfillIosHistory(todayStr); } catch (e) { console.warn(`  [경고] iOS 버전 기록 실패: ${e.message}`); }
             try { saveUpdates(todayStr); } catch (e) { console.warn(`  [경고] 업데이트 노트 저장 실패: ${e.message}`); }
 
             // 5. 사이트용 스냅샷 (실패해도 수집 결과에는 영향 없음)
