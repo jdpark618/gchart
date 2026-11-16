@@ -129,13 +129,13 @@ jobs:
                 const key = `ios:${country.code}`, ids = Object.entries(iosIds[country.code] || {}).filter(([b]) => !(done[key] || {})[b]);
                 if (!ids.length) continue;
                 let ok = 0, fail = 0, streak = 0;
-                for (const [bundle, tid] of ids.slice(0, 150)) {
+                for (const [bundle, tid] of ids.slice(0, 100)) {
                     try {
                         const list = await iosHistory(country.code, tid);
                         if (list.length) { (updHist[key] ||= {})[bundle] = list; (done[key] ||= {})[bundle] = todayStr; ok++; }
                         streak = 0;
                     } catch (e) { fail++; if (++streak >= 3) { console.warn(`  [경고] ${country.name} iOS 버전 기록: 연속 실패로 이번엔 멈춤 (${e.message}) — 다음 수집 때 이어서`); break; } }
-                    await new Promise(r => setTimeout(r, 400));
+                    await new Promise(r => setTimeout(r, 1000));   // 11/16: 0.4초 간격으로 약 300개를 연달아 읽자 Apple 이 429 → 1초 · 나라당 100개
                 }
                 console.log(`  - ${country.name} iOS 버전 기록: ${ok}개 게임 읽음${fail ? ` · 실패 ${fail}` : ''} (남은 ${Math.max(0, ids.length - ok - fail)})`);
             }
