@@ -95,8 +95,36 @@ jobs:
         const APPINFO_SHOTS = 6;
         const appInfoBy = {};   // 나라 코드 → { 패키지명 → 정보 }
         const infoOf = code => (appInfoBy[code] ||= {});
+        // ── 업데이트 노트 (11/16) ─────────────────────────────────
+        // 순위 수집 때 이미 받는 상세 정보에서 '새로운 기능'(업데이트 노트) · 업데이트 날짜 · 버전만 꺼내 data/updates/<gp|ios>_<나라>.json 에 쌓는다.
+        // 게임은 패키지명(iOS 는 번들 ID — 순위 시트의 패키지명 칸과 같은 값)으로 구분. 스토어는 최신 노트 하나만 보여 주므로 이력은 수집을 시작한 날부터 쌓임.
+        // 한 줄 = { d: 업데이트 날짜(한국), v: 버전, n: 노트, s: 처음 본 날 } · 최신이 앞 · 같은 날짜면 노트만 고쳐 씀 (개발사가 문구를 고친 경우)
+        const updBy = {};   // 'gp:kr' · 'ios:kr' … → { 패키지명 → {d, v, n} }
+        const updOf = key => (updBy[key] ||= {});
+        const kstDay = ms => (typeof ms === 'number' && ms > 0) ? new Date(ms + 9 * 3600e3).toISOString().slice(0, 10) : '';
+        const updNote = t => decodeHtml(String(t || '')).replace(/\r/g, '').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim().slice(0, 3000);
+        const updVer = v => (/\d/.test(String(v || '')) ? String(v).trim().slice(0, 40) : '');   // Play 의 '기기에 따라 다름' 같은 값은 버림
+        function keepUpdate(key, id, d, v, n) { id = String(id || '').replace(/^'/, '').trim(); if (!id || !(d || n)) return; updOf(key)[id] = { d: d || '', v: updVer(v), n: updNote(n) }; }
+        function saveUpdates(todayStr) {
+            fs.mkdirSync('data/updates', { recursive: true });
+            for (const [key, got] of Object.entries(updBy)) {
+                const f = `data/updates/${key.replace(':', '_')}.json`;
+                let db = {}; try { db = JSON.parse(fs.readFileSync(f, 'utf8')); } catch (e) {}
+                let added = 0, edited = 0;
+                for (const [id, u] of Object.entries(got)) {
+                    const list = (db[id] ||= []), top = list[0], d = u.d || todayStr;
+                    if (top && top.d === d) { if (u.n && top.n !== u.n) { top.n = u.n; edited++; } if (u.v && !top.v) top.v = u.v; continue; }
+                    if (top && top.d > d) continue;   // 예전 날짜가 다시 보이면(캐시 등) 무시
+                    if (top && !u.n && !u.v) continue;
+                    list.unshift({ d, v: u.v, n: u.n, s: todayStr }); if (list.length > 60) list.length = 60; added++;
+                }
+                fs.writeFileSync(f, JSON.stringify(db));
+                console.log(`  - ${f}: 게임 ${Object.keys(db).length}개 · 새 업데이트 ${added}건${edited ? ` · 노트 수정 ${edited}건` : ''}`);
+            }
+        }
         function keepAppInfo(country, appId, title, detail) {
             if (!appId || !detail) return;
+            keepUpdate(`gp:${country.code}`, appId, kstDay(detail.updated), detail.version, detail.recentChanges);
             const shots = (detail.screenshots || []).filter(u => typeof u === 'string' && u.startsWith('http')).slice(0, APPINFO_SHOTS);
             const desc = String(detail.description || '').trim();
             if (desc || shots.length) infoOf(country.code)[appId] = { title, desc, shots };
@@ -117,6 +145,12 @@ jobs:
                 const desc = m ? decodeHtml(m[1]).trim() : '';
                 const shots = [...new Set([...html.matchAll(/<img src="(https:\/\/play-lh\.googleusercontent\.com\/[^"=]+)=[^"]*"[^>]*alt="([^"]*)"/g)]
                     .filter(x => x[2] === country.shotAlt).map(x => x[1]))].slice(0, APPINFO_SHOTS);
+                // 업데이트 노트: '새로운 기능' 머리글 뒤의 첫 itemprop=description 블록 · 날짜는 한국어 페이지의 '업데이트 날짜'만 읽음
+                const NEW_HD = { ko: '새로운 기능', en: 'What’s new', ja: '最新情報', 'zh-TW': '最新異動' }[country.lang];
+                const hi = NEW_HD ? html.indexOf(NEW_HD) : -1;
+                const wn = hi >= 0 ? html.slice(hi, hi + 6000).match(/itemprop="description"[^>]*>([\s\S]*?)<\/div>/) : null;
+                const ud = html.match(/업데이트 날짜<\/div><div[^>]*>(\d{4})\. (\d{1,2})\. (\d{1,2})\./);
+                keepUpdate(`gp:${country.code}`, appId, ud ? `${ud[1]}-${ud[2].padStart(2, '0')}-${ud[3].padStart(2, '0')}` : '', '', wn ? wn[1] : '');
                 if (!desc && !shots.length) return false;
                 infoOf(country.code)[appId] = { title, desc, shots };
                 return true;
@@ -541,6 +575,7 @@ jobs:
                 const shots = (x.screenshotUrls && x.screenshotUrls.length ? x.screenshotUrls : x.ipadScreenshotUrls || []).slice(0, APPINFO_SHOTS);
                 const desc = String(x.description || '').trim();
                 if (desc || shots.length) infoOf(`ios:${country.code}`)[bundle] = { title, desc, shots };
+                if (x.currentVersionReleaseDate) keepUpdate(`ios:${country.code}`, bundle, kstDay(Date.parse(x.currentVersionReleaseDate)), x.version, x.releaseNotes);
                 const icon = x.artworkUrl512 || (e['im:image'] || []).at(-1)?.label || '';
                 return {
                     "날짜": todayStr, "순위": rank, "증감": change, "앱이름": title, "패키지명": `'${bundle}`,
@@ -687,6 +722,10 @@ jobs:
                 }
             }
 
+            // 4-b. 업데이트 노트 이력 (실패해도 순위 기록에는 영향 없음)
+            console.log("\n=== 4-b. 업데이트 노트 ===");
+            try { saveUpdates(todayStr); } catch (e) { console.warn(`  [경고] 업데이트 노트 저장 실패: ${e.message}`); }
+
             // 5. 사이트용 스냅샷 (실패해도 수집 결과에는 영향 없음)
             console.log("\n=== 5. 사이트용 스냅샷 ===");
             try { exportSnapshot(todayStr); } catch (e) { console.warn(`  [경고] 스냅샷 저장 실패: ${e.message}`); }
@@ -708,7 +747,7 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         save() {
-          git add data/snapshot.json data/version.json data/runlog 2>/dev/null
+          git add data/snapshot.json data/version.json data/runlog data/updates 2>/dev/null
           git diff --cached --quiet && return 0
           git commit -qm "rank: 수집 중간 저장 (시도 $1/3)"
           for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && return 0; sleep $((i * 15)); done
@@ -730,7 +769,7 @@ jobs:
         date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/.keepalive-rank
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add .github/.keepalive-rank data/snapshot.json data/version.json data/runlog 2>/dev/null || git add .github/.keepalive-rank
+        git add .github/.keepalive-rank data/snapshot.json data/version.json data/runlog data/updates 2>/dev/null || git add .github/.keepalive-rank
         git diff --cached --quiet && exit 0
         git commit -m "chore: keepalive (rank) + 사이트용 스냅샷"
         pushed=0
