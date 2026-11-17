@@ -87,6 +87,8 @@ CREATE_BACKUP = True
 CARD_SELECTOR = 'a.line-clamp-2[href*="/game/"]'   # 2026-11 개편 후 카드 제목 링크
 # 개편 후 플랫폼·출시유형 표기를 기존 DB 표기로 맞춘다 (표기가 바뀌면 행이 churn 되므로)
 PLATFORM_ALIAS = {"닌텐도": "NS", "플레이스테이션": "PS", "엑스박스": "Xbox"}
+# 출시유형으로 보는 값 (가드 3) — wame 배지 표기. 새 유형이 몇 건 섞이는 건 괜찮고, 대량으로 처음 보는 값이면 중단
+KNOWN_RELEASE_TYPES = {"정식 출시", "테스트", "얼리액세스", "소프트런칭", "데모", "팝업스토어", "이벤트", "사전예약", "베타", "CBT", "OBT", "업데이트"}
 RELEASE_TYPE_ALIAS = {"얼리 액세스": "얼리액세스", "소프트 런칭": "소프트런칭"}
 NAV_TIMEOUT_MS = 20000
 CARD_WAIT_MS = 5000
@@ -665,6 +667,24 @@ def run(scraped, scanned_ok, failed_dates):
                 len(in_range_existing), len(scraped), ratio * 100,
             )
             sys.exit(1)   # 쓰기 중단 = 실행 실패로 표시 (GitHub 실패 알림이 오도록)
+
+    # ── 가드 3 (11/17): 출시유형이 처음 보는 값으로 대량으로 바뀌면 중단 ──
+    # 출시유형은 중복 판정 키라 사이트 화면이 바뀌어 엉뚱한 값(예: '한국어 ?')을 읽으면 모든 게임이 새 행으로 다시 등록된다.
+    # 아는 값 = 기본 목록 + 기존 DB 에 3번 이상 나온 값('?' 가 든 값은 제외). 모르는 값이 5건 이상이면서 30% 이상이면 쓰지 않음
+    known = set(KNOWN_RELEASE_TYPES)
+    seen = {}
+    for r in existing:
+        t = s(r, "출시유형")
+        seen[t] = seen.get(t, 0) + 1
+    known |= {t for t, n in seen.items() if n >= 3 and t and "?" not in t}
+    odd = [s(it, "출시유형") for it in scraped if s(it, "출시유형") not in known]
+    if len(odd) >= 5 and len(odd) >= len(scraped) * 0.3:
+        top = sorted({t: odd.count(t) for t in set(odd)}.items(), key=lambda x: -x[1])[:3]
+        log.error(
+            "출시유형 이상 (%d건 중 %d건이 처음 보는 값: %s) — 사이트 화면 변경으로 보고 쓰기를 중단합니다.",
+            len(scraped), len(odd), ", ".join(f"'{t}' {n}건" for t, n in top),
+        )
+        sys.exit(1)   # 쓰기 중단 = 실행 실패로 표시 (GitHub 실패 알림이 오도록)
 
     write_backup(sheet, raw)
 
