@@ -6,13 +6,13 @@
   "charts": {
    "sales": 5
   },
-  "rank_date": "2026-11-16",
+  "rank_date": "2026-11-17",
   "aliases": [
    "CENTURY GAMES PTE. LTD.",
    "Whiteout Survival"
   ],
-  "tracked_at": "2026-11-15T23:19:26Z",
-  "days": 4,
+  "tracked_at": "2026-11-17T01:21:39Z",
+  "days": 5,
   "meta_live": 12,
   "google_live": 24,
   "meta_new7": 3,
@@ -28,17 +28,17 @@
   "charts": {
    "sales": 4
   },
-  "rank_date": "2026-11-16",
+  "rank_date": "2026-11-17",
   "aliases": [
    "승리의 여신: 니케"
   ],
-  "tracked_at": "2026-11-15T23:19:13Z",
-  "days": 8,
+  "tracked_at": "2026-11-17T01:21:18Z",
+  "days": 9,
   "meta_live": 50,
   "google_live": 0,
   "meta_new7": 0,
   "google_new7": 0,
-  "meta": 58,
+  "meta": 59,
   "meta_total": 96,
   "google": 0
  },
@@ -49,19 +49,19 @@
   "charts": {
    "sales": 3
   },
-  "rank_date": "2026-11-16",
+  "rank_date": "2026-11-17",
   "aliases": [
    "(주) 컴투스",
    "제우스: 오만의 신"
   ],
-  "tracked_at": "2026-11-15T23:18:48Z",
-  "days": 8,
-  "meta_live": 45,
+  "tracked_at": "2026-11-17T01:20:50Z",
+  "days": 9,
+  "meta_live": 61,
   "google_live": 9,
-  "meta_new7": 45,
+  "meta_new7": 61,
   "google_new7": 3,
-  "meta": 45,
-  "meta_total": 66,
+  "meta": 61,
+  "meta_total": 33,
   "google": 59
  },
  {
@@ -71,20 +71,20 @@
   "charts": {
    "sales": 2
   },
-  "rank_date": "2026-11-16",
+  "rank_date": "2026-11-17",
   "aliases": [
    "COGNOSPHERE PTE. LTD.",
    "Honkai: Star Rail"
   ],
-  "tracked_at": "2026-11-15T23:17:07Z",
-  "days": 5,
-  "meta_live": 31,
-  "google_live": 229,
-  "meta_new7": 35,
-  "google_new7": 46,
-  "meta": 35,
-  "meta_total": 38,
-  "google": 258
+  "tracked_at": "2026-11-17T01:19:52Z",
+  "days": 6,
+  "meta_live": 33,
+  "google_live": 231,
+  "meta_new7": 36,
+  "google_new7": 47,
+  "meta": 36,
+  "meta_total": 41,
+  "google": 261
  },
  {
   "pkg": "com.kakaogames.dokkaebi",
@@ -93,19 +93,128 @@
   "charts": {
    "sales": 1
   },
-  "rank_date": "2026-11-16",
+  "rank_date": "2026-11-17",
   "aliases": [
    "주식회사 카카오게임즈"
   ],
-  "tracked_at": "2026-11-15T23:17:01Z",
-  "days": 8,
+  "tracked_at": "2026-11-17T01:19:46Z",
+  "days": 9,
   "meta_live": 0,
-  "google_live": 13,
+  "google_live": 15,
   "meta_new7": 0,
   "google_new7": 0,
   "meta": 0,
   "meta_total": 0,
   "google": 39
+ },
+ {
+  "pkg": "com.noriworks.gm",
+  "name": "고스톱M : 데이터 필요없는 맞고 게임",
+  "publisher": "Noriworks",
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-17",
+  "aliases": [
+   "Noriworks"
+  ],
+  "tracked_at": "2026-11-17T01:19:17Z",
+  "days": 1,
+  "meta_live": 8,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 8,
+  "meta_total": 8,
+  "google": 0
+ },
+ {
+  "pkg": "com.farlightgames.warline.gp.global",
+  "name": "워라인: 스나이퍼",
+  "publisher": "Powerfantasy HK Limited",
+  "charts": {
+   "popular": 4
+  },
+  "rank_date": "2026-11-17",
+  "aliases": [
+   "FARLIGHT PTE. LTD.",
+   "Warline:Sniper Strike"
+  ],
+  "tracked_at": "2026-11-17T01:18:50Z",
+  "days": 9,
+  "meta_live": 35,
+  "google_live": 7,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 56,
+  "meta_total": 384,
+  "google": 11
+ },
+ {
+  "pkg": "com.lycq.kr.and",
+  "name": "미르의 전설2: 레볼루션",
+  "publisher": "Xsoga Game",
+  "charts": {
+   "popular": 3
+  },
+  "rank_date": "2026-11-17",
+  "aliases": [
+   "미르의 전설2: 레볼루션M",
+   "미르의전설2‑게임채널",
+   "미르의전설2‑공식게임"
+  ],
+  "tracked_at": "2026-11-17T01:17:33Z",
+  "days": 2,
+  "meta_live": 178,
+  "google_live": 0,
+  "meta_new7": 178,
+  "google_new7": 0,
+  "meta": 178,
+  "meta_total": 311,
+  "google": 0
+ },
+ {
+  "pkg": "com.end9games.worldtreeggl",
+  "name": "세계수의 노래: AFK",
+  "publisher": "End9 Games Corp.",
+  "charts": {
+   "popular": 2
+  },
+  "rank_date": "2026-11-17",
+  "aliases": [
+   "주식회사 엔드나인게임즈"
+  ],
+  "tracked_at": "2026-11-17T01:17:27Z",
+  "days": 4,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 1
+ },
+ {
+  "pkg": "com.c3wavestudio.yumyumdragon",
+  "name": "배고파용 키우기 : 방치형 RPG",
+  "publisher": "3wave studio Co. Ltd.",
+  "charts": {
+   "popular": 1
+  },
+  "rank_date": "2026-11-17",
+  "aliases": [
+   "3wave studio Co. Ltd.",
+   "주식회사 쓰리웨이브스튜디오"
+  ],
+  "tracked_at": "2026-11-17T01:17:13Z",
+  "days": 3,
+  "meta_live": 3,
+  "google_live": 4,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 3,
+  "meta_total": 3,
+  "google": 8
  },
  {
   "pkg": "com.badbeans.legendofmarmot",
@@ -127,94 +236,6 @@
   "meta": 0,
   "meta_total": 0,
   "google": 3
- },
- {
-  "pkg": "com.farlightgames.warline.gp.global",
-  "name": "워라인: 스나이퍼",
-  "publisher": "Powerfantasy HK Limited",
-  "charts": {
-   "popular": 4
-  },
-  "rank_date": "2026-11-16",
-  "aliases": [
-   "FARLIGHT PTE. LTD.",
-   "Warline:Sniper Strike"
-  ],
-  "tracked_at": "2026-11-15T23:16:36Z",
-  "days": 8,
-  "meta_live": 31,
-  "google_live": 9,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 53,
-  "meta_total": 442,
-  "google": 11
- },
- {
-  "pkg": "com.lycq.kr.and",
-  "name": "미르의 전설2: 레볼루션",
-  "publisher": "Xsoga Game",
-  "charts": {
-   "popular": 3
-  },
-  "rank_date": "2026-11-16",
-  "aliases": [
-   "미르의 전설2: 레볼루션M",
-   "미르의전설2‑게임채널",
-   "미르의전설2‑공식게임"
-  ],
-  "tracked_at": "2026-11-15T23:14:54Z",
-  "days": 1,
-  "meta_live": 130,
-  "google_live": 0,
-  "meta_new7": 130,
-  "google_new7": 0,
-  "meta": 130,
-  "meta_total": 243,
-  "google": 0
- },
- {
-  "pkg": "com.end9games.worldtreeggl",
-  "name": "세계수의 노래: AFK",
-  "publisher": "End9 Games Corp.",
-  "charts": {
-   "popular": 2
-  },
-  "rank_date": "2026-11-16",
-  "aliases": [
-   "주식회사 엔드나인게임즈"
-  ],
-  "tracked_at": "2026-11-15T23:14:47Z",
-  "days": 3,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 1
- },
- {
-  "pkg": "com.c3wavestudio.yumyumdragon",
-  "name": "배고파용 키우기 : 방치형 RPG",
-  "publisher": "3wave studio Co. Ltd.",
-  "charts": {
-   "popular": 1
-  },
-  "rank_date": "2026-11-16",
-  "aliases": [
-   "3wave studio Co. Ltd.",
-   "주식회사 쓰리웨이브스튜디오"
-  ],
-  "tracked_at": "2026-11-15T23:14:32Z",
-  "days": 2,
-  "meta_live": 3,
-  "google_live": 4,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 3,
-  "meta_total": 3,
-  "google": 8
  },
  {
   "pkg": "com.sesisoft.wildgirls.google",

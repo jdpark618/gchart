@@ -674,5 +674,46 @@
    "checked": []
   },
   "ver": 2
+ },
+ "com.noriworks.gm": {
+  "meta_pages": [
+   "961998263833204"
+  ],
+  "google": [],
+  "ios": "",
+  "meta_by": "검색어 'Noriworks' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-17T01:19:17Z",
+  "google_log": {
+   "meta": [
+    "고스톱M : 데이터 필요없는 맞고 게임:0",
+    "고스톱M:3",
+    "데이터 필요없는 맞고 게임:0",
+    "데이터필요없는맞고게임:0",
+    "고스톱M 데이터 필요없는 맞고 게임:0",
+    "Noriworks:8"
+   ],
+   "names": [
+    "Noriworks",
+    "MOCA"
+   ],
+   "domains": [
+    "moca.org"
+   ],
+   "candidates": 9,
+   "previews": 0,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "The Museum of Contemporary Art",
+     "region": "",
+     "from": "도메인 'moca.org'",
+     "recent": 1,
+     "previews": 0,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
  }
 }
