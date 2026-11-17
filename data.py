@@ -219,7 +219,12 @@ def parse_cards(html, date_str):
             sub = card.find("p")
             publisher = sub.text.split("·")[0].strip() if sub else ""
 
-            badge = card.find("span", class_=lambda c: c and "whitespace-nowrap" in c)
+            # 출시유형 배지 = 카드의 마지막 whitespace-nowrap span.
+            # 2026-11-17 wame 가 같은 class 의 '한국어 ? / Deck ? / 시간 ?' 칩(기울어진 -rotate span)을 배지 앞에 추가 →
+            # 첫 span 을 집으면 출시유형이 '한국어 ?' 가 되어 중복 판정 키가 바뀌고 모든 행이 새로 등록됨. 기울어진 칩은 빼고 마지막 것을 씀
+            badges = [sp for sp in card.find_all("span", class_=lambda c: c and "whitespace-nowrap" in c)
+                      if "rotate" not in " ".join(sp.get("class", []))]
+            badge = badges[-1] if badges else None
             release_type = badge.text.strip() if badge else ""
             release_type = RELEASE_TYPE_ALIAS.get(release_type, release_type)
 
