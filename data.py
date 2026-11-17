@@ -180,10 +180,23 @@ def extract_game_id(card):
     return ""
 
 
+def card_dl(card, label):
+    """2026-11-17 개편 카드의 '퍼블리셔 · 출시일 · 플랫폼' 표 (dl > div > dt + dd) 에서 한 칸 읽기. 없으면 None"""
+    for row in card.select("dl > div"):
+        dt = row.find("dt")
+        if dt and dt.get_text(strip=True) == label:
+            return " ".join(dd.get_text(" ", strip=True) for dd in row.find_all("dd")).strip()
+    return None
+
+
 def card_date_matches(card, date_str):
-    """카드에 적힌 날짜("2026. 11. 3.")가 요청 날짜와 같은지. 날짜 표기가 없으면 통과."""
-    elem = card.find("span", class_=lambda c: c and "tabular" in c)
-    nums = re.findall(r"\d+", elem.text) if elem else []
+    """카드에 적힌 날짜("2026. 11. 3." · 기간이면 시작일)가 요청 날짜와 같은지. 날짜 표기가 없으면 통과.
+    11-17 개편 후 날짜는 dl 의 '출시일' 칸 (예전 span.tabular 도 계속 읽음)"""
+    txt = card_dl(card, "출시일")
+    if txt is None:
+        elem = card.find("span", class_=lambda c: c and "tabular" in c)
+        txt = elem.text if elem else ""
+    nums = re.findall(r"\d+", txt)
     if len(nums) < 3:
         return True
     return "%04d-%02d-%02d" % tuple(int(n) for n in nums[:3]) == date_str
@@ -213,13 +226,21 @@ def parse_cards(html, date_str):
                 log.warning("[%s] 게임명 파싱 실패 카드 1건 스킵", date_str)
                 continue
 
-            platform = " / ".join(
-                PLATFORM_ALIAS.get(li.text.strip(), li.text.strip())
-                for li in card.select("ul li") if li.text.strip()
-            )
+            # 플랫폼 · 퍼블리셔: 11-17 개편 후 dl 표('플랫폼' = "PC · 모바일", '퍼블리셔'). 없으면 예전 구조(ul li · p)
+            # 예전 ul li 는 이제 '한국어 ? / Deck ? / 시간 ?' 칩이라 dl 이 있으면 쓰지 않음. 표기는 기존 DB 처럼 "PC / 모바일"
+            plat_txt = card_dl(card, "플랫폼")
+            if plat_txt is not None:
+                plats = [t.strip() for t in re.split(r"\s*[·,/]\s*", plat_txt) if t.strip()]
+            else:
+                plats = [li.text.strip() for li in card.select("ul li") if li.text.strip()]
+            platform = " / ".join(PLATFORM_ALIAS.get(t, t) for t in plats)
 
-            sub = card.find("p")
-            publisher = sub.text.split("·")[0].strip() if sub else ""
+            pub_txt = card_dl(card, "퍼블리셔")
+            if pub_txt is not None:
+                publisher = pub_txt
+            else:
+                sub = card.find("p")
+                publisher = sub.text.split("·")[0].strip() if sub else ""
 
             # 출시유형 배지 = 카드의 마지막 whitespace-nowrap span.
             # 2026-11-17 wame 가 같은 class 의 '한국어 ? / Deck ? / 시간 ?' 칩(기울어진 -rotate span)을 배지 앞에 추가 →
