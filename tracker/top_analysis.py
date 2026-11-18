@@ -26,12 +26,13 @@ def gap_days(a, b): return (D.date.fromisoformat(b) - D.date.fromisoformat(a)).d
 
 
 def rank_history():
-    out = {}
+    out, info = {}, {}
     for key, sheet in (('s', 'DB_매출순위'), ('p', 'DB_인기순위')):
-        q = urllib.parse.urlencode({'tqx': 'out:csv', 'sheet': sheet, 'tq': 'select A,B,E where B <= 100'})
+        q = urllib.parse.urlencode({'tqx': 'out:csv', 'sheet': sheet, 'tq': 'select A,B,D,E,J where B <= 100 order by A'})
         for r in list(csv.reader(io.StringIO(get(f'https://docs.google.com/spreadsheets/d/{SHEET}/gviz/tq?{q}'))))[1:]:
-            out.setdefault(key, {}).setdefault(r[2], {})[r[0]] = int(float(r[1]))
-    return out
+            out.setdefault(key, {}).setdefault(r[3], {})[r[0]] = int(float(r[1]))
+            if r[3]: info[r[3]] = {'name': r[2], 'icon': r[4].lstrip("'")}   # 날짜순이라 가장 최근 이름 · 아이콘이 남음
+    return out, info
 def app_lookup(ids):
     out = {}
     for i in range(0, len(ids), 50):
@@ -68,7 +69,7 @@ def final_size(note, strong):
 
 
 def main():
-    RK = rank_history()
+    RK, info = rank_history()
     cnt = collections.Counter(d for m in RK['s'].values() for d in m)
     days = [d for d in sorted(cnt) if cnt[d] >= 90]; idx = {d: i for i, d in enumerate(days)}; last = days[-1]; i0 = len(days) - 1
     accounts, index = load('ads', 'accounts.json', default={}), {x['pkg']: x for x in load('ads', 'index.json', default=[])}
@@ -141,6 +142,11 @@ def main():
     if len(games) < TOP_N: raise RuntimeError(f'게임 {len(games)}개만 찾음')
     json.dump(dict(base=last, days=show, games=games, pattern=dict(total=sum(size.values()), size=size)), open(os.path.join(DATA, 'top_analysis.json'), 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
     print(f'상위권 분석 {last}: 게임 {len(games)}개 · 패턴 표본 {sum(size.values())}건')
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import market_trend
+        market_trend.build(RK, info, days, lambda p: set(updates(p)))
+    except Exception as e: print('마케팅 동향 생성 실패 (이전 파일 유지):', str(e)[:300])
 
 
 if __name__ == '__main__':

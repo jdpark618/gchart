@@ -74,9 +74,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          python tracker/top_analysis.py || true   # 상위권 분석 데이터 (시장 분석, 11/18)
+          python tracker/top_analysis.py || true   # 상위권 분석 · 마케팅 동향 · 신작 성과 데이터 (시장 분석, 11/18)
           python tracker/pages_usage.py || true   # GitHub Pages 용량 기록 (/admin, 11/18)
-          git add data/ads data/runlog data/pages_usage.json data/top_analysis.json 2>/dev/null || git add data/ads   # 수집 로그 (/admin, 11/09)
+          git add data/ads data/runlog data/pages_usage.json data/top_analysis.json data/market_trend.json data/release_dates.json 2>/dev/null || git add data/ads   # 수집 로그 (/admin, 11/09)
           git diff --cached --quiet && { echo "변경 없음"; exit 0; }
           git commit -qm "ads: 마케팅 추적 결과 $(date -u +%FT%TZ)"
           for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && exit 0; sleep $((i*5)); done
