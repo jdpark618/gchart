@@ -715,5 +715,46 @@
    ]
   },
   "ver": 2
+ },
+ "com.standegg.teamdefense": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "6805769847",
+  "meta_by": "",
+  "matched_at": "2026-11-18T01:23:48Z",
+  "google_log": {
+   "meta": [
+    "팀빨협동전 : 협동 영웅 디펜스:0",
+    "팀빨협동전:0",
+    "협동 영웅 디펜스:8",
+    "협동영웅디펜스:0",
+    "팀빨협동전 협동 영웅 디펜스:0",
+    "팀빨협동전협동영웅디펜스:0",
+    "StandEgg Co., Ltd.:18"
+   ],
+   "names": [
+    "StandEgg",
+    "StandEgg Co., Ltd.",
+    "스탠드에그",
+    "주식회사 스탠드에그",
+    "StandEgg Co., Ltd"
+   ],
+   "domains": [],
+   "candidates": 1,
+   "previews": 29,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "주식회사 스탠드에그",
+     "region": "KR",
+     "from": "이름 '스탠드에그'",
+     "recent": 29,
+     "previews": 29,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
  }
 }
