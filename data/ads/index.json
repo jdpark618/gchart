@@ -1,5 +1,99 @@
 [
  {
+  "pkg": "com.zjcs.android.kr",
+  "name": "소드 x 스태프: 화산귀환 콜라보",
+  "publisher": "BOLTRAY GAMES",
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-09",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "广州天狐网络科技信息服务有限公司",
+   "소드 x 스태프",
+   "소드 x 스태프KR"
+  ],
+  "tracked_at": "2026-11-18T07:34:17Z",
+  "days": 1,
+  "meta_live": 82,
+  "google_live": 16,
+  "meta_new7": 77,
+  "google_new7": 2,
+  "meta": 216,
+  "meta_total": 147,
+  "google": 35
+ },
+ {
+  "pkg": "com.gamespark.topking.gp",
+  "name": "탑 로드",
+  "publisher": "GAME SPARK PTE. LTD.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "GAME SPARK PTE. LTD.",
+   "TOP LORDS",
+   "Top Lords"
+  ],
+  "tracked_at": "2026-11-18T07:33:41Z",
+  "days": 0,
+  "meta_live": 24,
+  "google_live": 0,
+  "meta_new7": 2,
+  "google_new7": 0,
+  "meta": 24,
+  "meta_total": 24,
+  "google": 0
+ },
+ {
+  "pkg": "com.superpixel.scrap",
+  "name": "고물 히어로 - 신규 서버 오픈!",
+  "publisher": "SUPERBOX Inc",
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-11",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "(주)슈퍼박스"
+  ],
+  "tracked_at": "2026-11-18T07:33:22Z",
+  "days": 3,
+  "meta_live": 0,
+  "google_live": 7,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 7
+ },
+ {
+  "pkg": "com.mocacorp.block",
+  "name": "블록게임",
+  "publisher": "Moca",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-18T07:33:05Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
   "pkg": "com.gof.global",
   "name": "WOS: 화이트아웃 서바이벌",
   "publisher": "Century Games PTE. LTD.",
@@ -362,27 +456,6 @@
   "google": 126
  },
  {
-  "pkg": "com.superpixel.scrap",
-  "name": "고물 히어로",
-  "publisher": "SUPERBOX Inc",
-  "charts": {
-   "popular": 5
-  },
-  "rank_date": "2026-11-11",
-  "aliases": [
-   "(주)슈퍼박스"
-  ],
-  "tracked_at": "2026-11-11T00:47:57Z",
-  "meta": 0,
-  "meta_total": 0,
-  "google": 4,
-  "days": 3,
-  "meta_live": 0,
-  "google_live": 4,
-  "meta_new7": 0,
-  "google_new7": 0
- },
- {
   "pkg": "com.ryonggame.dragonknightidle",
   "name": "드래곤 나이트 키우기 : 방치형 RPG",
   "publisher": "RyongGames",
@@ -402,29 +475,6 @@
   "google_live": 0,
   "meta_new7": 2,
   "google_new7": 0
- },
- {
-  "pkg": "com.zjcs.android.kr",
-  "name": "소드 x 스태프: 화산귀환 콜라보",
-  "publisher": "BOLTRAY GAMES",
-  "charts": {
-   "popular": 5
-  },
-  "rank_date": "2026-11-09",
-  "aliases": [
-   "广州天狐网络科技信息服务有限公司",
-   "소드 x 스태프",
-   "소드 x 스태프KR"
-  ],
-  "tracked_at": "2026-11-09T08:07:57Z",
-  "meta": 136,
-  "meta_total": 25,
-  "google": 25,
-  "days": 1,
-  "meta_live": 119,
-  "google_live": 13,
-  "meta_new7": 129,
-  "google_new7": 15
  },
  {
   "pkg": "com.davincinote.twomergesimul",

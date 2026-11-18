@@ -1,0 +1,37 @@
+{
+ "day": "2026-11-18",
+ "picks": {
+  "com.mocacorp.block": {
+   "name": "블록게임",
+   "pkg": "com.mocacorp.block",
+   "publisher": "Moca",
+   "ranks": {},
+   "date": "2026-11-18",
+   "chart": "popular"
+  },
+  "com.superpixel.scrap": {
+   "name": "고물 히어로 - 신규 서버 오픈!",
+   "pkg": "com.superpixel.scrap",
+   "publisher": "SUPERBOX Inc",
+   "ranks": {},
+   "date": "2026-11-18",
+   "chart": "popular"
+  },
+  "com.gamespark.topking.gp": {
+   "name": "탑 로드",
+   "pkg": "com.gamespark.topking.gp",
+   "publisher": "GAME SPARK PTE. LTD.",
+   "ranks": {},
+   "date": "2026-11-18",
+   "chart": "popular"
+  },
+  "com.zjcs.android.kr": {
+   "name": "소드 x 스태프: 화산귀환 콜라보",
+   "pkg": "com.zjcs.android.kr",
+   "publisher": "BOLTRAY GAMES",
+   "ranks": {},
+   "date": "2026-11-18",
+   "chart": "popular"
+  }
+ }
+}

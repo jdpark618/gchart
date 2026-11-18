@@ -229,7 +229,28 @@
   ],
   "ios": "6775388646",
   "meta_by": "",
-  "matched_at": "2026-11-06T01:40:59Z"
+  "matched_at": "2026-11-06T01:40:59Z",
+  "ver": 2,
+  "rematched_at": "2026-11-18T07:33:22Z",
+  "google_log": {
+   "meta": [
+    "고물 히어로 - 신규 서버 오픈!:0",
+    "고물 히어로:0",
+    "고물히어로:0",
+    "SUPERBOX Inc:0"
+   ],
+   "names": [
+    "SUPERBOX",
+    "SUPERBOX Inc",
+    "슈퍼박스",
+    "SUPERBOX. Inc"
+   ],
+   "domains": [],
+   "candidates": 0,
+   "previews": null,
+   "failed": null,
+   "checked": []
+  }
  },
  "com.cookapps.catshinobi": {
   "meta_pages": [
@@ -260,7 +281,43 @@
   ],
   "ios": "6762359394",
   "meta_by": "검색어 '소드 x 스태프: 화산귀환 콜라보' → 광고 링크의 iOS 앱 ID",
-  "matched_at": "2026-11-06T01:40:59Z"
+  "matched_at": "2026-11-06T01:40:59Z",
+  "ver": 2,
+  "rematched_at": "2026-11-18T07:34:17Z",
+  "google_log": {
+   "meta": [],
+   "names": [
+    "BOLTRAY GAMES",
+    "BOLTRAY",
+    "BOLTRAY PTE. LTD."
+   ],
+   "domains": [
+    "boltray.com"
+   ],
+   "candidates": 2,
+   "previews": 91,
+   "failed": 60,
+   "checked": [
+    {
+     "name": "广州天狐网络科技信息服务有限公司",
+     "region": "",
+     "from": "도메인 'boltray.com'",
+     "recent": 583,
+     "previews": 58,
+     "failed": 47,
+     "hit": true
+    },
+    {
+     "name": "广州天狐网络科技信息服务有限公司",
+     "region": "",
+     "from": "도메인 'boltray.com'",
+     "recent": 94,
+     "previews": 33,
+     "failed": 13,
+     "hit": false
+    }
+   ]
+  }
  },
  "com.farlightgames.warline.gp.global": {
   "meta_pages": [
@@ -752,6 +809,82 @@
      "previews": 29,
      "failed": 0,
      "hit": false
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.mocacorp.block": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "",
+  "meta_by": "",
+  "matched_at": "2026-11-18T07:33:05Z",
+  "google_log": {
+   "meta": [
+    "블록게임:0",
+    "Moca:31992"
+   ],
+   "names": [
+    "Moca"
+   ],
+   "domains": [
+    "moca.org"
+   ],
+   "candidates": 9,
+   "previews": 0,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "The Museum of Contemporary Art",
+     "region": "",
+     "from": "도메인 'moca.org'",
+     "recent": 1,
+     "previews": 0,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.gamespark.topking.gp": {
+  "meta_pages": [
+   "1105724252614921",
+   "1233429726522942"
+  ],
+  "google": [
+   {
+    "id": "AR17068127268968071169",
+    "name": "GAME SPARK PTE. LTD.",
+    "by": "이름 'GAME SPARK' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6767834940",
+  "meta_by": "검색어 '탑 로드' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-18T07:33:41Z",
+  "google_log": {
+   "meta": [
+    "탑 로드:15"
+   ],
+   "names": [
+    "GAME SPARK",
+    "GAME SPARK PTE. LTD.",
+    "Top Lords"
+   ],
+   "domains": [],
+   "candidates": 2,
+   "previews": 6,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "GAME SPARK PTE. LTD.",
+     "region": "SG",
+     "from": "이름 'GAME SPARK'",
+     "recent": 6,
+     "previews": 6,
+     "failed": 0,
+     "hit": true
     }
    ]
   },
