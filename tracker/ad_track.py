@@ -4,7 +4,7 @@
 방식: 패키지명 검색은 두 매체 모두 안 되므로 '패키지로 걸러 광고 계정을 찾고 → 그 계정으로 수집'
   · Meta  : 게임명 키워드 검색 → 연결 링크에 패키지가 들어간 광고의 '페이지' → 그 페이지 광고 전체 (페이지 ID 를 주면 바로)
   · Google: 광고주 이름 검색 → 후보 계정의 KR 소재 미리보기에 패키지가 든 것만 (광고주 ID 를 주면 그 계정만)
-저장: data/ads/<pkg>.json (최신 1회분만, 덮어씀) · data/ads/img/<pkg>/*.jpg (320px) · data/ads/index.json (추적한 앱 목록)
+저장: data/ads/<pkg>.json (최신 1회분만, 덮어씀) · data/ads/img/<pkg>/*.webp (320px · 11/18 이전 소재는 .jpg 그대로) · data/ads/index.json (추적한 앱 목록)
 실행: python tracker/ad_track.py --name 탕탕에이스 --pkg com.survivor.ace [--google-adv Habby] [--meta-page 123] [--google-adv-id AR...]"""
 import argparse, asyncio, calendar, hashlib, io, json, os, re, shutil, time, urllib.request
 from urllib.parse import quote
@@ -151,14 +151,15 @@ async def google(ctx, adv_q, adv_id, pkg, ios='', since=0, known=()):
 
 def save_thumb(url, d):
     if not url: return ''
-    key = hashlib.md5(url.split('?')[0].encode()).hexdigest()[:12]; path = os.path.join(d, key + '.jpg')
+    key = hashlib.md5(url.split('?')[0].encode()).hexdigest()[:12]; path = os.path.join(d, key + '.webp')
+    if os.path.exists(os.path.join(d, key + '.jpg')): return key + '.jpg'   # 이미 받은 JPG 는 그대로 (11/18 WebP 전환 · 바꾸면 git 이력만 늘어남)
     if not os.path.exists(path):
         try:
             b = urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': UA}), timeout=30).read()
-            im = Image.open(io.BytesIO(b)).convert('RGB'); im.thumbnail((320, 320)); im.save(path, quality=78)
+            im = Image.open(io.BytesIO(b)).convert('RGB'); im.thumbnail((320, 320)); im.save(path, 'WEBP', quality=70, method=6)
         except Exception as e:
             print('thumb fail', url[:70], e); return ''
-    return key + '.jpg'
+    return key + '.webp'
 
 nz = lambda v: re.sub(r'[\s:：·\-]', '', v or '').lower()   # 이름 비교용: 띄어쓰기·콜론 무시
 STORE_LB = re.compile(r'^(출시 예정|속도감 있는 게임|등록|사전 등록|지금 예약|예약하기|설치|받기|열기|앱 열기|개발자)$')
@@ -175,6 +176,7 @@ async def main():
     ap.add_argument('--name', required=True); ap.add_argument('--pkg', required=True)
     ap.add_argument('--google-adv', default=''); ap.add_argument('--meta-page', default=''); ap.add_argument('--google-adv-id', default=''); ap.add_argument('--ios', default='')
     ap.add_argument('--publisher', default=''); ap.add_argument('--rematch', action='store_true')
+    ap.add_argument('--pool', default=''); ap.add_argument('--no-rematch', action='store_true')   # 순번 교체(11/18): 어느 차트에서 뽑혔는지 · 오늘 재매칭 한도를 다 썼으면 건너뜀
     ap.add_argument('--ranks', default=''); ap.add_argument('--rank-date', default='')   # 'popular:2,sales:3' — 매일 TOP5 추적(daily_top5.py)에서 넘김
     a = ap.parse_args(); pkg = clean(a.pkg)
     keys = [clean(k) for k in a.name.split(',') if clean(k)]; name = keys[0]   # '먼작귀 포켓, 먼작귀' → 검색어 여러 개, 첫 값이 표시 이름
@@ -201,7 +203,7 @@ async def main():
         # 찾는 방법이 바뀌면(MATCH_VER, 11/13) 예전 방법으로 찾은 게임은 다시 찾음 — 이미 찾은 Google 계정에 새로 찾은 계정을 더함 (한 회사가 계정 여러 개로 나눠 광고).
         # Google 계정이나 Meta 페이지가 없는 게임은 바로, 둘 다 있는 게임은 마지막으로 찾은 지 7일이 지나면 (하루에 몰리면 광고 투명성 센터가 막으므로 나눠서)
         stale = bool(acc) and acc.get('ver') != MATCH_VER
-        if acc and not (a.meta_page or a.google_adv_id) and (stale or not acc.get('meta_pages') or not acc.get('google')):
+        if acc and not a.no_rematch and not (a.meta_page or a.google_adv_id) and (stale or not acc.get('meta_pages') or not acc.get('google')):
             last = acc.get('rematched_at') or acc.get('matched_at') or ''
             try: due = (stale and (not acc.get('google') or not acc.get('meta_pages'))) or time.time() - calendar.timegm(time.strptime(last[:19], '%Y-%m-%dT%H:%M:%S')) >= 7 * 86400
             except Exception: due = True
@@ -290,7 +292,7 @@ async def main():
     charts, rank_date = (ranks, clean(a.rank_date)) if ranks else (prev_ent.get('charts', {}), prev_ent.get('rank_date', ''))
     # TOP5 에 든 날 수 (11/12): 순위일이 새 날짜로 바뀔 때만 하루 더함 (수동 실행 · 같은 날 재실행은 그대로)
     days = prev_ent.get('days', 0) + (1 if ranks and rank_date != prev_ent.get('rank_date') else 0)
-    idx = [x for x in idx if x['pkg'] != pkg] + [{'pkg': pkg, 'name': name, 'publisher': publisher, 'charts': charts, 'rank_date': rank_date,
+    idx = [x for x in idx if x['pkg'] != pkg] + [{'pkg': pkg, 'name': name, 'publisher': publisher, 'charts': charts, 'rank_date': rank_date, 'pool': sorted(set(prev_ent.get('pool', [])) | ({clean(a.pool)} if clean(a.pool) else set())),
            'aliases': sorted({g['name'] for g in res['google'].get('advertisers', []) if g.get('name')} | {p['name'] for p in res['meta'].get('pages', []) if p.get('name')}),   # 광고주 법인명(한글 포함) · Meta 페이지명 → 검색용
            'tracked_at': res['tracked_at'], 'days': days, **live_stats(res, now),
            'meta': len(res['meta'].get('ads', [])), 'meta_total': res['meta'].get('count', 0), 'google': len(res['google'].get('ads', []))}]
