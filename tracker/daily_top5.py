@@ -43,19 +43,23 @@ stamp = lambda s: calendar.timegm(time.strptime(s[:19], '%Y-%m-%dT%H:%M:%S'))
 recent = {x['pkg'] for x in index0 if time.time() - stamp(x['tracked_at']) < 6 * 3600}
 
 def choose():
-    """오늘 조회할 게임: TOP5 먼저, 남은 자리는 6위 아래에서 (새 게임 매칭 자리도 TOP5 가 먼저 씀)"""
+    """오늘 조회할 게임: TOP5 먼저, 남은 자리는 6위 아래에서.
+    새 게임 매칭 자리: TOP5 가 먼저 쓰고, 남은 자리는 차트마다 1개씩 → 한쪽에 새 게임이 없으면 다른 차트가 씀 (인기가 먼저 돌아 매출이 계속 밀리지 않게)"""
     today_n = calendar.timegm(time.strptime(rank_day, '%Y-%m-%d')) // 86400
     last = {x['pkg']: (stamp(x['tracked_at']) + 9 * 3600) // 86400 for x in index0}   # 마지막 조회일 (한국 시간)
-    known, picks, cnt, new = load(ap, {}), {}, dict.fromkeys(POOL, 0), 0
-    for top in (True, False):
+    known, picks, cnt, new = load(ap, {}), {}, dict.fromkeys(POOL, 0), dict.fromkeys(POOL, 0)
+    def wait_days(pkg):   # Google 미리보기 실패가 남은 게임은 다음 날 다시 조회 (11/18)
+        res = load(os.path.join(ROOT, 'data', 'ads', f'{pkg}.json'), {})
+        return 1 if any(c.get('failed') for c in res.get('google', {}).get('candidates') or []) else WAIT_TOP if pkg in games else WAIT_REST
+    for top, share in ((True, NEW_MAX), (False, NEW_MAX // len(POOL)), (False, NEW_MAX)):   # TOP5 → 차트별 몫 → 남은 자리
         for chart, depth in POOL.items():
             for r in charts[chart]['rows'][:depth]:
                 pkg = r[4]
                 if (r[1] <= 5) != top or cnt[chart] >= SLOTS or pkg in picks: continue
-                if pkg in last and today_n - last[pkg] < (WAIT_TOP if pkg in games else WAIT_REST): continue
+                if pkg in last and today_n - last[pkg] < wait_days(pkg): continue
                 if pkg not in known:
-                    if new >= NEW_MAX: continue
-                    new += 1
+                    if sum(new.values()) >= NEW_MAX or new[chart] >= share: continue
+                    new[chart] += 1
                 cnt[chart] += 1
                 picks[pkg] = {'name': r[3], 'pkg': pkg, 'publisher': r[6], 'ranks': games.get(pkg, {}).get('ranks', {}), 'date': r[0], 'chart': chart}
     return picks
@@ -108,6 +112,14 @@ for g in picks.values():
     if any(l.get('retry') for l in m.get('log', [])): msgs.append(['r', f"{n}: Meta 0건 → 30초 뒤 재시도 → {len(m.get('ads', []))}건"])
     if gg.get('error'): msgs.append(['x', f"{n}: Google 오류 {gg['error'][:80]}"])
     elif not gg.get('advertisers'): msgs.append(['w', f'{n}: Google 계정 없음'])
+    cs = gg.get('candidates') or []
+    left, first = sum(c.get('failed') or 0 for c in cs), sum(c.get('failedFirst') or 0 for c in cs)
+    if left:
+        codes = {}
+        for c in cs:
+            for k, v in (c.get('codes') or {}).items(): codes[k] = codes.get(k, 0) + v
+        msgs.append(['w', f"{n}: Google 미리보기 {left}건 실패 (응답 " + ', '.join(f'{k}×{v}' for k, v in codes.items()) + ') → 다음 날 다시 조회'])
+    elif first: msgs.append(['r', f'{n}: Google 미리보기 {first}건 실패 → 재시도로 복구'])
     if gg.get('retry'): msgs.append(['r', f"{n}: Google 0건 → 30초 뒤 재시도 → {len(gg.get('ads', []))}건"])
 ok = not any(t == 'x' for t, _ in msgs)
 top_n = sum(1 for g in picks.values() if g['ranks'])
