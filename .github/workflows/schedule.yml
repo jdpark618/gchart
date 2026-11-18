@@ -285,6 +285,18 @@ jobs:
         function snapAdd(sheetName, arr) { (snapRows[sheetName] ||= []).push(...arr); }
         const rowToArr = r => [unq(r.get('날짜')), Number(r.get('순위')) || 0, unq(r.get('증감')), unq(r.get('앱이름')), unq(r.get('패키지명')), unq(r.get('장르')), unq(r.get('개발사(퍼블리셔)')), unq(r.get('증감수치')), unq(r.get('평점')), unq(r.get('아이콘url'))];
         const objToArr = o => [unq(o['날짜']), Number(o['순위']) || 0, unq(o['증감']), unq(o['앱이름']), unq(o['패키지명']), unq(o['장르']), unq(o['개발사(퍼블리셔)']), unq(o['증감수치']), unq(o['평점']), unq(o['아이콘url'])];
+        // ── DB 용량 (11/18): 구글 시트 한 파일 1,000만 셀 한도 → 탭마다 행×열(빈 칸 포함, 구글이 세는 방식) 합계를 날마다 남김.
+        //    data/sheet_usage.json = { limit, hist: [{ d, cells, tabs }] } 최근 90일 · 수집 로그 페이지(/admin)가 막대 · % · 수명으로 보여 줌
+        async function saveDbUsage(doc, todayStr) {
+            await doc.loadInfo();
+            const cells = doc.sheetsByIndex.reduce((t, sh) => t + (sh.rowCount || 0) * (sh.columnCount || 0), 0);
+            const f = 'data/sheet_usage.json';
+            let rec; try { rec = JSON.parse(fs.readFileSync(f, 'utf8')); } catch (e) { rec = {}; }
+            const hist = (rec.hist || []).filter(x => x.d !== todayStr).concat([{ d: todayStr, cells, tabs: doc.sheetsByIndex.length }]).sort((a, b) => a.d.localeCompare(b.d)).slice(-90);
+            fs.writeFileSync(f, JSON.stringify({ limit: 10000000, hist }, null, 1));
+            console.log(`  - ${f}: ${(cells / 1e5).toFixed(1)}% (탭 ${doc.sheetsByIndex.length}개)`);
+        }
+
         function exportSnapshot(todayStr) {
             const snap = { v: new Date().toISOString(), today: todayStr, charts: {}, apps: {} };
             for (const st of ['gp', 'ios']) for (const country of COUNTRIES) for (const [k, base] of [['sales', '매출순위'], ['popular', '인기순위']]) {
@@ -812,6 +824,7 @@ jobs:
             // 5. 사이트용 스냅샷 (실패해도 수집 결과에는 영향 없음)
             console.log("\n=== 5. 사이트용 스냅샷 ===");
             try { exportSnapshot(todayStr); } catch (e) { console.warn(`  [경고] 스냅샷 저장 실패: ${e.message}`); }
+            try { await saveDbUsage(doc, todayStr); } catch (e) { console.warn(`  [경고] DB 용량 기록 실패: ${e.message}`); }
 
             try { writeRunlog(todayStr); } catch (e) { console.warn(`  [경고] 수집 로그 저장 실패: ${e.message}`); }
             if (failures.length) console.error(`[실패] 수집 오류: ${failures.join(' · ')}`);
@@ -830,7 +843,7 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         save() {
-          git add data/snapshot.json data/version.json data/runlog data/updates 2>/dev/null
+          git add data/snapshot.json data/version.json data/runlog data/updates 2>/dev/null; git add data/sheet_usage.json 2>/dev/null || true
           git diff --cached --quiet && return 0
           git commit -qm "rank: 수집 중간 저장 (시도 $1/3)"
           for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && return 0; sleep $((i * 15)); done
@@ -853,6 +866,7 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add .github/.keepalive-rank data/snapshot.json data/version.json data/runlog data/updates 2>/dev/null || git add .github/.keepalive-rank
+        git add data/sheet_usage.json 2>/dev/null || true
         git diff --cached --quiet && exit 0
         git commit -m "chore: keepalive (rank) + 사이트용 스냅샷"
         pushed=0
