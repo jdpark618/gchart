@@ -1,5 +1,28 @@
 [
  {
+  "pkg": "com.ryonggame.dragonknightidle",
+  "name": "드래곤 나이트 키우기 : 방치형 RPG",
+  "publisher": "RyongGames",
+  "charts": {
+   "popular": 3
+  },
+  "rank_date": "2026-11-11",
+  "pool": [],
+  "aliases": [
+   "Dragon knight idle",
+   "주식회사 룡게임"
+  ],
+  "tracked_at": "2026-11-18T08:03:16Z",
+  "days": 3,
+  "meta_live": 45,
+  "google_live": 30,
+  "meta_new7": 4,
+  "google_new7": 1,
+  "meta": 73,
+  "meta_total": 160,
+  "google": 48
+ },
+ {
   "pkg": "com.zjcs.android.kr",
   "name": "소드 x 스태프: 화산귀환 콜라보",
   "publisher": "BOLTRAY GAMES",
@@ -454,27 +477,6 @@
   "meta": 8,
   "meta_total": 253,
   "google": 126
- },
- {
-  "pkg": "com.ryonggame.dragonknightidle",
-  "name": "드래곤 나이트 키우기 : 방치형 RPG",
-  "publisher": "RyongGames",
-  "charts": {
-   "popular": 3
-  },
-  "rank_date": "2026-11-11",
-  "aliases": [
-   "Dragon knight idle"
-  ],
-  "tracked_at": "2026-11-11T00:47:27Z",
-  "meta": 47,
-  "meta_total": 133,
-  "google": 0,
-  "days": 3,
-  "meta_live": 47,
-  "google_live": 0,
-  "meta_new7": 2,
-  "google_new7": 0
  },
  {
   "pkg": "com.davincinote.twomergesimul",
