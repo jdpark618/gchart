@@ -139,6 +139,17 @@ def main():
     for p in index:
         c = creatives(p)
         if c is not None: size.update(e['size'] for e in events(p, updates(p), c) if e['dv'] is not None)
+    # 주간 리포트 '업데이트 효과' 쪽 (11/19): 매출 TOP100 에 든 적 있는 모든 게임의 업데이트 · 전후 3일 매출 평균 (상위권 분석과 같은 규칙)
+    allev = []
+    for p in RK['s']:
+        U = updates(p)
+        if not U: continue
+        N = clean_notes(U)
+        for e in events(p, U, creatives(p)):
+            cats = sorted({k for l in (U[e['d']].get('n') or '').splitlines() for k in [line_cat(l)] if k})
+            allev.append(dict(p=p, n=info.get(p, {}).get('name', ''), cats=cats, nt=N[e['d']][:900], **{k: e[k] for k in ('d', 'size', 'est', 'note', 'b', 'a', 'dv', 'pdv', 'res', 'cr')}))
+    json.dump(dict(base=last, since=days[0], ev=sorted(allev, key=lambda e: e['d'])), open(os.path.join(DATA, 'update_events.json'), 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+    print(f'업데이트 효과 {len(allev)}건')
     if len(games) < TOP_N: raise RuntimeError(f'게임 {len(games)}개만 찾음')
     json.dump(dict(base=last, days=show, games=games, pattern=dict(total=sum(size.values()), size=size)), open(os.path.join(DATA, 'top_analysis.json'), 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
     print(f'상위권 분석 {last}: 게임 {len(games)}개 · 패턴 표본 {sum(size.values())}건')
