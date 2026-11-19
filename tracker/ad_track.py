@@ -98,7 +98,10 @@ async def meta(ctx, keys, pkg, page_id):
     return out
 
 GOOGLE_JS = r"""
-async ([q, advId, pkg, ios, since, known, other]) => {
+async ([q, advId, pkg, ios, since, known, other, cap, budget]) => {
+  /* 한도 (11/19): 게임 하나에 새 미리보기 cap 건 · 이번 실행에 남은 예산 budget 건까지 (최근 노출 소재부터). 못 연 것은 다음 수집에서 이어서 확인
+     막힘 감지: 최근 20건 중 절반 이상 실패하면 2분 쉬고, 다시 그러면 이 게임의 Google 미리보기를 멈춤 (blocked → 오후 예비 실행에서 다른 서버로 재시도) */
+  let quota = Math.max(0, Math.min(cap ?? 300, budget ?? 800)), blocked = false;
   const otherSet = new Set(other || []);   // 다른 게임 소재로 이미 확인한 ID (11/18) → 다시 열지 않음
   const knownSet = new Set(known || []);   // 이미 저장된 소재 ID → 미리보기 없이 날짜만 갱신
   const ids = [pkg].concat(ios ? ['id' + ios] : []);   // Play 패키지 또는 iOS 앱 ID 가 든 소재
@@ -118,11 +121,15 @@ async ([q, advId, pkg, ios, since, known, other]) => {
     all = all.filter(c => +(c[7]?.[1] || 0) >= since);   // 최근 N일(기본 30일) 안에 노출된 소재만
     all.filter(c => knownSet.has(c[2])).forEach(c => res.seen.push({ id: c[2], first: +c[6]?.[1], last: +c[7]?.[1], days: c[13] }));
     all = all.filter(c => !knownSet.has(c[2]) && !otherSet.has(c[2]));   // 처음 보는 소재만 미리보기
+    all.sort((x, y) => (+y[7]?.[1] || 0) - (+x[7]?.[1] || 0));   // 최근 노출 소재부터
+    const fresh = all.length, take = blocked ? [] : all.slice(0, quota); quota -= take.length;
+    let opened = 0;
     const pk = {}, codes = {}; let hit = 0;
     const wait = ms => new Promise(r => setTimeout(r, ms)), miss = k => { codes[k] = (codes[k] || 0) + 1; return false; };
     /* 미리보기 요청이 너무 많으면 구글이 막으므로 10건씩 간격을 두고, 계정당 1200건까지 */
     const one = async c => {   // true = 확인 끝 · false = 미리보기 실패 (응답 코드를 세어 둠)
         const u = c[3]?.[1]?.[4]; if (!u) return true;
+        opened++;
         let t = ''; try { const r = await fetch(u); if (!r.ok) return miss(r.status); t = await r.text(); } catch (e) { return miss('net'); }
         new Set((t.match(/(?:com|jp|kr|net|io|co)\.[a-z0-9_]+\.[a-z0-9_.]+/gi) || []).map(x => x.replace(/\.+$/, '')).filter(x => !/^com\.(google|android)\./i.test(x))).forEach(x => { pk[x] = (pk[x] || 0) + 1; });
         if (!ids.some(x => t.includes(x))) { if (t.length >= 200) res.other.push(c[2]); return true; }   // 내용이 온전할 때만 '다른 게임 소재'로 기억
@@ -136,16 +143,21 @@ async ([q, advId, pkg, ios, since, known, other]) => {
         res.ads.push({ id: c[2], adv: a.id, fmt: c[4], first: +c[6]?.[1], last: +c[7]?.[1], days: c[13], yt, img, lines });
         return true;
     };
-    let bad = [];
+    let bad = [], win = [], paused = false, stopAt = take.length;
     /* 1차 확인 (11/19 속도 낮춤): 5건씩 · 0.3초 간격 — 10건씩 · 0.12초일 때 순간 초당 15~20회라 429(요청 과다)가 많았음 */
-    for (let i = 0; i < Math.min(all.length, 1200); i += 5) {
+    for (let i = 0; i < take.length; i += 5) {
       await wait(300);
-      const part = all.slice(i, i + 5), ok = await Promise.all(part.map(one));
+      const part = take.slice(i, i + 5), ok = await Promise.all(part.map(one));
       part.forEach((c, k) => { if (!ok[k]) bad.push(c); });
+      win = win.concat(ok).slice(-20);
+      if (win.length >= 20 && win.filter(x => !x).length >= 10){
+        if (!paused){ paused = true; win = []; await wait(120000); }
+        else { blocked = true; stopAt = i + 5; break; }
+      }
     }
     /* 실패분 재시도 (11/18): 15초 쉬고 3건씩 천천히 · 계정당 300건까지 · 처음 30건이 하나도 안 열리면 아직 막힌 것으로 보고 멈춤 (다음 날 다시 조회) */
     const failedFirst = bad.length;
-    if (bad.length) {
+    if (bad.length && !blocked) {
       await wait(15000);
       const left = []; let tried = 0, back = 0, i = 0;
       for (; i < Math.min(bad.length, 300); i += 3) {
@@ -156,17 +168,17 @@ async ([q, advId, pkg, ios, since, known, other]) => {
       }
       bad = left.concat(bad.slice(i));
     }
-    res.candidates.push({ ...a, creativesKR: total, newRecent: all.length, remembered: otherSet.size, matched: hit, failed: bad.length, failedFirst, codes, topPkgs: Object.entries(pk).sort((x, y) => y[1] - x[1]).slice(0, 5) });
+    res.candidates.push({ ...a, creativesKR: total, newRecent: fresh, remembered: otherSet.size, opened, deferred: fresh - stopAt, blocked, paused, matched: hit, failed: bad.length, failedFirst, codes, topPkgs: Object.entries(pk).sort((x, y) => y[1] - x[1]).slice(0, 5) });
   }
   return res;
 }
 """
 
-async def google(ctx, adv_q, adv_id, pkg, ios='', since=0, known=(), other=()):
+async def google(ctx, adv_q, adv_id, pkg, ios='', since=0, known=(), other=(), cap=300, budget=800):
     pg = await ctx.new_page(); out = {'query': adv_q, 'advertisers': [], 'candidates': [], 'ads': []}
     await pg.goto('https://adstransparency.google.com/?region=KR&hl=ko', wait_until='domcontentloaded', timeout=60000)
     await pg.wait_for_timeout(2500)
-    r = await pg.evaluate(GOOGLE_JS, [adv_q, adv_id, pkg, ios, since, list(known), list(other)])
+    r = await pg.evaluate(GOOGLE_JS, [adv_q, adv_id, pkg, ios, since, list(known), list(other), cap, budget])
     out['candidates'] = r['candidates']; out['ads'] = sorted(r['ads'], key=lambda x: -(x['last'] or 0)); out['seen'] = r.get('seen', []); out['other'] = r.get('other', [])
     out['advertisers'] = [{'id': c['id'], 'name': c['name']} for c in r['candidates'] if c['matched'] or adv_id]
     return out
@@ -198,6 +210,7 @@ async def main():
     ap.add_argument('--name', required=True); ap.add_argument('--pkg', required=True)
     ap.add_argument('--google-adv', default=''); ap.add_argument('--meta-page', default=''); ap.add_argument('--google-adv-id', default=''); ap.add_argument('--ios', default='')
     ap.add_argument('--publisher', default=''); ap.add_argument('--rematch', action='store_true')
+    ap.add_argument('--g-cap', type=int, default=300); ap.add_argument('--g-budget', type=int, default=800)   # Google 미리보기 한도 (11/19): 게임당 · 이번 실행에 남은 예산
     ap.add_argument('--pool', default=''); ap.add_argument('--no-rematch', action='store_true')   # 순번 교체(11/18): 어느 차트에서 뽑혔는지 · 오늘 재매칭 한도를 다 썼으면 건너뜀
     ap.add_argument('--ranks', default=''); ap.add_argument('--rank-date', default='')   # 'popular:2,sales:3' — 매일 TOP5 추적(daily_top5.py)에서 넘김
     a = ap.parse_args(); pkg = clean(a.pkg)
@@ -263,12 +276,12 @@ async def main():
         ck = json.load(open(ck_p, encoding='utf-8')) if os.path.exists(ck_p) else {}
         other = ck.get('ids', []) if ck.get('ios', '') == ios_now else []
         known = [x['id'] for x in prev.get('google', {}).get('ads', []) if x.get('yt') or x.get('img')]   # 썸네일 없는 소재는 다시 미리보기 (영상 ID 추출 보완분 반영)
-        try: res['google'] = await google(ctx, '', gadv, pkg, acc.get('ios', '') or clean(a.ios), now - (30 if prev else 90) * 86400, known, other) if gadv else {'advertisers': [], 'candidates': [], 'ads': []}
+        try: res['google'] = await google(ctx, '', gadv, pkg, acc.get('ios', '') or clean(a.ios), now - (30 if prev else 90) * 86400, known, other, a.g_cap, a.g_budget) if gadv else {'advertisers': [], 'candidates': [], 'ads': []}
         except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
         # 재시도: 광고주 조회가 전부 0건(또는 오류)이면 일시 차단일 수 있어 30초 쉬고 한 번 더 (11/06 WOS 0건 사례)
         if gadv and (res['google'].get('error') or not any(c.get('creativesKR') for c in res['google'].get('candidates', []))):
             await asyncio.sleep(30)
-            try: res['google'] = await google(ctx, '', gadv, pkg, acc.get('ios', '') or clean(a.ios), now - (30 if prev else 90) * 86400, known, other); res['google']['retry'] = True
+            try: res['google'] = await google(ctx, '', gadv, pkg, acc.get('ios', '') or clean(a.ios), now - (30 if prev else 90) * 86400, known, other, a.g_cap, a.g_budget); res['google']['retry'] = True
             except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
         try: res['title'] = await play_title(ctx, pkg)
         except Exception: res['title'] = ''

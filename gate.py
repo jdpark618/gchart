@@ -11,9 +11,15 @@ root = os.path.dirname(os.path.abspath(__file__))
 
 def done(cat):
     try:
-        return bool(json.load(open(os.path.join(root, 'data', 'runlog', day, f'{cat}.json'), encoding='utf-8'))['attempts'][-1]['ok'])
+        ok = bool(json.load(open(os.path.join(root, 'data', 'runlog', day, f'{cat}.json'), encoding='utf-8'))['attempts'][-1]['ok'])
     except Exception:
         return False
+    if cat == 'ads':   # 마케팅 추적 (11/19): Google 요청 제한으로 멈춘 게임이 있으면 예비 실행에서 한 번 더 (data/ads/retry.json)
+        try:
+            r = json.load(open(os.path.join(root, 'data', 'ads', 'retry.json'), encoding='utf-8'))
+            if r.get('day') == day and r.get('pkgs') and not r.get('done'): return False
+        except Exception: pass
+    return ok
 
 
 cats = sys.argv[1:]

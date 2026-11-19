@@ -16,7 +16,8 @@ START_UTC = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
 msgs, games = [], {}
 POOL = {'popular': 20, 'sales': 30}   # 차트별 조회 범위
 SLOTS, WAIT_TOP, WAIT_REST = 5, 3, 7   # 차트별 하루 조회 수 · 다시 조회까지 기다리는 날 (TOP5 / 그 아래)
-NEW_MAX, REMATCH_MAX, PREVIEW_MAX = 2, 3, 1500   # 광고 투명성 센터 차단 방지: 하루 새 게임 매칭 · 재매칭 수 · 매칭 미리보기 합계 (한 번에 약 2000건부터 막힘)
+NEW_MAX, REMATCH_MAX, PREVIEW_MAX = 2, 3, 600
+G_CAP, G_BUDGET = 300, 800   # Google 미리보기 (11/19): 게임당 · 한 번 실행에 · 매칭은 PREVIEW_MAX 따로   # 광고 투명성 센터 차단 방지: 하루 새 게임 매칭 · 재매칭 수 · 매칭 미리보기 합계 (한 번에 약 2000건부터 막힘)
 try:
     snap = json.load(open(os.path.join(ROOT, 'data', 'snapshot.json'), encoding='utf-8'))
     charts = snap['charts']['gp']['kr']
@@ -50,7 +51,7 @@ def choose():
     known, picks, cnt, new = load(ap, {}), {}, dict.fromkeys(POOL, 0), dict.fromkeys(POOL, 0)
     def wait_days(pkg):   # Google 미리보기 실패가 남은 게임은 다음 날 다시 조회 (11/18)
         res = load(os.path.join(ROOT, 'data', 'ads', f'{pkg}.json'), {})
-        return 1 if any(c.get('failed') for c in res.get('google', {}).get('candidates') or []) else WAIT_TOP if pkg in games else WAIT_REST
+        return 1 if any(c.get('failed') or c.get('deferred') for c in res.get('google', {}).get('candidates') or []) else WAIT_TOP if pkg in games else WAIT_REST
     for top, share in ((True, NEW_MAX), (False, NEW_MAX // len(POOL)), (False, NEW_MAX)):   # TOP5 → 차트별 몫 → 남은 자리
         for chart, depth in POOL.items():
             for r in charts[chart]['rows'][:depth]:
@@ -67,6 +68,12 @@ def choose():
 # 같은 날 다시 돌아도(수동 · 재시도) 다음 순번으로 넘어가지 않게 그날 고른 목록을 남겨 그대로 씀
 plan = load(plan_p, {})
 picks = plan['picks'] if plan.get('day') == rank_day else choose()
+# 오후 재시도 (11/19): 오늘 Google 요청 제한으로 멈춘 게임만 다른 서버(예비 실행)에서 한 번 더. gate.py 가 이 파일을 보고 예비 실행을 진행시킴
+retry_p = os.path.join(ROOT, 'data', 'ads', 'retry.json'); retry = load(retry_p, {})
+RETRY = retry.get('day') == rank_day and not retry.get('done') and retry.get('pkgs')
+if RETRY:
+    picks = {p: g for p, g in picks.items() if p in retry['pkgs']}
+    print('오후 재시도: Google 요청 제한으로 멈춘 게임', ', '.join(g['name'] for g in picks.values()), flush=True)
 print(f"오늘 조회 {len(picks)}개:", ', '.join(f"{g['name']}({g['chart']})" for g in picks.values()), flush=True)
 if os.environ.get('DRY_RUN'): sys.exit(0)
 json.dump({'day': rank_day, 'picks': picks}, open(plan_p, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
@@ -82,10 +89,11 @@ def rank_only(g):
 
 for g in games.values():
     if g['pkg'] not in picks: rank_only(g)
-skipped = ran = rematched = previews = 0
+skipped = ran = rematched = previews = used = 0; blocked_pk = []
+last_open = 0
 for g in picks.values():
     before = load(ap, {}).get(g['pkg'])
-    if g['pkg'] in recent:
+    if g['pkg'] in recent and not RETRY:
         print(f"건너뜀 (6시간 안에 추적함): {g['name']}", flush=True)
         skipped += 1
         if g['ranks']: rank_only(g)
@@ -96,6 +104,8 @@ for g in picks.values():
     cmd = [sys.executable, os.path.join(ROOT, 'tracker', 'ad_track.py'), '--name', g['name'], '--pkg', g['pkg'], '--publisher', g['publisher'] or '', '--pool', g['chart']]
     if g['ranks']: cmd += ['--ranks', ','.join(f'{k}:{v}' for k, v in g['ranks'].items()), '--rank-date', g['date']]
     if rematched >= REMATCH_MAX or previews >= PREVIEW_MAX: cmd.append('--no-rematch')
+    cmd += ['--g-cap', str(G_CAP), '--g-budget', str(max(0, G_BUDGET - used))]
+    if ran > 1: time.sleep(10 if last_open < 100 else 30)   # 게임 사이 쉬기 (11/19): 미리보기를 많이 연 게임 뒤에는 더 길게
     rc = subprocess.run(cmd, check=False).returncode
     after = load(ap, {}).get(g['pkg']) or {}
     if before and after.get('rematched_at') != before.get('rematched_at'): rematched += 1
@@ -114,6 +124,11 @@ for g in picks.values():
     elif not gg.get('advertisers'): msgs.append(['w', f'{n}: Google 계정 없음'])
     cs = gg.get('candidates') or []
     left, first = sum(c.get('failed') or 0 for c in cs), sum(c.get('failedFirst') or 0 for c in cs)
+    last_open = sum(c.get('opened') or 0 for c in cs); used += last_open
+    deferred = sum(c.get('deferred') or 0 for c in cs)
+    if any(c.get('blocked') for c in cs):
+        blocked_pk.append(g['pkg']); msgs.append(['w', f"{n}: Google 요청 제한 감지 → 미리보기 중단" + (' (오후 재시도도 막힘 · 다음 수집에서)' if RETRY else ' · 12:30 예비 실행에서 다른 서버로 재시도')])
+    elif deferred: msgs.append(['m', f'{n}: Google 미리보기 한도로 {deferred}건은 다음 수집에서 확인'])
     if left:
         codes = {}
         for c in cs:
@@ -122,7 +137,8 @@ for g in picks.values():
     elif first: msgs.append(['r', f'{n}: Google 미리보기 {first}건 실패 → 재시도로 복구'])
     if gg.get('retry'): msgs.append(['r', f"{n}: Google 0건 → 30초 뒤 재시도 → {len(gg.get('ads', []))}건"])
 ok = not any(t == 'x' for t, _ in msgs)
+json.dump({'day': rank_day, 'pkgs': blocked_pk if not RETRY else retry['pkgs'], 'done': bool(RETRY) or not blocked_pk}, open(retry_p, 'w', encoding='utf-8'), ensure_ascii=False)
 top_n = sum(1 for g in picks.values() if g['ranks'])
-head = ['o' if ok else 'x', f'조회 {ran}개 (TOP5 {top_n} · 순번 {len(picks) - top_n}) · 오늘 TOP5 {len(games)}개' + (f' · 6시간 안에 조회해 건너뜀 {skipped}' if skipped else '')]
-order = {'x': 0, 'r': 1, 'w': 2}
+head = ['o' if ok else 'x', (f'오후 재시도 {ran}개 (Google 요청 제한으로 멈췄던 게임)' if RETRY else f'조회 {ran}개 (TOP5 {top_n} · 순번 {len(picks) - top_n}) · 오늘 TOP5 {len(games)}개' + (f' · 6시간 안에 조회해 건너뜀 {skipped}' if skipped else '')) + f' · Google 미리보기 {used}건']
+order = {'x': 0, 'r': 1, 'w': 2, 'm': 3}
 runlog.add('ads', '05:30', START, ok, [head] + sorted(msgs, key=lambda x: order.get(x[0], 3)))
