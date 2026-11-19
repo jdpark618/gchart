@@ -398,12 +398,12 @@
   "tracked_at": "2026-11-19T00:58:14Z",
   "days": 0,
   "meta_live": 0,
-  "google_live": 1,
+  "google_live": 2,
   "meta_new7": 0,
   "google_new7": 0,
   "meta": 0,
   "meta_total": 0,
-  "google": 1
+  "google": 2
  },
  {
   "pkg": "com.gamespark.topking.gp",
@@ -567,19 +567,20 @@
    "popular": 5
   },
   "rank_date": "2026-11-14",
+  "pool": [],
   "aliases": [
    "Fantasy For You",
    "지앤아이소프트(주)"
   ],
   "tracked_at": "2026-11-13T23:56:10Z",
   "days": 5,
-  "meta_live": 52,
-  "google_live": 6,
-  "meta_new7": 91,
-  "google_new7": 6,
+  "meta_live": 0,
+  "google_live": 9,
+  "meta_new7": 12,
+  "google_new7": 3,
   "meta": 91,
   "meta_total": 70,
-  "google": 12
+  "google": 15
  },
  {
   "pkg": "com.mainquest.randomdefense2d",
@@ -647,22 +648,23 @@
   "pkg": "com.cookapps.catshinobi",
   "name": "냥냥 시노비 : 미소녀 닌자 로그라이크 디펜스 RPG",
   "publisher": "CookApps",
+  "charts": {
+   "popular": 2
+  },
+  "rank_date": "2026-11-06",
+  "pool": [],
   "aliases": [
    "(주) 쿡앱스",
    "Ninja Defenders"
   ],
   "tracked_at": "2026-11-09T01:00:33Z",
+  "days": 1,
+  "meta_live": 0,
+  "google_live": 14,
+  "meta_new7": 0,
+  "google_new7": 0,
   "meta": 51,
   "meta_total": 72,
-  "google": 64,
-  "charts": {
-   "popular": 2
-  },
-  "rank_date": "2026-11-06",
-  "days": 1,
-  "meta_live": 51,
-  "google_live": 13,
-  "meta_new7": 17,
-  "google_new7": 3
+  "google": 66
  }
 ]
