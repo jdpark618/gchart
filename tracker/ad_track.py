@@ -137,9 +137,10 @@ async ([q, advId, pkg, ios, since, known, other]) => {
         return true;
     };
     let bad = [];
-    for (let i = 0; i < Math.min(all.length, 1200); i += 10) {
-      await wait(120);
-      const part = all.slice(i, i + 10), ok = await Promise.all(part.map(one));
+    /* 1차 확인 (11/19 속도 낮춤): 5건씩 · 0.3초 간격 — 10건씩 · 0.12초일 때 순간 초당 15~20회라 429(요청 과다)가 많았음 */
+    for (let i = 0; i < Math.min(all.length, 1200); i += 5) {
+      await wait(300);
+      const part = all.slice(i, i + 5), ok = await Promise.all(part.map(one));
       part.forEach((c, k) => { if (!ok[k]) bad.push(c); });
     }
     /* 실패분 재시도 (11/18): 15초 쉬고 3건씩 천천히 · 계정당 300건까지 · 처음 30건이 하나도 안 열리면 아직 막힌 것으로 보고 멈춤 (다음 날 다시 조회) */
