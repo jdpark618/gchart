@@ -593,7 +593,60 @@
   ],
   "ios": "1599719154",
   "meta_by": "검색어 '붕괴: 스타레일' → 광고 링크의 Play 패키지",
-  "matched_at": "2026-11-12T01:19:20Z"
+  "matched_at": "2026-11-12T01:19:20Z",
+  "ver": 2,
+  "rematched_at": "2026-11-19T09:33:47Z",
+  "google_log": {
+   "meta": [],
+   "names": [
+    "COGNOSPHERE",
+    "COGNOSPHERE PTE. LTD."
+   ],
+   "domains": [
+    "hoyoverse.com"
+   ],
+   "candidates": 9,
+   "previews": 70,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "COGNOSPHERE PTE. LTD",
+     "region": "SG",
+     "from": "이름 'COGNOSPHERE'",
+     "recent": 1,
+     "previews": 0,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "COGNOSPHERE PTE. LTD.",
+     "region": "SG",
+     "from": "이름 'COGNOSPHERE'",
+     "recent": 1469,
+     "previews": 9,
+     "failed": 0,
+     "hit": true
+    },
+    {
+     "name": "COGNOSPHERE PTE. LTD.",
+     "region": "SG",
+     "from": "이름 'COGNOSPHERE'",
+     "recent": 27,
+     "previews": 27,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "COGNOSPHERE PTE. LTD.",
+     "region": "SG",
+     "from": "이름 'COGNOSPHERE'",
+     "recent": 34,
+     "previews": 34,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  }
  },
  "com.end9games.worldtreeggl": {
   "meta_pages": [],

@@ -1,12 +1,42 @@
 {
  "day": "2026-11-19",
- "picks": {
+ "top5": {
+  "com.standegg.teamdefense": {
+   "name": "팀빨협동전 : 협동 영웅 디펜스",
+   "pkg": "com.standegg.teamdefense",
+   "publisher": "StandEgg Co., Ltd.",
+   "ranks": {
+    "popular": 1
+   },
+   "date": "2026-11-19",
+   "chart": "popular"
+  },
   "com.end9games.worldtreeggl": {
    "name": "세계수의 노래: AFK",
    "pkg": "com.end9games.worldtreeggl",
    "publisher": "End9 Games Corp.",
    "ranks": {
     "popular": 2
+   },
+   "date": "2026-11-19",
+   "chart": "popular"
+  },
+  "com.lycq.kr.and": {
+   "name": "미르의 전설2: 레볼루션",
+   "pkg": "com.lycq.kr.and",
+   "publisher": "Xsoga Game",
+   "ranks": {
+    "popular": 3
+   },
+   "date": "2026-11-19",
+   "chart": "popular"
+  },
+  "com.c3wavestudio.yumyumdragon": {
+   "name": "배고파용 키우기 : 방치형 RPG",
+   "pkg": "com.c3wavestudio.yumyumdragon",
+   "publisher": "3wave studio Co. Ltd.",
+   "ranks": {
+    "popular": 4
    },
    "date": "2026-11-19",
    "chart": "popular"
@@ -21,12 +51,32 @@
    "date": "2026-11-19",
    "chart": "popular"
   },
+  "com.kakaogames.dokkaebi": {
+   "name": "도깨비의세계",
+   "pkg": "com.kakaogames.dokkaebi",
+   "publisher": "Kakao Games Corp.",
+   "ranks": {
+    "sales": 1
+   },
+   "date": "2026-11-19",
+   "chart": "sales"
+  },
   "com.com2us.es.android.google.kr.normal": {
    "name": "제우스: 오만의 신",
    "pkg": "com.com2us.es.android.google.kr.normal",
    "publisher": "Com2uS",
    "ranks": {
     "sales": 2
+   },
+   "date": "2026-11-19",
+   "chart": "sales"
+  },
+  "com.proximabeta.nikke": {
+   "name": "승리의 여신: 니케",
+   "pkg": "com.proximabeta.nikke",
+   "publisher": "Level Infinite",
+   "ranks": {
+    "sales": 3
    },
    "date": "2026-11-19",
    "chart": "sales"
@@ -48,46 +98,6 @@
    "ranks": {
     "sales": 5
    },
-   "date": "2026-11-19",
-   "chart": "sales"
-  },
-  "com.gamespark.topking.gp": {
-   "name": "탑 로드",
-   "pkg": "com.gamespark.topking.gp",
-   "publisher": "GAME SPARK PTE. LTD.",
-   "ranks": {},
-   "date": "2026-11-19",
-   "chart": "popular"
-  },
-  "com.mocacorp.sudoku": {
-   "name": "스도쿠",
-   "pkg": "com.mocacorp.sudoku",
-   "publisher": "Moca",
-   "ranks": {},
-   "date": "2026-11-19",
-   "chart": "popular"
-  },
-  "com.zjcs.android.kr": {
-   "name": "소드 x 스태프: 화산귀환 콜라보",
-   "pkg": "com.zjcs.android.kr",
-   "publisher": "BOLTRAY GAMES",
-   "ranks": {},
-   "date": "2026-11-19",
-   "chart": "popular"
-  },
-  "com.mergegames.gossipharbor": {
-   "name": "가십하버: 합성 & 스토리 게임",
-   "pkg": "com.mergegames.gossipharbor",
-   "publisher": "Microfun Limited",
-   "ranks": {},
-   "date": "2026-11-19",
-   "chart": "sales"
-  },
-  "com.ncsoft.lineagem19": {
-   "name": "리니지M",
-   "pkg": "com.ncsoft.lineagem19",
-   "publisher": "NC Corporation",
-   "ranks": {},
    "date": "2026-11-19",
    "chart": "sales"
   }
