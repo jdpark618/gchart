@@ -55,7 +55,9 @@
   "ver": 2
  },
  "com.ncsoft.lineagem19": {
-  "meta_pages": [],
+  "meta_pages": [
+   "1292415850830271"
+  ],
   "google": [
    {
     "id": "AR08233267038722719745",
@@ -64,24 +66,29 @@
    }
   ],
   "ios": "1474589366",
-  "meta_by": "",
+  "meta_by": "검색어 '리니지M' → 광고 링크가 게임 사이트 lineagem.plaync.com",
   "matched_at": "2026-11-06T01:40:59Z",
-  "rematched_at": "2026-11-14T00:00:36Z",
+  "rematched_at": "2026-11-19T01:01:35Z",
   "google_log": {
-   "meta": [],
+   "meta": [
+    "리니지M:17",
+    "NC Corporation:41"
+   ],
    "names": [
     "NC",
     "NC Corporation",
     "엔씨",
     "주식회사 엔씨",
-    "NC Corp."
+    "NC Corp.",
+    "리니지M"
    ],
    "domains": [],
    "candidates": 0,
    "previews": null,
    "failed": null,
    "checked": []
-  }
+  },
+  "ver": 2
  },
  "com.kakaogames.dokkaebi": {
   "meta_pages": [],
@@ -885,6 +892,111 @@
      "previews": 6,
      "failed": 0,
      "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.mocacorp.sudoku": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR04089022171047788545",
+    "name": "Easybrain Ltd",
+    "by": "이름 'Easybrain' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "1193508329",
+  "meta_by": "",
+  "matched_at": "2026-11-19T00:58:14Z",
+  "google_log": {
+   "meta": [
+    "스도쿠:211",
+    "스도쿠 - 클래식 로직 퍼즐 게임:0",
+    "Moca:32366"
+   ],
+   "names": [
+    "Moca",
+    "Easybrain",
+    "Easybrain Ltd"
+   ],
+   "domains": [
+    "easybrain.co.kr"
+   ],
+   "candidates": 12,
+   "previews": 25,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "Easybrain Ltd",
+     "region": "CY",
+     "from": "이름 'Easybrain'",
+     "recent": 50,
+     "previews": 20,
+     "failed": 0,
+     "hit": true
+    },
+    {
+     "name": "이종규",
+     "region": "KR",
+     "from": "도메인→이름 '이종규'",
+     "recent": 5,
+     "previews": 5,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.mergegames.gossipharbor": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR11474172334340833281",
+    "name": "Microfun Limited",
+    "by": "이름 'Microfun' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "1623318294",
+  "meta_by": "",
+  "matched_at": "2026-11-19T01:01:01Z",
+  "google_log": {
+   "meta": [
+    "가십하버: 합성 & 스토리 게임:0",
+    "가십하버:0",
+    "합성 & 스토리 게임:0",
+    "합성&스토리게임:0",
+    "가십하버 합성 & 스토리 게임:0",
+    "가십하버합성&스토리게임:0",
+    "Microfun Limited:0"
+   ],
+   "names": [
+    "Microfun",
+    "Microfun Limited"
+   ],
+   "domains": [],
+   "candidates": 3,
+   "previews": 43,
+   "failed": 13,
+   "checked": [
+    {
+     "name": "Microfun Limited",
+     "region": "HK",
+     "from": "이름 'Microfun'",
+     "recent": 25,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    },
+    {
+     "name": "Microfun Limited",
+     "region": "HK",
+     "from": "이름 'Microfun'",
+     "recent": 33,
+     "previews": 33,
+     "failed": 13,
+     "hit": false
     }
    ]
   },

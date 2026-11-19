@@ -1,28 +1,70 @@
 {
- "day": "2026-11-18",
+ "day": "2026-11-19",
  "picks": {
-  "com.mocacorp.block": {
-   "name": "블록게임",
-   "pkg": "com.mocacorp.block",
-   "publisher": "Moca",
-   "ranks": {},
-   "date": "2026-11-18",
+  "com.end9games.worldtreeggl": {
+   "name": "세계수의 노래: AFK",
+   "pkg": "com.end9games.worldtreeggl",
+   "publisher": "End9 Games Corp.",
+   "ranks": {
+    "popular": 2
+   },
+   "date": "2026-11-19",
    "chart": "popular"
   },
-  "com.superpixel.scrap": {
-   "name": "고물 히어로 - 신규 서버 오픈!",
-   "pkg": "com.superpixel.scrap",
-   "publisher": "SUPERBOX Inc",
-   "ranks": {},
-   "date": "2026-11-18",
+  "com.farlightgames.warline.gp.global": {
+   "name": "워라인: 스나이퍼",
+   "pkg": "com.farlightgames.warline.gp.global",
+   "publisher": "Powerfantasy HK Limited",
+   "ranks": {
+    "popular": 5
+   },
+   "date": "2026-11-19",
    "chart": "popular"
+  },
+  "com.com2us.es.android.google.kr.normal": {
+   "name": "제우스: 오만의 신",
+   "pkg": "com.com2us.es.android.google.kr.normal",
+   "publisher": "Com2uS",
+   "ranks": {
+    "sales": 2
+   },
+   "date": "2026-11-19",
+   "chart": "sales"
+  },
+  "com.HoYoverse.hkrpgoversea": {
+   "name": "붕괴: 스타레일",
+   "pkg": "com.HoYoverse.hkrpgoversea",
+   "publisher": "COGNOSPHERE PTE. LTD.",
+   "ranks": {
+    "sales": 4
+   },
+   "date": "2026-11-19",
+   "chart": "sales"
+  },
+  "com.gof.global": {
+   "name": "WOS: 화이트아웃 서바이벌",
+   "pkg": "com.gof.global",
+   "publisher": "Century Games PTE. LTD.",
+   "ranks": {
+    "sales": 5
+   },
+   "date": "2026-11-19",
+   "chart": "sales"
   },
   "com.gamespark.topking.gp": {
    "name": "탑 로드",
    "pkg": "com.gamespark.topking.gp",
    "publisher": "GAME SPARK PTE. LTD.",
    "ranks": {},
-   "date": "2026-11-18",
+   "date": "2026-11-19",
+   "chart": "popular"
+  },
+  "com.mocacorp.sudoku": {
+   "name": "스도쿠",
+   "pkg": "com.mocacorp.sudoku",
+   "publisher": "Moca",
+   "ranks": {},
+   "date": "2026-11-19",
    "chart": "popular"
   },
   "com.zjcs.android.kr": {
@@ -30,8 +72,24 @@
    "pkg": "com.zjcs.android.kr",
    "publisher": "BOLTRAY GAMES",
    "ranks": {},
-   "date": "2026-11-18",
+   "date": "2026-11-19",
    "chart": "popular"
+  },
+  "com.mergegames.gossipharbor": {
+   "name": "가십하버: 합성 & 스토리 게임",
+   "pkg": "com.mergegames.gossipharbor",
+   "publisher": "Microfun Limited",
+   "ranks": {},
+   "date": "2026-11-19",
+   "chart": "sales"
+  },
+  "com.ncsoft.lineagem19": {
+   "name": "리니지M",
+   "pkg": "com.ncsoft.lineagem19",
+   "publisher": "NC Corporation",
+   "ranks": {},
+   "date": "2026-11-19",
+   "chart": "sales"
   }
  }
 }
