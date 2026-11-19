@@ -210,6 +210,7 @@ async def main():
     ap.add_argument('--name', required=True); ap.add_argument('--pkg', required=True)
     ap.add_argument('--google-adv', default=''); ap.add_argument('--meta-page', default=''); ap.add_argument('--google-adv-id', default=''); ap.add_argument('--ios', default='')
     ap.add_argument('--publisher', default=''); ap.add_argument('--rematch', action='store_true')
+    ap.add_argument('--google-only', action='store_true')   # 보충 추적 (11/19): Meta · 매칭 · 순위는 그대로 두고 Google 소재만 이어서 받음
     ap.add_argument('--g-cap', type=int, default=300); ap.add_argument('--g-budget', type=int, default=800)   # Google 미리보기 한도 (11/19): 게임당 · 이번 실행에 남은 예산
     ap.add_argument('--pool', default=''); ap.add_argument('--no-rematch', action='store_true')   # 순번 교체(11/18): 어느 차트에서 뽑혔는지 · 오늘 재매칭 한도를 다 썼으면 건너뜀
     ap.add_argument('--ranks', default=''); ap.add_argument('--rank-date', default='')   # 'popular:2,sales:3' — 매일 TOP5 추적(daily_top5.py)에서 넘김
@@ -222,6 +223,9 @@ async def main():
     acc = None if a.rematch else accounts.get(pkg)
     prev_p = os.path.join(ROOT, 'data', 'ads', f'{pkg}.json')
     prev = json.load(open(prev_p, encoding='utf-8')) if os.path.exists(prev_p) and acc else {}   # 처음 매칭이면 이전 결과는 버리고 새로
+    if a.google_only:
+        if not prev or not (acc or {}).get('google'): print('보충 추적: 저장된 결과 · Google 계정이 없어 건너뜀'); return
+        res['tracked_at'] = prev.get('tracked_at', res['tracked_at']); res['google_at'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())   # 추적일(조회 순번 기준)은 그대로
     async with async_playwright() as p:
         b = await p.chromium.launch()
         ctx = await b.new_context(locale='ko-KR', user_agent=UA, viewport={'width': 1366, 'height': 900})
@@ -238,7 +242,7 @@ async def main():
         # 찾는 방법이 바뀌면(MATCH_VER, 11/13) 예전 방법으로 찾은 게임은 다시 찾음 — 이미 찾은 Google 계정에 새로 찾은 계정을 더함 (한 회사가 계정 여러 개로 나눠 광고).
         # Google 계정이나 Meta 페이지가 없는 게임은 바로, 둘 다 있는 게임은 마지막으로 찾은 지 7일이 지나면 (하루에 몰리면 광고 투명성 센터가 막으므로 나눠서)
         stale = bool(acc) and acc.get('ver') != MATCH_VER
-        if acc and not a.no_rematch and not (a.meta_page or a.google_adv_id) and (stale or not acc.get('meta_pages') or not acc.get('google')):
+        if acc and not a.google_only and not a.no_rematch and not (a.meta_page or a.google_adv_id) and (stale or not acc.get('meta_pages') or not acc.get('google')):
             last = acc.get('rematched_at') or acc.get('matched_at') or ''
             try: due = (stale and (not acc.get('google') or not acc.get('meta_pages'))) or time.time() - calendar.timegm(time.strptime(last[:19], '%Y-%m-%dT%H:%M:%S')) >= 7 * 86400
             except Exception: due = True
@@ -264,10 +268,12 @@ async def main():
             accounts[pkg] = acc
         meta_page = ','.join(acc.get('meta_pages', []))
         gadv = ','.join(f"{g['id']}|{g.get('name', '')}" for g in acc.get('google', []))
-        try: res['meta'] = await meta(ctx, keys, pkg, meta_page) if meta_page else {'pages': [], 'count': 0, 'ads': [], 'log': [{'skip': 'Meta 계정 없음'}]}
-        except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
+        if a.google_only: res['meta'] = prev.get('meta') or {'ads': []}
+        else:
+            try: res['meta'] = await meta(ctx, keys, pkg, meta_page) if meta_page else {'pages': [], 'count': 0, 'ads': [], 'log': [{'skip': 'Meta 계정 없음'}]}
+            except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
         # 재시도 (11/06): 이전엔 광고가 있었는데 이번 조회가 비면 일시 차단일 수 있어 30초 쉬고 한 번 더
-        if meta_page and not res['meta'].get('ads') and prev.get('meta', {}).get('ads'):
+        if not a.google_only and meta_page and not res['meta'].get('ads') and prev.get('meta', {}).get('ads'):
             await asyncio.sleep(30)
             try: res['meta'] = await meta(ctx, keys, pkg, meta_page); res['meta'].setdefault('log', []).append({'retry': True})
             except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
@@ -283,7 +289,7 @@ async def main():
             await asyncio.sleep(30)
             try: res['google'] = await google(ctx, '', gadv, pkg, acc.get('ios', '') or clean(a.ios), now - (30 if prev else 90) * 86400, known, other, a.g_cap, a.g_budget); res['google']['retry'] = True
             except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
-        try: res['title'] = await play_title(ctx, pkg)
+        try: res['title'] = prev.get('title', '') if a.google_only else await play_title(ctx, pkg)
         except Exception: res['title'] = ''
         await b.close()
     # Google 문구 정리: 게임 이름(검색어·Play 정식 이름)과 그 조각 · 스토어 카드 라벨 · 깨진 따옴표(x22 등) 제거 → 실제 광고 문구만
@@ -295,11 +301,13 @@ async def main():
     d = os.path.join(ROOT, 'data', 'ads', 'img', pkg)
     if not prev: shutil.rmtree(d, ignore_errors=True)
     os.makedirs(d, exist_ok=True)
-    for x in res['meta'].get('ads', []): x['thumb'] = save_thumb(x.pop('thumb', ''), d)
+    if not a.google_only:   # 보충 추적은 Meta 를 다시 받지 않음 (저장된 썸네일 파일 이름 그대로)
+        for x in res['meta'].get('ads', []): x['thumb'] = save_thumb(x.pop('thumb', ''), d)
     for x in res['google'].get('ads', []): x['thumb'] = save_thumb(f"https://i.ytimg.com/vi/{x['yt']}/hqdefault.jpg" if x.get('yt') else x.get('img'), d)
     # 이전 결과와 병합: Meta 는 ID 기준 최신 값으로, Google 은 저장된 소재의 날짜를 목록 값으로 갱신 + 새 소재 추가
     # Meta 마지막 확인 시각: 비로그인 30개 한도로 그날 안 걸린 소재는 예전 '집행 중' 상태가 남으므로, 화면은 이 값이 마지막 추적일과 같을 때만 집행 중으로 봄
-    for x in res['meta'].get('ads', []): x['seen'] = now
+    if not a.google_only:
+        for x in res['meta'].get('ads', []): x['seen'] = now
     if prev:
         mm = {x['id']: x for x in prev.get('meta', {}).get('ads', [])} if prev.get('meta', {}).get('lang') == 'ko' else {}   # 한국어 조회 이전(전체 언어) 결과는 버림
         mm.update({x['id']: x for x in res['meta'].get('ads', [])})

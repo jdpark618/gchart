@@ -9,6 +9,8 @@ on:
       google_adv: { description: 'Google 광고주 검색어 (퍼블리셔명, 비우면 Google 건너뜀)', default: '' }
       meta_page: { description: 'Meta 페이지 ID (알면 입력, 비우면 자동)', default: '' }
       google_adv_id: { description: 'Google 광고주 ID AR... (알면 입력)', default: '' }
+      stage: { description: '시작 단계 (비우면 처음부터) — top5 · rotation · fill. IP 가 겹칠 때 수집기가 스스로 씀', required: false, default: '' }
+      attempt: { description: 'IP 중복으로 다시 실행한 횟수 (수집기가 씀)', required: false, default: '1' }
   push:
     branches: [main]
     paths: ['tracker/test.json', 'tracker/daily_top5.py']   # daily_top5.py 를 고쳐 push 하면 그날 TOP5 를 바로 한 번 추적
@@ -23,6 +25,7 @@ on:
 concurrency: { group: ad-track, cancel-in-progress: false }
 permissions:
   contents: write
+  actions: write   # IP 가 겹치면 그 단계부터 워크플로를 새로 실행 (tracker/ip_guard.py, 11/19)
 jobs:
   # 관문 (11/10, 11/12 순위 완료 연결 추가): 예약 · 순위 완료로 시작했을 때 오늘 이미 성공했으면 여기서 끝냄 · 수동 실행은 항상 진행
   gate:
@@ -34,11 +37,15 @@ jobs:
         if: github.event_name == 'schedule' || github.event_name == 'workflow_run'
       - id: g
         if: github.event_name == 'schedule' || github.event_name == 'workflow_run'
-        run: python3 gate.py ads
+        run: python3 gate.py ads ads_rot ads_fill   # 세 단계(TOP5 · 순번 · 보충) 모두 성공했을 때만 건너뜀
 
+  # 1단계 TOP5 추적 (11/19 세 단계로 나눔): 인기 TOP5 + 매출 TOP5 매일 · 수동 단일 게임 · test.json 도 여기서
   track:
     needs: gate
-    if: needs.gate.outputs.skip != 'true'
+    if: needs.gate.outputs.skip != 'true' && (inputs.stage == '' || inputs.stage == 'top5' || github.event_name != 'workflow_dispatch')
+    outputs:
+      ip: ${{ steps.ip.outputs.ip }}
+      dup: ${{ steps.ip.outputs.dup }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -46,8 +53,14 @@ jobs:
         with: { fetch-depth: 0 }   # push 때 바뀐 파일을 보고 TOP5 / test.json 중 고르기 위함
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
-      - run: pip install playwright==1.48.0 pillow && python -m playwright install --with-deps chromium
+      - id: ip   # 매일 TOP5 일 때만 IP 검사 (게임 하나 수동 실행 · test.json push 는 다시 실행하면 입력이 사라지므로 검사 안 함)
+        if: github.event_name != 'push' && inputs.pkg == ''
+        env: { GH_TOKEN: '${{ github.token }}' }
+        run: python tracker/ip_guard.py top5 "${{ inputs.attempt || '1' }}"
+      - if: steps.ip.outputs.dup != 'true'
+        run: pip install playwright==1.48.0 pillow && python -m playwright install --with-deps chromium
       - name: Track
+        if: steps.ip.outputs.dup != 'true'
         env:
           IN_NAME: ${{ inputs.name }}
           IN_PKG: ${{ inputs.pkg }}
@@ -56,10 +69,11 @@ jobs:
           IN_GADVID: ${{ inputs.google_adv_id }}
           EVENT: ${{ github.event_name }}
         run: |
+          export RUNNER_IP="${{ steps.ip.outputs.ip }}"   # 수집 로그에 남겨 다음 단계가 다른 IP 인지 확인
           CHANGED=$( [ "$EVENT" = "push" ] && git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" 2>/dev/null || true )
           # 매일 TOP5: 순위 완료 · 예약 · 수동 실행(입력 비움) · daily_top5.py 를 고친 push  /  test.json push = 시험 목록  /  패키지 입력 = 그 게임 하나 (11/10)
           if [ "$EVENT" = "schedule" ] || [ "$EVENT" = "workflow_run" ] || { [ "$EVENT" = "workflow_dispatch" ] && [ -z "$IN_PKG" ]; } || { [ "$EVENT" = "push" ] && echo "$CHANGED" | grep -q 'tracker/daily_top5.py' && ! echo "$CHANGED" | grep -q 'tracker/test.json'; }; then
-            python tracker/daily_top5.py   # 매일: 그날 인기 TOP5 + 매출 TOP5 (Play · 한국)
+            python tracker/daily_top5.py top5   # 1단계: 그날 인기 TOP5 + 매출 TOP5 (Play · 한국)
           elif [ -n "$IN_PKG" ]; then
             python tracker/ad_track.py --name "$IN_NAME" --pkg "$IN_PKG" --google-adv "$IN_GADV" --meta-page "$IN_MPAGE" --google-adv-id "$IN_GADVID"
           else
@@ -74,10 +88,79 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          python tracker/top_analysis.py || true   # 상위권 분석 · 마케팅 동향 · 신작 성과 데이터 (시장 분석, 11/18)
+          [ "${{ steps.ip.outputs.dup }}" = "true" ] || python tracker/top_analysis.py || true   # 상위권 분석 · 마케팅 동향 · 신작 성과 데이터 (시장 분석, 11/18)
           python tracker/pages_usage.py || true   # GitHub Pages 용량 기록 (/admin, 11/18)
           git add data/ads data/runlog data/pages_usage.json data/top_analysis.json data/market_trend.json data/release_dates.json 2>/dev/null || git add data/ads   # 수집 로그 (/admin, 11/09)
           git diff --cached --quiet && { echo "변경 없음"; exit 0; }
           git commit -qm "ads: 마케팅 추적 결과 $(date -u +%FT%TZ)"
+          for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && exit 0; sleep $((i*5)); done
+          exit 1
+
+  # 2단계 순번 추적 (11/19): TOP5 뒤 새 서버(다른 IP)에서 6위 아래 게임
+  rotation:
+    needs: [gate, track]
+    if: always() && needs.gate.outputs.skip != 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && inputs.pkg == '')) && inputs.stage != 'fill' && (needs.track.result == 'success' || needs.track.result == 'skipped') && needs.track.outputs.dup != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      ip: ${{ steps.ip.outputs.ip }}
+      dup: ${{ steps.ip.outputs.dup }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: git pull -q --rebase origin main   # 앞 단계가 올린 결과 · 수집 로그부터
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - id: ip
+        env: { GH_TOKEN: '${{ github.token }}' }
+        run: python tracker/ip_guard.py rotation "${{ inputs.attempt || '1' }}"
+      - if: steps.ip.outputs.dup != 'true'
+        run: pip install playwright==1.48.0 pillow && python -m playwright install --with-deps chromium
+      - name: 2단계 순번 추적 (11/19)
+        if: steps.ip.outputs.dup != 'true'
+        run: |
+          export RUNNER_IP="${{ steps.ip.outputs.ip }}"
+          python tracker/daily_top5.py rotation
+      - name: Save to main (Pages)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          [ "${{ steps.ip.outputs.dup }}" = "true" ] || python tracker/top_analysis.py || true
+          git add data/ads data/runlog data/top_analysis.json data/market_trend.json data/release_dates.json 2>/dev/null || git add data/ads data/runlog
+          git diff --cached --quiet && { echo "변경 없음"; exit 0; }
+          git commit -qm "ads: 순번 추적 결과 $(date -u +%FT%TZ)"
+          for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && exit 0; sleep $((i*5)); done
+          exit 1
+
+  # 3단계 보충 추적 (11/19): 순번 뒤 또 새 서버(다른 IP)에서 못 받은 Google 소재만
+  fill:
+    needs: [gate, track, rotation]
+    if: always() && needs.gate.outputs.skip != 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && inputs.pkg == '')) && (needs.rotation.result == 'success' || needs.rotation.result == 'skipped') && needs.track.outputs.dup != 'true' && needs.rotation.outputs.dup != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      ip: ${{ steps.ip.outputs.ip }}
+      dup: ${{ steps.ip.outputs.dup }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: git pull -q --rebase origin main   # 앞 단계가 올린 결과 · 수집 로그부터
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - id: ip
+        env: { GH_TOKEN: '${{ github.token }}' }
+        run: python tracker/ip_guard.py fill "${{ inputs.attempt || '1' }}"
+      - if: steps.ip.outputs.dup != 'true'
+        run: pip install playwright==1.48.0 pillow && python -m playwright install --with-deps chromium
+      - name: 3단계 보충 추적 (11/19)
+        if: steps.ip.outputs.dup != 'true'
+        run: |
+          export RUNNER_IP="${{ steps.ip.outputs.ip }}"
+          python tracker/catchup.py
+      - name: Save to main (Pages)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ads data/runlog data/top_analysis.json data/market_trend.json data/release_dates.json 2>/dev/null || git add data/ads data/runlog
+          git diff --cached --quiet && { echo "변경 없음"; exit 0; }
+          git commit -qm "ads: 보충 추적 결과 $(date -u +%FT%TZ)"
           for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && exit 0; sleep $((i*5)); done
           exit 1

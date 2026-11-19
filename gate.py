@@ -1,5 +1,5 @@
 """예약 실행 관문 (11/10): 하루 2번(원래 + 예비 7시간 뒤) 예약을 걸고, 오늘 이미 성공한 수집이면 뒤에 온 예약은 바로 끝낸다.
-사용: python gate.py <카테고리...>   예) python gate.py popular sales
+사용: python gate.py <카테고리...>   예) python gate.py popular sales · 마케팅 추적은 ads ads_rot ads_fill (세 단계 모두 성공해야 건너뜀)
 기준: data/runlog/<KST 오늘>/<카테고리>.json 의 마지막 시도가 성공(ok) — 주어진 카테고리가 모두 성공이면 skip=true.
 수동 실행(workflow_dispatch) 은 워크플로 쪽에서 이 관문을 거치지 않음 (항상 실행)."""
 import json, os, sys
@@ -11,15 +11,9 @@ root = os.path.dirname(os.path.abspath(__file__))
 
 def done(cat):
     try:
-        ok = bool(json.load(open(os.path.join(root, 'data', 'runlog', day, f'{cat}.json'), encoding='utf-8'))['attempts'][-1]['ok'])
+        return bool(json.load(open(os.path.join(root, 'data', 'runlog', day, f'{cat}.json'), encoding='utf-8'))['attempts'][-1]['ok'])
     except Exception:
         return False
-    if cat == 'ads':   # 마케팅 추적 (11/19): Google 요청 제한으로 멈춘 게임이 있으면 예비 실행에서 한 번 더 (data/ads/retry.json)
-        try:
-            r = json.load(open(os.path.join(root, 'data', 'ads', 'retry.json'), encoding='utf-8'))
-            if r.get('day') == day and r.get('pkgs') and not r.get('done'): return False
-        except Exception: pass
-    return ok
 
 
 cats = sys.argv[1:]
