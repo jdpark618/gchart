@@ -1,5 +1,4 @@
 {
- "day": "2026-11-19",
  "top5": {
   "com.standegg.teamdefense": {
    "name": "팀빨협동전 : 협동 영웅 디펜스",
@@ -98,6 +97,33 @@
    "ranks": {
     "sales": 5
    },
+   "date": "2026-11-19",
+   "chart": "sales"
+  }
+ },
+ "day": "2026-11-19",
+ "rotation": {
+  "com.run.tower.defense": {
+   "name": "킹샷:Kingshot",
+   "pkg": "com.run.tower.defense",
+   "publisher": "Century Games PTE. LTD.",
+   "ranks": {},
+   "date": "2026-11-19",
+   "chart": "sales"
+  },
+  "com.ProjectMoon.LimbusCompany": {
+   "name": "Limbus Company",
+   "pkg": "com.ProjectMoon.LimbusCompany",
+   "publisher": "Project Moon",
+   "ranks": {},
+   "date": "2026-11-19",
+   "chart": "sales"
+  },
+  "com.nexon.ma": {
+   "name": "메이플 키우기",
+   "pkg": "com.nexon.ma",
+   "publisher": "NEXON Company",
+   "ranks": {},
    "date": "2026-11-19",
    "chart": "sales"
   }

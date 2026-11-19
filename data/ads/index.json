@@ -1,5 +1,73 @@
 [
  {
+  "pkg": "com.nexon.ma",
+  "name": "메이플 키우기",
+  "publisher": "NEXON Company",
+  "charts": {
+   "sales": 4
+  },
+  "rank_date": "2026-11-12",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "(주)넥슨코리아",
+   "메이플 키우기"
+  ],
+  "tracked_at": "2026-11-19T09:41:15Z",
+  "days": 4,
+  "meta_live": 0,
+  "google_live": 64,
+  "meta_new7": 0,
+  "google_new7": 1,
+  "meta": 8,
+  "meta_total": 222,
+  "google": 135
+ },
+ {
+  "pkg": "com.ProjectMoon.LimbusCompany",
+  "name": "Limbus Company",
+  "publisher": "Project Moon",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-19T09:40:54Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.run.tower.defense",
+  "name": "킹샷:Kingshot",
+  "publisher": "Century Games PTE. LTD.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "CENTURY GAMES PTE. LTD.",
+   "Kingshot"
+  ],
+  "tracked_at": "2026-11-19T09:38:26Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 40,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 30,
+  "meta_total": 5154,
+  "google": 46
+ },
+ {
   "pkg": "com.gof.global",
   "name": "WOS: 화이트아웃 서바이벌",
   "publisher": "Century Games PTE. LTD.",
@@ -531,28 +599,6 @@
   "meta": 0,
   "meta_total": 0,
   "google": 0
- },
- {
-  "pkg": "com.nexon.ma",
-  "name": "메이플 키우기",
-  "publisher": "NEXON Company",
-  "charts": {
-   "sales": 4
-  },
-  "rank_date": "2026-11-12",
-  "aliases": [
-   "(주)넥슨코리아",
-   "메이플 키우기"
-  ],
-  "tracked_at": "2026-11-12T08:33:31Z",
-  "days": 4,
-  "meta_live": 0,
-  "google_live": 66,
-  "meta_new7": 0,
-  "google_new7": 1,
-  "meta": 8,
-  "meta_total": 253,
-  "google": 126
  },
  {
   "pkg": "com.davincinote.twomergesimul",

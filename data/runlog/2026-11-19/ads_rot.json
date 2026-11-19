@@ -1,0 +1,30 @@
+{
+ "cat": "ads_rot",
+ "sched": "이어서",
+ "attempts": [
+  {
+   "n": 1,
+   "start": "2026-11-19T18:38:25+09:00",
+   "end": "2026-11-19T18:45:23+09:00",
+   "ok": true,
+   "msgs": [
+    [
+     "o",
+     "순번 추적 3개 · Google 미리보기 501건 · 서버 IP 48.200.97.187"
+    ],
+    [
+     "w",
+     "Limbus Company: Meta 계정 없음"
+    ],
+    [
+     "w",
+     "Limbus Company: Google 계정 없음"
+    ],
+    [
+     "m",
+     "킹샷:Kingshot: Google 미리보기 한도로 103건은 보충 추적에서 이어서"
+    ]
+   ]
+  }
+ ]
+}

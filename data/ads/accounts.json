@@ -424,7 +424,63 @@
   ],
   "ios": "6739616715",
   "meta_by": "검색어 '메이플 키우기' → 광고 링크의 Play 패키지",
-  "matched_at": "2026-11-09T01:14:18Z"
+  "matched_at": "2026-11-09T01:14:18Z",
+  "ver": 2,
+  "rematched_at": "2026-11-19T09:41:15Z",
+  "google_log": {
+   "meta": [],
+   "names": [
+    "NEXON",
+    "NEXON Company",
+    "Nexon Korea",
+    "Nexon Korea Corporation"
+   ],
+   "domains": [
+    "nexon.com",
+    "nexon.co.jp"
+   ],
+   "candidates": 24,
+   "previews": 304,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "Nexon Korea",
+     "region": "KR",
+     "from": "이름 'NEXON'",
+     "recent": 1500,
+     "previews": 198,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "Nexon Korea Co., Ltd.",
+     "region": "KR",
+     "from": "이름 'Nexon Korea'",
+     "recent": 93,
+     "previews": 93,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "NEXON Co. Ltd",
+     "region": "",
+     "from": "도메인 'nexon.co.jp'",
+     "recent": 26,
+     "previews": 2,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "넥슨코리아",
+     "region": "",
+     "from": "도메인 'nexon.com'",
+     "recent": 561,
+     "previews": 11,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  }
  },
  "com.gnisoft.f4u.googlePlay": {
   "meta_pages": [
@@ -1052,6 +1108,79 @@
      "hit": false
     }
    ]
+  },
+  "ver": 2
+ },
+ "com.run.tower.defense": {
+  "meta_pages": [
+   "325635760632130"
+  ],
+  "google": [
+   {
+    "id": "AR15528579328135659521",
+    "name": "CENTURY GAMES PTE. LTD.",
+    "by": "이름 'Century Games' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6739554056",
+  "meta_by": "검색어 '킹샷:Kingshot' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-19T09:38:26Z",
+  "google_log": {
+   "meta": [
+    "킹샷:Kingshot:29"
+   ],
+   "names": [
+    "Century Games",
+    "Century Games PTE. LTD.",
+    "Kingshot"
+   ],
+   "domains": [
+    "tower.jp"
+   ],
+   "candidates": 4,
+   "previews": 10,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "CENTURY GAMES PTE. LTD.",
+     "region": "SG",
+     "from": "이름 'Century Games'",
+     "recent": 403,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    },
+    {
+     "name": "タワーレコード株式会社",
+     "region": "",
+     "from": "도메인 'tower.jp'",
+     "recent": 1,
+     "previews": 0,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.ProjectMoon.LimbusCompany": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "6444112366",
+  "meta_by": "",
+  "matched_at": "2026-11-19T09:40:54Z",
+  "google_log": {
+   "meta": [],
+   "names": [
+    "Project Moon",
+    "Project Moon Corp.",
+    "Project Moon Co., Ltd."
+   ],
+   "domains": [],
+   "candidates": 0,
+   "previews": 0,
+   "failed": 0,
+   "checked": []
   },
   "ver": 2
  }
