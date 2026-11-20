@@ -1183,5 +1183,90 @@
    "checked": []
   },
   "ver": 2
+ },
+ "com.rabbithole.cardofdemonslayer": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR07840379442122719233",
+    "name": "(주) 쿡앱스",
+    "by": "이름 '쿡앱스' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6824833886",
+  "meta_by": "",
+  "matched_at": "2026-11-20T01:00:53Z",
+  "google_log": {
+   "meta": [
+    "카드 오브 데몬슬레이어: 덱빌딩 로그라이크 RPG:0",
+    "카드 오브 데몬슬레이어:0",
+    "카드오브데몬슬레이어:0",
+    "덱빌딩 로그라이크 RPG:0",
+    "덱빌딩로그라이크RPG:0",
+    "카드 오브 데몬슬레이어 덱빌딩 로그라이크 RPG:0",
+    "CookApps:22204"
+   ],
+   "names": [
+    "CookApps",
+    "쿡앱스"
+   ],
+   "domains": [
+    "cookapps.com"
+   ],
+   "candidates": 2,
+   "previews": 21,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "(주)쿡앱스",
+     "region": "KR",
+     "from": "이름 '쿡앱스'",
+     "recent": 1,
+     "previews": 1,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "(주) 쿡앱스",
+     "region": "KR",
+     "from": "이름 '쿡앱스'",
+     "recent": 60,
+     "previews": 20,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "6760277702",
+  "meta_by": "",
+  "matched_at": "2026-11-20T01:02:10Z",
+  "google_log": {
+   "meta": [
+    "몬몬 마스터즈: 몬스터 수집 전투 RPG:0",
+    "몬몬 마스터즈:0",
+    "몬몬마스터즈:0",
+    "몬스터 수집 전투 RPG:0",
+    "몬스터수집전투RPG:0",
+    "몬몬 마스터즈 몬스터 수집 전투 RPG:0",
+    "PLAYHARD STUDIO:0"
+   ],
+   "names": [
+    "PLAYHARD STUDIO",
+    "playhard",
+    "playhard co., ltd",
+    "playhard Inc.,"
+   ],
+   "domains": [],
+   "candidates": 0,
+   "previews": 0,
+   "failed": 0,
+   "checked": []
+  },
+  "ver": 2
  }
 }

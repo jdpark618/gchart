@@ -1,4 +1,5 @@
 {
+ "day": "2026-11-20",
  "top5": {
   "com.standegg.teamdefense": {
    "name": "팀빨협동전 : 협동 영웅 디펜스",
@@ -7,17 +8,27 @@
    "ranks": {
     "popular": 1
    },
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "chart": "popular"
   },
-  "com.end9games.worldtreeggl": {
-   "name": "세계수의 노래: AFK",
-   "pkg": "com.end9games.worldtreeggl",
-   "publisher": "End9 Games Corp.",
+  "com.rabbithole.cardofdemonslayer": {
+   "name": "카드 오브 데몬슬레이어: 덱빌딩 로그라이크 RPG",
+   "pkg": "com.rabbithole.cardofdemonslayer",
+   "publisher": "CookApps",
    "ranks": {
     "popular": 2
    },
-   "date": "2026-11-19",
+   "date": "2026-11-20",
+   "chart": "popular"
+  },
+  "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid": {
+   "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
+   "pkg": "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid",
+   "publisher": "PLAYHARD STUDIO",
+   "ranks": {
+    "popular": 3
+   },
+   "date": "2026-11-20",
    "chart": "popular"
   },
   "com.lycq.kr.and": {
@@ -25,29 +36,19 @@
    "pkg": "com.lycq.kr.and",
    "publisher": "Xsoga Game",
    "ranks": {
-    "popular": 3
-   },
-   "date": "2026-11-19",
-   "chart": "popular"
-  },
-  "com.c3wavestudio.yumyumdragon": {
-   "name": "배고파용 키우기 : 방치형 RPG",
-   "pkg": "com.c3wavestudio.yumyumdragon",
-   "publisher": "3wave studio Co. Ltd.",
-   "ranks": {
     "popular": 4
    },
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "chart": "popular"
   },
-  "com.farlightgames.warline.gp.global": {
-   "name": "워라인: 스나이퍼",
-   "pkg": "com.farlightgames.warline.gp.global",
-   "publisher": "Powerfantasy HK Limited",
+  "com.noriworks.gm": {
+   "name": "고스톱M : 데이터 필요없는 맞고 게임",
+   "pkg": "com.noriworks.gm",
+   "publisher": "Noriworks",
    "ranks": {
     "popular": 5
    },
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "chart": "popular"
   },
   "com.kakaogames.dokkaebi": {
@@ -57,7 +58,7 @@
    "ranks": {
     "sales": 1
    },
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "chart": "sales"
   },
   "com.com2us.es.android.google.kr.normal": {
@@ -67,7 +68,7 @@
    "ranks": {
     "sales": 2
    },
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "chart": "sales"
   },
   "com.proximabeta.nikke": {
@@ -77,17 +78,7 @@
    "ranks": {
     "sales": 3
    },
-   "date": "2026-11-19",
-   "chart": "sales"
-  },
-  "com.HoYoverse.hkrpgoversea": {
-   "name": "붕괴: 스타레일",
-   "pkg": "com.HoYoverse.hkrpgoversea",
-   "publisher": "COGNOSPHERE PTE. LTD.",
-   "ranks": {
-    "sales": 4
-   },
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "chart": "sales"
   },
   "com.gof.global": {
@@ -95,36 +86,19 @@
    "pkg": "com.gof.global",
    "publisher": "Century Games PTE. LTD.",
    "ranks": {
+    "sales": 4
+   },
+   "date": "2026-11-20",
+   "chart": "sales"
+  },
+  "com.mergegames.gossipharbor": {
+   "name": "가십하버: 합성 & 스토리 게임",
+   "pkg": "com.mergegames.gossipharbor",
+   "publisher": "Microfun Limited",
+   "ranks": {
     "sales": 5
    },
-   "date": "2026-11-19",
-   "chart": "sales"
-  }
- },
- "day": "2026-11-19",
- "rotation": {
-  "com.run.tower.defense": {
-   "name": "킹샷:Kingshot",
-   "pkg": "com.run.tower.defense",
-   "publisher": "Century Games PTE. LTD.",
-   "ranks": {},
-   "date": "2026-11-19",
-   "chart": "sales"
-  },
-  "com.ProjectMoon.LimbusCompany": {
-   "name": "Limbus Company",
-   "pkg": "com.ProjectMoon.LimbusCompany",
-   "publisher": "Project Moon",
-   "ranks": {},
-   "date": "2026-11-19",
-   "chart": "sales"
-  },
-  "com.nexon.ma": {
-   "name": "메이플 키우기",
-   "pkg": "com.nexon.ma",
-   "publisher": "NEXON Company",
-   "ranks": {},
-   "date": "2026-11-19",
+   "date": "2026-11-20",
    "chart": "sales"
   }
  }
