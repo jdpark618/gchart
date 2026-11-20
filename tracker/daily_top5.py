@@ -3,7 +3,7 @@
   python tracker/daily_top5.py rotation  2단계 순번 추적: 6위 아래(인기 20위 · 매출 30위까지)에서 차트마다 하루 5개 (수집 로그 ads_rot)
                                          10위 안의 처음 보는 게임이 먼저, 그다음 순위 순 · 한 번 조회한 게임은 7일 뒤에 다시
   3단계 보충 추적은 tracker/catchup.py (1 · 2단계에서 못 받은 Google 소재만)
-처음 보는 게임은 ad_track.py 가 광고 계정을 자동으로 찾아 data/ads/accounts.json 에 저장 (순번: 하루 새 게임 매칭 2개 · 차트마다 1개 먼저).
+처음 보는 게임은 ad_track.py 가 광고 계정을 자동으로 찾아 data/ads/accounts.json 에 저장 (순번: 하루 새 게임 매칭 4개 · 차트마다 2개 먼저).
 TOP5 게임에는 '--ranks popular:2,sales:3' 처럼 그날 순위를 넘겨 사이트 TODAY 가 인기/매출로 나눠 보여 줌. 순번 게임은 지난 추적 목록에 쌓임.
 같은 날 다시 돌면 data/ads/rotation.json 에 남긴 그날 목록을 그대로 쓰고, 6시간 안에 조회한 게임은 건너뜀."""
 import json, os, subprocess, sys, time, calendar
@@ -20,7 +20,7 @@ START = runlog.now()
 START_UTC = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
 POOL = {'popular': 20, 'sales': 30}   # 순번 추적 범위
 SLOTS, WAIT_REST = 5, 7   # 순번: 차트별 하루 조회 수 · 다시 조회까지 기다리는 날
-NEW_MAX, REMATCH_MAX, PREVIEW_MAX = 2, 3, 600   # 광고 투명성 센터 차단 방지: 하루 새 게임 매칭 · 재매칭 수 · 매칭 미리보기 합계
+NEW_MAX, REMATCH_MAX, PREVIEW_MAX = 4, 3, 600   # 광고 투명성 센터 차단 방지 (11/20 새 매칭 2→4): 하루 새 게임 매칭 · 재매칭 수 · 매칭 미리보기 합계
 G_CAP, G_BUDGET = 300, 800   # Google 미리보기: 게임당 · 이번 단계 전체 (11/19)
 msgs, games = [], {}
 load = lambda p, d: json.load(open(p, encoding='utf-8')) if os.path.exists(p) else d
