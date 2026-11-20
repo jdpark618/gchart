@@ -1,0 +1,31 @@
+name: Game News (게임 뉴스)
+
+# 루리웹 플랫폼별 뉴스 섹션 → data/news/YYYY-MM.json (대시보드 게임 뉴스). 3시간마다 + 수동 실행 (11/20)
+on:
+  schedule:
+    - cron: '40 */3 * * *'   # UTC 0·3·6…시 40분 = KST 9·12·15…시 40분 (GitHub 예약은 늦어질 수 있음)
+  workflow_dispatch:
+
+concurrency: { group: news, cancel-in-progress: false }
+permissions:
+  contents: write
+
+jobs:
+  news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: python news.py
+      - name: Save (바뀐 경우만)
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/news
+          git diff --cached --quiet && { echo "변경 없음"; exit 0; }
+          git commit -qm "news: 게임 뉴스 갱신 $(date -u +%FT%TZ)"
+          for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && exit 0; sleep $((i*5)); done
+          exit 1
