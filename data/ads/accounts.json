@@ -1268,5 +1268,137 @@
    "checked": []
   },
   "ver": 2
+ },
+ "com.roblox.client": {
+  "meta_pages": [
+   "792898734147531"
+  ],
+  "google": [
+   {
+    "id": "AR18222345432791515137",
+    "name": "ROBLOX Corporation",
+    "by": "이름 'Roblox' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "431946152",
+  "meta_by": "검색어 '로블록스 (Roblox)' → 광고 링크가 게임 사이트 roblox.com",
+  "matched_at": "2026-11-20T01:08:00Z",
+  "google_log": {
+   "meta": [
+    "로블록스 (Roblox):6",
+    "로블록스(Roblox):6",
+    "로블록스:22",
+    "Roblox Corporation:14"
+   ],
+   "names": [
+    "Roblox",
+    "Roblox Corporation",
+    "20대 뭐 하지?"
+   ],
+   "domains": [
+    "roblox.com"
+   ],
+   "candidates": 15,
+   "previews": 21,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "ROBLOX Corporation",
+     "region": "US",
+     "from": "이름 'Roblox'",
+     "recent": 60,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    },
+    {
+     "name": "MANUEL JANZER",
+     "region": "",
+     "from": "도메인 'roblox.com'",
+     "recent": 1,
+     "previews": 1,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "VETKOEK STUDIOS (PTY) LTD",
+     "region": "",
+     "from": "도메인 'roblox.com'",
+     "recent": 1,
+     "previews": 1,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "FiveStones Limited",
+     "region": "",
+     "from": "도메인 'roblox.com'",
+     "recent": 9,
+     "previews": 9,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "WK KELLOGG NORTH AMERICA LLC",
+     "region": "",
+     "from": "도메인 'roblox.com'",
+     "recent": 3,
+     "previews": 0,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "WGC UK Ltd",
+     "region": "",
+     "from": "도메인 'roblox.com'",
+     "recent": 7,
+     "previews": 0,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.dreamgames.royalmatch": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR09376188622513897473",
+    "name": "Dream Games Publishing Ltd",
+    "by": "이름 'Dream Games' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "",
+  "meta_by": "",
+  "matched_at": "2026-11-20T01:09:04Z",
+  "google_log": {
+   "meta": [
+    "로얄 매치 Royal Match:0",
+    "Dream Games, Ltd.:601"
+   ],
+   "names": [
+    "Dream Games",
+    "Dream Games, Ltd.",
+    "DREAM GAMES PUBLISHING",
+    "DREAM GAMES PUBLISHING LIMITED"
+   ],
+   "domains": [],
+   "candidates": 1,
+   "previews": 10,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "Dream Games Publishing Ltd",
+     "region": "GB",
+     "from": "이름 'Dream Games'",
+     "recent": 83,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
  }
 }

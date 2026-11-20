@@ -1,5 +1,50 @@
 [
  {
+  "pkg": "com.dreamgames.royalmatch",
+  "name": "로얄 매치 Royal Match",
+  "publisher": "Dream Games, Ltd.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "Dream Games Publishing Ltd"
+  ],
+  "tracked_at": "2026-11-20T01:09:04Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 29,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 42
+ },
+ {
+  "pkg": "com.roblox.client",
+  "name": "로블록스 (Roblox)",
+  "publisher": "Roblox Corporation",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "20대 뭐 하지?",
+   "ROBLOX Corporation"
+  ],
+  "tracked_at": "2026-11-20T01:08:00Z",
+  "days": 0,
+  "meta_live": 18,
+  "google_live": 26,
+  "meta_new7": 16,
+  "google_new7": 10,
+  "meta": 18,
+  "meta_total": 18,
+  "google": 36
+ },
+ {
   "pkg": "com.mergegames.gossipharbor",
   "name": "가십하버: 합성 & 스토리 게임",
   "publisher": "Microfun Limited",

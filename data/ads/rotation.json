@@ -1,5 +1,4 @@
 {
- "day": "2026-11-20",
  "top5": {
   "com.standegg.teamdefense": {
    "name": "팀빨협동전 : 협동 영웅 디펜스",
@@ -98,6 +97,25 @@
    "ranks": {
     "sales": 5
    },
+   "date": "2026-11-20",
+   "chart": "sales"
+  }
+ },
+ "day": "2026-11-20",
+ "rotation": {
+  "com.roblox.client": {
+   "name": "로블록스 (Roblox)",
+   "pkg": "com.roblox.client",
+   "publisher": "Roblox Corporation",
+   "ranks": {},
+   "date": "2026-11-20",
+   "chart": "sales"
+  },
+  "com.dreamgames.royalmatch": {
+   "name": "로얄 매치 Royal Match",
+   "pkg": "com.dreamgames.royalmatch",
+   "publisher": "Dream Games, Ltd.",
+   "ranks": {},
    "date": "2026-11-20",
    "chart": "sales"
   }
