@@ -1,5 +1,4 @@
 {
- "day": "2026-11-21",
  "top5": {
   "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid": {
    "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
@@ -98,6 +97,41 @@
    "ranks": {
     "sales": 5
    },
+   "date": "2026-11-21",
+   "chart": "sales"
+  }
+ },
+ "day": "2026-11-21",
+ "rotation": {
+  "com.igg.android.doomsdaylastsurvivors": {
+   "name": "둠스데이 × 듄: 파트 3",
+   "pkg": "com.igg.android.doomsdaylastsurvivors",
+   "publisher": "IGG.COM",
+   "ranks": {},
+   "date": "2026-11-21",
+   "chart": "popular"
+  },
+  "com.block.juggle": {
+   "name": "블록 블라스트 (Block Blast)",
+   "pkg": "com.block.juggle",
+   "publisher": "HungryStudio",
+   "ranks": {},
+   "date": "2026-11-21",
+   "chart": "popular"
+  },
+  "com.netmarble.sol": {
+   "name": "SOL: enchant",
+   "pkg": "com.netmarble.sol",
+   "publisher": "Netmarble",
+   "ranks": {},
+   "date": "2026-11-21",
+   "chart": "sales"
+  },
+  "com.percent.aos.luckydefense": {
+   "name": "운빨존많겜",
+   "pkg": "com.percent.aos.luckydefense",
+   "publisher": "111%",
+   "ranks": {},
    "date": "2026-11-21",
    "chart": "sales"
   }

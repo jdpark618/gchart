@@ -1,5 +1,92 @@
 [
  {
+  "pkg": "com.percent.aos.luckydefense",
+  "name": "운빨존많겜",
+  "publisher": "111%",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "111퍼센트 주식회사"
+  ],
+  "tracked_at": "2026-11-21T00:31:52Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 5,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 13
+ },
+ {
+  "pkg": "com.netmarble.sol",
+  "name": "SOL: enchant",
+  "publisher": "Netmarble",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-21T00:30:28Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.block.juggle",
+  "name": "블록 블라스트 (Block Blast)",
+  "publisher": "HungryStudio",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "ARETIS LIMITED"
+  ],
+  "tracked_at": "2026-11-21T00:29:31Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 6
+ },
+ {
+  "pkg": "com.igg.android.doomsdaylastsurvivors",
+  "name": "둠스데이 × 듄: 파트 3",
+  "publisher": "IGG.COM",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "Doomsday: Last Survivors",
+   "Doomsday: Last Survivors KR"
+  ],
+  "tracked_at": "2026-11-21T00:26:25Z",
+  "days": 0,
+  "meta_live": 41,
+  "google_live": 3,
+  "meta_new7": 13,
+  "google_new7": 0,
+  "meta": 71,
+  "meta_total": 392,
+  "google": 3
+ },
+ {
   "pkg": "com.mergegames.gossipharbor",
   "name": "가십하버: 합성 & 스토리 게임",
   "publisher": "Microfun Limited",

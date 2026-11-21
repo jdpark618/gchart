@@ -1403,5 +1403,242 @@
    ]
   },
   "ver": 2
+ },
+ "com.igg.android.doomsdaylastsurvivors": {
+  "meta_pages": [
+   "101637678730360",
+   "100396992404005"
+  ],
+  "google": [
+   {
+    "id": "AR04414067082715463681",
+    "name": "Doomsday: Last Survivors",
+    "by": "이름 'Doomsday: Last Survivors' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "1552206075",
+  "meta_by": "검색어 '둠스데이 × 듄: 파트 3' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-21T00:26:25Z",
+  "google_log": {
+   "meta": [
+    "둠스데이 × 듄: 파트 3:19"
+   ],
+   "names": [
+    "IGG.COM",
+    "IGG SINGAPORE",
+    "IGG SINGAPORE PTE. LTD.",
+    "Doomsday: Last Survivors",
+    "Doomsday: Last Survivors KR"
+   ],
+   "domains": [
+    "igg.com"
+   ],
+   "candidates": 1,
+   "previews": 10,
+   "failed": 3,
+   "checked": [
+    {
+     "name": "Doomsday: Last Survivors",
+     "region": "SG",
+     "from": "이름 'Doomsday: Last Survivors'",
+     "recent": 217,
+     "previews": 10,
+     "failed": 3,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.block.juggle": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR08477441641806823425",
+    "name": "ARETIS LIMITED",
+    "by": "이름 'ARETIS' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "1617391485",
+  "meta_by": "",
+  "matched_at": "2026-11-21T00:29:31Z",
+  "google_log": {
+   "meta": [
+    "블록 블라스트 (Block Blast):0",
+    "블록 블라스트:1",
+    "블록블라스트:1",
+    "HungryStudio:40742"
+   ],
+   "names": [
+    "HungryStudio",
+    "ARETIS",
+    "ARETIS LIMITED",
+    "Hungry Studio"
+   ],
+   "domains": [],
+   "candidates": 3,
+   "previews": 10,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "ARETIS LIMITED",
+     "region": "HK",
+     "from": "이름 'ARETIS'",
+     "recent": 17,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.netmarble.sol": {
+  "meta_pages": [
+   "105389485831866"
+  ],
+  "google": [],
+  "ios": "6748004690",
+  "meta_by": "검색어 'Netmarble' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-21T00:30:28Z",
+  "google_log": {
+   "meta": [
+    "SOL: enchant:43",
+    "SOL:50001",
+    "enchant:25255",
+    "SOL enchant:43",
+    "SOLenchant:50001",
+    "Netmarble:175"
+   ],
+   "names": [
+    "Netmarble",
+    "넷마블",
+    "Netmarble Corporation",
+    "Solo Leveling:ARISE"
+   ],
+   "domains": [
+    "netmarble.com",
+    "netmarble.net"
+   ],
+   "candidates": 14,
+   "error": "소재 미리보기 215건 중 130건 실패 (일시 차단일 수 있음)",
+   "previews": 215,
+   "failed": 130,
+   "checked": [
+    {
+     "name": "netmarble",
+     "region": "KR",
+     "from": "이름 'Netmarble'",
+     "recent": 116,
+     "previews": 115,
+     "failed": 72,
+     "hit": false
+    },
+    {
+     "name": "넷마블",
+     "region": "KR",
+     "from": "이름 '넷마블'",
+     "recent": 56,
+     "previews": 50,
+     "failed": 50,
+     "hit": false
+    },
+    {
+     "name": "넷마블",
+     "region": "KR",
+     "from": "이름 '넷마블'",
+     "recent": 3,
+     "previews": 3,
+     "failed": 3,
+     "hit": false
+    },
+    {
+     "name": "넷마블",
+     "region": "KR",
+     "from": "이름 '넷마블'",
+     "recent": 4,
+     "previews": 4,
+     "failed": 4,
+     "hit": false
+    },
+    {
+     "name": "넷마블 주식회사",
+     "region": "KR",
+     "from": "이름 '넷마블'",
+     "recent": 10,
+     "previews": 10,
+     "failed": 1,
+     "hit": false
+    },
+    {
+     "name": "넷마블 주식회사",
+     "region": "KR",
+     "from": "이름 '넷마블'",
+     "recent": 4,
+     "previews": 3,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "넷마블 주식회사",
+     "region": "KR",
+     "from": "이름 '넷마블'",
+     "recent": 8,
+     "previews": 8,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "넷마블 주식회사",
+     "region": "",
+     "from": "도메인 'netmarble.com'",
+     "recent": 28,
+     "previews": 22,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  }
+ },
+ "com.percent.aos.luckydefense": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR10598148599667752961",
+    "name": "111퍼센트 주식회사",
+    "by": "이름 '111퍼센트' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6482291732",
+  "meta_by": "",
+  "matched_at": "2026-11-21T00:31:52Z",
+  "google_log": {
+   "meta": [
+    "운빨존많겜:2",
+    "111%:50001"
+   ],
+   "names": [
+    "111%",
+    "111퍼센트",
+    "Crater",
+    "Crater Co., Ltd."
+   ],
+   "domains": [],
+   "candidates": 7,
+   "previews": 10,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "111퍼센트 주식회사",
+     "region": "KR",
+     "from": "이름 '111퍼센트'",
+     "recent": 29,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
  }
 }
