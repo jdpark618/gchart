@@ -1,5 +1,241 @@
 [
  {
+  "pkg": "com.mergegames.gossipharbor",
+  "name": "가십하버: 합성 & 스토리 게임",
+  "publisher": "Microfun Limited",
+  "charts": {
+   "sales": 5
+  },
+  "rank_date": "2026-11-21",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "Microfun Limited"
+  ],
+  "tracked_at": "2026-11-21T00:25:39Z",
+  "days": 2,
+  "meta_live": 0,
+  "google_live": 23,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 24
+ },
+ {
+  "pkg": "com.gof.global",
+  "name": "WOS: 화이트아웃 서바이벌",
+  "publisher": "Century Games PTE. LTD.",
+  "charts": {
+   "sales": 4
+  },
+  "rank_date": "2026-11-21",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "CENTURY GAMES PTE. LTD.",
+   "Whiteout Survival"
+  ],
+  "tracked_at": "2026-11-21T00:24:29Z",
+  "days": 9,
+  "meta_live": 12,
+  "google_live": 23,
+  "meta_new7": 6,
+  "google_new7": 0,
+  "meta": 60,
+  "meta_total": 140,
+  "google": 121
+ },
+ {
+  "pkg": "com.proximabeta.nikke",
+  "name": "승리의 여신: 니케",
+  "publisher": "Level Infinite",
+  "charts": {
+   "sales": 3
+  },
+  "rank_date": "2026-11-21",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-21T00:23:39Z",
+  "days": 13,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 59,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.com2us.es.android.google.kr.normal",
+  "name": "제우스: 오만의 신",
+  "publisher": "Com2uS",
+  "charts": {
+   "sales": 2
+  },
+  "rank_date": "2026-11-21",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "(주) 컴투스",
+   "제우스: 오만의 신"
+  ],
+  "tracked_at": "2026-11-21T00:22:29Z",
+  "days": 13,
+  "meta_live": 34,
+  "google_live": 8,
+  "meta_new7": 34,
+  "google_new7": 0,
+  "meta": 95,
+  "meta_total": 35,
+  "google": 59
+ },
+ {
+  "pkg": "com.kakaogames.dokkaebi",
+  "name": "도깨비의세계",
+  "publisher": "Kakao Games Corp.",
+  "charts": {
+   "sales": 1
+  },
+  "rank_date": "2026-11-21",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "주식회사 카카오게임즈"
+  ],
+  "tracked_at": "2026-11-21T00:22:08Z",
+  "days": 13,
+  "meta_live": 0,
+  "google_live": 28,
+  "meta_new7": 0,
+  "google_new7": 14,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 53
+ },
+ {
+  "pkg": "com.noriworks.gm",
+  "name": "고스톱M : 데이터 필요없는 맞고 게임",
+  "publisher": "Noriworks",
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-21",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "Noriworks"
+  ],
+  "tracked_at": "2026-11-21T00:21:15Z",
+  "days": 3,
+  "meta_live": 8,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 8,
+  "meta_total": 8,
+  "google": 0
+ },
+ {
+  "pkg": "com.mainquest.sgidle",
+  "name": "실험소녀 키우기 : 방치형 RPG",
+  "publisher": "MainQuest",
+  "charts": {
+   "popular": 4
+  },
+  "rank_date": "2026-11-21",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "주식회사 메인퀘스트"
+  ],
+  "tracked_at": "2026-11-21T00:20:52Z",
+  "days": 1,
+  "meta_live": 0,
+  "google_live": 2,
+  "meta_new7": 0,
+  "google_new7": 2,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 2
+ },
+ {
+  "pkg": "com.standegg.teamdefense",
+  "name": "팀빨협동전 : 협동 영웅 디펜스",
+  "publisher": "StandEgg Co., Ltd.",
+  "charts": {
+   "popular": 3
+  },
+  "rank_date": "2026-11-21",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-21T00:20:40Z",
+  "days": 4,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.rabbithole.cardofdemonslayer",
+  "name": "카드 오브 데몬슬레이어: 덱빌딩 로그라이크 RPG",
+  "publisher": "CookApps",
+  "charts": {
+   "popular": 2
+  },
+  "rank_date": "2026-11-21",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "(주) 쿡앱스"
+  ],
+  "tracked_at": "2026-11-21T00:20:26Z",
+  "days": 2,
+  "meta_live": 0,
+  "google_live": 2,
+  "meta_new7": 0,
+  "google_new7": 2,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 7
+ },
+ {
+  "pkg": "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid",
+  "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
+  "publisher": "PLAYHARD STUDIO",
+  "charts": {
+   "popular": 1
+  },
+  "rank_date": "2026-11-21",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-21T00:20:14Z",
+  "days": 2,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
   "pkg": "com.dreamgames.royalmatch",
   "name": "로얄 매치 Royal Match",
   "publisher": "Dream Games, Ltd.",
@@ -45,150 +281,6 @@
   "google": 36
  },
  {
-  "pkg": "com.mergegames.gossipharbor",
-  "name": "가십하버: 합성 & 스토리 게임",
-  "publisher": "Microfun Limited",
-  "charts": {
-   "sales": 5
-  },
-  "rank_date": "2026-11-20",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "Microfun Limited"
-  ],
-  "tracked_at": "2026-11-20T01:07:14Z",
-  "days": 1,
-  "meta_live": 0,
-  "google_live": 23,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 24
- },
- {
-  "pkg": "com.gof.global",
-  "name": "WOS: 화이트아웃 서바이벌",
-  "publisher": "Century Games PTE. LTD.",
-  "charts": {
-   "sales": 4
-  },
-  "rank_date": "2026-11-20",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "CENTURY GAMES PTE. LTD.",
-   "Whiteout Survival"
-  ],
-  "tracked_at": "2026-11-20T01:06:27Z",
-  "days": 8,
-  "meta_live": 15,
-  "google_live": 23,
-  "meta_new7": 6,
-  "google_new7": 0,
-  "meta": 60,
-  "meta_total": 140,
-  "google": 121
- },
- {
-  "pkg": "com.proximabeta.nikke",
-  "name": "승리의 여신: 니케",
-  "publisher": "Level Infinite",
-  "charts": {
-   "sales": 3
-  },
-  "rank_date": "2026-11-20",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [],
-  "tracked_at": "2026-11-20T01:05:27Z",
-  "days": 12,
-  "meta_live": 49,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 59,
-  "meta_total": 0,
-  "google": 0
- },
- {
-  "pkg": "com.com2us.es.android.google.kr.normal",
-  "name": "제우스: 오만의 신",
-  "publisher": "Com2uS",
-  "charts": {
-   "sales": 2
-  },
-  "rank_date": "2026-11-20",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "(주) 컴투스",
-   "제우스: 오만의 신"
-  ],
-  "tracked_at": "2026-11-20T01:04:45Z",
-  "days": 12,
-  "meta_live": 66,
-  "google_live": 8,
-  "meta_new7": 33,
-  "google_new7": 0,
-  "meta": 94,
-  "meta_total": 35,
-  "google": 59
- },
- {
-  "pkg": "com.kakaogames.dokkaebi",
-  "name": "도깨비의세계",
-  "publisher": "Kakao Games Corp.",
-  "charts": {
-   "sales": 1
-  },
-  "rank_date": "2026-11-20",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "주식회사 카카오게임즈"
-  ],
-  "tracked_at": "2026-11-20T01:04:29Z",
-  "days": 12,
-  "meta_live": 0,
-  "google_live": 28,
-  "meta_new7": 0,
-  "google_new7": 13,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 52
- },
- {
-  "pkg": "com.noriworks.gm",
-  "name": "고스톱M : 데이터 필요없는 맞고 게임",
-  "publisher": "Noriworks",
-  "charts": {
-   "popular": 5
-  },
-  "rank_date": "2026-11-20",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "Noriworks"
-  ],
-  "tracked_at": "2026-11-20T01:04:04Z",
-  "days": 2,
-  "meta_live": 8,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 8,
-  "meta_total": 8,
-  "google": 0
- },
- {
   "pkg": "com.lycq.kr.and",
   "name": "미르의 전설2: 레볼루션",
   "publisher": "Xsoga Game",
@@ -212,74 +304,6 @@
   "google_new7": 0,
   "meta": 324,
   "meta_total": 216,
-  "google": 0
- },
- {
-  "pkg": "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid",
-  "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
-  "publisher": "PLAYHARD STUDIO",
-  "charts": {
-   "popular": 3
-  },
-  "rank_date": "2026-11-20",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [],
-  "tracked_at": "2026-11-20T01:02:10Z",
-  "days": 1,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 0
- },
- {
-  "pkg": "com.rabbithole.cardofdemonslayer",
-  "name": "카드 오브 데몬슬레이어: 덱빌딩 로그라이크 RPG",
-  "publisher": "CookApps",
-  "charts": {
-   "popular": 2
-  },
-  "rank_date": "2026-11-20",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "(주) 쿡앱스"
-  ],
-  "tracked_at": "2026-11-20T01:00:53Z",
-  "days": 1,
-  "meta_live": 0,
-  "google_live": 2,
-  "meta_new7": 0,
-  "google_new7": 2,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 7
- },
- {
-  "pkg": "com.standegg.teamdefense",
-  "name": "팀빨협동전 : 협동 영웅 디펜스",
-  "publisher": "StandEgg Co., Ltd.",
-  "charts": {
-   "popular": 1
-  },
-  "rank_date": "2026-11-20",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [],
-  "tracked_at": "2026-11-20T01:00:42Z",
-  "days": 3,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
   "google": 0
  },
  {

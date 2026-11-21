@@ -1,13 +1,14 @@
 {
+ "day": "2026-11-21",
  "top5": {
-  "com.standegg.teamdefense": {
-   "name": "팀빨협동전 : 협동 영웅 디펜스",
-   "pkg": "com.standegg.teamdefense",
-   "publisher": "StandEgg Co., Ltd.",
+  "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid": {
+   "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
+   "pkg": "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid",
+   "publisher": "PLAYHARD STUDIO",
    "ranks": {
     "popular": 1
    },
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "chart": "popular"
   },
   "com.rabbithole.cardofdemonslayer": {
@@ -17,27 +18,27 @@
    "ranks": {
     "popular": 2
    },
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "chart": "popular"
   },
-  "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid": {
-   "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
-   "pkg": "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid",
-   "publisher": "PLAYHARD STUDIO",
+  "com.standegg.teamdefense": {
+   "name": "팀빨협동전 : 협동 영웅 디펜스",
+   "pkg": "com.standegg.teamdefense",
+   "publisher": "StandEgg Co., Ltd.",
    "ranks": {
     "popular": 3
    },
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "chart": "popular"
   },
-  "com.lycq.kr.and": {
-   "name": "미르의 전설2: 레볼루션",
-   "pkg": "com.lycq.kr.and",
-   "publisher": "Xsoga Game",
+  "com.mainquest.sgidle": {
+   "name": "실험소녀 키우기 : 방치형 RPG",
+   "pkg": "com.mainquest.sgidle",
+   "publisher": "MainQuest",
    "ranks": {
     "popular": 4
    },
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "chart": "popular"
   },
   "com.noriworks.gm": {
@@ -47,7 +48,7 @@
    "ranks": {
     "popular": 5
    },
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "chart": "popular"
   },
   "com.kakaogames.dokkaebi": {
@@ -57,7 +58,7 @@
    "ranks": {
     "sales": 1
    },
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "chart": "sales"
   },
   "com.com2us.es.android.google.kr.normal": {
@@ -67,7 +68,7 @@
    "ranks": {
     "sales": 2
    },
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "chart": "sales"
   },
   "com.proximabeta.nikke": {
@@ -77,7 +78,7 @@
    "ranks": {
     "sales": 3
    },
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "chart": "sales"
   },
   "com.gof.global": {
@@ -87,7 +88,7 @@
    "ranks": {
     "sales": 4
    },
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "chart": "sales"
   },
   "com.mergegames.gossipharbor": {
@@ -97,26 +98,7 @@
    "ranks": {
     "sales": 5
    },
-   "date": "2026-11-20",
-   "chart": "sales"
-  }
- },
- "day": "2026-11-20",
- "rotation": {
-  "com.roblox.client": {
-   "name": "로블록스 (Roblox)",
-   "pkg": "com.roblox.client",
-   "publisher": "Roblox Corporation",
-   "ranks": {},
-   "date": "2026-11-20",
-   "chart": "sales"
-  },
-  "com.dreamgames.royalmatch": {
-   "name": "로얄 매치 Royal Match",
-   "pkg": "com.dreamgames.royalmatch",
-   "publisher": "Dream Games, Ltd.",
-   "ranks": {},
-   "date": "2026-11-20",
+   "date": "2026-11-21",
    "chart": "sales"
   }
  }

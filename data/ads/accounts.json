@@ -103,54 +103,21 @@
   "meta_by": "",
   "matched_at": "2026-11-06T01:40:59Z",
   "ver": 2,
-  "rematched_at": "2026-11-13T06:00:13Z",
+  "rematched_at": "2026-11-21T00:22:08Z",
   "google_log": {
    "meta": [
-    "도깨비의세계:2",
+    "도깨비의세계:0",
     "Kakao Games Corp.:0"
    ],
    "names": [
     "Kakao Games",
     "Kakao Games Corp."
    ],
-   "domains": [
-    "kakaogames.com"
-   ],
-   "candidates": 13,
-   "checked": [
-    {
-     "name": "Kakao Games Co., Ltd.",
-     "region": "KR",
-     "from": "이름 'Kakao Games'",
-     "recent": 16,
-     "previews": 16,
-     "hit": false
-    },
-    {
-     "name": "카카오게임즈",
-     "region": "",
-     "from": "도메인 'kakaogames.com'",
-     "recent": 20,
-     "previews": 18,
-     "hit": false
-    },
-    {
-     "name": "KT Nasmedia Co., Ltd.",
-     "region": "",
-     "from": "도메인 'kakaogames.com'",
-     "recent": 1500,
-     "previews": 303,
-     "hit": false
-    },
-    {
-     "name": "주식회사 카카오게임즈",
-     "region": "KR",
-     "from": "도메인→이름 '카카오게임즈'",
-     "recent": 164,
-     "previews": 10,
-     "hit": true
-    }
-   ]
+   "domains": [],
+   "candidates": 0,
+   "previews": null,
+   "failed": null,
+   "checked": []
   }
  },
  "com.com2us.es.android.google.kr.normal": {
@@ -1393,6 +1360,42 @@
      "region": "GB",
      "from": "이름 'Dream Games'",
      "recent": 83,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.mainquest.sgidle": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR05721230457878609921",
+    "name": "주식회사 메인퀘스트",
+    "by": "이름 '메인퀘스트' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6825401079",
+  "meta_by": "",
+  "matched_at": "2026-11-21T00:20:52Z",
+  "google_log": {
+   "meta": [],
+   "names": [
+    "MainQuest",
+    "메인퀘스트"
+   ],
+   "domains": [],
+   "candidates": 1,
+   "previews": 10,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "주식회사 메인퀘스트",
+     "region": "KR",
+     "from": "이름 '메인퀘스트'",
+     "recent": 11,
      "previews": 10,
      "failed": 0,
      "hit": true
