@@ -7,7 +7,7 @@
   "ios": "1585915174",
   "meta_by": "검색어 '승리의 여신: 니케' → 광고 링크의 iOS 앱 ID",
   "matched_at": "2026-11-06T01:40:59Z",
-  "rematched_at": "2026-11-14T22:50:54Z",
+  "rematched_at": "2026-11-21T23:41:23Z",
   "google_log": {
    "meta": [],
    "names": [
@@ -20,32 +20,42 @@
     "nikke-kr.com"
    ],
    "candidates": 11,
-   "previews": 243,
-   "failed": 0,
+   "error": "소재 미리보기 242건 중 118건 실패 (일시 차단일 수 있음)",
+   "previews": 242,
+   "failed": 118,
    "checked": [
     {
      "name": "Proxima Beta Pte. Limited",
      "region": "SG",
      "from": "이름 'PROXIMA BETA'",
-     "recent": 244,
-     "previews": 193,
-     "failed": 0,
+     "recent": 236,
+     "previews": 189,
+     "failed": 111,
      "hit": false
     },
     {
      "name": "PROXIMA BETA PTE. LIMITED",
      "region": "SG",
      "from": "이름 'PROXIMA BETA'",
-     "recent": 50,
-     "previews": 50,
-     "failed": 0,
+     "recent": 48,
+     "previews": 48,
+     "failed": 2,
+     "hit": false
+    },
+    {
+     "name": "PROXIMA BETA PTE. LIMITED",
+     "region": "SG",
+     "from": "이름 'PROXIMA BETA'",
+     "recent": 5,
+     "previews": 5,
+     "failed": 5,
      "hit": false
     },
     {
      "name": "RPL Digital, SIA",
      "region": "",
      "from": "도메인 'nikke-kr.com'",
-     "recent": 3,
+     "recent": 2,
      "previews": 0,
      "failed": 0,
      "hit": false
@@ -1633,6 +1643,57 @@
      "region": "KR",
      "from": "이름 '111퍼센트'",
      "recent": 29,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.dragonheart.spearknightrpg2": {
+  "meta_pages": [
+   "1270524339479916"
+  ],
+  "google": [
+   {
+    "id": "AR02471727685705924609",
+    "name": "(주)코드드래곤",
+    "by": "이름 '코드드래곤' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6808981771",
+  "meta_by": "검색어 '창술사 키우기X : 방치형RPG' → 광고 링크의 iOS 앱 ID",
+  "matched_at": "2026-11-21T23:38:54Z",
+  "google_log": {
+   "meta": [
+    "창술사 키우기X : 방치형RPG:3"
+   ],
+   "names": [
+    "DragonHeart",
+    "우창곤",
+    "Changgon Woo",
+    "코드드래곤"
+   ],
+   "domains": [],
+   "candidates": 3,
+   "previews": 17,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "우창곤",
+     "region": "KR",
+     "from": "이름 '우창곤'",
+     "recent": 7,
+     "previews": 7,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "(주)코드드래곤",
+     "region": "KR",
+     "from": "이름 '코드드래곤'",
+     "recent": 15,
      "previews": 10,
      "failed": 0,
      "hit": true

@@ -1,4 +1,5 @@
 {
+ "day": "2026-11-22",
  "top5": {
   "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid": {
    "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
@@ -7,7 +8,17 @@
    "ranks": {
     "popular": 1
    },
-   "date": "2026-11-21",
+   "date": "2026-11-22",
+   "chart": "popular"
+  },
+  "com.dragonheart.spearknightrpg2": {
+   "name": "창술사 키우기X : 방치형RPG",
+   "pkg": "com.dragonheart.spearknightrpg2",
+   "publisher": "DragonHeart",
+   "ranks": {
+    "popular": 2
+   },
+   "date": "2026-11-22",
    "chart": "popular"
   },
   "com.rabbithole.cardofdemonslayer": {
@@ -15,19 +26,9 @@
    "pkg": "com.rabbithole.cardofdemonslayer",
    "publisher": "CookApps",
    "ranks": {
-    "popular": 2
-   },
-   "date": "2026-11-21",
-   "chart": "popular"
-  },
-  "com.standegg.teamdefense": {
-   "name": "팀빨협동전 : 협동 영웅 디펜스",
-   "pkg": "com.standegg.teamdefense",
-   "publisher": "StandEgg Co., Ltd.",
-   "ranks": {
     "popular": 3
    },
-   "date": "2026-11-21",
+   "date": "2026-11-22",
    "chart": "popular"
   },
   "com.mainquest.sgidle": {
@@ -37,17 +38,17 @@
    "ranks": {
     "popular": 4
    },
-   "date": "2026-11-21",
+   "date": "2026-11-22",
    "chart": "popular"
   },
-  "com.noriworks.gm": {
-   "name": "고스톱M : 데이터 필요없는 맞고 게임",
-   "pkg": "com.noriworks.gm",
-   "publisher": "Noriworks",
+  "com.standegg.teamdefense": {
+   "name": "팀빨협동전 : 협동 영웅 디펜스",
+   "pkg": "com.standegg.teamdefense",
+   "publisher": "StandEgg Co., Ltd.",
    "ranks": {
     "popular": 5
    },
-   "date": "2026-11-21",
+   "date": "2026-11-22",
    "chart": "popular"
   },
   "com.kakaogames.dokkaebi": {
@@ -57,7 +58,7 @@
    "ranks": {
     "sales": 1
    },
-   "date": "2026-11-21",
+   "date": "2026-11-22",
    "chart": "sales"
   },
   "com.com2us.es.android.google.kr.normal": {
@@ -67,7 +68,7 @@
    "ranks": {
     "sales": 2
    },
-   "date": "2026-11-21",
+   "date": "2026-11-22",
    "chart": "sales"
   },
   "com.proximabeta.nikke": {
@@ -77,7 +78,7 @@
    "ranks": {
     "sales": 3
    },
-   "date": "2026-11-21",
+   "date": "2026-11-22",
    "chart": "sales"
   },
   "com.gof.global": {
@@ -87,52 +88,17 @@
    "ranks": {
     "sales": 4
    },
-   "date": "2026-11-21",
+   "date": "2026-11-22",
    "chart": "sales"
   },
-  "com.mergegames.gossipharbor": {
-   "name": "가십하버: 합성 & 스토리 게임",
-   "pkg": "com.mergegames.gossipharbor",
-   "publisher": "Microfun Limited",
+  "com.ncsoft.lineagem19": {
+   "name": "리니지M",
+   "pkg": "com.ncsoft.lineagem19",
+   "publisher": "NC Corporation",
    "ranks": {
     "sales": 5
    },
-   "date": "2026-11-21",
-   "chart": "sales"
-  }
- },
- "day": "2026-11-21",
- "rotation": {
-  "com.igg.android.doomsdaylastsurvivors": {
-   "name": "둠스데이 × 듄: 파트 3",
-   "pkg": "com.igg.android.doomsdaylastsurvivors",
-   "publisher": "IGG.COM",
-   "ranks": {},
-   "date": "2026-11-21",
-   "chart": "popular"
-  },
-  "com.block.juggle": {
-   "name": "블록 블라스트 (Block Blast)",
-   "pkg": "com.block.juggle",
-   "publisher": "HungryStudio",
-   "ranks": {},
-   "date": "2026-11-21",
-   "chart": "popular"
-  },
-  "com.netmarble.sol": {
-   "name": "SOL: enchant",
-   "pkg": "com.netmarble.sol",
-   "publisher": "Netmarble",
-   "ranks": {},
-   "date": "2026-11-21",
-   "chart": "sales"
-  },
-  "com.percent.aos.luckydefense": {
-   "name": "운빨존많겜",
-   "pkg": "com.percent.aos.luckydefense",
-   "publisher": "111%",
-   "ranks": {},
-   "date": "2026-11-21",
+   "date": "2026-11-22",
    "chart": "sales"
   }
  }
