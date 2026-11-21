@@ -1701,5 +1701,165 @@
    ]
   },
   "ver": 2
+ },
+ "com.nexon.overgeared": {
+  "meta_pages": [
+   "1480621432198772"
+  ],
+  "google": [],
+  "ios": "6673894896",
+  "meta_by": "검색어 '템빨: 오버기어드' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-21T23:46:02Z",
+  "google_log": {
+   "meta": [
+    "템빨: 오버기어드:6"
+   ],
+   "names": [
+    "NEXON",
+    "NEXON Company",
+    "Nexon Korea",
+    "Nexon Korea Corporation",
+    "넥슨모바일"
+   ],
+   "domains": [
+    "nexon.com",
+    "nexon.co.jp"
+   ],
+   "candidates": 18,
+   "previews": 306,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "Nexon Korea",
+     "region": "KR",
+     "from": "이름 'NEXON'",
+     "recent": 1500,
+     "previews": 216,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "Nexon Korea Co., Ltd.",
+     "region": "KR",
+     "from": "이름 'Nexon Korea'",
+     "recent": 93,
+     "previews": 90,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.blockblast.lite": {
+  "meta_pages": [
+   "1300263419839842",
+   "1472340152619605"
+  ],
+  "google": [],
+  "ios": "",
+  "meta_by": "검색어 'Block Blast Lite' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-21T23:47:55Z",
+  "google_log": {
+   "meta": [
+    "Block Blast Lite:2503"
+   ],
+   "names": [
+    "HungryStudio",
+    "ARETIS",
+    "ARETIS LIMITED",
+    "Block Blast Lite",
+    "Block Blast Lite 2026"
+   ],
+   "domains": [],
+   "candidates": 3,
+   "previews": 18,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "ARETIS LIMITED",
+     "region": "HK",
+     "from": "이름 'ARETIS'",
+     "recent": 18,
+     "previews": 18,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.percent.aos.cooptd": {
+  "meta_pages": [
+   "532130599973201",
+   "525251020661737"
+  ],
+  "google": [
+   {
+    "id": "AR00240125591385276417",
+    "name": "슈퍼매직 주식회사",
+    "by": "이름 '슈퍼매직' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6503702666",
+  "meta_by": "검색어 '협타디: 협동 타워 디펜스' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-21T23:48:38Z",
+  "google_log": {
+   "meta": [
+    "협타디: 협동 타워 디펜스:15"
+   ],
+   "names": [
+    "Supermagic",
+    "슈퍼매직",
+    "슈퍼매직 주식회사",
+    "Supermagic Inc.",
+    "Coop-TD",
+    "Coop TD"
+   ],
+   "domains": [],
+   "candidates": 3,
+   "previews": 10,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "슈퍼매직 주식회사",
+     "region": "KR",
+     "from": "이름 '슈퍼매직'",
+     "recent": 32,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.fun.lastwar.gp": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "6448786147",
+  "meta_by": "",
+  "matched_at": "2026-11-21T23:49:49Z",
+  "google_log": {
+   "meta": [
+    "라스트 워: 서바이벌:0",
+    "라스트 워:2",
+    "라스트워:0",
+    "서바이벌:2436",
+    "라스트 워 서바이벌:0",
+    "라스트워서바이벌:0",
+    "FUNFLY PTE. LTD.:0"
+   ],
+   "names": [
+    "FUNFLY",
+    "FUNFLY PTE. LTD."
+   ],
+   "domains": [],
+   "candidates": 2,
+   "previews": 0,
+   "failed": 0,
+   "checked": []
+  },
+  "ver": 2
  }
 }

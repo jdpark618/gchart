@@ -1,5 +1,4 @@
 {
- "day": "2026-11-22",
  "top5": {
   "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid": {
    "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
@@ -98,6 +97,41 @@
    "ranks": {
     "sales": 5
    },
+   "date": "2026-11-22",
+   "chart": "sales"
+  }
+ },
+ "day": "2026-11-22",
+ "rotation": {
+  "com.nexon.overgeared": {
+   "name": "템빨: 오버기어드",
+   "pkg": "com.nexon.overgeared",
+   "publisher": "NEXON Company",
+   "ranks": {},
+   "date": "2026-11-22",
+   "chart": "popular"
+  },
+  "com.blockblast.lite": {
+   "name": "Block Blast Lite",
+   "pkg": "com.blockblast.lite",
+   "publisher": "HungryStudio",
+   "ranks": {},
+   "date": "2026-11-22",
+   "chart": "popular"
+  },
+  "com.percent.aos.cooptd": {
+   "name": "협타디: 협동 타워 디펜스",
+   "pkg": "com.percent.aos.cooptd",
+   "publisher": "Supermagic",
+   "ranks": {},
+   "date": "2026-11-22",
+   "chart": "sales"
+  },
+  "com.fun.lastwar.gp": {
+   "name": "라스트 워: 서바이벌",
+   "pkg": "com.fun.lastwar.gp",
+   "publisher": "FUNFLY PTE. LTD.",
+   "ranks": {},
    "date": "2026-11-22",
    "chart": "sales"
   }

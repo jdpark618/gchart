@@ -1,5 +1,91 @@
 [
  {
+  "pkg": "com.fun.lastwar.gp",
+  "name": "라스트 워: 서바이벌",
+  "publisher": "FUNFLY PTE. LTD.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-21T23:49:49Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.percent.aos.cooptd",
+  "name": "협타디: 협동 타워 디펜스",
+  "publisher": "Supermagic",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "Coop TD",
+   "Coop-TD",
+   "슈퍼매직 주식회사"
+  ],
+  "tracked_at": "2026-11-21T23:48:38Z",
+  "days": 0,
+  "meta_live": 86,
+  "google_live": 4,
+  "meta_new7": 0,
+  "google_new7": 2,
+  "meta": 117,
+  "meta_total": 496,
+  "google": 14
+ },
+ {
+  "pkg": "com.blockblast.lite",
+  "name": "Block Blast Lite",
+  "publisher": "HungryStudio",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-21T23:47:55Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.nexon.overgeared",
+  "name": "템빨: 오버기어드",
+  "publisher": "NEXON Company",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "넥슨모바일"
+  ],
+  "tracked_at": "2026-11-21T23:46:02Z",
+  "days": 0,
+  "meta_live": 48,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 48,
+  "meta_total": 161,
+  "google": 0
+ },
+ {
   "pkg": "com.ncsoft.lineagem19",
   "name": "리니지M",
   "publisher": "NC Corporation",
