@@ -56,12 +56,12 @@
   "tracked_at": "2026-11-21T00:29:31Z",
   "days": 0,
   "meta_live": 0,
-  "google_live": 0,
+  "google_live": 8,
   "meta_new7": 0,
   "google_new7": 0,
   "meta": 0,
   "meta_total": 0,
-  "google": 6
+  "google": 17
  },
  {
   "pkg": "com.igg.android.doomsdaylastsurvivors",
@@ -79,12 +79,12 @@
   "tracked_at": "2026-11-21T00:26:25Z",
   "days": 0,
   "meta_live": 41,
-  "google_live": 3,
+  "google_live": 33,
   "meta_new7": 13,
-  "google_new7": 0,
+  "google_new7": 5,
   "meta": 71,
   "meta_total": 392,
-  "google": 3
+  "google": 53
  },
  {
   "pkg": "com.mergegames.gossipharbor",
