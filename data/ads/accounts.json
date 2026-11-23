@@ -801,21 +801,11 @@
   "meta_by": "검색어 '미르의 전설2: 레볼루션' → 광고 링크의 iOS 앱 ID",
   "matched_at": "2026-11-15T23:14:54Z",
   "google_log": {
-   "meta": [
-    "미르의 전설2: 레볼루션:462"
-   ],
+   "meta": [],
    "names": [
     "Xsoga Game",
     "Koda Duck Games",
-    "Koda Duck Games Company Limited",
-    "미르의전설2‑공식게임",
-    "미르의 전설2: 레볼루션M",
-    "미르의전설2‑게임채널",
-    "미르의전설2‑추억의전장",
-    "미르의전설2‑게임정보",
-    "미르의전설2‑전투rpg",
-    "미르의전설2",
-    "미르의전설2‑핏빛전투"
+    "Koda Duck Games Company Limited"
    ],
    "domains": [],
    "candidates": 0,
@@ -823,7 +813,8 @@
    "failed": 0,
    "checked": []
   },
-  "ver": 2
+  "ver": 2,
+  "rematched_at": "2026-11-22T23:56:27Z"
  },
  "com.noriworks.gm": {
   "meta_pages": [

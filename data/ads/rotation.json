@@ -1,23 +1,24 @@
 {
+ "day": "2026-11-23",
  "top5": {
-  "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid": {
-   "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
-   "pkg": "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid",
-   "publisher": "PLAYHARD STUDIO",
-   "ranks": {
-    "popular": 1
-   },
-   "date": "2026-11-22",
-   "chart": "popular"
-  },
   "com.dragonheart.spearknightrpg2": {
    "name": "창술사 키우기X : 방치형RPG",
    "pkg": "com.dragonheart.spearknightrpg2",
    "publisher": "DragonHeart",
    "ranks": {
+    "popular": 1
+   },
+   "date": "2026-11-23",
+   "chart": "popular"
+  },
+  "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid": {
+   "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
+   "pkg": "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid",
+   "publisher": "PLAYHARD STUDIO",
+   "ranks": {
     "popular": 2
    },
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "chart": "popular"
   },
   "com.rabbithole.cardofdemonslayer": {
@@ -27,7 +28,7 @@
    "ranks": {
     "popular": 3
    },
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "chart": "popular"
   },
   "com.mainquest.sgidle": {
@@ -37,17 +38,17 @@
    "ranks": {
     "popular": 4
    },
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "chart": "popular"
   },
-  "com.standegg.teamdefense": {
-   "name": "팀빨협동전 : 협동 영웅 디펜스",
-   "pkg": "com.standegg.teamdefense",
-   "publisher": "StandEgg Co., Ltd.",
+  "com.lycq.kr.and": {
+   "name": "미르의 전설2: 레볼루션",
+   "pkg": "com.lycq.kr.and",
+   "publisher": "Xsoga Game",
    "ranks": {
     "popular": 5
    },
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "chart": "popular"
   },
   "com.kakaogames.dokkaebi": {
@@ -57,7 +58,7 @@
    "ranks": {
     "sales": 1
    },
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "chart": "sales"
   },
   "com.com2us.es.android.google.kr.normal": {
@@ -67,7 +68,7 @@
    "ranks": {
     "sales": 2
    },
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "chart": "sales"
   },
   "com.proximabeta.nikke": {
@@ -77,17 +78,7 @@
    "ranks": {
     "sales": 3
    },
-   "date": "2026-11-22",
-   "chart": "sales"
-  },
-  "com.gof.global": {
-   "name": "WOS: 화이트아웃 서바이벌",
-   "pkg": "com.gof.global",
-   "publisher": "Century Games PTE. LTD.",
-   "ranks": {
-    "sales": 4
-   },
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "chart": "sales"
   },
   "com.ncsoft.lineagem19": {
@@ -95,44 +86,19 @@
    "pkg": "com.ncsoft.lineagem19",
    "publisher": "NC Corporation",
    "ranks": {
+    "sales": 4
+   },
+   "date": "2026-11-23",
+   "chart": "sales"
+  },
+  "com.gof.global": {
+   "name": "WOS: 화이트아웃 서바이벌",
+   "pkg": "com.gof.global",
+   "publisher": "Century Games PTE. LTD.",
+   "ranks": {
     "sales": 5
    },
-   "date": "2026-11-22",
-   "chart": "sales"
-  }
- },
- "day": "2026-11-22",
- "rotation": {
-  "com.nexon.overgeared": {
-   "name": "템빨: 오버기어드",
-   "pkg": "com.nexon.overgeared",
-   "publisher": "NEXON Company",
-   "ranks": {},
-   "date": "2026-11-22",
-   "chart": "popular"
-  },
-  "com.blockblast.lite": {
-   "name": "Block Blast Lite",
-   "pkg": "com.blockblast.lite",
-   "publisher": "HungryStudio",
-   "ranks": {},
-   "date": "2026-11-22",
-   "chart": "popular"
-  },
-  "com.percent.aos.cooptd": {
-   "name": "협타디: 협동 타워 디펜스",
-   "pkg": "com.percent.aos.cooptd",
-   "publisher": "Supermagic",
-   "ranks": {},
-   "date": "2026-11-22",
-   "chart": "sales"
-  },
-  "com.fun.lastwar.gp": {
-   "name": "라스트 워: 서바이벌",
-   "pkg": "com.fun.lastwar.gp",
-   "publisher": "FUNFLY PTE. LTD.",
-   "ranks": {},
-   "date": "2026-11-22",
+   "date": "2026-11-23",
    "chart": "sales"
   }
  }
