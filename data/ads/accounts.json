@@ -1852,5 +1852,250 @@
    "checked": []
   },
   "ver": 2
+ },
+ "com.mobirix.hamdoku": {
+  "meta_pages": [
+   "1425998754325988"
+  ],
+  "google": [
+   {
+    "id": "AR01023267093459501057",
+    "name": "주식회사 모비릭스",
+    "by": "이름 '모비릭스' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6795797684",
+  "meta_by": "검색어 'mobirix' → 광고 링크의 iOS 앱 ID",
+  "matched_at": "2026-11-23T00:01:51Z",
+  "google_log": {
+   "meta": [
+    "햄도쿠: 햄스터 스도쿠 두뇌 퍼즐:0",
+    "햄도쿠:0",
+    "햄스터 스도쿠 두뇌 퍼즐:0",
+    "햄스터스도쿠두뇌퍼즐:0",
+    "햄도쿠 햄스터 스도쿠 두뇌 퍼즐:0",
+    "mobirix:206"
+   ],
+   "names": [
+    "mobirix",
+    "모비릭스",
+    "주식회사 모비릭스",
+    "Mobirix-en"
+   ],
+   "domains": [],
+   "candidates": 1,
+   "previews": 10,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "주식회사 모비릭스",
+     "region": "KR",
+     "from": "이름 '모비릭스'",
+     "recent": 68,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.noriworks.kg": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "",
+  "meta_by": "",
+  "matched_at": "2026-11-23T00:02:58Z",
+  "google_log": {
+   "meta": [
+    "국민 고스톱:0",
+    "국민고스톱:0",
+    "Noriworks:8"
+   ],
+   "names": [
+    "Noriworks",
+    "MOCA"
+   ],
+   "domains": [],
+   "candidates": 8,
+   "previews": 0,
+   "failed": 0,
+   "checked": []
+  },
+  "ver": 2
+ },
+ "com.kakaogames.odin": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR13750641160274051073",
+    "name": "Kakao Games Co., Ltd.",
+    "by": "이름 'Kakao Games' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "1520354659",
+  "meta_by": "",
+  "matched_at": "2026-11-23T00:03:22Z",
+  "google_log": {
+   "meta": [
+    "오딘: 발할라 라이징:0",
+    "오딘:4",
+    "발할라 라이징:0",
+    "발할라라이징:0",
+    "오딘 발할라 라이징:0",
+    "오딘발할라라이징:0",
+    "Kakao Games Corp.:0"
+   ],
+   "names": [
+    "Kakao Games",
+    "Kakao Games Corp."
+   ],
+   "domains": [
+    "kakaogames.com"
+   ],
+   "candidates": 13,
+   "previews": 300,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "Kakao Games Co., Ltd.",
+     "region": "KR",
+     "from": "이름 'Kakao Games'",
+     "recent": 16,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    },
+    {
+     "name": "카카오게임즈",
+     "region": "",
+     "from": "도메인 'kakaogames.com'",
+     "recent": 20,
+     "previews": 18,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "KT Nasmedia Co., Ltd.",
+     "region": "",
+     "from": "도메인 'kakaogames.com'",
+     "recent": 1500,
+     "previews": 272,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.nhnent.Qpoker": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "1471486284",
+  "meta_by": "",
+  "matched_at": "2026-11-23T00:04:41Z",
+  "google_log": {
+   "meta": [
+    "한게임 포커:0",
+    "한게임포커:0",
+    "NHN Corp.:1"
+   ],
+   "names": [
+    "NHN",
+    "NHN Corp.",
+    "엔에이치엔"
+   ],
+   "domains": [
+    "hangame.com",
+    "nhn.com"
+   ],
+   "candidates": 20,
+   "previews": 46,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "NHN",
+     "region": "KR",
+     "from": "이름 'NHN'",
+     "recent": 1,
+     "previews": 1,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "엔에이치엔 주식회사",
+     "region": "KR",
+     "from": "이름 '엔에이치엔'",
+     "recent": 10,
+     "previews": 3,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "엔에이치엔 주식회사",
+     "region": "KR",
+     "from": "이름 '엔에이치엔'",
+     "recent": 9,
+     "previews": 9,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "NHNAD",
+     "region": "KR",
+     "from": "이름 'NHN'",
+     "recent": 119,
+     "previews": 11,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "NHN KCP",
+     "region": "KR",
+     "from": "이름 'NHN'",
+     "recent": 4,
+     "previews": 4,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "엔에이치엔데이터",
+     "region": "KR",
+     "from": "이름 '엔에이치엔'",
+     "recent": 5,
+     "previews": 0,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "엔에이치엔데이터",
+     "region": "KR",
+     "from": "이름 '엔에이치엔'",
+     "recent": 1,
+     "previews": 1,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "엔에이치엔링크(주)",
+     "region": "KR",
+     "from": "이름 '엔에이치엔'",
+     "recent": 23,
+     "previews": 17,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "엔에이치엔클라우드 주식회사",
+     "region": "KR",
+     "from": "도메인→이름 '엔에이치엔클라우드'",
+     "recent": 2,
+     "previews": 0,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
  }
 }

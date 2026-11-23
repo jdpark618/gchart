@@ -1,5 +1,4 @@
 {
- "day": "2026-11-23",
  "top5": {
   "com.dragonheart.spearknightrpg2": {
    "name": "창술사 키우기X : 방치형RPG",
@@ -98,6 +97,41 @@
    "ranks": {
     "sales": 5
    },
+   "date": "2026-11-23",
+   "chart": "sales"
+  }
+ },
+ "day": "2026-11-23",
+ "rotation": {
+  "com.mobirix.hamdoku": {
+   "name": "햄도쿠: 햄스터 스도쿠 두뇌 퍼즐",
+   "pkg": "com.mobirix.hamdoku",
+   "publisher": "mobirix",
+   "ranks": {},
+   "date": "2026-11-23",
+   "chart": "popular"
+  },
+  "com.noriworks.kg": {
+   "name": "국민 고스톱",
+   "pkg": "com.noriworks.kg",
+   "publisher": "Noriworks",
+   "ranks": {},
+   "date": "2026-11-23",
+   "chart": "popular"
+  },
+  "com.kakaogames.odin": {
+   "name": "오딘: 발할라 라이징",
+   "pkg": "com.kakaogames.odin",
+   "publisher": "Kakao Games Corp.",
+   "ranks": {},
+   "date": "2026-11-23",
+   "chart": "sales"
+  },
+  "com.nhnent.Qpoker": {
+   "name": "한게임 포커",
+   "pkg": "com.nhnent.Qpoker",
+   "publisher": "NHN Corp.",
+   "ranks": {},
    "date": "2026-11-23",
    "chart": "sales"
   }
