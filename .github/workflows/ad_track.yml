@@ -36,6 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         if: github.event_name == 'schedule' || github.event_name == 'workflow_run' || inputs.trigger == 'cron'
+        with: { ref: main }   # 대기열에서 기다린 경우에도 실행 시점의 최신 수집 로그로 판단 (11/24)
       - id: g
         if: github.event_name == 'schedule' || github.event_name == 'workflow_run' || inputs.trigger == 'cron'
         run: python3 gate.py ads ads_rot ads_fill   # 세 단계(TOP5 · 순번 · 보충) 모두 성공했을 때만 건너뜀
@@ -51,7 +52,7 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-        with: { fetch-depth: 0 }   # push 때 바뀐 파일을 보고 TOP5 / test.json 중 고르기 위함
+        with: { fetch-depth: 0, ref: main }   # push 때 바뀐 파일을 보고 TOP5 / test.json 중 고르기 위함 · ref main: 대기열에서 기다렸다 시작해도 최신 상태에서 저장 (11/24)
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - id: ip   # 매일 TOP5 일 때만 IP 검사 (게임 하나 수동 실행 · test.json push 는 다시 실행하면 입력이 사라지므로 검사 안 함)

@@ -34,6 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         if: github.event_name == 'schedule' || inputs.trigger == 'cron'
+        with: { ref: main }   # 대기열에서 기다린 경우에도 실행 시점의 최신 수집 로그로 판단 (11/24)
       - id: g
         if: github.event_name == 'schedule' || inputs.trigger == 'cron'
         run: python3 gate.py popular sales
