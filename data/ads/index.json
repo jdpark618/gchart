@@ -19,7 +19,7 @@
   "google_new7": 2,
   "meta": 0,
   "meta_total": 0,
-  "google": 111
+  "google": 177
  },
  {
   "pkg": "com.rxjhglkr.gp",
@@ -361,12 +361,12 @@
   "tracked_at": "2026-11-24T02:02:55Z",
   "days": 0,
   "meta_live": 0,
-  "google_live": 0,
+  "google_live": 42,
   "meta_new7": 0,
   "google_new7": 0,
   "meta": 0,
   "meta_total": 0,
-  "google": 0
+  "google": 53
  },
  {
   "pkg": "com.smilegate.eclipse.stove.google",
@@ -389,7 +389,7 @@
   "google_new7": 0,
   "meta": 1,
   "meta_total": 1,
-  "google": 2
+  "google": 15
  },
  {
   "pkg": "com.oakever.meowdoku",
