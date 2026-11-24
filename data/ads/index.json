@@ -1,5 +1,246 @@
 [
  {
+  "pkg": "com.ncsoft.lineagem19",
+  "name": "리니지M",
+  "publisher": "NC Corporation",
+  "charts": {
+   "sales": 5
+  },
+  "rank_date": "2026-11-24",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "리니지M",
+   "주식회사 엔씨"
+  ],
+  "tracked_at": "2026-11-24T01:51:35Z",
+  "days": 7,
+  "meta_live": 6,
+  "google_live": 0,
+  "meta_new7": 2,
+  "google_new7": 0,
+  "meta": 6,
+  "meta_total": 6,
+  "google": 68
+ },
+ {
+  "pkg": "com.percent.aos.luckydefense",
+  "name": "운빨존많겜",
+  "publisher": "111%",
+  "charts": {
+   "sales": 4
+  },
+  "rank_date": "2026-11-24",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "111퍼센트 주식회사"
+  ],
+  "tracked_at": "2026-11-24T01:51:20Z",
+  "days": 1,
+  "meta_live": 0,
+  "google_live": 5,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 13
+ },
+ {
+  "pkg": "com.proximabeta.nikke",
+  "name": "승리의 여신: 니케",
+  "publisher": "Level Infinite",
+  "charts": {
+   "sales": 3
+  },
+  "rank_date": "2026-11-24",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-24T01:50:18Z",
+  "days": 16,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 59,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.com2us.es.android.google.kr.normal",
+  "name": "제우스: 오만의 신",
+  "publisher": "Com2uS",
+  "charts": {
+   "sales": 2
+  },
+  "rank_date": "2026-11-24",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "(주) 컴투스",
+   "제우스: 오만의 신"
+  ],
+  "tracked_at": "2026-11-24T01:49:38Z",
+  "days": 16,
+  "meta_live": 35,
+  "google_live": 8,
+  "meta_new7": 32,
+  "google_new7": 0,
+  "meta": 96,
+  "meta_total": 35,
+  "google": 59
+ },
+ {
+  "pkg": "com.kakaogames.dokkaebi",
+  "name": "도깨비의세계",
+  "publisher": "Kakao Games Corp.",
+  "charts": {
+   "sales": 1
+  },
+  "rank_date": "2026-11-24",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "주식회사 카카오게임즈"
+  ],
+  "tracked_at": "2026-11-24T01:49:06Z",
+  "days": 16,
+  "meta_live": 0,
+  "google_live": 21,
+  "meta_new7": 0,
+  "google_new7": 8,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 55
+ },
+ {
+  "pkg": "com.mainquest.sgidle",
+  "name": "실험소녀 키우기 : 방치형 RPG",
+  "publisher": "MainQuest",
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-24",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "주식회사 메인퀘스트"
+  ],
+  "tracked_at": "2026-11-24T01:48:52Z",
+  "days": 4,
+  "meta_live": 0,
+  "google_live": 2,
+  "meta_new7": 0,
+  "google_new7": 2,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 2
+ },
+ {
+  "pkg": "com.lycq.kr.and",
+  "name": "미르의 전설2: 레볼루션",
+  "publisher": "Xsoga Game",
+  "charts": {
+   "popular": 4
+  },
+  "rank_date": "2026-11-24",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "미르의 전설2: 레볼루션M",
+   "미르의전설2‑게임채널",
+   "미르의전설2‑공식게임"
+  ],
+  "tracked_at": "2026-11-24T01:47:31Z",
+  "days": 7,
+  "meta_live": 151,
+  "google_live": 0,
+  "meta_new7": 175,
+  "google_new7": 0,
+  "meta": 442,
+  "meta_total": 197,
+  "google": 0
+ },
+ {
+  "pkg": "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid",
+  "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
+  "publisher": "PLAYHARD STUDIO",
+  "charts": {
+   "popular": 3
+  },
+  "rank_date": "2026-11-24",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-24T01:47:20Z",
+  "days": 5,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.rabbithole.cardofdemonslayer",
+  "name": "카드 오브 데몬슬레이어: 덱빌딩 로그라이크 RPG",
+  "publisher": "CookApps",
+  "charts": {
+   "popular": 2
+  },
+  "rank_date": "2026-11-24",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "(주) 쿡앱스"
+  ],
+  "tracked_at": "2026-11-24T01:47:05Z",
+  "days": 5,
+  "meta_live": 0,
+  "google_live": 2,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 7
+ },
+ {
+  "pkg": "com.dragonheart.spearknightrpg2",
+  "name": "창술사 키우기X : 방치형RPG",
+  "publisher": "DragonHeart",
+  "charts": {
+   "popular": 1
+  },
+  "rank_date": "2026-11-24",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "(주)코드드래곤",
+   "코드드래곤"
+  ],
+  "tracked_at": "2026-11-24T01:46:29Z",
+  "days": 3,
+  "meta_live": 35,
+  "google_live": 10,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 35,
+  "meta_total": 35,
+  "google": 12
+ },
+ {
   "pkg": "com.nhnent.Qpoker",
   "name": "한게임 포커",
   "publisher": "NHN Corp.",
@@ -110,223 +351,6 @@
   "google": 121
  },
  {
-  "pkg": "com.ncsoft.lineagem19",
-  "name": "리니지M",
-  "publisher": "NC Corporation",
-  "charts": {
-   "sales": 4
-  },
-  "rank_date": "2026-11-23",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "리니지M",
-   "주식회사 엔씨"
-  ],
-  "tracked_at": "2026-11-23T00:00:31Z",
-  "days": 6,
-  "meta_live": 6,
-  "google_live": 0,
-  "meta_new7": 6,
-  "google_new7": 0,
-  "meta": 6,
-  "meta_total": 6,
-  "google": 68
- },
- {
-  "pkg": "com.proximabeta.nikke",
-  "name": "승리의 여신: 니케",
-  "publisher": "Level Infinite",
-  "charts": {
-   "sales": 3
-  },
-  "rank_date": "2026-11-23",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [],
-  "tracked_at": "2026-11-22T23:59:31Z",
-  "days": 15,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 59,
-  "meta_total": 0,
-  "google": 0
- },
- {
-  "pkg": "com.com2us.es.android.google.kr.normal",
-  "name": "제우스: 오만의 신",
-  "publisher": "Com2uS",
-  "charts": {
-   "sales": 2
-  },
-  "rank_date": "2026-11-23",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "(주) 컴투스",
-   "제우스: 오만의 신"
-  ],
-  "tracked_at": "2026-11-22T23:58:57Z",
-  "days": 15,
-  "meta_live": 35,
-  "google_live": 8,
-  "meta_new7": 35,
-  "google_new7": 0,
-  "meta": 96,
-  "meta_total": 35,
-  "google": 59
- },
- {
-  "pkg": "com.kakaogames.dokkaebi",
-  "name": "도깨비의세계",
-  "publisher": "Kakao Games Corp.",
-  "charts": {
-   "sales": 1
-  },
-  "rank_date": "2026-11-23",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "주식회사 카카오게임즈"
-  ],
-  "tracked_at": "2026-11-22T23:58:42Z",
-  "days": 15,
-  "meta_live": 0,
-  "google_live": 21,
-  "meta_new7": 0,
-  "google_new7": 16,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 55
- },
- {
-  "pkg": "com.lycq.kr.and",
-  "name": "미르의 전설2: 레볼루션",
-  "publisher": "Xsoga Game",
-  "charts": {
-   "popular": 5
-  },
-  "rank_date": "2026-11-23",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "미르의 전설2: 레볼루션M",
-   "미르의전설2‑게임채널",
-   "미르의전설2‑공식게임"
-  ],
-  "tracked_at": "2026-11-22T23:56:27Z",
-  "days": 6,
-  "meta_live": 96,
-  "google_live": 0,
-  "meta_new7": 163,
-  "google_new7": 0,
-  "meta": 387,
-  "meta_total": 124,
-  "google": 0
- },
- {
-  "pkg": "com.mainquest.sgidle",
-  "name": "실험소녀 키우기 : 방치형 RPG",
-  "publisher": "MainQuest",
-  "charts": {
-   "popular": 4
-  },
-  "rank_date": "2026-11-23",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "주식회사 메인퀘스트"
-  ],
-  "tracked_at": "2026-11-22T23:56:12Z",
-  "days": 3,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 2,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 2
- },
- {
-  "pkg": "com.rabbithole.cardofdemonslayer",
-  "name": "카드 오브 데몬슬레이어: 덱빌딩 로그라이크 RPG",
-  "publisher": "CookApps",
-  "charts": {
-   "popular": 3
-  },
-  "rank_date": "2026-11-23",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "(주) 쿡앱스"
-  ],
-  "tracked_at": "2026-11-22T23:55:58Z",
-  "days": 4,
-  "meta_live": 0,
-  "google_live": 2,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 7
- },
- {
-  "pkg": "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid",
-  "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
-  "publisher": "PLAYHARD STUDIO",
-  "charts": {
-   "popular": 2
-  },
-  "rank_date": "2026-11-23",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [],
-  "tracked_at": "2026-11-22T23:55:47Z",
-  "days": 4,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 0
- },
- {
-  "pkg": "com.dragonheart.spearknightrpg2",
-  "name": "창술사 키우기X : 방치형RPG",
-  "publisher": "DragonHeart",
-  "charts": {
-   "popular": 1
-  },
-  "rank_date": "2026-11-23",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "(주)코드드래곤",
-   "코드드래곤"
-  ],
-  "tracked_at": "2026-11-22T23:55:21Z",
-  "days": 2,
-  "meta_live": 35,
-  "google_live": 10,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 35,
-  "meta_total": 35,
-  "google": 12
- },
- {
   "pkg": "com.fun.lastwar.gp",
   "name": "라스트 워: 서바이벌",
   "publisher": "FUNFLY PTE. LTD.",
@@ -433,28 +457,6 @@
   "meta": 0,
   "meta_total": 0,
   "google": 0
- },
- {
-  "pkg": "com.percent.aos.luckydefense",
-  "name": "운빨존많겜",
-  "publisher": "111%",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "111퍼센트 주식회사"
-  ],
-  "tracked_at": "2026-11-21T00:31:52Z",
-  "days": 0,
-  "meta_live": 0,
-  "google_live": 5,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 13
  },
  {
   "pkg": "com.netmarble.sol",
