@@ -11,6 +11,7 @@ on:
       google_adv_id: { description: 'Google 광고주 ID AR... (알면 입력)', default: '' }
       stage: { description: '시작 단계 (비우면 처음부터) — top5 · rotation · fill. IP 가 겹칠 때 수집기가 스스로 씀', required: false, default: '' }
       attempt: { description: 'IP 중복으로 다시 실행한 횟수 (수집기가 씀)', required: false, default: '1' }
+      trigger: { description: '비워 두세요 — 외부 예약(Firebase)이 cron 으로 부름: 오늘 이미 성공했으면 건너뜀', required: false, default: '' }
   push:
     branches: [main]
     paths: ['tracker/test.json', 'tracker/daily_top5.py']   # daily_top5.py 를 고쳐 push 하면 그날 TOP5 를 바로 한 번 추적
@@ -34,9 +35,9 @@ jobs:
       skip: ${{ steps.g.outputs.skip }}
     steps:
       - uses: actions/checkout@v4
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_run'
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_run' || inputs.trigger == 'cron'
       - id: g
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_run'
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_run' || inputs.trigger == 'cron'
         run: python3 gate.py ads ads_rot ads_fill   # 세 단계(TOP5 · 순번 · 보충) 모두 성공했을 때만 건너뜀
 
   # 1단계 TOP5 추적 (11/19 세 단계로 나눔): 인기 TOP5 + 매출 TOP5 매일 · 수동 단일 게임 · test.json 도 여기서

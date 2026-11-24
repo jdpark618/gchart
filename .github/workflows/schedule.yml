@@ -12,6 +12,10 @@ on:
         description: '앱 정보(설명·스크린샷)만 채우기 — 순위 수집·기록은 하지 않음'
         type: boolean
         default: false
+      trigger:
+        description: '비워 두세요 — 외부 예약(Firebase)이 cron 으로 부름: 오늘 이미 성공했으면 건너뜀'
+        type: string
+        default: ''
 
 permissions:
   contents: write   # keepalive 커밋을 push 하기 위해 필요
@@ -29,9 +33,9 @@ jobs:
       skip: ${{ steps.g.outputs.skip }}
     steps:
       - uses: actions/checkout@v4
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || inputs.trigger == 'cron'
       - id: g
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || inputs.trigger == 'cron'
         run: python3 gate.py popular sales
 
   scrape-and-update:
