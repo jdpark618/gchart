@@ -80,12 +80,12 @@
   "tracked_at": "2026-11-24T01:56:19Z",
   "days": 0,
   "meta_live": 40,
-  "google_live": 4,
+  "google_live": 10,
   "meta_new7": 14,
-  "google_new7": 3,
+  "google_new7": 4,
   "meta": 40,
   "meta_total": 90,
-  "google": 4
+  "google": 10
  },
  {
   "pkg": "com.ncsoft.lineagem19",
