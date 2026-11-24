@@ -1,5 +1,112 @@
 [
  {
+  "pkg": "com.playrix.gardenscapes",
+  "name": "꿈의 정원 (Gardenscapes)",
+  "publisher": "Playrix",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "Playrix"
+  ],
+  "tracked_at": "2026-11-24T16:14:56Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 94,
+  "meta_new7": 0,
+  "google_new7": 2,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 111
+ },
+ {
+  "pkg": "com.rxjhglkr.gp",
+  "name": "열혈강호: 넥스트",
+  "publisher": "Kingnet Technology Limited",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "열혈강호: NEXT",
+   "열혈강호: 넥스트"
+  ],
+  "tracked_at": "2026-11-24T16:14:09Z",
+  "days": 0,
+  "meta_live": 49,
+  "google_live": 0,
+  "meta_new7": 28,
+  "google_new7": 0,
+  "meta": 49,
+  "meta_total": 56,
+  "google": 0
+ },
+ {
+  "pkg": "com.dreamgames.royalkingdom",
+  "name": "로얄 킹덤 (Royal Kingdom)",
+  "publisher": "Dream Games, Ltd.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "Dream Games Publishing Ltd"
+  ],
+  "tracked_at": "2026-11-24T16:13:03Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 17,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 25
+ },
+ {
+  "pkg": "sort.casual.color.cat.puzzle.match",
+  "name": "Cutie Sort: 고양이 분류 퍼즐",
+  "publisher": "Ladaneta Games",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-24T16:12:27Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.mocacorp.block",
+  "name": "블록게임",
+  "publisher": "Moca",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-24T16:12:16Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
   "pkg": "com.percent.aos.luckydefense",
   "name": "운빨존많겜",
   "publisher": "111%",
@@ -987,26 +1094,6 @@
   "meta": 0,
   "meta_total": 0,
   "google": 7
- },
- {
-  "pkg": "com.mocacorp.block",
-  "name": "블록게임",
-  "publisher": "Moca",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [],
-  "tracked_at": "2026-11-18T07:33:05Z",
-  "days": 0,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 0
  },
  {
   "pkg": "com.badbeans.legendofmarmot",

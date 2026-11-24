@@ -1,5 +1,4 @@
 {
- "day": "2026-11-25",
  "top5": {
   "com.dragonheart.spearknightrpg2": {
    "name": "창술사 키우기X : 방치형RPG",
@@ -98,6 +97,49 @@
    "ranks": {
     "sales": 5
    },
+   "date": "2026-11-25",
+   "chart": "sales"
+  }
+ },
+ "day": "2026-11-25",
+ "rotation": {
+  "com.mocacorp.block": {
+   "name": "블록게임",
+   "pkg": "com.mocacorp.block",
+   "publisher": "Moca",
+   "ranks": {},
+   "date": "2026-11-25",
+   "chart": "popular"
+  },
+  "sort.casual.color.cat.puzzle.match": {
+   "name": "Cutie Sort: 고양이 분류 퍼즐",
+   "pkg": "sort.casual.color.cat.puzzle.match",
+   "publisher": "Ladaneta Games",
+   "ranks": {},
+   "date": "2026-11-25",
+   "chart": "popular"
+  },
+  "com.dreamgames.royalkingdom": {
+   "name": "로얄 킹덤 (Royal Kingdom)",
+   "pkg": "com.dreamgames.royalkingdom",
+   "publisher": "Dream Games, Ltd.",
+   "ranks": {},
+   "date": "2026-11-25",
+   "chart": "sales"
+  },
+  "com.rxjhglkr.gp": {
+   "name": "열혈강호: 넥스트",
+   "pkg": "com.rxjhglkr.gp",
+   "publisher": "Kingnet Technology Limited",
+   "ranks": {},
+   "date": "2026-11-25",
+   "chart": "sales"
+  },
+  "com.playrix.gardenscapes": {
+   "name": "꿈의 정원 (Gardenscapes)",
+   "pkg": "com.playrix.gardenscapes",
+   "publisher": "Playrix",
+   "ranks": {},
    "date": "2026-11-25",
    "chart": "sales"
   }

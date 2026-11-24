@@ -2305,5 +2305,162 @@
    ]
   },
   "ver": 2
+ },
+ "sort.casual.color.cat.puzzle.match": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "",
+  "meta_by": "",
+  "matched_at": "2026-11-24T16:12:27Z",
+  "google_log": {
+   "meta": [
+    "Cutie Sort: 고양이 분류 퍼즐:0",
+    "Cutie Sort:6952",
+    "CutieSort:6952",
+    "고양이 분류 퍼즐:0",
+    "고양이분류퍼즐:0",
+    "Cutie Sort 고양이 분류 퍼즐:0",
+    "Ladaneta Games:0"
+   ],
+   "names": [
+    "Ladaneta Games",
+    "LADANETA",
+    "LADANETA PTE. LTD."
+   ],
+   "domains": [],
+   "candidates": 1,
+   "previews": 2,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "LADANETA PTE. LTD.",
+     "region": "SG",
+     "from": "이름 'LADANETA'",
+     "recent": 2,
+     "previews": 2,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.dreamgames.royalkingdom": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR09376188622513897473",
+    "name": "Dream Games Publishing Ltd",
+    "by": "이름 'Dream Games' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "1606549505",
+  "meta_by": "",
+  "matched_at": "2026-11-24T16:13:03Z",
+  "google_log": {
+   "meta": [
+    "로얄 킹덤 (Royal Kingdom):0",
+    "로얄 킹덤:0",
+    "로얄킹덤:0",
+    "Dream Games, Ltd.:601"
+   ],
+   "names": [
+    "Dream Games",
+    "Dream Games, Ltd.",
+    "DREAM GAMES PUBLISHING",
+    "DREAM GAMES PUBLISHING LIMITED",
+    "Dream Games Dijital Teknolojiler A.S",
+    "Dream Games Dijital Teknolojiler A.S."
+   ],
+   "domains": [],
+   "candidates": 1,
+   "previews": 10,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "Dream Games Publishing Ltd",
+     "region": "GB",
+     "from": "이름 'Dream Games'",
+     "recent": 82,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.rxjhglkr.gp": {
+  "meta_pages": [
+   "309444348927013",
+   "435373036324234"
+  ],
+  "google": [],
+  "ios": "6762442041",
+  "meta_by": "검색어 '열혈강호: 넥스트' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-24T16:14:09Z",
+  "google_log": {
+   "meta": [
+    "열혈강호: 넥스트:24"
+   ],
+   "names": [
+    "Kingnet Technology",
+    "Kingnet Technology Limited",
+    "Kingnet Technology (HK)",
+    "Kingnet Technology (HK) Limited",
+    "HONGKONG FAME CHAMPION TRADING CO",
+    "HONGKONG FAME CHAMPION TRADING CO., LIMITED",
+    "열혈강호: 넥스트",
+    "열혈강호: NEXT"
+   ],
+   "domains": [],
+   "candidates": 0,
+   "previews": 0,
+   "failed": 0,
+   "checked": []
+  },
+  "ver": 2
+ },
+ "com.playrix.gardenscapes": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR07574878651376730113",
+    "name": "Playrix",
+    "by": "이름 'Playrix' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "",
+  "meta_by": "",
+  "matched_at": "2026-11-24T16:14:56Z",
+  "google_log": {
+   "meta": [
+    "꿈의 정원 (Gardenscapes):0",
+    "꿈의 정원:6",
+    "꿈의정원:0",
+    "Playrix:5828"
+   ],
+   "names": [
+    "Playrix",
+    "PLR WORLDWIDE SALES",
+    "PLR WORLDWIDE SALES LIMITED"
+   ],
+   "domains": [],
+   "candidates": 1,
+   "previews": 10,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "Playrix",
+     "region": "IE",
+     "from": "이름 'Playrix'",
+     "recent": 529,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
  }
 }
