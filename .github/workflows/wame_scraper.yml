@@ -6,6 +6,11 @@ on:
     - cron: '12 18 * * *'
     - cron: '12 1 * * *'    # 예비: 원래 + 7시간 = KST 10:12 (11/10) · 오늘 이미 성공했으면 gate 에서 끝남
   workflow_dispatch: # 수동 실행 버튼 활성화
+    inputs:
+      trigger:
+        description: '비워 두세요 — 외부 예약(Cloud Scheduler)이 cron 으로 부름: 오늘 이미 성공했으면 건너뜀'
+        type: string
+        default: ''
 
 permissions:
   contents: write   # keepalive 커밋을 push 하기 위해 필요
@@ -23,9 +28,9 @@ jobs:
       skip: ${{ steps.g.outputs.skip }}
     steps:
       - uses: actions/checkout@v4
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || inputs.trigger == 'cron'
       - id: g
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || inputs.trigger == 'cron'
         run: python3 gate.py new
 
   run-scraper:
