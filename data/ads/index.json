@@ -516,12 +516,12 @@
   ],
   "tracked_at": "2026-11-21T23:46:02Z",
   "days": 0,
-  "meta_live": 48,
+  "meta_live": 2,
   "google_live": 0,
   "meta_new7": 0,
   "google_new7": 0,
-  "meta": 48,
-  "meta_total": 161,
+  "meta": 2,
+  "meta_total": 2,
   "google": 0
  },
  {
@@ -691,17 +691,16 @@
    "sales"
   ],
   "aliases": [
-   "20대 뭐 하지?",
    "ROBLOX Corporation"
   ],
   "tracked_at": "2026-11-20T01:08:00Z",
   "days": 0,
-  "meta_live": 18,
-  "google_live": 26,
-  "meta_new7": 16,
-  "google_new7": 10,
-  "meta": 18,
-  "meta_total": 18,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
   "google": 36
  },
  {

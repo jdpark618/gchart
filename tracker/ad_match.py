@@ -82,7 +82,9 @@ async def meta_match(pg, g, ios_id, names=(), hosts=(), cores=()):
         if hit: return {'pages': [{'id': k, 'name': v[0]} for k, v in hit.items()], 'by': f"검색어 '{q}' → 광고 링크의 {next(iter(hit.values()))[1]}", 'tried': tried}
         await pg.wait_for_timeout(1200)
     # 링크에 패키지가 없는 경우: 게임 사이트로 보내는 광고(B) → 없으면 추적 링크 + 이름 일치(C, 광고 2개 이상)
-    b = {k: v for k, v in weak.items() if v['B']}
+    # B 는 광고 2개 이상이거나 페이지 이름이 게임 · 회사 이름과 겹칠 때만 (11/24: 로블록스 → 게임 사이트 링크 광고 1개뿐인 잡지 페이지 '20대 뭐 하지?' 가 잡힘)
+    rel = lambda n: (lambda p: len(p) >= 2 and any(k in p or p in k for k in keys | cores))(nzk(n))
+    b = {k: v for k, v in weak.items() if v['B'] >= 2 or (v['B'] and rel(v['name']))}
     c = {k: v for k, v in weak.items() if v['C'] >= 2}
     pick, label = (b, '광고 링크가 ') if b else (c, '추적 링크 광고 · ') if c else ({}, '')
     if pick:

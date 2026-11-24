@@ -10,7 +10,7 @@ import argparse, asyncio, calendar, hashlib, io, json, os, re, shutil, time, url
 from urllib.parse import quote
 from PIL import Image
 from playwright.async_api import async_playwright
-from ad_terms import MATCH_VER
+from ad_terms import MATCH_VER, game_keys, nzk
 
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -56,7 +56,7 @@ def meta_norm(a):
             'vsrc': (v.get('video_hd_url') or v.get('video_sd_url') or card.get('video_hd_url') or card.get('video_sd_url') or '')[:1500],   # 고화질 우선 (11/09)
             'isrc': (img.get('original_image_url') or card.get('original_image_url') or v.get('video_preview_image_url') or card.get('video_preview_image_url') or '')[:1500]}
 
-async def meta(ctx, keys, pkg, page_id):
+async def meta(ctx, keys, pkg, page_id, ios=''):
     pg = await ctx.new_page(); out = {'query': ', '.join(keys), 'pages': [], 'count': 0, 'ads': [], 'log': []}
     pages = {}
     if page_id:
@@ -93,7 +93,8 @@ async def meta(ctx, keys, pkg, page_id):
             for a in got: ads[a['ad_archive_id']] = a
             await pg.wait_for_timeout(1000)
         out['pages'].append({'id': pid, 'name': pages[pid] or next((a['snapshot'].get('page_name') for a in ads.values() if a.get('page_id') == pid), '')})
-    out['ads'] = sorted((meta_norm(a) for a in ads.values()), key=lambda x: -(x['start'] or 0))
+    # own (11/24): 소재 원본(링크 · 카드)에 이 게임 패키지나 App Store ID 가 있는지 — 퍼블리셔 공용 페이지에서 다른 게임 소재를 거를 때 씀 (meta_filter)
+    out['ads'] = sorted(({**meta_norm(a), 'own': (lambda r: pkg in r or bool(ios and ios in r))(json.dumps(a['snapshot'], ensure_ascii=False))} for a in ads.values()), key=lambda x: -(x['start'] or 0))
     out['lang'] = 'ko'
     return out
 
@@ -270,12 +271,12 @@ async def main():
         gadv = ','.join(f"{g['id']}|{g.get('name', '')}" for g in acc.get('google', []))
         if a.google_only: res['meta'] = prev.get('meta') or {'ads': []}
         else:
-            try: res['meta'] = await meta(ctx, keys, pkg, meta_page) if meta_page else {'pages': [], 'count': 0, 'ads': [], 'log': [{'skip': 'Meta 계정 없음'}]}
+            try: res['meta'] = await meta(ctx, keys, pkg, meta_page, acc.get('ios', '')) if meta_page else {'pages': [], 'count': 0, 'ads': [], 'log': [{'skip': 'Meta 계정 없음'}]}
             except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
         # 재시도 (11/06): 이전엔 광고가 있었는데 이번 조회가 비면 일시 차단일 수 있어 30초 쉬고 한 번 더
         if not a.google_only and meta_page and not res['meta'].get('ads') and prev.get('meta', {}).get('ads'):
             await asyncio.sleep(30)
-            try: res['meta'] = await meta(ctx, keys, pkg, meta_page); res['meta'].setdefault('log', []).append({'retry': True})
+            try: res['meta'] = await meta(ctx, keys, pkg, meta_page, acc.get('ios', '')); res['meta'].setdefault('log', []).append({'retry': True})
             except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
         # 다른 게임 소재로 확인된 ID (11/18): data/ads/checked/<pkg>.json · 사이트가 읽는 파일이 커지지 않게 따로 둠 · iOS ID 가 새로 잡히면 기준이 달라지므로 처음부터 다시 확인
         ck_p, ios_now = os.path.join(ROOT, 'data', 'ads', 'checked', f'{pkg}.json'), acc.get('ios', '') or clean(a.ios)
@@ -318,6 +319,8 @@ async def main():
         gm.update({x['id']: x for x in res['google'].get('ads', [])})
         res['google']['ads'] = sorted(gm.values(), key=lambda x: -(x.get('last') or 0))
         res['google'].pop('seen', None)
+    res['meta']['ads'], res['meta']['dropped'] = meta_filter(res['meta'].get('ads', []), game_keys(keys + [res.get('title', '')]))
+    if res['meta']['dropped']: res['meta']['count'] = len(res['meta']['ads'])   # 공용 페이지면 페이지 전체 건수 대신 이 게임 소재 수
     oth = res['google'].pop('other', None)
     if oth is not None:   # 조회가 오류로 끝났으면 기존 기록 유지
         os.makedirs(os.path.dirname(ck_p), exist_ok=True)
@@ -352,6 +355,25 @@ async def main():
                'meta': {k: res['meta'].get(k) for k in ('pages', 'count', 'log', 'error')} | {'ads': len(res['meta'].get('ads', []))},
                'google': {'advertisers': res['google'].get('advertisers'), 'candidates': res['google'].get('candidates'), 'ads': len(res['google'].get('ads', [])), 'error': res['google'].get('error')}}
     print(json.dumps(summary, ensure_ascii=False, indent=1))
+
+def meta_filter(ads, gk):
+    """퍼블리셔 공용 페이지 거르기 (11/24): 넥슨모바일처럼 한 페이지가 여러 게임을 광고하면 이 게임 소재만 남김.
+    페이지별로 '이 게임 소재로 보이는 비율'이 절반 이상이거나 페이지 이름이 게임 이름과 겹치면 전용 페이지 → 전부 남김.
+    아니면 이 게임 소재만: 원본에 패키지 · App Store ID (own) 또는 제목 · 문구 · 링크에 게임 이름.
+    예전에 받은 소재(own 없음)는 원본이 없어 스토어 링크면 남김. 돌려줌: (남긴 소재, 뺀 개수)"""
+    def mine(x):
+        if x.get('own'): return True
+        if any(k in nzk((x.get('title') or '') + (x.get('body') or '') + (x.get('link') or '')) for k in gk): return True
+        return False if 'own' in x else x.get('store') in ('Play', 'iOS')
+    by = {}
+    for x in ads: by.setdefault(x.get('page_id'), []).append(x)
+    keep = []
+    for xs in by.values():
+        p = nzk(xs[0].get('page') or '')
+        named = not p or any(len(p) >= 2 and (k in p or p in k) for k in gk)
+        keep += xs if named or sum(map(mine, xs)) * 2 >= len(xs) else [x for x in xs if mine(x)]
+    keep.sort(key=lambda x: -(x.get('start') or 0))
+    return keep, len(ads) - len(keep)
 
 def match_log(m):
     """Meta 검색어(검색어:광고 수) · Google 광고주를 무엇으로 찾아봤는지 요약 (accounts.json 에 남김 → '왜 못 찾았나'를 나중에 확인)"""
