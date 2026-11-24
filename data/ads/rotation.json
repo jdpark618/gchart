@@ -1,4 +1,5 @@
 {
+ "day": "2026-11-25",
  "top5": {
   "com.dragonheart.spearknightrpg2": {
    "name": "창술사 키우기X : 방치형RPG",
@@ -7,7 +8,7 @@
    "ranks": {
     "popular": 1
    },
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "chart": "popular"
   },
   "com.rabbithole.cardofdemonslayer": {
@@ -17,17 +18,7 @@
    "ranks": {
     "popular": 2
    },
-   "date": "2026-11-24",
-   "chart": "popular"
-  },
-  "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid": {
-   "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
-   "pkg": "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid",
-   "publisher": "PLAYHARD STUDIO",
-   "ranks": {
-    "popular": 3
-   },
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "chart": "popular"
   },
   "com.lycq.kr.and": {
@@ -35,9 +26,19 @@
    "pkg": "com.lycq.kr.and",
    "publisher": "Xsoga Game",
    "ranks": {
+    "popular": 3
+   },
+   "date": "2026-11-25",
+   "chart": "popular"
+  },
+  "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid": {
+   "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
+   "pkg": "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid",
+   "publisher": "PLAYHARD STUDIO",
+   "ranks": {
     "popular": 4
    },
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "chart": "popular"
   },
   "com.mainquest.sgidle": {
@@ -47,7 +48,7 @@
    "ranks": {
     "popular": 5
    },
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "chart": "popular"
   },
   "com.kakaogames.dokkaebi": {
@@ -57,7 +58,7 @@
    "ranks": {
     "sales": 1
    },
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "chart": "sales"
   },
   "com.com2us.es.android.google.kr.normal": {
@@ -67,7 +68,7 @@
    "ranks": {
     "sales": 2
    },
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "chart": "sales"
   },
   "com.proximabeta.nikke": {
@@ -77,7 +78,17 @@
    "ranks": {
     "sales": 3
    },
-   "date": "2026-11-24",
+   "date": "2026-11-25",
+   "chart": "sales"
+  },
+  "com.gof.global": {
+   "name": "WOS: 화이트아웃 서바이벌",
+   "pkg": "com.gof.global",
+   "publisher": "Century Games PTE. LTD.",
+   "ranks": {
+    "sales": 4
+   },
+   "date": "2026-11-25",
    "chart": "sales"
   },
   "com.percent.aos.luckydefense": {
@@ -85,54 +96,9 @@
    "pkg": "com.percent.aos.luckydefense",
    "publisher": "111%",
    "ranks": {
-    "sales": 4
-   },
-   "date": "2026-11-24",
-   "chart": "sales"
-  },
-  "com.ncsoft.lineagem19": {
-   "name": "리니지M",
-   "pkg": "com.ncsoft.lineagem19",
-   "publisher": "NC Corporation",
-   "ranks": {
     "sales": 5
    },
-   "date": "2026-11-24",
-   "chart": "sales"
-  }
- },
- "day": "2026-11-24",
- "rotation": {
-  "group.theorigin.themaxlevelreturner": {
-   "name": "나 혼자 만렙 키우기",
-   "pkg": "group.theorigin.themaxlevelreturner",
-   "publisher": "Punchline Games Co., Ltd.",
-   "ranks": {},
-   "date": "2026-11-24",
-   "chart": "popular"
-  },
-  "com.oakever.meowdoku": {
-   "name": "Meowdoku: 두뇌 퍼즐 게임",
-   "pkg": "com.oakever.meowdoku",
-   "publisher": "Oakever Games",
-   "ranks": {},
-   "date": "2026-11-24",
-   "chart": "popular"
-  },
-  "com.smilegate.eclipse.stove.google": {
-   "name": "이클립스: 더 어웨이크닝",
-   "pkg": "com.smilegate.eclipse.stove.google",
-   "publisher": "Smilegate, Inc.",
-   "ranks": {},
-   "date": "2026-11-24",
-   "chart": "sales"
-  },
-  "com.fatmerge.global": {
-   "name": "테이스티 트레블: 합성 게임",
-   "pkg": "com.fatmerge.global",
-   "publisher": "Century Games PTE. LTD.",
-   "ranks": {},
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "chart": "sales"
   }
  }
