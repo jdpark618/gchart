@@ -1,5 +1,4 @@
 {
- "day": "2026-11-24",
  "top5": {
   "com.dragonheart.spearknightrpg2": {
    "name": "창술사 키우기X : 방치형RPG",
@@ -98,6 +97,41 @@
    "ranks": {
     "sales": 5
    },
+   "date": "2026-11-24",
+   "chart": "sales"
+  }
+ },
+ "day": "2026-11-24",
+ "rotation": {
+  "group.theorigin.themaxlevelreturner": {
+   "name": "나 혼자 만렙 키우기",
+   "pkg": "group.theorigin.themaxlevelreturner",
+   "publisher": "Punchline Games Co., Ltd.",
+   "ranks": {},
+   "date": "2026-11-24",
+   "chart": "popular"
+  },
+  "com.oakever.meowdoku": {
+   "name": "Meowdoku: 두뇌 퍼즐 게임",
+   "pkg": "com.oakever.meowdoku",
+   "publisher": "Oakever Games",
+   "ranks": {},
+   "date": "2026-11-24",
+   "chart": "popular"
+  },
+  "com.smilegate.eclipse.stove.google": {
+   "name": "이클립스: 더 어웨이크닝",
+   "pkg": "com.smilegate.eclipse.stove.google",
+   "publisher": "Smilegate, Inc.",
+   "ranks": {},
+   "date": "2026-11-24",
+   "chart": "sales"
+  },
+  "com.fatmerge.global": {
+   "name": "테이스티 트레블: 합성 게임",
+   "pkg": "com.fatmerge.global",
+   "publisher": "Century Games PTE. LTD.",
+   "ranks": {},
    "date": "2026-11-24",
    "chart": "sales"
   }

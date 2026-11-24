@@ -2097,5 +2097,215 @@
    ]
   },
   "ver": 2
+ },
+ "group.theorigin.themaxlevelreturner": {
+  "meta_pages": [
+   "611751312022500"
+  ],
+  "google": [
+   {
+    "id": "AR05065273442928951297",
+    "name": "펀치라인게임즈",
+    "by": "이름 '펀치라인게임즈' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6566177585",
+  "meta_by": "검색어 '나 혼자 만렙 키우기' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-24T01:56:19Z",
+  "google_log": {
+   "meta": [
+    "나 혼자 만렙 키우기:1"
+   ],
+   "names": [
+    "Punchline Games",
+    "Punchline Games Co., Ltd.",
+    "펀치라인게임즈"
+   ],
+   "domains": [],
+   "candidates": 1,
+   "previews": 10,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "펀치라인게임즈",
+     "region": "KR",
+     "from": "이름 '펀치라인게임즈'",
+     "recent": 161,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.oakever.meowdoku": {
+  "meta_pages": [
+   "1069630859571210",
+   "1184586754728105"
+  ],
+  "google": [],
+  "ios": "",
+  "meta_by": "검색어 'Meowdoku' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-24T01:59:03Z",
+  "google_log": {
+   "meta": [
+    "Meowdoku: 두뇌 퍼즐 게임:1",
+    "Meowdoku:1215"
+   ],
+   "names": [
+    "Oakever Games",
+    "OAKEVER GAMES PTE. LTD.",
+    "Meowdoku"
+   ],
+   "domains": [],
+   "candidates": 0,
+   "previews": 0,
+   "failed": 0,
+   "checked": []
+  },
+  "ver": 2
+ },
+ "com.smilegate.eclipse.stove.google": {
+  "meta_pages": [
+   "1209813575557149"
+  ],
+  "google": [
+   {
+    "id": "AR07071302428934537217",
+    "name": "(주)스마일게이트 메가포트 지점",
+    "by": "도메인 'onstove.com' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6745164499",
+  "meta_by": "검색어 '이클립스: 더 어웨이크닝' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-24T01:59:43Z",
+  "google_log": {
+   "meta": [
+    "이클립스: 더 어웨이크닝:1"
+   ],
+   "names": [
+    "Smilegate",
+    "Smilegate, Inc.",
+    "이클립스: 더 어웨이크닝"
+   ],
+   "domains": [
+    "onstove.com"
+   ],
+   "candidates": 9,
+   "previews": 276,
+   "failed": 231,
+   "checked": [
+    {
+     "name": "(주)스마일게이트 메가포트 지점",
+     "region": "",
+     "from": "도메인 'onstove.com'",
+     "recent": 492,
+     "previews": 173,
+     "failed": 170,
+     "hit": true
+    },
+    {
+     "name": "주식회사 도트랩",
+     "region": "",
+     "from": "도메인 'onstove.com'",
+     "recent": 264,
+     "previews": 6,
+     "failed": 3,
+     "hit": false
+    },
+    {
+     "name": "스마일게이트홀딩스",
+     "region": "",
+     "from": "도메인 'onstove.com'",
+     "recent": 610,
+     "previews": 79,
+     "failed": 58,
+     "hit": false
+    },
+    {
+     "name": "Smilegate West, Inc.",
+     "region": "CA",
+     "from": "이름 'Smilegate'",
+     "recent": 6,
+     "previews": 0,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "스마일게이트홀딩스",
+     "region": "KR",
+     "from": "도메인→이름 '스마일게이트홀딩스'",
+     "recent": 14,
+     "previews": 14,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "주식회사 도트랩",
+     "region": "KR",
+     "from": "도메인→이름 '도트랩'",
+     "recent": 1,
+     "previews": 0,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "(주)스마일게이트홀딩스 메가포트 지점",
+     "region": "KR",
+     "from": "도메인→이름 '스마일게이트홀딩스'",
+     "recent": 4,
+     "previews": 4,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.fatmerge.global": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR15528579328135659521",
+    "name": "CENTURY GAMES PTE. LTD.",
+    "by": "이름 'Century Games' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6471045672",
+  "meta_by": "",
+  "matched_at": "2026-11-24T02:02:55Z",
+  "google_log": {
+   "meta": [
+    "테이스티 트레블: 합성 게임:0",
+    "테이스티 트레블:0",
+    "테이스티트레블:0",
+    "합성 게임:78",
+    "합성게임:0",
+    "테이스티 트레블 합성 게임:0",
+    "테이스티트레블합성게임:0",
+    "Century Games PTE. LTD.:91"
+   ],
+   "names": [
+    "Century Games",
+    "Century Games PTE. LTD."
+   ],
+   "domains": [],
+   "candidates": 3,
+   "previews": 80,
+   "failed": 67,
+   "checked": [
+    {
+     "name": "CENTURY GAMES PTE. LTD.",
+     "region": "SG",
+     "from": "이름 'Century Games'",
+     "recent": 398,
+     "previews": 80,
+     "failed": 67,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
  }
 }

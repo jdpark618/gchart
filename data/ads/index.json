@@ -1,5 +1,93 @@
 [
  {
+  "pkg": "com.fatmerge.global",
+  "name": "테이스티 트레블: 합성 게임",
+  "publisher": "Century Games PTE. LTD.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "CENTURY GAMES PTE. LTD."
+  ],
+  "tracked_at": "2026-11-24T02:02:55Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.smilegate.eclipse.stove.google",
+  "name": "이클립스: 더 어웨이크닝",
+  "publisher": "Smilegate, Inc.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "(주)스마일게이트 메가포트 지점",
+   "이클립스: 더 어웨이크닝"
+  ],
+  "tracked_at": "2026-11-24T01:59:43Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 1,
+  "meta_total": 1,
+  "google": 2
+ },
+ {
+  "pkg": "com.oakever.meowdoku",
+  "name": "Meowdoku: 두뇌 퍼즐 게임",
+  "publisher": "Oakever Games",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-24T01:59:03Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "group.theorigin.themaxlevelreturner",
+  "name": "나 혼자 만렙 키우기",
+  "publisher": "Punchline Games Co., Ltd.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "Punchline Games",
+   "펀치라인게임즈"
+  ],
+  "tracked_at": "2026-11-24T01:56:19Z",
+  "days": 0,
+  "meta_live": 40,
+  "google_live": 4,
+  "meta_new7": 14,
+  "google_new7": 3,
+  "meta": 40,
+  "meta_total": 90,
+  "google": 4
+ },
+ {
   "pkg": "com.ncsoft.lineagem19",
   "name": "리니지M",
   "publisher": "NC Corporation",
