@@ -1,7 +1,7 @@
 """수집 로그 (11/09): 대시보드 /admin 이 읽는 카테고리별 실행 기록.
 
 파일: data/runlog/<KST 날짜>/<카테고리>.json
-  {"cat": "new", "sched": "03:12", "attempts": [{"n": 1, "start": ISO, "end": ISO, "ok": true, "msgs": [["o", "..."], ...]}]}
+  {"cat": "new", "sched": "00:30", "attempts": [{"n": 1, "start": ISO, "end": ISO, "ok": true, "msgs": [["o", "..."], ...]}]}
 msgs 종류: o = 정상, w = 경고, x = 실패, r = 실행 안 재시도, m = 참고
 같은 날 다시 돌면 attempts 에 이어 붙음 (최초 → 재시도 → 최종).
 순위 수집(Node)은 같은 모양을 run.js 안에서 직접 씀."""
