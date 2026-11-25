@@ -47,7 +47,7 @@ def meta_norm(a):
     return {'id': a['ad_archive_id'], 'page': s.get('page_name'), 'page_id': a.get('page_id'), 'start': a.get('start_date'), 'end': a.get('end_date'),
             'active': a.get('is_active'), 'plat': [p[:2] for p in (a.get('publisher_platform') or [])], 'fmt': s.get('display_format'),
             'body': ((s.get('body') or {}).get('text') or card.get('body') or '')[:300], 'title': (s.get('title') or card.get('title') or '')[:150],
-            'store': 'iOS' if 'apple.com' in link else 'Play' if 'play.google' in link else '기타', 'link': link.split('?')[0][:200],
+            'store': 'iOS' if 'apple.com' in link else 'Play' if 'play.google' in link else '기타', 'link': (link.split('?')[0] + (('?id=' + re.search(r'[?&]id=([\w.]+)', link).group(1)) if 'play.google' in link and re.search(r'[?&]id=([\w.]+)', link) else ''))[:200],   # Play 는 ?id=패키지 를 남김 (11/25: 나중에도 어느 게임 링크인지 판정)
             'variants': a.get('collation_count') or 1,
             'thumb': v.get('video_preview_image_url') or img.get('resized_image_url') or img.get('original_image_url') or card.get('resized_image_url')
                      or card.get('video_preview_image_url') or card.get('original_image_url')   # 동적 소재(DCO)는 이미지가 카드·추가 소재 칸에 있음
@@ -276,7 +276,7 @@ async def main():
         # 재시도 (11/06): 이전엔 광고가 있었는데 이번 조회가 비면 일시 차단일 수 있어 30초 쉬고 한 번 더
         if not a.google_only and meta_page and not res['meta'].get('ads') and prev.get('meta', {}).get('ads'):
             await asyncio.sleep(30)
-            try: res['meta'] = await meta(ctx, keys, pkg, meta_page, acc.get('ios', '')); res['meta'].setdefault('log', []).append({'retry': True})
+            try: res['meta'] = await meta(ctx, keys, pkg, meta_page, acc.get('ios', '')); res['meta'].setdefault('log', []).append({'retry': True, 'got': len(res['meta'].get('ads', []))})   # got = 재시도에서 실제로 받은 수 (병합 전)
             except Exception as e: res['meta'] = {'error': str(e)[:300], 'ads': []}
         # 다른 게임 소재로 확인된 ID (11/18): data/ads/checked/<pkg>.json · 사이트가 읽는 파일이 커지지 않게 따로 둠 · iOS ID 가 새로 잡히면 기준이 달라지므로 처음부터 다시 확인
         ck_p, ios_now = os.path.join(ROOT, 'data', 'ads', 'checked', f'{pkg}.json'), acc.get('ios', '') or clean(a.ios)
@@ -319,7 +319,9 @@ async def main():
         gm.update({x['id']: x for x in res['google'].get('ads', [])})
         res['google']['ads'] = sorted(gm.values(), key=lambda x: -(x.get('last') or 0))
         res['google'].pop('seen', None)
-    res['meta']['ads'], res['meta']['dropped'] = meta_filter(res['meta'].get('ads', []), game_keys(keys + [res.get('title', '')]))
+    res['meta']['ads'], res['meta']['dropped'], res['meta']['page_class'] = meta_filter(res['meta'].get('ads', []), game_keys(keys + [res.get('title', '')]), acc.get('ios', '') or clean(a.ios))
+    res['meta']['ads'], res['meta']['dup'], res['meta']['shared_with'] = cross_guard(pkg, res['meta']['ads'], acc, accounts)
+    res['meta']['dropped'] += res['meta']['dup']
     if res['meta']['dropped']: res['meta']['count'] = len(res['meta']['ads'])   # 공용 페이지면 페이지 전체 건수 대신 이 게임 소재 수
     oth = res['google'].pop('other', None)
     if oth is not None:   # 조회가 오류로 끝났으면 기존 기록 유지
@@ -356,24 +358,48 @@ async def main():
                'google': {'advertisers': res['google'].get('advertisers'), 'candidates': res['google'].get('candidates'), 'ads': len(res['google'].get('ads', [])), 'error': res['google'].get('error')}}
     print(json.dumps(summary, ensure_ascii=False, indent=1))
 
-def meta_filter(ads, gk):
-    """퍼블리셔 공용 페이지 거르기 (11/24): 넥슨모바일처럼 한 페이지가 여러 게임을 광고하면 이 게임 소재만 남김.
-    페이지별로 '이 게임 소재로 보이는 비율'이 절반 이상이거나 페이지 이름이 게임 이름과 겹치면 전용 페이지 → 전부 남김.
-    아니면 이 게임 소재만: 원본에 패키지 · App Store ID (own) 또는 제목 · 문구 · 링크에 게임 이름.
-    예전에 받은 소재(own 없음)는 원본이 없어 스토어 링크면 남김. 돌려줌: (남긴 소재, 뺀 개수)"""
+def meta_filter(ads, gk, ios=''):
+    """다른 게임 소재 거르기 (11/24 · 11/25 보강). 돌려줌: (남긴 소재, 뺀 개수, 페이지별 판정)
+    ① 스토어 링크가 다른 앱: 새 소재(own 있음)가 Play(· iOS ID 를 알면 App Store)로 가는데 이 게임 ID 가 없으면 어느 페이지든 뺌
+    ② 페이지 판정: 이름이 게임과 겹치면 '이름' → 전부 남김
+       새 소재 5건 이상이면 이 게임 소재 비율로 — 80% 이상 '전용'(전부 남김) · 미만 '공용'(이 게임 소재만, 예전 소재는 게임 이름이 있거나 같은 페이지 새 소재와 제목이 같을 때만)
+       새 소재가 모자라면 '보류' → 예전 규칙(절반 이상이 이 게임 소재면 전부, 아니면 이 게임 소재만 · 예전 소재는 스토어 링크면 이 게임으로 봄)"""
+    named_txt = lambda x: any(k in nzk((x.get('title') or '') + (x.get('body') or '') + (x.get('link') or '')) for k in gk)
     def mine(x):
-        if x.get('own'): return True
-        if any(k in nzk((x.get('title') or '') + (x.get('body') or '') + (x.get('link') or '')) for k in gk): return True
+        if x.get('own') or named_txt(x): return True
         return False if 'own' in x else x.get('store') in ('Play', 'iOS')
+    wrong = lambda x: x.get('own') is False and (x.get('store') == 'Play' or (ios and x.get('store') == 'iOS'))
     by = {}
     for x in ads: by.setdefault(x.get('page_id'), []).append(x)
-    keep = []
-    for xs in by.values():
-        p = nzk(xs[0].get('page') or '')
-        named = not p or any(len(p) >= 2 and (k in p or p in k) for k in gk)
-        keep += xs if named or sum(map(mine, xs)) * 2 >= len(xs) else [x for x in xs if mine(x)]
+    keep, cls = [], {}
+    for pid, xs in by.items():
+        p, fresh = nzk(xs[0].get('page') or ''), [x for x in xs if 'own' in x]
+        xs = [x for x in xs if not wrong(x)]
+        ratio = sum(bool(x.get('own') or named_txt(x)) for x in fresh) / len(fresh) if fresh else 0
+        if not p or any(len(p) >= 2 and (k in p or p in k) for k in gk): c, kept = '이름', xs
+        elif len(fresh) >= 5 and ratio >= 0.8: c, kept = '전용', xs
+        elif len(fresh) >= 5:
+            tl = {nzk(x.get('title') or '') for x in fresh if x.get('own')} - {''}
+            c, kept = '공용', [x for x in xs if x.get('own') or named_txt(x) or ('own' not in x and nzk(x.get('title') or '') in tl)]
+        else: c, kept = '보류', xs if sum(map(mine, xs)) * 2 >= len(xs) else [x for x in xs if mine(x)]
+        keep += kept
+        cls[pid or ''] = {'name': xs[0].get('page') if xs else '', 'class': c, 'fresh': len(fresh), 'ratio': round(ratio, 2)}
     keep.sort(key=lambda x: -(x.get('start') or 0))
-    return keep, len(ads) - len(keep)
+    return keep, len(ads) - len(keep), cls
+
+def cross_guard(pkg, ads, acc, accounts):
+    """게임 사이 중복 (11/25): 다른 게임 파일에 이 게임 패키지 근거(own)로 저장된 같은 Meta 소재 ID 는 여기서 뺌 (여기도 own 이면 남김)
+    · 같은 Meta 페이지가 다른 게임에도 매칭돼 있으면 그 게임 목록을 돌려줌 (수집 로그 경고용). 돌려줌: (남긴 소재, 뺀 개수, 페이지 공유 게임)"""
+    owned = set()
+    for f in os.listdir(os.path.join(ROOT, 'data', 'ads')):
+        if not f.endswith('.json') or f in ('accounts.json', 'index.json', 'rotation.json') or f == f'{pkg}.json': continue
+        try: d = json.load(open(os.path.join(ROOT, 'data', 'ads', f), encoding='utf-8'))
+        except Exception: continue
+        if isinstance(d, dict): owned |= {x['id'] for x in (d.get('meta') or {}).get('ads', []) if x.get('own')}
+    kept = [x for x in ads if x.get('own') or x['id'] not in owned]
+    mine = set(acc.get('meta_pages') or [])
+    shared = sorted(k for k, v in accounts.items() if k != pkg and isinstance(v, dict) and mine & set(v.get('meta_pages') or []))
+    return kept, len(ads) - len(kept), shared
 
 def match_log(m):
     """Meta 검색어(검색어:광고 수) · Google 광고주를 무엇으로 찾아봤는지 요약 (accounts.json 에 남김 → '왜 못 찾았나'를 나중에 확인)"""

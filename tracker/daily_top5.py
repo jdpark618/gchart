@@ -114,7 +114,17 @@ for g in picks.values():
     m, gg = res.get('meta', {}), res.get('google', {})
     if m.get('error'): msgs.append(['x', f"{n}: Meta 오류 {m['error'][:80]}"])
     elif any(l.get('skip') for l in m.get('log', [])): msgs.append(['w', f'{n}: Meta 계정 없음'])
-    if any(l.get('retry') for l in m.get('log', [])): msgs.append(['r', f"{n}: Meta 0건 → 30초 뒤 재시도 → {len(m.get('ads', []))}건"])
+    rt = next((l for l in m.get('log', []) if l.get('retry')), None)
+    if rt and rt.get('got', 1): msgs.append(['r', f"{n}: Meta 0건 → 30초 뒤 재시도 → {rt.get('got', len(m.get('ads', [])))}건"])
+    elif rt: msgs.append(['w', f"{n}: Meta 재시도도 0건 → 저장된 소재 유지"])   # 11/25: 전엔 저장된 수를 재시도 결과처럼 보여 줌
+    # 다른 게임 소재 안전장치 (11/25): 뺀 소재 · 게임 사이 중복 · 페이지 공유 · 계정 새 매칭
+    if m.get('dup'): msgs.append(['w', f"{n}: Meta 다른 게임과 겹친 소재 {m['dup']}건 제외"])
+    if m.get('dropped', 0) - m.get('dup', 0) > 0: msgs.append(['m', f"{n}: Meta 다른 게임 소재 {m['dropped'] - m.get('dup', 0)}건 제외"])
+    if m.get('shared_with'): msgs.append(['w', f"{n}: Meta 페이지가 다른 게임과 같음 ({len(m['shared_with'])}개) → 확인 필요"])
+    sig = lambda x: (sorted((x or {}).get('meta_pages') or []), sorted(g.get('id', '') for g in (x or {}).get('google') or []))
+    if after and sig(after) != sig(before):   # 처음 매칭 · 7일 재매칭에서 계정이 실제로 바뀐 때만
+        nm = [p['name'] for p in m.get('pages', []) if p.get('name')] + [x.get('name', '') for x in gg.get('advertisers', []) if x.get('name')]
+        msgs.append(['w' if before else 'm', f"{n}: 광고 계정 {'바뀜' if before else '첫 매칭'} → 확인 ({', '.join(nm[:3]) or '없음'})"])
     if gg.get('error'): msgs.append(['x', f"{n}: Google 오류 {gg['error'][:80]}"])
     elif not gg.get('advertisers'): msgs.append(['w', f'{n}: Google 계정 없음'])
     cs = gg.get('candidates') or []
