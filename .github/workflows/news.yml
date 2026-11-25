@@ -1,9 +1,9 @@
 name: Game News (게임 뉴스)
 
 # 루리웹 플랫폼별 뉴스 섹션 → data/news/YYYY-MM.json (대시보드 게임 뉴스). 3시간마다 + 수동 실행 (11/20)
+# 11/25: Google Cloud Scheduler(작업 이름 ads-backup, 40 */3 KST)가 workflow_dispatch 로 부름.
+#        GitHub 예약은 하루 8번 중 2번 정도만 돌아서 뺌 (같이 두면 늦게 도는 중복 실행이 수집 로그에 섞임)
 on:
-  schedule:
-    - cron: '40 */3 * * *'   # UTC 0·3·6…시 40분 = KST 9·12·15…시 40분 (GitHub 예약은 늦어질 수 있음)
   workflow_dispatch:
 
 concurrency: { group: news, cancel-in-progress: false }

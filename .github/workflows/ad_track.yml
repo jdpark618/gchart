@@ -1,6 +1,6 @@
 name: Ad Tracker (마케팅 추적)
 # 게임 하나의 KR 광고(Meta · Google)를 모아 data/ads/ 에 저장 → 사이트가 Pages 로 읽음 (tracker/ad_track.py 설명 참고)
-# 실행: 순위 수집(인기·매출)이 끝나면 바로 자동(그날 인기 TOP5 + 매출 TOP5, tracker/daily_top5.py) · Cloud Scheduler 11:00 · 12:30 예약은 안전망 · Actions 탭에서 수동 실행(게임명 · 패키지명 입력) · tracker/test.json 수정 후 push
+# 실행: 순위 수집(인기·매출)이 끝나면 바로 자동(그날 인기 TOP5 + 매출 TOP5, tracker/daily_top5.py) · 12:30 예약은 안전망 (Cloud Scheduler 11:00 예비는 11/25 뉴스로 넘김) · Actions 탭에서 수동 실행(게임명 · 패키지명 입력) · tracker/test.json 수정 후 push
 on:
   workflow_dispatch:
     inputs:
