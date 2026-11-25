@@ -427,12 +427,12 @@
   "tracked_at": "2026-11-24T01:56:19Z",
   "days": 0,
   "meta_live": 25,
-  "google_live": 10,
-  "meta_new7": 11,
-  "google_new7": 4,
+  "google_live": 54,
+  "meta_new7": 8,
+  "google_new7": 24,
   "meta": 25,
   "meta_total": 25,
-  "google": 10
+  "google": 58
  },
  {
   "pkg": "com.ncsoft.lineagem19",
