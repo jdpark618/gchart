@@ -1,6 +1,6 @@
 name: Ad Tracker (마케팅 추적)
 # 게임 하나의 KR 광고(Meta · Google)를 모아 data/ads/ 에 저장 → 사이트가 Pages 로 읽음 (tracker/ad_track.py 설명 참고)
-# 실행: 순위 수집(인기·매출)이 끝나면 바로 자동(그날 인기 TOP5 + 매출 TOP5, tracker/daily_top5.py) · 05:30/12:30 예약은 안전망 · Actions 탭에서 수동 실행(게임명 · 패키지명 입력) · tracker/test.json 수정 후 push
+# 실행: 순위 수집(인기·매출)이 끝나면 바로 자동(그날 인기 TOP5 + 매출 TOP5, tracker/daily_top5.py) · Cloud Scheduler 11:00 · 12:30 예약은 안전망 · Actions 탭에서 수동 실행(게임명 · 패키지명 입력) · tracker/test.json 수정 후 push
 on:
   workflow_dispatch:
     inputs:
@@ -22,8 +22,7 @@ on:
     types: [completed]
   schedule:   # 안전망: 위 연결이 안 돈 날만 실제로 추적 (이미 성공했으면 gate 에서 끝남)
     - cron: '30 3 * * *'    # 예비: 원래 + 7시간 = KST 12:30 (11/10) · 오늘 이미 성공했으면 gate 에서 끝남
-    - cron: '0 4 * * *'    # 13:00 KST 보충만 (11/24): 새벽 추적(01:10 무렵, Cloud Scheduler 순위 01:00 뒤) 12시간 뒤 · 429 로 못 받은 Google 소재를 다른 IP 로 이어 받음 · GitHub 예약이 몇 시간 밀려도 다음 날 새벽 추적과 안 겹치게 · 남은 게 없으면 바로 끝남 · gate 안 거침
-    - cron: '30 20 * * *'   # 매일 05:30 KST — GitHub 예약이 3~4시간 밀려 실제로는 9시 무렵 · 순위 수집(실제 7시 반 무렵) 뒤에 그날 TOP5 로 추적 (11/09)
+    - cron: '0 12 * * *'   # 21:00 KST 보충만 (11/25): 아침 추적(09:10 무렵, Cloud Scheduler 순위 09:00 뒤) 12시간 뒤 · 429 로 못 받은 Google 소재를 다른 IP 로 이어 받음 · GitHub 예약이 몇 시간 밀려도 다음 날 아침 추적과 안 겹치게 · 남은 게 없으면 바로 끝남 · gate 안 거침
 concurrency: { group: ad-track, cancel-in-progress: false }
 permissions:
   contents: write
@@ -36,16 +35,16 @@ jobs:
       skip: ${{ steps.g.outputs.skip }}
     steps:
       - uses: actions/checkout@v4
-        if: (github.event_name == 'schedule' && github.event.schedule != '0 4 * * *') || github.event_name == 'workflow_run' || inputs.trigger == 'cron'
+        if: (github.event_name == 'schedule' && github.event.schedule != '0 12 * * *') || github.event_name == 'workflow_run' || inputs.trigger == 'cron'
         with: { ref: main }   # 대기열에서 기다린 경우에도 실행 시점의 최신 수집 로그로 판단 (11/24)
       - id: g
-        if: (github.event_name == 'schedule' && github.event.schedule != '0 4 * * *') || github.event_name == 'workflow_run' || inputs.trigger == 'cron'
+        if: (github.event_name == 'schedule' && github.event.schedule != '0 12 * * *') || github.event_name == 'workflow_run' || inputs.trigger == 'cron'
         run: python3 gate.py ads ads_rot ads_fill   # 세 단계(TOP5 · 순번 · 보충) 모두 성공했을 때만 건너뜀
 
   # 1단계 TOP5 추적 (11/19 세 단계로 나눔): 인기 TOP5 + 매출 TOP5 매일 · 수동 단일 게임 · test.json 도 여기서
   track:
     needs: gate
-    if: needs.gate.outputs.skip != 'true' && (inputs.stage == '' || inputs.stage == 'top5' || github.event_name != 'workflow_dispatch') && github.event.schedule != '0 4 * * *'
+    if: needs.gate.outputs.skip != 'true' && (inputs.stage == '' || inputs.stage == 'top5' || github.event_name != 'workflow_dispatch') && github.event.schedule != '0 12 * * *'
     outputs:
       ip: ${{ steps.ip.outputs.ip }}
       dup: ${{ steps.ip.outputs.dup }}
@@ -102,7 +101,7 @@ jobs:
   # 2단계 순번 추적 (11/19): TOP5 뒤 새 서버(다른 IP)에서 6위 아래 게임
   rotation:
     needs: [gate, track]
-    if: always() && needs.gate.outputs.skip != 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && inputs.pkg == '')) && inputs.stage != 'fill' && github.event.schedule != '0 4 * * *' && (needs.track.result == 'success' || needs.track.result == 'skipped') && needs.track.outputs.dup != 'true'
+    if: always() && needs.gate.outputs.skip != 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && inputs.pkg == '')) && inputs.stage != 'fill' && github.event.schedule != '0 12 * * *' && (needs.track.result == 'success' || needs.track.result == 'skipped') && needs.track.outputs.dup != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     outputs:
