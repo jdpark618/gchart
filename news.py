@@ -59,7 +59,7 @@ def full_title(aid):
 
 def main():
     os.makedirs(DIR, exist_ok=True)
-    got, fails = {}, []
+    got, fails, secn, added = {}, [], {}, {'m': 0, 'pc': 0, 'cs': 0}
     for sec, no in SECTIONS:
         n = 0
         for pg in range(1, PAGES + 1):
@@ -73,7 +73,7 @@ def main():
                 else:
                     got[it['id']] = it
             n += len(items); time.sleep(1.5)
-        print(f'{sec}: {n}건')
+        print(f'{sec}: {n}건'); secn[sec] = n
         if n == 0:
             fails.append(f'{sec}: 0건 (화면 구조 바뀜?)')
     # 달 파일에 합치기
@@ -88,6 +88,8 @@ def main():
         before = json.dumps(old, ensure_ascii=False, sort_keys=True)
         for it in items:
             o = cur.get(it['id'])
+            if not o:
+                for p in it['p']: added[p] += 1
             if o:   # 이미 있는 기사: 플랫폼만 더함 (전체 제목은 유지) · 지난번에 한도로 못 채운 잘린 제목은 이번에 채움
                 o['p'] = sorted(set(o['p'] + it['p']), key=['m', 'pc', 'cs'].index)
                 it = o
@@ -112,8 +114,26 @@ def main():
         json.dump({'months': idx}, open(ip, 'w', encoding='utf-8'))
     print(f'제목 보충 {fetched}건')
     if fails:
-        print('실패:', '; '.join(fails)); sys.exit(1)
+        print('실패:', '; '.join(fails))
+    return fails, secn, added, fetched
+
+
+def run():
+    """수집 로그 (11/25): /admin 뉴스 줄. 3시간마다 도는 실행이 하루 파일의 attempts 에 차례로 쌓임"""
+    sys.path.insert(0, ROOT); import runlog
+    start = runlog.now()
+    try:
+        fails, secn, added, fetched = main()
+    except Exception as e:
+        runlog.add('news', '3시간마다', start, False, [['x', f'수집 중단: {str(e)[:120]}']]); raise
+    nm = {'m': '모바일', 'pc': 'PC', 'cs': '콘솔'}
+    new = sum(added.values())
+    msgs = [['o' if not fails else 'x', f'새 기사 {new}건' + (' (' + ' · '.join(f'{nm[k]} {v}' for k, v in added.items() if v) + ')' if new else '')]]
+    msgs += [['x', f] for f in fails]
+    msgs.append(['m', '목록 ' + ' · '.join(f'{nm[k]} {secn.get(k, 0)}' for k in nm) + (f' · 제목 보충 {fetched}' if fetched else '')])
+    runlog.add('news', '3시간마다', start, not fails, msgs)
+    if fails: sys.exit(1)
 
 
 if __name__ == '__main__':
-    main()
+    run()

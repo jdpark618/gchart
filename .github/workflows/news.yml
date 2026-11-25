@@ -24,7 +24,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/news
+          git add data/news data/runlog   # 수집 로그 (/admin 뉴스 줄, 11/25) · 실행마다 커밋됨
           git diff --cached --quiet && { echo "변경 없음"; exit 0; }
           git commit -qm "news: 게임 뉴스 갱신 $(date -u +%FT%TZ)"
           for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && exit 0; sleep $((i*5)); done
