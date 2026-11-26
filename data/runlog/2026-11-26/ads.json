@@ -1,0 +1,62 @@
+{
+ "cat": "ads",
+ "sched": "05:30",
+ "attempts": [
+  {
+   "n": 1,
+   "start": "2026-11-26T09:05:16+09:00",
+   "end": "2026-11-26T09:14:28+09:00",
+   "ok": false,
+   "msgs": [
+    [
+     "x",
+     "TOP5 추적 10개 · Google 미리보기 1건 · 서버 IP 172.202.119.223"
+    ],
+    [
+     "x",
+     "나 혼자 만렙 키우기: Google 오류 Page.evaluate: SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid J"
+    ],
+    [
+     "x",
+     "창술사 키우기X : 방치형RPG: Google 오류 Page.evaluate: SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid J"
+    ],
+    [
+     "x",
+     "카드 오브 데몬슬레이어: 덱빌딩 로그라이크 RPG: Google 오류 Page.evaluate: SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid J"
+    ],
+    [
+     "x",
+     "도깨비의세계: Google 오류 Page.evaluate: SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid J"
+    ],
+    [
+     "x",
+     "제우스: 오만의 신: Google 오류 Page.evaluate: SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid J"
+    ],
+    [
+     "x",
+     "WOS: 화이트아웃 서바이벌: Google 오류 Page.evaluate: SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid J"
+    ],
+    [
+     "x",
+     "운빨존많겜: Google 오류 Page.evaluate: SyntaxError: Unexpected token '<', \"<!DOCTYPE \"... is not valid J"
+    ],
+    [
+     "w",
+     "고스톱M : 데이터 필요없는 맞고 게임: Google 계정 없음"
+    ],
+    [
+     "w",
+     "카드 오브 데몬슬레이어: 덱빌딩 로그라이크 RPG: Meta 계정 없음"
+    ],
+    [
+     "w",
+     "도깨비의세계: Meta 계정 없음"
+    ],
+    [
+     "w",
+     "운빨존많겜: Meta 계정 없음"
+    ]
+   ]
+  }
+ ]
+}

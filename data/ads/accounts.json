@@ -825,37 +825,20 @@
   "meta_by": "검색어 'Noriworks' → 광고 링크의 Play 패키지",
   "matched_at": "2026-11-17T01:19:17Z",
   "google_log": {
-   "meta": [
-    "고스톱M : 데이터 필요없는 맞고 게임:0",
-    "고스톱M:3",
-    "데이터 필요없는 맞고 게임:0",
-    "데이터필요없는맞고게임:0",
-    "고스톱M 데이터 필요없는 맞고 게임:0",
-    "Noriworks:8"
-   ],
+   "meta": [],
    "names": [
     "Noriworks",
     "MOCA"
    ],
-   "domains": [
-    "moca.org"
-   ],
-   "candidates": 9,
-   "previews": 0,
-   "failed": 0,
-   "checked": [
-    {
-     "name": "The Museum of Contemporary Art",
-     "region": "",
-     "from": "도메인 'moca.org'",
-     "recent": 1,
-     "previews": 0,
-     "failed": 0,
-     "hit": false
-    }
-   ]
+   "domains": [],
+   "candidates": 0,
+   "error": "광고 투명성 센터 조회가 모두 실패 (일시 차단일 수 있음)",
+   "previews": null,
+   "failed": null,
+   "checked": []
   },
-  "ver": 2
+  "ver": 2,
+  "rematched_at": "2026-11-26T00:08:02Z"
  },
  "com.standegg.teamdefense": {
   "meta_pages": [],
@@ -2458,6 +2441,69 @@
      "previews": 10,
      "failed": 0,
      "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.mgame.gsir": {
+  "meta_pages": [
+   "1317951898067273"
+  ],
+  "google": [
+   {
+    "id": "AR15457059987989200897",
+    "name": "(주)엠게임",
+    "by": "이름 '엠게임' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6795757139",
+  "meta_by": "검색어 '귀혼키우기' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-26T00:05:17Z",
+  "google_log": {
+   "meta": [
+    "귀혼키우기:18"
+   ],
+   "names": [
+    "Mgame",
+    "엠게임",
+    "MGAME Corp",
+    "MGAME Corp.",
+    "귀혼키우기"
+   ],
+   "domains": [
+    "mgame.com"
+   ],
+   "candidates": 3,
+   "previews": 8,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "(주)엠게임",
+     "region": "KR",
+     "from": "이름 '엠게임'",
+     "recent": 3,
+     "previews": 1,
+     "failed": 0,
+     "hit": true
+    },
+    {
+     "name": "(주)엠게임",
+     "region": "KR",
+     "from": "이름 '엠게임'",
+     "recent": 2,
+     "previews": 2,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "MgameStudios",
+     "region": "IN",
+     "from": "이름 'Mgame'",
+     "recent": 5,
+     "previews": 5,
+     "failed": 0,
+     "hit": false
     }
    ]
   },

@@ -1,13 +1,44 @@
 {
+ "day": "2026-11-26",
  "top5": {
+  "com.mgame.gsir": {
+   "name": "귀혼키우기",
+   "pkg": "com.mgame.gsir",
+   "publisher": "Mgame",
+   "ranks": {
+    "popular": 1
+   },
+   "date": "2026-11-26",
+   "chart": "popular"
+  },
+  "group.theorigin.themaxlevelreturner": {
+   "name": "나 혼자 만렙 키우기",
+   "pkg": "group.theorigin.themaxlevelreturner",
+   "publisher": "Punchline Games Co., Ltd.",
+   "ranks": {
+    "popular": 2
+   },
+   "date": "2026-11-26",
+   "chart": "popular"
+  },
   "com.dragonheart.spearknightrpg2": {
    "name": "창술사 키우기X : 방치형RPG",
    "pkg": "com.dragonheart.spearknightrpg2",
    "publisher": "DragonHeart",
    "ranks": {
-    "popular": 1
+    "popular": 3
    },
-   "date": "2026-11-25",
+   "date": "2026-11-26",
+   "chart": "popular"
+  },
+  "com.noriworks.gm": {
+   "name": "고스톱M : 데이터 필요없는 맞고 게임",
+   "pkg": "com.noriworks.gm",
+   "publisher": "Noriworks",
+   "ranks": {
+    "popular": 4
+   },
+   "date": "2026-11-26",
    "chart": "popular"
   },
   "com.rabbithole.cardofdemonslayer": {
@@ -15,39 +46,9 @@
    "pkg": "com.rabbithole.cardofdemonslayer",
    "publisher": "CookApps",
    "ranks": {
-    "popular": 2
-   },
-   "date": "2026-11-25",
-   "chart": "popular"
-  },
-  "com.lycq.kr.and": {
-   "name": "미르의 전설2: 레볼루션",
-   "pkg": "com.lycq.kr.and",
-   "publisher": "Xsoga Game",
-   "ranks": {
-    "popular": 3
-   },
-   "date": "2026-11-25",
-   "chart": "popular"
-  },
-  "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid": {
-   "name": "몬몬 마스터즈: 몬스터 수집 전투 RPG",
-   "pkg": "com.playhardlab.monmonmasters.rpg.battle.monster.pvp.raid",
-   "publisher": "PLAYHARD STUDIO",
-   "ranks": {
-    "popular": 4
-   },
-   "date": "2026-11-25",
-   "chart": "popular"
-  },
-  "com.mainquest.sgidle": {
-   "name": "실험소녀 키우기 : 방치형 RPG",
-   "pkg": "com.mainquest.sgidle",
-   "publisher": "MainQuest",
-   "ranks": {
     "popular": 5
    },
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "chart": "popular"
   },
   "com.kakaogames.dokkaebi": {
@@ -57,7 +58,7 @@
    "ranks": {
     "sales": 1
    },
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "chart": "sales"
   },
   "com.com2us.es.android.google.kr.normal": {
@@ -67,17 +68,7 @@
    "ranks": {
     "sales": 2
    },
-   "date": "2026-11-25",
-   "chart": "sales"
-  },
-  "com.proximabeta.nikke": {
-   "name": "승리의 여신: 니케",
-   "pkg": "com.proximabeta.nikke",
-   "publisher": "Level Infinite",
-   "ranks": {
-    "sales": 3
-   },
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "chart": "sales"
   },
   "com.gof.global": {
@@ -85,9 +76,9 @@
    "pkg": "com.gof.global",
    "publisher": "Century Games PTE. LTD.",
    "ranks": {
-    "sales": 4
+    "sales": 3
    },
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "chart": "sales"
   },
   "com.percent.aos.luckydefense": {
@@ -95,52 +86,19 @@
    "pkg": "com.percent.aos.luckydefense",
    "publisher": "111%",
    "ranks": {
+    "sales": 4
+   },
+   "date": "2026-11-26",
+   "chart": "sales"
+  },
+  "com.proximabeta.nikke": {
+   "name": "승리의 여신: 니케",
+   "pkg": "com.proximabeta.nikke",
+   "publisher": "Level Infinite",
+   "ranks": {
     "sales": 5
    },
-   "date": "2026-11-25",
-   "chart": "sales"
-  }
- },
- "day": "2026-11-25",
- "rotation": {
-  "com.mocacorp.block": {
-   "name": "블록게임",
-   "pkg": "com.mocacorp.block",
-   "publisher": "Moca",
-   "ranks": {},
-   "date": "2026-11-25",
-   "chart": "popular"
-  },
-  "sort.casual.color.cat.puzzle.match": {
-   "name": "Cutie Sort: 고양이 분류 퍼즐",
-   "pkg": "sort.casual.color.cat.puzzle.match",
-   "publisher": "Ladaneta Games",
-   "ranks": {},
-   "date": "2026-11-25",
-   "chart": "popular"
-  },
-  "com.dreamgames.royalkingdom": {
-   "name": "로얄 킹덤 (Royal Kingdom)",
-   "pkg": "com.dreamgames.royalkingdom",
-   "publisher": "Dream Games, Ltd.",
-   "ranks": {},
-   "date": "2026-11-25",
-   "chart": "sales"
-  },
-  "com.rxjhglkr.gp": {
-   "name": "열혈강호: 넥스트",
-   "pkg": "com.rxjhglkr.gp",
-   "publisher": "Kingnet Technology Limited",
-   "ranks": {},
-   "date": "2026-11-25",
-   "chart": "sales"
-  },
-  "com.playrix.gardenscapes": {
-   "name": "꿈의 정원 (Gardenscapes)",
-   "pkg": "com.playrix.gardenscapes",
-   "publisher": "Playrix",
-   "ranks": {},
-   "date": "2026-11-25",
+   "date": "2026-11-26",
    "chart": "sales"
   }
  }
