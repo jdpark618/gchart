@@ -2508,5 +2508,133 @@
    ]
   },
   "ver": 2
+ },
+ "com.highbrow.games.dvo": {
+  "meta_pages": [
+   "235916869772270"
+  ],
+  "google": [
+   {
+    "id": "AR02469486348432572417",
+    "name": "주식회사 하이브로",
+    "by": "이름 '하이브로' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6499562253",
+  "meta_by": "검색어 '드래곤빌리지3 X 리센느' → 광고 링크의 iOS 앱 ID",
+  "matched_at": "2026-11-26T00:15:07Z",
+  "google_log": {
+   "meta": [
+    "드래곤빌리지3 X 리센느:78"
+   ],
+   "names": [
+    "highbrow",
+    "하이브로",
+    "드래곤빌리지 : Dragon Village"
+   ],
+   "domains": [
+    "highbrow.com"
+   ],
+   "candidates": 10,
+   "previews": 10,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "주식회사 하이브로",
+     "region": "KR",
+     "from": "이름 '하이브로'",
+     "recent": 94,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.nexon.azurpromilia": {
+  "meta_pages": [
+   "1480621432198772"
+  ],
+  "google": [],
+  "ios": "6754899430",
+  "meta_by": "검색어 '아주르 프로밀리아' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-26T00:16:25Z",
+  "google_log": {
+   "meta": [
+    "아주르 프로밀리아:151"
+   ],
+   "names": [
+    "NEXON",
+    "NEXON Company",
+    "Nexon Korea",
+    "Nexon Korea Corporation",
+    "넥슨모바일"
+   ],
+   "domains": [],
+   "candidates": 0,
+   "error": "광고 투명성 센터 조회가 모두 실패 (일시 차단일 수 있음)",
+   "previews": null,
+   "failed": null,
+   "checked": []
+  }
+ },
+ "com.nhnent.pokerclassic": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "1582390510",
+  "meta_by": "",
+  "matched_at": "2026-11-26T00:26:25Z",
+  "google_log": {
+   "meta": [
+    "한게임포커 클래식 : 7포커 홀덤 섯다 훌라 슬롯:0",
+    "한게임포커 클래식:0",
+    "한게임포커클래식:0",
+    "7포커 홀덤 섯다 훌라 슬롯:0",
+    "7포커홀덤섯다훌라슬롯:0",
+    "한게임포커 클래식 7포커 홀덤 섯다 훌라 슬롯:0",
+    "한게임포커 클래식 - 7포커 홀덤 섯다 훌라 슬롯:0",
+    "NHN Corp.:1"
+   ],
+   "names": [
+    "NHN",
+    "NHN Corp.",
+    "엔에이치엔"
+   ],
+   "domains": [],
+   "candidates": 0,
+   "error": "광고 투명성 센터 조회가 모두 실패 (일시 차단일 수 있음)",
+   "previews": null,
+   "failed": null,
+   "checked": []
+  }
+ },
+ "com.gamedots.seasideescape": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "6443755785",
+  "meta_by": "",
+  "matched_at": "2026-11-26T00:26:56Z",
+  "google_log": {
+   "meta": [
+    "씨사이드 익스케이프: 합성 & 스토리 게임:0",
+    "씨사이드 익스케이프:1",
+    "씨사이드익스케이프:0",
+    "합성 & 스토리 게임:0",
+    "합성&스토리게임:0",
+    "씨사이드 익스케이프 합성 & 스토리 게임:0",
+    "Microfun Limited:0"
+   ],
+   "names": [
+    "Microfun",
+    "Microfun Limited"
+   ],
+   "domains": [],
+   "candidates": 0,
+   "error": "광고 투명성 센터 조회가 모두 실패 (일시 차단일 수 있음)",
+   "previews": null,
+   "failed": null,
+   "checked": []
+  }
  }
 }

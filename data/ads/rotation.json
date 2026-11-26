@@ -1,5 +1,4 @@
 {
- "day": "2026-11-26",
  "top5": {
   "com.mgame.gsir": {
    "name": "귀혼키우기",
@@ -98,6 +97,89 @@
    "ranks": {
     "sales": 5
    },
+   "date": "2026-11-26",
+   "chart": "sales"
+  }
+ },
+ "day": "2026-11-26",
+ "rotation": {
+  "com.highbrow.games.dvo": {
+   "name": "드래곤빌리지3 X 리센느",
+   "pkg": "com.highbrow.games.dvo",
+   "publisher": "highbrow",
+   "ranks": {},
+   "date": "2026-11-26",
+   "chart": "popular"
+  },
+  "com.nexon.azurpromilia": {
+   "name": "아주르 프로밀리아",
+   "pkg": "com.nexon.azurpromilia",
+   "publisher": "NEXON Company",
+   "ranks": {},
+   "date": "2026-11-26",
+   "chart": "popular"
+  },
+  "com.farlightgames.warline.gp.global": {
+   "name": "워라인: 스나이퍼",
+   "pkg": "com.farlightgames.warline.gp.global",
+   "publisher": "Powerfantasy HK Limited",
+   "ranks": {},
+   "date": "2026-11-26",
+   "chart": "popular"
+  },
+  "com.mocacorp.sudoku": {
+   "name": "스도쿠",
+   "pkg": "com.mocacorp.sudoku",
+   "publisher": "Moca",
+   "ranks": {},
+   "date": "2026-11-26",
+   "chart": "popular"
+  },
+  "com.gamespark.topking.gp": {
+   "name": "탑 로드",
+   "pkg": "com.gamespark.topking.gp",
+   "publisher": "GAME SPARK PTE. LTD.",
+   "ranks": {},
+   "date": "2026-11-26",
+   "chart": "popular"
+  },
+  "com.run.tower.defense": {
+   "name": "킹샷:Kingshot",
+   "pkg": "com.run.tower.defense",
+   "publisher": "Century Games PTE. LTD.",
+   "ranks": {},
+   "date": "2026-11-26",
+   "chart": "sales"
+  },
+  "com.nexon.ma": {
+   "name": "메이플 키우기",
+   "pkg": "com.nexon.ma",
+   "publisher": "NEXON Company",
+   "ranks": {},
+   "date": "2026-11-26",
+   "chart": "sales"
+  },
+  "com.zjcs.android.kr": {
+   "name": "소드 x 스태프: 화산귀환 콜라보",
+   "pkg": "com.zjcs.android.kr",
+   "publisher": "BOLTRAY GAMES",
+   "ranks": {},
+   "date": "2026-11-26",
+   "chart": "sales"
+  },
+  "com.nhnent.pokerclassic": {
+   "name": "한게임포커 클래식 : 7포커 홀덤 섯다 훌라 슬롯",
+   "pkg": "com.nhnent.pokerclassic",
+   "publisher": "NHN Corp.",
+   "ranks": {},
+   "date": "2026-11-26",
+   "chart": "sales"
+  },
+  "com.gamedots.seasideescape": {
+   "name": "씨사이드 익스케이프: 합성 & 스토리 게임",
+   "pkg": "com.gamedots.seasideescape",
+   "publisher": "Microfun Limited",
+   "ranks": {},
    "date": "2026-11-26",
    "chart": "sales"
   }
