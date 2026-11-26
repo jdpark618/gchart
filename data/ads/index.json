@@ -1,5 +1,237 @@
 [
  {
+  "pkg": "com.gamedots.seasideescape",
+  "name": "씨사이드 익스케이프: 합성 & 스토리 게임",
+  "publisher": "Microfun Limited",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-26T10:21:30Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.nhnent.pokerclassic",
+  "name": "한게임포커 클래식 : 7포커 홀덤 섯다 훌라 슬롯",
+  "publisher": "NHN Corp.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-26T10:20:33Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.zjcs.android.kr",
+  "name": "소드 x 스태프: 화산귀환 콜라보",
+  "publisher": "BOLTRAY GAMES",
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-09",
+  "pool": [
+   "popular",
+   "sales"
+  ],
+  "aliases": [
+   "广州天狐网络科技信息服务有限公司",
+   "소드 x 스태프",
+   "소드 x 스태프KR"
+  ],
+  "tracked_at": "2026-11-26T10:19:07Z",
+  "days": 1,
+  "meta_live": 79,
+  "google_live": 18,
+  "meta_new7": 49,
+  "google_new7": 8,
+  "meta": 287,
+  "meta_total": 134,
+  "google": 50
+ },
+ {
+  "pkg": "com.nexon.ma",
+  "name": "메이플 키우기",
+  "publisher": "NEXON Company",
+  "charts": {
+   "sales": 4
+  },
+  "rank_date": "2026-11-12",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "(주)넥슨코리아",
+   "메이플 키우기"
+  ],
+  "tracked_at": "2026-11-26T10:18:42Z",
+  "days": 4,
+  "meta_live": 0,
+  "google_live": 58,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 8,
+  "meta_total": 228,
+  "google": 135
+ },
+ {
+  "pkg": "com.run.tower.defense",
+  "name": "킹샷:Kingshot",
+  "publisher": "Century Games PTE. LTD.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "CENTURY GAMES PTE. LTD.",
+   "Kingshot"
+  ],
+  "tracked_at": "2026-11-26T10:18:14Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 38,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 30,
+  "meta_total": 5230,
+  "google": 47
+ },
+ {
+  "pkg": "com.gamespark.topking.gp",
+  "name": "탑 로드",
+  "publisher": "GAME SPARK PTE. LTD.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "GAME SPARK PTE. LTD.",
+   "TOP LORDS",
+   "Top Lords"
+  ],
+  "tracked_at": "2026-11-26T10:16:44Z",
+  "days": 0,
+  "meta_live": 39,
+  "google_live": 7,
+  "meta_new7": 14,
+  "google_new7": 1,
+  "meta": 45,
+  "meta_total": 39,
+  "google": 8
+ },
+ {
+  "pkg": "com.mocacorp.sudoku",
+  "name": "스도쿠",
+  "publisher": "Moca",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "Easybrain Ltd"
+  ],
+  "tracked_at": "2026-11-26T10:14:51Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 2,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 2
+ },
+ {
+  "pkg": "com.farlightgames.warline.gp.global",
+  "name": "워라인: 스나이퍼",
+  "publisher": "Powerfantasy HK Limited",
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-19",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "FARLIGHT PTE. LTD.",
+   "Warline:Sniper Strike"
+  ],
+  "tracked_at": "2026-11-26T10:12:09Z",
+  "days": 11,
+  "meta_live": 34,
+  "google_live": 9,
+  "meta_new7": 0,
+  "google_new7": 1,
+  "meta": 82,
+  "meta_total": 248,
+  "google": 12
+ },
+ {
+  "pkg": "com.nexon.azurpromilia",
+  "name": "아주르 프로밀리아",
+  "publisher": "NEXON Company",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "(주)넥슨코리아",
+   "넥슨모바일"
+  ],
+  "tracked_at": "2026-11-26T10:07:57Z",
+  "days": 0,
+  "meta_live": 55,
+  "google_live": 7,
+  "meta_new7": 55,
+  "google_new7": 7,
+  "meta": 55,
+  "meta_total": 55,
+  "google": 7
+ },
+ {
+  "pkg": "com.highbrow.games.dvo",
+  "name": "드래곤빌리지3 X 리센느",
+  "publisher": "highbrow",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "드래곤빌리지 : Dragon Village",
+   "주식회사 하이브로"
+  ],
+  "tracked_at": "2026-11-26T10:07:20Z",
+  "days": 0,
+  "meta_live": 42,
+  "google_live": 16,
+  "meta_new7": 9,
+  "google_new7": 3,
+  "meta": 43,
+  "meta_total": 43,
+  "google": 63
+ },
+ {
   "pkg": "com.proximabeta.nikke",
   "name": "승리의 여신: 니케",
   "publisher": "Level Infinite",
@@ -241,237 +473,6 @@
   "meta": 18,
   "meta_total": 18,
   "google": 1
- },
- {
-  "pkg": "com.gamedots.seasideescape",
-  "name": "씨사이드 익스케이프: 합성 & 스토리 게임",
-  "publisher": "Microfun Limited",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [],
-  "tracked_at": "2026-11-26T00:26:56Z",
-  "days": 0,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 0
- },
- {
-  "pkg": "com.nhnent.pokerclassic",
-  "name": "한게임포커 클래식 : 7포커 홀덤 섯다 훌라 슬롯",
-  "publisher": "NHN Corp.",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [],
-  "tracked_at": "2026-11-26T00:26:25Z",
-  "days": 0,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 0
- },
- {
-  "pkg": "com.zjcs.android.kr",
-  "name": "소드 x 스태프: 화산귀환 콜라보",
-  "publisher": "BOLTRAY GAMES",
-  "charts": {
-   "popular": 5
-  },
-  "rank_date": "2026-11-09",
-  "pool": [
-   "popular",
-   "sales"
-  ],
-  "aliases": [
-   "广州天狐网络科技信息服务有限公司",
-   "소드 x 스태프",
-   "소드 x 스태프KR"
-  ],
-  "tracked_at": "2026-11-26T00:24:31Z",
-  "days": 1,
-  "meta_live": 63,
-  "google_live": 18,
-  "meta_new7": 37,
-  "google_new7": 8,
-  "meta": 272,
-  "meta_total": 143,
-  "google": 50
- },
- {
-  "pkg": "com.nexon.ma",
-  "name": "메이플 키우기",
-  "publisher": "NEXON Company",
-  "charts": {
-   "sales": 4
-  },
-  "rank_date": "2026-11-12",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "(주)넥슨코리아",
-   "메이플 키우기"
-  ],
-  "tracked_at": "2026-11-26T00:23:33Z",
-  "days": 4,
-  "meta_live": 0,
-  "google_live": 58,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 8,
-  "meta_total": 221,
-  "google": 135
- },
- {
-  "pkg": "com.run.tower.defense",
-  "name": "킹샷:Kingshot",
-  "publisher": "Century Games PTE. LTD.",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "CENTURY GAMES PTE. LTD.",
-   "Kingshot"
-  ],
-  "tracked_at": "2026-11-26T00:21:49Z",
-  "days": 0,
-  "meta_live": 0,
-  "google_live": 38,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 30,
-  "meta_total": 5104,
-  "google": 47
- },
- {
-  "pkg": "com.gamespark.topking.gp",
-  "name": "탑 로드",
-  "publisher": "GAME SPARK PTE. LTD.",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "GAME SPARK PTE. LTD.",
-   "TOP LORDS",
-   "Top Lords"
-  ],
-  "tracked_at": "2026-11-26T00:19:44Z",
-  "days": 0,
-  "meta_live": 39,
-  "google_live": 7,
-  "meta_new7": 14,
-  "google_new7": 1,
-  "meta": 45,
-  "meta_total": 39,
-  "google": 8
- },
- {
-  "pkg": "com.mocacorp.sudoku",
-  "name": "스도쿠",
-  "publisher": "Moca",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "Easybrain Ltd"
-  ],
-  "tracked_at": "2026-11-26T00:18:56Z",
-  "days": 0,
-  "meta_live": 0,
-  "google_live": 2,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 2
- },
- {
-  "pkg": "com.farlightgames.warline.gp.global",
-  "name": "워라인: 스나이퍼",
-  "publisher": "Powerfantasy HK Limited",
-  "charts": {
-   "popular": 5
-  },
-  "rank_date": "2026-11-19",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "FARLIGHT PTE. LTD.",
-   "Warline:Sniper Strike"
-  ],
-  "tracked_at": "2026-11-26T00:17:12Z",
-  "days": 11,
-  "meta_live": 34,
-  "google_live": 9,
-  "meta_new7": 0,
-  "google_new7": 1,
-  "meta": 82,
-  "meta_total": 248,
-  "google": 12
- },
- {
-  "pkg": "com.nexon.azurpromilia",
-  "name": "아주르 프로밀리아",
-  "publisher": "NEXON Company",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "넥슨모바일"
-  ],
-  "tracked_at": "2026-11-26T00:16:25Z",
-  "days": 0,
-  "meta_live": 33,
-  "google_live": 0,
-  "meta_new7": 33,
-  "google_new7": 0,
-  "meta": 33,
-  "meta_total": 33,
-  "google": 0
- },
- {
-  "pkg": "com.highbrow.games.dvo",
-  "name": "드래곤빌리지3 X 리센느",
-  "publisher": "highbrow",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "드래곤빌리지 : Dragon Village",
-   "주식회사 하이브로"
-  ],
-  "tracked_at": "2026-11-26T00:15:07Z",
-  "days": 0,
-  "meta_live": 42,
-  "google_live": 16,
-  "meta_new7": 9,
-  "google_new7": 3,
-  "meta": 43,
-  "meta_total": 43,
-  "google": 63
  },
  {
   "pkg": "com.playrix.gardenscapes",

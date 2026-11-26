@@ -971,43 +971,23 @@
   "matched_at": "2026-11-19T00:58:14Z",
   "google_log": {
    "meta": [
-    "스도쿠:211",
+    "스도쿠:231",
     "스도쿠 - 클래식 로직 퍼즐 게임:0",
-    "Moca:32366"
+    "Moca:33022"
    ],
    "names": [
     "Moca",
     "Easybrain",
     "Easybrain Ltd"
    ],
-   "domains": [
-    "easybrain.co.kr"
-   ],
-   "candidates": 12,
-   "previews": 25,
-   "failed": 0,
-   "checked": [
-    {
-     "name": "Easybrain Ltd",
-     "region": "CY",
-     "from": "이름 'Easybrain'",
-     "recent": 50,
-     "previews": 20,
-     "failed": 0,
-     "hit": true
-    },
-    {
-     "name": "이종규",
-     "region": "KR",
-     "from": "도메인→이름 '이종규'",
-     "recent": 5,
-     "previews": 5,
-     "failed": 0,
-     "hit": false
-    }
-   ]
+   "domains": [],
+   "candidates": 0,
+   "previews": null,
+   "failed": null,
+   "checked": []
   },
-  "ver": 2
+  "ver": 2,
+  "rematched_at": "2026-11-26T10:14:51Z"
  },
  "com.mergegames.gossipharbor": {
   "meta_pages": [],
@@ -2556,28 +2536,81 @@
   "meta_pages": [
    "1480621432198772"
   ],
-  "google": [],
+  "google": [
+   {
+    "id": "AR17935783050138877953",
+    "name": "(주)넥슨코리아",
+    "by": "도메인 'nexon.com' → 소재에 패키지/iOS ID"
+   }
+  ],
   "ios": "6754899430",
   "meta_by": "검색어 '아주르 프로밀리아' → 광고 링크의 Play 패키지",
   "matched_at": "2026-11-26T00:16:25Z",
   "google_log": {
-   "meta": [
-    "아주르 프로밀리아:151"
-   ],
+   "meta": [],
    "names": [
     "NEXON",
     "NEXON Company",
     "Nexon Korea",
-    "Nexon Korea Corporation",
-    "넥슨모바일"
+    "Nexon Korea Corporation"
    ],
-   "domains": [],
-   "candidates": 0,
-   "error": "광고 투명성 센터 조회가 모두 실패 (일시 차단일 수 있음)",
-   "previews": null,
-   "failed": null,
-   "checked": []
-  }
+   "domains": [
+    "nexon.com",
+    "nexon.co.jp"
+   ],
+   "candidates": 23,
+   "previews": 303,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "Nexon Korea",
+     "region": "KR",
+     "from": "이름 'NEXON'",
+     "recent": 1201,
+     "previews": 186,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "Nexon Korea Co., Ltd.",
+     "region": "KR",
+     "from": "이름 'Nexon Korea'",
+     "recent": 89,
+     "previews": 89,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "NEXON Co. Ltd",
+     "region": "JP",
+     "from": "이름 'NEXON'",
+     "recent": 26,
+     "previews": 2,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "(주)넥슨코리아",
+     "region": "",
+     "from": "도메인 'nexon.com'",
+     "recent": 672,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    },
+    {
+     "name": "(주)넥슨코리아",
+     "region": "",
+     "from": "도메인 'nexon.com'",
+     "recent": 103,
+     "previews": 16,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2,
+  "rematched_at": "2026-11-26T10:07:57Z"
  },
  "com.nhnent.pokerclassic": {
   "meta_pages": [],
@@ -2586,16 +2619,7 @@
   "meta_by": "",
   "matched_at": "2026-11-26T00:26:25Z",
   "google_log": {
-   "meta": [
-    "한게임포커 클래식 : 7포커 홀덤 섯다 훌라 슬롯:0",
-    "한게임포커 클래식:0",
-    "한게임포커클래식:0",
-    "7포커 홀덤 섯다 훌라 슬롯:0",
-    "7포커홀덤섯다훌라슬롯:0",
-    "한게임포커 클래식 7포커 홀덤 섯다 훌라 슬롯:0",
-    "한게임포커 클래식 - 7포커 홀덤 섯다 훌라 슬롯:0",
-    "NHN Corp.:1"
-   ],
+   "meta": [],
    "names": [
     "NHN",
     "NHN Corp.",
@@ -2607,7 +2631,8 @@
    "previews": null,
    "failed": null,
    "checked": []
-  }
+  },
+  "rematched_at": "2026-11-26T10:20:33Z"
  },
  "com.gamedots.seasideescape": {
   "meta_pages": [],
