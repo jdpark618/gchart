@@ -819,7 +819,7 @@ def write_runlog(start, ok):
             msgs.append(["r", f"실행 안 재시도 {len(retry)}회 (페이지 로드·파싱 등) · 예: {retry[0][:70]}"])
         msgs += [["x", e[:140]] for e in dict.fromkeys(RUNLOG["err"])][:4]
         msgs += [["w", w[:140]] for w in dict.fromkeys(other)][:3]
-        runlog.add("new", "00:30", start, ok, msgs)
+        runlog.add("new", "09:30", start, ok, msgs)
     except Exception as e:
         log.info("수집 로그 저장 실패: %s", e)
 

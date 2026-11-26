@@ -2,10 +2,10 @@ name: Wame Calendar Scraper
 
 on:
   schedule:
-    # 실제 수집은 Google Cloud Scheduler 가 매일 00:30 KST 에 trigger=cron 으로 부름 (11/24, 순위는 09:00) · 아래 GitHub 예약은 안전망
-    # UTC 18:12 = 한국 시간 다음 날 03:12 (예약 지연 대비 앞당김, 11/05)
-    - cron: '12 18 * * *'
-    - cron: '12 1 * * *'    # 예비: 원래 + 7시간 = KST 10:12 (11/10) · 오늘 이미 성공했으면 gate 에서 끝남
+    # 실제 수집은 Google Cloud Scheduler 가 매일 09:30 KST 에 trigger=cron 으로 부름 (11/26: 00:30 → 09:30, 순위 09:00 과 30분 띄움) · 아래 GitHub 예약은 안전망
+    # 안전망은 09:30 뒤에만: 그 전에 돌면 오늘 몫을 먼저 가져가 버림 · 오늘 이미 성공했으면 gate 에서 끝남
+    - cron: '12 4 * * *'    # KST 13:12 (재시도 3번이 끝나는 11:30 무렵 뒤)
+    - cron: '12 6 * * *'    # KST 15:12
   workflow_dispatch: # 수동 실행 버튼 활성화
     inputs:
       trigger:
