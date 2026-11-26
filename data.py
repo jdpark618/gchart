@@ -266,6 +266,28 @@ def parse_cards(html, date_str):
     return items, len(cards)
 
 
+_DIAG = {"n": 0}
+
+
+def diag_empty(page, resp, date_str):
+    """진단 (11/26): 카드가 안 보일 때 실제로 받은 화면을 앞의 3번만 기록 — 차단 화면인지 · 빈 날인지 · 구조 변경인지 구분용"""
+    if _DIAG["n"] >= 3:
+        return
+    _DIAG["n"] += 1
+    try:
+        body = re.sub(r"\s+", " ", page.inner_text("body", timeout=3000))[:160]
+    except Exception as e:
+        body = f"(본문 못 읽음: {e})"[:160]
+    try:
+        cookies = ",".join(sorted(c["name"] for c in page.context.cookies()))[:120]
+    except Exception:
+        cookies = "?"
+    n_game = len(re.findall(r'href="/[a-z-]*/?game/\d+', page.content()))
+    msg = (f"카드 없음 진단 [{date_str}] 응답 {resp.status if resp else '?'} · 주소 {page.url[:80]} · "
+           f"제목 '{page.title()[:40]}' · 게임 링크 {n_game}개 · 쿠키 {cookies} · 본문 '{body}'")
+    log.warning(msg)
+
+
 def scrape_one_date(page, date_str):
     """성공 시 리스트(0건 포함), 실패 시 None을 반환한다.
 
@@ -277,7 +299,7 @@ def scrape_one_date(page, date_str):
 
     for attempt in range(1, NAV_RETRIES + 1):
         try:
-            page.goto(url, wait_until="domcontentloaded", timeout=NAV_TIMEOUT_MS)
+            resp = page.goto(url, wait_until="domcontentloaded", timeout=NAV_TIMEOUT_MS)
         except Exception as e:
             log.warning("[%s] 페이지 로드 실패 (%d/%d): %s",
                         date_str, attempt, NAV_RETRIES, e)
@@ -287,6 +309,7 @@ def scrape_one_date(page, date_str):
         try:
             page.wait_for_selector(CARD_SELECTOR, timeout=CARD_WAIT_MS)
         except PlaywrightTimeout:
+            diag_empty(page, resp, date_str)
             # 응답이 느려서 못 본 것인지, 정말 0건인지 구분이 안 된다.
             # 확정 전에 한 번 더 확인한다 (오판하면 그날 행이 통째로 삭제됨).
             if attempt < EMPTY_CONFIRM_ATTEMPTS:
@@ -818,7 +841,7 @@ def write_runlog(start, ok):
         if retry:
             msgs.append(["r", f"실행 안 재시도 {len(retry)}회 (페이지 로드·파싱 등) · 예: {retry[0][:70]}"])
         msgs += [["x", e[:140]] for e in dict.fromkeys(RUNLOG["err"])][:4]
-        msgs += [["w", w[:140]] for w in dict.fromkeys(other)][:3]
+        msgs += [["w", w[:320] if w.startswith("카드 없음 진단") else w[:140]] for w in dict.fromkeys(other)][:3]   # 진단 줄은 길게 (11/26)
         runlog.add("new", "09:30", start, ok, msgs)
     except Exception as e:
         log.info("수집 로그 저장 실패: %s", e)
