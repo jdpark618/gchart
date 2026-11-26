@@ -106,7 +106,17 @@ async ([q, advId, pkg, ios, since, known, other, cap, budget]) => {
   const otherSet = new Set(other || []);   // 다른 게임 소재로 이미 확인한 ID (11/18) → 다시 열지 않음
   const knownSet = new Set(known || []);   // 이미 저장된 소재 ID → 미리보기 없이 날짜만 갱신
   const ids = [pkg].concat(ios ? ['id' + ios] : []);   // Play 패키지 또는 iOS 앱 ID 가 든 소재
-  const rpc = async (name, req) => (await fetch(`/anji/_/rpc/${name}?authuser=`, { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: 'f.req=' + encodeURIComponent(JSON.stringify(req)) })).json();
+  /* 차단 대응 (11/26): 구글이 JSON 대신 HTML 페이지(차단 화면)를 주면 20초 · 60초 쉬고 다시. 그래도면 'Google 차단' 오류 → 이 게임은 보충 추적으로 넘어감 */
+  const rpc = async (name, req) => {
+    for (const w of [0, 20000, 60000]) {
+      if (w) await new Promise(r => setTimeout(r, w));
+      const r = await fetch(`/anji/_/rpc/${name}?authuser=`, { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: 'f.req=' + encodeURIComponent(JSON.stringify(req)) });
+      const t = await r.text();
+      if (r.ok && !/^\s*</.test(t)) return JSON.parse(t);
+      var last = r.status;
+    }
+    throw new Error(`Google 차단 (HTML 응답 ${last}, 3번 시도)`);
+  };
   let advs = advId ? advId.split(',').map(x => { const [id, name] = x.split('|'); return { id: id.trim(), name: (name || '').trim() }; }) : [];   // 'AR...|광고주명' 쉼표로 여러 개
   if (!advId && q) { const sg = await rpc('SearchService/SearchSuggestions', { 1: q, 2: 10, 3: 10 }); advs = (sg[1] || []).filter(x => x[1]).map(x => ({ id: x[1][2], name: (x[1][1] || '').trim(), region: x[1][3] })).slice(0, 5); }
   const res = { candidates: [], ads: [], seen: [], other: [] };
@@ -211,6 +221,7 @@ async def main():
     ap.add_argument('--name', required=True); ap.add_argument('--pkg', required=True)
     ap.add_argument('--google-adv', default=''); ap.add_argument('--meta-page', default=''); ap.add_argument('--google-adv-id', default=''); ap.add_argument('--ios', default='')
     ap.add_argument('--publisher', default=''); ap.add_argument('--rematch', action='store_true')
+    ap.add_argument('--google-later', action='store_true')   # 차단 (11/26): 앞 게임들이 Google 에 막혀 이 게임은 Google 을 건드리지 않고 보충 추적으로 넘김
     ap.add_argument('--google-only', action='store_true')   # 보충 추적 (11/19): Meta · 매칭 · 순위는 그대로 두고 Google 소재만 이어서 받음
     ap.add_argument('--g-cap', type=int, default=300); ap.add_argument('--g-budget', type=int, default=800)   # Google 미리보기 한도 (11/19): 게임당 · 이번 실행에 남은 예산
     ap.add_argument('--pool', default=''); ap.add_argument('--no-rematch', action='store_true')   # 순번 교체(11/18): 어느 차트에서 뽑혔는지 · 오늘 재매칭 한도를 다 썼으면 건너뜀
@@ -283,10 +294,12 @@ async def main():
         ck = json.load(open(ck_p, encoding='utf-8')) if os.path.exists(ck_p) else {}
         other = ck.get('ids', []) if ck.get('ios', '') == ios_now else []
         known = [x['id'] for x in prev.get('google', {}).get('ads', []) if x.get('yt') or x.get('img')]   # 썸네일 없는 소재는 다시 미리보기 (영상 ID 추출 보완분 반영)
-        try: res['google'] = await google(ctx, '', gadv, pkg, acc.get('ios', '') or clean(a.ios), now - (30 if prev else 90) * 86400, known, other, a.g_cap, a.g_budget) if gadv else {'advertisers': [], 'candidates': [], 'ads': []}
-        except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
-        # 재시도: 광고주 조회가 전부 0건(또는 오류)이면 일시 차단일 수 있어 30초 쉬고 한 번 더 (11/06 WOS 0건 사례)
-        if gadv and (res['google'].get('error') or not any(c.get('creativesKR') for c in res['google'].get('candidates', []))):
+        if gadv and a.google_later: res['google'] = {'error': 'Google 차단으로 보충 추적에 넘김', 'blocked_skip': True, 'ads': []}
+        else:
+            try: res['google'] = await google(ctx, '', gadv, pkg, acc.get('ios', '') or clean(a.ios), now - (30 if prev else 90) * 86400, known, other, a.g_cap, a.g_budget) if gadv else {'advertisers': [], 'candidates': [], 'ads': []}
+            except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
+        # 재시도: 광고주 조회가 전부 0건(또는 오류)이면 일시 차단일 수 있어 30초 쉬고 한 번 더 (11/06 WOS 0건 사례) · 차단 화면이면 rpc 가 이미 3번 해 봤으므로 다시 안 함
+        if gadv and not a.google_later and 'Google 차단' not in str(res['google'].get('error', '')) and (res['google'].get('error') or not any(c.get('creativesKR') for c in res['google'].get('candidates', []))):
             await asyncio.sleep(30)
             try: res['google'] = await google(ctx, '', gadv, pkg, acc.get('ios', '') or clean(a.ios), now - (30 if prev else 90) * 86400, known, other, a.g_cap, a.g_budget); res['google']['retry'] = True
             except Exception as e: res['google'] = {'error': str(e)[:300], 'ads': []}
@@ -335,6 +348,8 @@ async def main():
     json.dump(accounts, open(ACC, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     res['sec'] = round(time.time() - t0, 1)
     os.makedirs(os.path.join(ROOT, 'data', 'ads'), exist_ok=True)
+    # 보충 대상 표시 (11/26): Google 조회가 오류로 끝나면 pending → 보충 추적(catchup.py)이 다른 서버에서 다시. 성공하면 지워짐
+    if gadv and res['google'].get('error'): res['google']['pending'] = True
     json.dump(res, open(os.path.join(ROOT, 'data', 'ads', f'{pkg}.json'), 'w', encoding='utf-8'), ensure_ascii=False)
     ip = os.path.join(ROOT, 'data', 'ads', 'index.json')
     idx = json.load(open(ip, encoding='utf-8')) if os.path.exists(ip) else []

@@ -22,7 +22,7 @@ on:
     types: [completed]
   schedule:   # 안전망: 위 연결이 안 돈 날만 실제로 추적 (이미 성공했으면 gate 에서 끝남)
     - cron: '30 3 * * *'    # 예비: 원래 + 7시간 = KST 12:30 (11/10) · 오늘 이미 성공했으면 gate 에서 끝남
-    - cron: '0 12 * * *'   # 21:00 KST 보충만 (11/25): 아침 추적(09:10 무렵, Cloud Scheduler 순위 09:00 뒤) 12시간 뒤 · 429 로 못 받은 Google 소재를 다른 IP 로 이어 받음 · GitHub 예약이 몇 시간 밀려도 다음 날 아침 추적과 안 겹치게 · 남은 게 없으면 바로 끝남 · gate 안 거침
+    - cron: '0 6 * * *'    # 15:00 KST 보충만 (11/26, 전엔 21:00 — GitHub 예약이 9시간 밀려 다음 날 06:10 에 돌았음): 아침 추적(09:10 무렵) 6시간 뒤 · 429 · 차단으로 못 받은 Google 소재를 다른 IP 로 이어 받음 · 밀려도 다음 날 아침 추적 전에 끝나게 · 남은 게 없으면 바로 끝남 · gate 안 거침
 concurrency: { group: ad-track, cancel-in-progress: false }
 permissions:
   contents: write
@@ -35,16 +35,16 @@ jobs:
       skip: ${{ steps.g.outputs.skip }}
     steps:
       - uses: actions/checkout@v4
-        if: (github.event_name == 'schedule' && github.event.schedule != '0 12 * * *') || github.event_name == 'workflow_run' || inputs.trigger == 'cron'
+        if: (github.event_name == 'schedule' && github.event.schedule != '0 6 * * *') || github.event_name == 'workflow_run' || inputs.trigger == 'cron'
         with: { ref: main }   # 대기열에서 기다린 경우에도 실행 시점의 최신 수집 로그로 판단 (11/24)
       - id: g
-        if: (github.event_name == 'schedule' && github.event.schedule != '0 12 * * *') || github.event_name == 'workflow_run' || inputs.trigger == 'cron'
+        if: (github.event_name == 'schedule' && github.event.schedule != '0 6 * * *') || github.event_name == 'workflow_run' || inputs.trigger == 'cron'
         run: python3 gate.py ads ads_rot ads_fill   # 세 단계(TOP5 · 순번 · 보충) 모두 성공했을 때만 건너뜀
 
   # 1단계 TOP5 추적 (11/19 세 단계로 나눔): 인기 TOP5 + 매출 TOP5 매일 · 수동 단일 게임 · test.json 도 여기서
   track:
     needs: gate
-    if: needs.gate.outputs.skip != 'true' && (inputs.stage == '' || inputs.stage == 'top5' || github.event_name != 'workflow_dispatch') && github.event.schedule != '0 12 * * *'
+    if: needs.gate.outputs.skip != 'true' && (inputs.stage == '' || inputs.stage == 'top5' || github.event_name != 'workflow_dispatch') && github.event.schedule != '0 6 * * *'
     outputs:
       ip: ${{ steps.ip.outputs.ip }}
       dup: ${{ steps.ip.outputs.dup }}
@@ -101,7 +101,7 @@ jobs:
   # 2단계 순번 추적 (11/19): TOP5 뒤 새 서버(다른 IP)에서 6위 아래 게임
   rotation:
     needs: [gate, track]
-    if: always() && needs.gate.outputs.skip != 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && inputs.pkg == '')) && inputs.stage != 'fill' && github.event.schedule != '0 12 * * *' && (needs.track.result == 'success' || needs.track.result == 'skipped') && needs.track.outputs.dup != 'true'
+    if: always() && needs.gate.outputs.skip != 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && inputs.pkg == '')) && inputs.stage != 'fill' && github.event.schedule != '0 6 * * *' && (needs.track.result == 'success' || needs.track.result == 'skipped') && needs.track.outputs.dup != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     outputs:

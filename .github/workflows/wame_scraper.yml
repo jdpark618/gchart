@@ -64,7 +64,22 @@ jobs:
       env:
         # GitHub Secrets에 등록할 구글 API 키를 환경변수로 전달
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-      run: python data.py
+      # 실패하면 1시간 간격 최대 3번 (11/26): 00:30 GitHub 네트워크 장애로 0건 → 그날 신작이 통째로 빠졌음.
+      # 실패는 모두 쓰기 전 가드(0건 · 급감 · 화면 변경)거나 시트 오류라 다시 돌려도 중복 행 · 중복 메일 없음.
+      # 시도 사이에 수집 로그를 올려 /admin 에서 최초 → 재시도 → 최종으로 보이게 함
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        ok=0
+        for a in 1 2 3; do
+          if python data.py; then ok=1; break; fi
+          [ $a = 3 ] && break
+          git add data/runlog 2>/dev/null
+          git diff --cached --quiet || { git commit -qm "new: 수집 실패 기록 (시도 $a/3)"; for i in 1 2 3; do git pull --rebase --autostash -q && git push -q && break; sleep $((i * 10)); done; }
+          echo "::warning::신작 수집 실패 (시도 $a/3) — 1시간 뒤 다시 시도"
+          sleep 3600
+        done
+        [ $ok = 1 ] || exit 1
 
     - name: 저장소 활동 기록 (스케줄 자동 비활성화 방지)
       if: always()

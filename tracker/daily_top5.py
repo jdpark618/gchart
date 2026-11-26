@@ -86,7 +86,7 @@ def rank_only(g):
     json.dump(idx, open(ip, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
 
-skipped = ran = rematched = previews = used = last_open = 0
+skipped = ran = rematched = previews = used = last_open = gblock = 0
 for g in picks.values():
     before = load(ap, {}).get(g['pkg'])
     if g['pkg'] in recent:
@@ -101,6 +101,7 @@ for g in picks.values():
     if g['ranks']: cmd += ['--ranks', ','.join(f'{k}:{v}' for k, v in g['ranks'].items()), '--rank-date', g['date']]
     if rematched >= REMATCH_MAX or previews >= PREVIEW_MAX: cmd.append('--no-rematch')
     cmd += ['--g-cap', str(G_CAP), '--g-budget', str(max(0, G_BUDGET - used))]
+    if gblock >= 2: cmd.append('--google-later')   # 차단 (11/26): Google 이 2게임 연속 막으면 남은 게임은 Google 을 건드리지 않고 보충 추적으로 넘김
     if ran > 1: time.sleep(10 if last_open < 100 else 30)   # 게임 사이 쉬기: 미리보기를 많이 연 게임 뒤에는 더 길게
     rc = subprocess.run(cmd, check=False).returncode
     after = load(ap, {}).get(g['pkg']) or {}
@@ -125,7 +126,10 @@ for g in picks.values():
     if after and sig(after) != sig(before):   # 처음 매칭 · 7일 재매칭에서 계정이 실제로 바뀐 때만
         nm = [p['name'] for p in m.get('pages', []) if p.get('name')] + [x.get('name', '') for x in gg.get('advertisers', []) if x.get('name')]
         msgs.append(['w' if before else 'm', f"{n}: 광고 계정 {'바뀜' if before else '첫 매칭'} → 확인 ({', '.join(nm[:3]) or '없음'})"])
-    if gg.get('error'): msgs.append(['x', f"{n}: Google 오류 {gg['error'][:80]}"])
+    if gg.get('blocked_skip'): msgs.append(['w', f'{n}: Google 차단 이어져 건너뜀 → 보충 추적에서'])
+    elif 'Google 차단' in str(gg.get('error', '')): gblock += 1; msgs.append(['w', f'{n}: Google 차단 (3번 시도) → 보충 추적에서 다른 서버로'])
+    elif gg.get('error'): msgs.append(['x', f"{n}: Google 오류 {gg['error'][:80]}"])
+    if gg.get('advertisers') and not gg.get('error'): gblock = 0   # 실제로 Google 을 조회해 성공했을 때만 연속 차단을 끊음
     elif not gg.get('advertisers'): msgs.append(['w', f'{n}: Google 계정 없음'])
     cs = gg.get('candidates') or []
     left, first = sum(c.get('failed') or 0 for c in cs), sum(c.get('failedFirst') or 0 for c in cs)

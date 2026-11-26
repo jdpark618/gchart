@@ -26,24 +26,30 @@ def left_of(p):
     return sum((c.get('deferred') or 0) + (c.get('failed') or 0) for c in R.get('google', {}).get('candidates') or [])
 
 
-todo = [x for x in index if accounts.get(x['pkg'], {}).get('google') and left_of(x['pkg'])]
+# Google 조회 자체가 오류(차단 등)로 끝난 게임 (11/26): 남은 미리보기 수를 모르므로 따로 표시해 대상에 넣음
+pending = lambda p: bool(load(os.path.join(ADS, f'{p}.json'), {}).get('google', {}).get('pending'))
+todo = [x for x in index if accounts.get(x['pkg'], {}).get('google') and (left_of(x['pkg']) or pending(x['pkg']))]
 todo.sort(key=lambda x: (x['pkg'] not in today, today.index(x['pkg']) if x['pkg'] in today else 0, min(rank('sales', x['pkg']), rank('popular', x['pkg']) + 1000)))
 ip = os.environ.get('RUNNER_IP', '알 수 없음')
-print(f'보충 추적 대상 {len(todo)}개 (서버 IP {ip}):', ', '.join(f"{x['name']}({left_of(x['pkg'])})" for x in todo), flush=True)
+print(f'보충 추적 대상 {len(todo)}개 (서버 IP {ip}):', ', '.join(f"{x['name']}({'조회 실패' if pending(x['pkg']) else left_of(x['pkg'])})" for x in todo), flush=True)
 msgs, used, ran, last_open, stopped = [], 0, 0, 0, False
 for x in todo:
     if used >= G_BUDGET:
         msgs.append(['m', f"예산 {G_BUDGET}건을 다 써서 {len(todo) - ran}개 게임은 다음 보충에서"]); break
     if ran: time.sleep(10 if last_open < 100 else 30)
-    ran += 1; before = left_of(x['pkg'])
+    ran += 1; before = left_of(x['pkg']); was_pending = pending(x['pkg'])
     rc = subprocess.run([sys.executable, os.path.join(ROOT, 'tracker', 'ad_track.py'), '--name', x['name'], '--pkg', x['pkg'], '--google-only',
                          '--g-cap', str(G_CAP), '--g-budget', str(G_BUDGET - used)], check=False).returncode
     R = load(os.path.join(ADS, f"{x['pkg']}.json"), {}); cs = R.get('google', {}).get('candidates') or []
     if rc != 0 or str(R.get('google_at', ''))[:19] < START_UTC:
         msgs.append(['x', f"{x['name']}: 보충 추적 실패 (종료 코드 {rc})"]); last_open = 0; continue
+    if 'Google 차단' in str(R.get('google', {}).get('error', '')):   # 이 서버도 막힘 → 더 두드리지 않고 다음 보충에서
+        msgs.append(['w', f"{x['name']}: Google 차단 · 보충 중단 (다음 보충에서)"]); stopped = True; break
+    if R.get('google', {}).get('error'):
+        msgs.append(['x', f"{x['name']}: Google 오류 {R['google']['error'][:80]}"]); last_open = 0; continue
     last_open = sum(c.get('opened') or 0 for c in cs); used += last_open; after = left_of(x['pkg'])
     new = sum(c.get('matched') or 0 for c in cs)
-    line = f"{x['name']}: 미리보기 {last_open}건 · 새 소재 {new}개 · 남은 {before} → {after}건"
+    line = f"{x['name']}: " + ('앞 단계 조회 실패분 · ' if was_pending else '') + f"미리보기 {last_open}건 · 새 소재 {new}개 · 남은 {before} → {after}건"
     if any(c.get('blocked') for c in cs):
         msgs.append(['w', line + ' · 요청 제한으로 보충 중단 (다음 보충에서)']); stopped = True; break
     msgs.append(['o' if not after else 'm', line])
