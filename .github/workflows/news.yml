@@ -9,6 +9,7 @@ on:
 concurrency: { group: news, cancel-in-progress: false }
 permissions:
   contents: write
+  actions: write   # 마케팅 보충 실행 요청 (11/26)
 
 jobs:
   news:
@@ -29,3 +30,26 @@ jobs:
           git commit -qm "news: 게임 뉴스 갱신 $(date -u +%FT%TZ)"
           for i in 1 2 3 4 5; do git pull --rebase --autostash -q && git push -q && exit 0; sleep $((i*5)); done
           exit 1
+      # 마케팅 보충 호출 (11/26): GitHub 예약(15:00)은 몇 시간씩 밀려서, 정시에 도는 이 뉴스 실행(Cloud Scheduler)이 대신 부름
+      # 15:40 · 21:40 실행에서만 · 못 받은 Google 소재(남은 미리보기 · 차단으로 조회 실패)가 있을 때만 Ad Tracker 를 stage=fill 로 실행
+      - name: 마케팅 보충 필요하면 실행
+        if: always()
+        env: { GH_TOKEN: '${{ github.token }}' }
+        run: |
+          h=$(TZ=Asia/Seoul date +%H)
+          [ "$h" = 15 ] || [ "$h" = 21 ] || { echo "보충 확인 시간 아님 ($h시)"; exit 0; }
+          git pull -q --rebase origin main || true
+          n=$(python3 - <<'EOF'
+          import json, os
+          A = 'data/ads'
+          ld = lambda p: json.load(open(p, encoding='utf-8')) if os.path.exists(p) else {}
+          acc = ld(f'{A}/accounts.json')
+          left = lambda g: sum((c.get('deferred') or 0) + (c.get('failed') or 0) for c in g.get('candidates') or [])
+          todo = [x['pkg'] for x in (ld(f'{A}/index.json') or []) if acc.get(x['pkg'], {}).get('google')
+                  and ((g := ld(f"{A}/{x['pkg']}.json").get('google', {})).get('pending') or left(g))]
+          print(len(todo))
+          EOF
+          )
+          echo "보충 대상 ${n}개"
+          [ "${n:-0}" -gt 0 ] || exit 0
+          gh workflow run ad_track.yml --ref main -f stage=fill && echo "Ad Tracker 보충 실행 요청함"
