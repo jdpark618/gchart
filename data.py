@@ -270,8 +270,11 @@ _DIAG = {"n": 0}
 
 
 def diag_empty(page, resp, date_str):
-    """진단 (11/26): 카드가 안 보일 때 실제로 받은 화면을 앞의 3번만 기록 — 차단 화면인지 · 빈 날인지 · 구조 변경인지 구분용"""
+    """진단 (11/26): 게임 링크는 있는데 카드를 못 찾을 때(숨김 · 구조 변경) 받은 화면을 앞의 3번만 기록 — 차단 화면인지 · 빈 날인지 · 구조 변경인지 구분용"""
     if _DIAG["n"] >= 3:
+        return
+    n_game = len(re.findall(r'href="/[a-z-]*/?game/\d+', page.content()))
+    if not n_game:   # 게임 링크가 하나도 없으면 정말 빈 날 → 기록 안 함 (11/26: 빈 날까지 경고로 떠서)
         return
     _DIAG["n"] += 1
     try:
@@ -282,7 +285,6 @@ def diag_empty(page, resp, date_str):
         cookies = ",".join(sorted(c["name"] for c in page.context.cookies()))[:120]
     except Exception:
         cookies = "?"
-    n_game = len(re.findall(r'href="/[a-z-]*/?game/\d+', page.content()))
     msg = (f"카드 없음 진단 [{date_str}] 응답 {resp.status if resp else '?'} · 주소 {page.url[:80]} · "
            f"제목 '{page.title()[:40]}' · 게임 링크 {n_game}개 · 쿠키 {cookies} · 본문 '{body}'")
     log.warning(msg)
