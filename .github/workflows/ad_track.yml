@@ -22,7 +22,8 @@ on:
     types: [completed]
   schedule:   # 안전망: 위 연결이 안 돈 날만 실제로 추적 (이미 성공했으면 gate 에서 끝남)
     - cron: '30 3 * * *'    # 예비: 원래 + 7시간 = KST 12:30 (11/10) · 오늘 이미 성공했으면 gate 에서 끝남
-    - cron: '0 6 * * *'    # 15:00 KST 보충만 (11/26, 전엔 21:00 — GitHub 예약이 9시간 밀려 다음 날 06:10 에 돌았음): 아침 추적(09:10 무렵) 6시간 뒤 · 429 · 차단으로 못 받은 Google 소재를 다른 IP 로 이어 받음 · 밀려도 다음 날 아침 추적 전에 끝나게 · 남은 게 없으면 바로 끝남 · gate 안 거침
+    # 보충(fill) 예약은 뺐음 (11/26): GitHub 예약이 몇 시간씩 밀림 → 정시에 도는 뉴스 실행(Cloud Scheduler)이 15:40 · 21:40 에 남은 게 있을 때만 stage=fill 로 부름 (news.yml)
+    #   아래 '0 6 * * *' 조건들은 예전 보충 예약용 · 이제 그 예약이 없어 늘 참이라 그대로 둠
 concurrency: { group: ad-track, cancel-in-progress: false }
 permissions:
   contents: write
