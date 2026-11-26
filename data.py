@@ -307,7 +307,9 @@ def scrape_one_date(page, date_str):
             continue
 
         try:
-            page.wait_for_selector(CARD_SELECTOR, timeout=CARD_WAIT_MS)
+            # state="attached" (11/26): 와미 개편으로 데스크톱 화면에선 그날 목록 카드가 숨겨진 채 들어옴(달력 칸만 보임).
+            # 기본값(visible)으로 기다리면 61일 전부 0건 → 카드가 페이지에 있기만 하면 읽음 (파싱은 page.content() 라 숨김과 무관)
+            page.wait_for_selector(CARD_SELECTOR, timeout=CARD_WAIT_MS, state="attached")
         except PlaywrightTimeout:
             diag_empty(page, resp, date_str)
             # 응답이 느려서 못 본 것인지, 정말 0건인지 구분이 안 된다.
