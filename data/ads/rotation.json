@@ -101,7 +101,6 @@
    "chart": "sales"
   }
  },
- "day": "2026-11-26",
  "rotation": {
   "com.highbrow.games.dvo": {
    "name": "드래곤빌리지3 X 리센느",
@@ -183,5 +182,6 @@
    "date": "2026-11-26",
    "chart": "sales"
   }
- }
+ },
+ "day": "2026-11-26"
 }

@@ -1,5 +1,248 @@
 [
  {
+  "pkg": "com.proximabeta.nikke",
+  "name": "승리의 여신: 니케",
+  "publisher": "Level Infinite",
+  "charts": {
+   "sales": 5
+  },
+  "rank_date": "2026-11-26",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-26T10:05:57Z",
+  "days": 18,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 59,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.percent.aos.luckydefense",
+  "name": "운빨존많겜",
+  "publisher": "111%",
+  "charts": {
+   "sales": 4
+  },
+  "rank_date": "2026-11-26",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "111퍼센트 주식회사"
+  ],
+  "tracked_at": "2026-11-26T10:05:42Z",
+  "days": 3,
+  "meta_live": 0,
+  "google_live": 6,
+  "meta_new7": 0,
+  "google_new7": 1,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 14
+ },
+ {
+  "pkg": "com.gof.global",
+  "name": "WOS: 화이트아웃 서바이벌",
+  "publisher": "Century Games PTE. LTD.",
+  "charts": {
+   "sales": 3
+  },
+  "rank_date": "2026-11-26",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "CENTURY GAMES PTE. LTD.",
+   "Whiteout Survival"
+  ],
+  "tracked_at": "2026-11-26T10:05:00Z",
+  "days": 13,
+  "meta_live": 12,
+  "google_live": 21,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 60,
+  "meta_total": 140,
+  "google": 121
+ },
+ {
+  "pkg": "com.com2us.es.android.google.kr.normal",
+  "name": "제우스: 오만의 신",
+  "publisher": "Com2uS",
+  "charts": {
+   "sales": 2
+  },
+  "rank_date": "2026-11-26",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "(주) 컴투스",
+   "제우스: 오만의 신"
+  ],
+  "tracked_at": "2026-11-26T10:04:27Z",
+  "days": 18,
+  "meta_live": 44,
+  "google_live": 9,
+  "meta_new7": 9,
+  "google_new7": 0,
+  "meta": 105,
+  "meta_total": 9,
+  "google": 59
+ },
+ {
+  "pkg": "com.kakaogames.dokkaebi",
+  "name": "도깨비의세계",
+  "publisher": "Kakao Games Corp.",
+  "charts": {
+   "sales": 1
+  },
+  "rank_date": "2026-11-26",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "주식회사 카카오게임즈"
+  ],
+  "tracked_at": "2026-11-26T10:04:12Z",
+  "days": 18,
+  "meta_live": 0,
+  "google_live": 14,
+  "meta_new7": 0,
+  "google_new7": 3,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 55
+ },
+ {
+  "pkg": "com.rabbithole.cardofdemonslayer",
+  "name": "카드 오브 데몬슬레이어: 덱빌딩 로그라이크 RPG",
+  "publisher": "CookApps",
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-26",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "(주) 쿡앱스"
+  ],
+  "tracked_at": "2026-11-26T10:03:57Z",
+  "days": 7,
+  "meta_live": 0,
+  "google_live": 2,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 7
+ },
+ {
+  "pkg": "com.noriworks.gm",
+  "name": "고스톱M : 데이터 필요없는 맞고 게임",
+  "publisher": "Noriworks",
+  "charts": {
+   "popular": 4
+  },
+  "rank_date": "2026-11-26",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "Noriworks"
+  ],
+  "tracked_at": "2026-11-26T10:03:28Z",
+  "days": 4,
+  "meta_live": 8,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 8,
+  "meta_total": 8,
+  "google": 0
+ },
+ {
+  "pkg": "com.dragonheart.spearknightrpg2",
+  "name": "창술사 키우기X : 방치형RPG",
+  "publisher": "DragonHeart",
+  "charts": {
+   "popular": 3
+  },
+  "rank_date": "2026-11-26",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "(주)코드드래곤",
+   "코드드래곤"
+  ],
+  "tracked_at": "2026-11-26T10:02:46Z",
+  "days": 5,
+  "meta_live": 35,
+  "google_live": 10,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 35,
+  "meta_total": 35,
+  "google": 12
+ },
+ {
+  "pkg": "group.theorigin.themaxlevelreturner",
+  "name": "나 혼자 만렙 키우기",
+  "publisher": "Punchline Games Co., Ltd.",
+  "charts": {
+   "popular": 2
+  },
+  "rank_date": "2026-11-26",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "Punchline Games",
+   "펀치라인게임즈"
+  ],
+  "tracked_at": "2026-11-26T10:01:55Z",
+  "days": 1,
+  "meta_live": 27,
+  "google_live": 55,
+  "meta_new7": 8,
+  "google_new7": 25,
+  "meta": 27,
+  "meta_total": 27,
+  "google": 59
+ },
+ {
+  "pkg": "com.mgame.gsir",
+  "name": "귀혼키우기",
+  "publisher": "Mgame",
+  "charts": {
+   "popular": 1
+  },
+  "rank_date": "2026-11-26",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "(주)엠게임",
+   "귀혼키우기"
+  ],
+  "tracked_at": "2026-11-26T10:01:26Z",
+  "days": 1,
+  "meta_live": 18,
+  "google_live": 1,
+  "meta_new7": 18,
+  "google_new7": 1,
+  "meta": 18,
+  "meta_total": 18,
+  "google": 1
+ },
+ {
   "pkg": "com.gamedots.seasideescape",
   "name": "씨사이드 익스케이프: 합성 & 스토리 게임",
   "publisher": "Microfun Limited",
@@ -229,249 +472,6 @@
   "meta": 43,
   "meta_total": 43,
   "google": 63
- },
- {
-  "pkg": "com.proximabeta.nikke",
-  "name": "승리의 여신: 니케",
-  "publisher": "Level Infinite",
-  "charts": {
-   "sales": 5
-  },
-  "rank_date": "2026-11-26",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [],
-  "tracked_at": "2026-11-26T00:13:36Z",
-  "days": 18,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 59,
-  "meta_total": 0,
-  "google": 0
- },
- {
-  "pkg": "com.percent.aos.luckydefense",
-  "name": "운빨존많겜",
-  "publisher": "111%",
-  "charts": {
-   "sales": 4
-  },
-  "rank_date": "2026-11-26",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "111퍼센트 주식회사"
-  ],
-  "tracked_at": "2026-11-26T00:12:49Z",
-  "days": 3,
-  "meta_live": 0,
-  "google_live": 6,
-  "meta_new7": 0,
-  "google_new7": 1,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 14
- },
- {
-  "pkg": "com.gof.global",
-  "name": "WOS: 화이트아웃 서바이벌",
-  "publisher": "Century Games PTE. LTD.",
-  "charts": {
-   "sales": 3
-  },
-  "rank_date": "2026-11-26",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "CENTURY GAMES PTE. LTD.",
-   "Whiteout Survival"
-  ],
-  "tracked_at": "2026-11-26T00:11:44Z",
-  "days": 13,
-  "meta_live": 12,
-  "google_live": 21,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 60,
-  "meta_total": 140,
-  "google": 121
- },
- {
-  "pkg": "com.com2us.es.android.google.kr.normal",
-  "name": "제우스: 오만의 신",
-  "publisher": "Com2uS",
-  "charts": {
-   "sales": 2
-  },
-  "rank_date": "2026-11-26",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "(주) 컴투스",
-   "제우스: 오만의 신"
-  ],
-  "tracked_at": "2026-11-26T00:10:45Z",
-  "days": 18,
-  "meta_live": 44,
-  "google_live": 9,
-  "meta_new7": 9,
-  "google_new7": 0,
-  "meta": 105,
-  "meta_total": 9,
-  "google": 59
- },
- {
-  "pkg": "com.kakaogames.dokkaebi",
-  "name": "도깨비의세계",
-  "publisher": "Kakao Games Corp.",
-  "charts": {
-   "sales": 1
-  },
-  "rank_date": "2026-11-26",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "주식회사 카카오게임즈"
-  ],
-  "tracked_at": "2026-11-26T00:09:57Z",
-  "days": 18,
-  "meta_live": 0,
-  "google_live": 14,
-  "meta_new7": 0,
-  "google_new7": 3,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 55
- },
- {
-  "pkg": "com.rabbithole.cardofdemonslayer",
-  "name": "카드 오브 데몬슬레이어: 덱빌딩 로그라이크 RPG",
-  "publisher": "CookApps",
-  "charts": {
-   "popular": 5
-  },
-  "rank_date": "2026-11-26",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "(주) 쿡앱스"
-  ],
-  "tracked_at": "2026-11-26T00:09:09Z",
-  "days": 7,
-  "meta_live": 0,
-  "google_live": 2,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 7
- },
- {
-  "pkg": "com.noriworks.gm",
-  "name": "고스톱M : 데이터 필요없는 맞고 게임",
-  "publisher": "Noriworks",
-  "charts": {
-   "popular": 4
-  },
-  "rank_date": "2026-11-26",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "Noriworks"
-  ],
-  "tracked_at": "2026-11-26T00:08:02Z",
-  "days": 4,
-  "meta_live": 8,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 8,
-  "meta_total": 8,
-  "google": 0
- },
- {
-  "pkg": "com.dragonheart.spearknightrpg2",
-  "name": "창술사 키우기X : 방치형RPG",
-  "publisher": "DragonHeart",
-  "charts": {
-   "popular": 3
-  },
-  "rank_date": "2026-11-26",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "(주)코드드래곤",
-   "코드드래곤"
-  ],
-  "tracked_at": "2026-11-26T00:07:02Z",
-  "days": 5,
-  "meta_live": 35,
-  "google_live": 10,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 35,
-  "meta_total": 35,
-  "google": 12
- },
- {
-  "pkg": "group.theorigin.themaxlevelreturner",
-  "name": "나 혼자 만렙 키우기",
-  "publisher": "Punchline Games Co., Ltd.",
-  "charts": {
-   "popular": 2
-  },
-  "rank_date": "2026-11-26",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "Punchline Games",
-   "펀치라인게임즈"
-  ],
-  "tracked_at": "2026-11-26T00:05:55Z",
-  "days": 1,
-  "meta_live": 26,
-  "google_live": 54,
-  "meta_new7": 8,
-  "google_new7": 24,
-  "meta": 26,
-  "meta_total": 26,
-  "google": 58
- },
- {
-  "pkg": "com.mgame.gsir",
-  "name": "귀혼키우기",
-  "publisher": "Mgame",
-  "charts": {
-   "popular": 1
-  },
-  "rank_date": "2026-11-26",
-  "pool": [
-   "popular"
-  ],
-  "aliases": [
-   "(주)엠게임",
-   "귀혼키우기"
-  ],
-  "tracked_at": "2026-11-26T00:05:17Z",
-  "days": 1,
-  "meta_live": 18,
-  "google_live": 1,
-  "meta_new7": 18,
-  "google_new7": 1,
-  "meta": 18,
-  "meta_total": 18,
-  "google": 1
  },
  {
   "pkg": "com.playrix.gardenscapes",
