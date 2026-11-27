@@ -37,7 +37,7 @@ jobs:
         with: { ref: main }   # 대기열에서 기다린 경우에도 실행 시점의 최신 수집 로그로 판단 (11/24)
       - id: g
         if: github.event_name == 'schedule' || inputs.trigger == 'cron'
-        run: python3 gate.py popular sales
+        run: python3 gate.py popular sales ${{ github.event_name == 'schedule' && '--after 09:00' || '' }}   # 밀린 안전망이 자정을 넘겨 09:00 전에 돌면 갱신 전 매출 차트를 잡으므로 건너뜀 (11/27)
 
   scrape-and-update:
     needs: gate

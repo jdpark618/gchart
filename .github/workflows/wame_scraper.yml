@@ -33,7 +33,7 @@ jobs:
         with: { ref: main }   # 대기열에서 기다린 경우에도 실행 시점의 최신 수집 로그로 판단 (11/24)
       - id: g
         if: github.event_name == 'schedule' || inputs.trigger == 'cron'
-        run: python3 gate.py new
+        run: python3 gate.py new ${{ github.event_name == 'schedule' && '--after 09:25' || '' }}   # 밀린 안전망이 자정을 넘겨 09:30 정기 실행보다 먼저 돌면 건너뜀 (11/27 01:48)
 
   run-scraper:
     needs: gate
