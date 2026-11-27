@@ -1,5 +1,157 @@
 [
  {
+  "pkg": "com.ProjectMoon.LimbusCompany",
+  "name": "Limbus Company",
+  "publisher": "Project Moon",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-27T00:21:16Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.com2us.futurecpb.android.google.global.normal",
+  "name": "컴투스프로야구V26",
+  "publisher": "Com2uS",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "Com2uS"
+  ],
+  "tracked_at": "2026-11-27T00:20:16Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 7
+ },
+ {
+  "pkg": "com.phs.global",
+  "name": "라스트 어사일럼: 페스트",
+  "publisher": "37GAMES GLOBAL",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-27T00:19:33Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.dreamgames.royalmatch",
+  "name": "로얄 매치 Royal Match",
+  "publisher": "Dream Games, Ltd.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "Dream Games Publishing Ltd"
+  ],
+  "tracked_at": "2026-11-27T00:19:18Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 29,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 43
+ },
+ {
+  "pkg": "com.roblox.client",
+  "name": "로블록스 (Roblox)",
+  "publisher": "Roblox Corporation",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular",
+   "sales"
+  ],
+  "aliases": [
+   "ROBLOX Corporation"
+  ],
+  "tracked_at": "2026-11-27T00:19:00Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 23,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 36
+ },
+ {
+  "pkg": "net.gameduo.el",
+  "name": "일랜시아 모바일",
+  "publisher": "Gameduo",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "Elancia Mobile"
+  ],
+  "tracked_at": "2026-11-27T00:17:27Z",
+  "days": 0,
+  "meta_live": 33,
+  "google_live": 0,
+  "meta_new7": 33,
+  "google_new7": 0,
+  "meta": 33,
+  "meta_total": 139,
+  "google": 0
+ },
+ {
+  "pkg": "com.Eclipse.Neuphoria",
+  "name": "뉴포리아: 서바이벌",
+  "publisher": "AIMED",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [
+   "Aimed Inc",
+   "주식회사 에임드"
+  ],
+  "tracked_at": "2026-11-27T00:16:24Z",
+  "days": 0,
+  "meta_live": 32,
+  "google_live": 5,
+  "meta_new7": 10,
+  "google_new7": 0,
+  "meta": 32,
+  "meta_total": 58,
+  "google": 6
+ },
+ {
   "pkg": "com.run.tower.defense",
   "name": "킹샷:Kingshot",
   "publisher": "Century Games PTE. LTD.",
@@ -1076,70 +1228,6 @@
   "meta": 0,
   "meta_total": 0,
   "google": 24
- },
- {
-  "pkg": "com.dreamgames.royalmatch",
-  "name": "로얄 매치 Royal Match",
-  "publisher": "Dream Games, Ltd.",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "Dream Games Publishing Ltd"
-  ],
-  "tracked_at": "2026-11-20T01:09:04Z",
-  "days": 0,
-  "meta_live": 0,
-  "google_live": 29,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 42
- },
- {
-  "pkg": "com.roblox.client",
-  "name": "로블록스 (Roblox)",
-  "publisher": "Roblox Corporation",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "ROBLOX Corporation"
-  ],
-  "tracked_at": "2026-11-20T01:08:00Z",
-  "days": 0,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 36
- },
- {
-  "pkg": "com.ProjectMoon.LimbusCompany",
-  "name": "Limbus Company",
-  "publisher": "Project Moon",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [],
-  "tracked_at": "2026-11-19T09:40:54Z",
-  "days": 0,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 0
  },
  {
   "pkg": "com.HoYoverse.hkrpgoversea",

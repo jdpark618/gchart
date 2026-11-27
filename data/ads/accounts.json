@@ -1101,7 +1101,10 @@
   "meta_by": "",
   "matched_at": "2026-11-19T09:40:54Z",
   "google_log": {
-   "meta": [],
+   "meta": [
+    "Limbus Company:0",
+    "Project Moon:50001"
+   ],
    "names": [
     "Project Moon",
     "Project Moon Corp.",
@@ -1113,7 +1116,8 @@
    "failed": 0,
    "checked": []
   },
-  "ver": 2
+  "ver": 2,
+  "rematched_at": "2026-11-27T00:21:16Z"
  },
  "com.rabbithole.cardofdemonslayer": {
   "meta_pages": [],
@@ -2735,5 +2739,197 @@
     }
    ]
   }
+ },
+ "com.Eclipse.Neuphoria": {
+  "meta_pages": [
+   "173813092482918"
+  ],
+  "google": [
+   {
+    "id": "AR14011257662671421441",
+    "name": "주식회사 에임드",
+    "by": "이름 '에임드' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "6444274471",
+  "meta_by": "검색어 '뉴포리아' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-27T00:16:24Z",
+  "google_log": {
+   "meta": [
+    "뉴포리아: 서바이벌:0",
+    "뉴포리아:5"
+   ],
+   "names": [
+    "AIMED",
+    "에임드",
+    "Aimed Incorporated",
+    "Aimed Inc"
+   ],
+   "domains": [],
+   "candidates": 6,
+   "previews": 6,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "주식회사 에임드",
+     "region": "KR",
+     "from": "이름 '에임드'",
+     "recent": 6,
+     "previews": 6,
+     "failed": 0,
+     "hit": true
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "net.gameduo.el": {
+  "meta_pages": [
+   "1309780722223004"
+  ],
+  "google": [],
+  "ios": "6802933822",
+  "meta_by": "검색어 '일랜시아 모바일' → 광고 링크의 Play 패키지",
+  "matched_at": "2026-11-27T00:17:27Z",
+  "google_log": {
+   "meta": [
+    "일랜시아 모바일:45"
+   ],
+   "names": [
+    "Gameduo",
+    "게임듀오",
+    "주식회사 게임듀오",
+    "Game Duo",
+    "Game Duo Co.,Ltd.",
+    "Elancia Mobile"
+   ],
+   "domains": [
+    "gameduo.net"
+   ],
+   "candidates": 3,
+   "previews": 302,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "주식회사 게임듀오",
+     "region": "KR",
+     "from": "이름 '게임듀오'",
+     "recent": 619,
+     "previews": 302,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.phs.global": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "6756989323",
+  "meta_by": "",
+  "matched_at": "2026-11-27T00:19:33Z",
+  "google_log": {
+   "meta": [
+    "라스트 어사일럼: 페스트:0",
+    "라스트 어사일럼:0",
+    "라스트어사일럼:0",
+    "페스트:353",
+    "라스트 어사일럼 페스트:0",
+    "라스트어사일럼페스트:0",
+    "37GAMES GLOBAL:3321"
+   ],
+   "names": [
+    "37GAMES GLOBAL",
+    "Wiseness Network Online International",
+    "Wiseness Network Online International Ltd",
+    "WISENESS GAME ONLINE INTERNATIONAL",
+    "WISENESS GAME ONLINE INTERNATIONAL LTD"
+   ],
+   "domains": [],
+   "candidates": 0,
+   "previews": 0,
+   "failed": 0,
+   "checked": []
+  },
+  "ver": 2
+ },
+ "com.com2us.futurecpb.android.google.global.normal": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR10540700525865730049",
+    "name": "Com2uS",
+    "by": "이름 'Com2uS' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "1458848044",
+  "meta_by": "",
+  "matched_at": "2026-11-27T00:20:16Z",
+  "google_log": {
+   "meta": [
+    "컴투스프로야구V26:0",
+    "Com2uS:44189"
+   ],
+   "names": [
+    "Com2uS",
+    "컴투스",
+    "Com2uS Corp."
+   ],
+   "domains": [
+    "com2us.com"
+   ],
+   "candidates": 8,
+   "previews": 224,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "Com2uS",
+     "region": "KR",
+     "from": "이름 'Com2uS'",
+     "recent": 21,
+     "previews": 10,
+     "failed": 0,
+     "hit": true
+    },
+    {
+     "name": "(주) 컴투스",
+     "region": "KR",
+     "from": "이름 '컴투스'",
+     "recent": 221,
+     "previews": 192,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "(주) 컴투스",
+     "region": "KR",
+     "from": "이름 '컴투스'",
+     "recent": 5,
+     "previews": 5,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "(주)컴투스타이젬",
+     "region": "KR",
+     "from": "이름 '컴투스'",
+     "recent": 1,
+     "previews": 1,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "주식회사 컴투스홀딩스",
+     "region": "KR",
+     "from": "이름 '컴투스'",
+     "recent": 16,
+     "previews": 16,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
  }
 }

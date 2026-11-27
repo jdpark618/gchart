@@ -1,5 +1,4 @@
 {
- "day": "2026-11-27",
  "top5": {
   "com.mgame.gsir": {
    "name": "귀혼키우기",
@@ -98,6 +97,65 @@
    "ranks": {
     "sales": 5
    },
+   "date": "2026-11-27",
+   "chart": "sales"
+  }
+ },
+ "day": "2026-11-27",
+ "rotation": {
+  "com.Eclipse.Neuphoria": {
+   "name": "뉴포리아: 서바이벌",
+   "pkg": "com.Eclipse.Neuphoria",
+   "publisher": "AIMED",
+   "ranks": {},
+   "date": "2026-11-27",
+   "chart": "popular"
+  },
+  "net.gameduo.el": {
+   "name": "일랜시아 모바일",
+   "pkg": "net.gameduo.el",
+   "publisher": "Gameduo",
+   "ranks": {},
+   "date": "2026-11-27",
+   "chart": "popular"
+  },
+  "com.roblox.client": {
+   "name": "로블록스 (Roblox)",
+   "pkg": "com.roblox.client",
+   "publisher": "Roblox Corporation",
+   "ranks": {},
+   "date": "2026-11-27",
+   "chart": "popular"
+  },
+  "com.dreamgames.royalmatch": {
+   "name": "로얄 매치 Royal Match",
+   "pkg": "com.dreamgames.royalmatch",
+   "publisher": "Dream Games, Ltd.",
+   "ranks": {},
+   "date": "2026-11-27",
+   "chart": "sales"
+  },
+  "com.phs.global": {
+   "name": "라스트 어사일럼: 페스트",
+   "pkg": "com.phs.global",
+   "publisher": "37GAMES GLOBAL",
+   "ranks": {},
+   "date": "2026-11-27",
+   "chart": "sales"
+  },
+  "com.com2us.futurecpb.android.google.global.normal": {
+   "name": "컴투스프로야구V26",
+   "pkg": "com.com2us.futurecpb.android.google.global.normal",
+   "publisher": "Com2uS",
+   "ranks": {},
+   "date": "2026-11-27",
+   "chart": "sales"
+  },
+  "com.ProjectMoon.LimbusCompany": {
+   "name": "Limbus Company",
+   "pkg": "com.ProjectMoon.LimbusCompany",
+   "publisher": "Project Moon",
+   "ranks": {},
    "date": "2026-11-27",
    "chart": "sales"
   }
