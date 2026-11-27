@@ -1,4 +1,5 @@
 {
+ "day": "2026-11-27",
  "top5": {
   "com.mgame.gsir": {
    "name": "귀혼키우기",
@@ -7,7 +8,37 @@
    "ranks": {
     "popular": 1
    },
-   "date": "2026-11-26",
+   "date": "2026-11-27",
+   "chart": "popular"
+  },
+  "com.davestudio.mika": {
+   "name": "미카: 던전 백패커",
+   "pkg": "com.davestudio.mika",
+   "publisher": "Dave Studio",
+   "ranks": {
+    "popular": 2
+   },
+   "date": "2026-11-27",
+   "chart": "popular"
+  },
+  "com.nexon.azurpromilia": {
+   "name": "아주르 프로밀리아",
+   "pkg": "com.nexon.azurpromilia",
+   "publisher": "NEXON Company",
+   "ranks": {
+    "popular": 3
+   },
+   "date": "2026-11-27",
+   "chart": "popular"
+  },
+  "com.highbrow.games.tkr": {
+   "name": "삼국지 GO! : 방치형 키우기 RPG",
+   "pkg": "com.highbrow.games.tkr",
+   "publisher": "highbrow",
+   "ranks": {
+    "popular": 4
+   },
+   "date": "2026-11-27",
    "chart": "popular"
   },
   "group.theorigin.themaxlevelreturner": {
@@ -15,39 +46,9 @@
    "pkg": "group.theorigin.themaxlevelreturner",
    "publisher": "Punchline Games Co., Ltd.",
    "ranks": {
-    "popular": 2
-   },
-   "date": "2026-11-26",
-   "chart": "popular"
-  },
-  "com.dragonheart.spearknightrpg2": {
-   "name": "창술사 키우기X : 방치형RPG",
-   "pkg": "com.dragonheart.spearknightrpg2",
-   "publisher": "DragonHeart",
-   "ranks": {
-    "popular": 3
-   },
-   "date": "2026-11-26",
-   "chart": "popular"
-  },
-  "com.noriworks.gm": {
-   "name": "고스톱M : 데이터 필요없는 맞고 게임",
-   "pkg": "com.noriworks.gm",
-   "publisher": "Noriworks",
-   "ranks": {
-    "popular": 4
-   },
-   "date": "2026-11-26",
-   "chart": "popular"
-  },
-  "com.rabbithole.cardofdemonslayer": {
-   "name": "카드 오브 데몬슬레이어: 덱빌딩 로그라이크 RPG",
-   "pkg": "com.rabbithole.cardofdemonslayer",
-   "publisher": "CookApps",
-   "ranks": {
     "popular": 5
    },
-   "date": "2026-11-26",
+   "date": "2026-11-27",
    "chart": "popular"
   },
   "com.kakaogames.dokkaebi": {
@@ -57,7 +58,7 @@
    "ranks": {
     "sales": 1
    },
-   "date": "2026-11-26",
+   "date": "2026-11-27",
    "chart": "sales"
   },
   "com.com2us.es.android.google.kr.normal": {
@@ -67,7 +68,7 @@
    "ranks": {
     "sales": 2
    },
-   "date": "2026-11-26",
+   "date": "2026-11-27",
    "chart": "sales"
   },
   "com.gof.global": {
@@ -77,111 +78,28 @@
    "ranks": {
     "sales": 3
    },
-   "date": "2026-11-26",
-   "chart": "sales"
-  },
-  "com.percent.aos.luckydefense": {
-   "name": "운빨존많겜",
-   "pkg": "com.percent.aos.luckydefense",
-   "publisher": "111%",
-   "ranks": {
-    "sales": 4
-   },
-   "date": "2026-11-26",
-   "chart": "sales"
-  },
-  "com.proximabeta.nikke": {
-   "name": "승리의 여신: 니케",
-   "pkg": "com.proximabeta.nikke",
-   "publisher": "Level Infinite",
-   "ranks": {
-    "sales": 5
-   },
-   "date": "2026-11-26",
-   "chart": "sales"
-  }
- },
- "rotation": {
-  "com.highbrow.games.dvo": {
-   "name": "드래곤빌리지3 X 리센느",
-   "pkg": "com.highbrow.games.dvo",
-   "publisher": "highbrow",
-   "ranks": {},
-   "date": "2026-11-26",
-   "chart": "popular"
-  },
-  "com.nexon.azurpromilia": {
-   "name": "아주르 프로밀리아",
-   "pkg": "com.nexon.azurpromilia",
-   "publisher": "NEXON Company",
-   "ranks": {},
-   "date": "2026-11-26",
-   "chart": "popular"
-  },
-  "com.farlightgames.warline.gp.global": {
-   "name": "워라인: 스나이퍼",
-   "pkg": "com.farlightgames.warline.gp.global",
-   "publisher": "Powerfantasy HK Limited",
-   "ranks": {},
-   "date": "2026-11-26",
-   "chart": "popular"
-  },
-  "com.mocacorp.sudoku": {
-   "name": "스도쿠",
-   "pkg": "com.mocacorp.sudoku",
-   "publisher": "Moca",
-   "ranks": {},
-   "date": "2026-11-26",
-   "chart": "popular"
-  },
-  "com.gamespark.topking.gp": {
-   "name": "탑 로드",
-   "pkg": "com.gamespark.topking.gp",
-   "publisher": "GAME SPARK PTE. LTD.",
-   "ranks": {},
-   "date": "2026-11-26",
-   "chart": "popular"
-  },
-  "com.run.tower.defense": {
-   "name": "킹샷:Kingshot",
-   "pkg": "com.run.tower.defense",
-   "publisher": "Century Games PTE. LTD.",
-   "ranks": {},
-   "date": "2026-11-26",
+   "date": "2026-11-27",
    "chart": "sales"
   },
   "com.nexon.ma": {
    "name": "메이플 키우기",
    "pkg": "com.nexon.ma",
    "publisher": "NEXON Company",
-   "ranks": {},
-   "date": "2026-11-26",
+   "ranks": {
+    "sales": 4
+   },
+   "date": "2026-11-27",
    "chart": "sales"
   },
-  "com.zjcs.android.kr": {
-   "name": "소드 x 스태프: 화산귀환 콜라보",
-   "pkg": "com.zjcs.android.kr",
-   "publisher": "BOLTRAY GAMES",
-   "ranks": {},
-   "date": "2026-11-26",
-   "chart": "sales"
-  },
-  "com.nhnent.pokerclassic": {
-   "name": "한게임포커 클래식 : 7포커 홀덤 섯다 훌라 슬롯",
-   "pkg": "com.nhnent.pokerclassic",
-   "publisher": "NHN Corp.",
-   "ranks": {},
-   "date": "2026-11-26",
-   "chart": "sales"
-  },
-  "com.gamedots.seasideescape": {
-   "name": "씨사이드 익스케이프: 합성 & 스토리 게임",
-   "pkg": "com.gamedots.seasideescape",
-   "publisher": "Microfun Limited",
-   "ranks": {},
-   "date": "2026-11-26",
+  "com.run.tower.defense": {
+   "name": "킹샷:Kingshot",
+   "pkg": "com.run.tower.defense",
+   "publisher": "Century Games PTE. LTD.",
+   "ranks": {
+    "sales": 5
+   },
+   "date": "2026-11-27",
    "chart": "sales"
   }
- },
- "day": "2026-11-26"
+ }
 }

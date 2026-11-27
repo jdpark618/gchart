@@ -2661,5 +2661,79 @@
    "failed": null,
    "checked": []
   }
+ },
+ "com.davestudio.mika": {
+  "meta_pages": [
+   "103597027708447"
+  ],
+  "google": [],
+  "ios": "6761421604",
+  "meta_by": "검색어 '미카: 던전 백패커' → 광고 링크의 iOS 앱 ID",
+  "matched_at": "2026-11-27T00:06:10Z",
+  "google_log": {
+   "meta": [
+    "미카: 던전 백패커:29"
+   ],
+   "names": [
+    "Dave Studio",
+    "박용규",
+    "Tae won Go",
+    "SuperPlanet Games"
+   ],
+   "domains": [],
+   "candidates": 2,
+   "previews": 1,
+   "failed": 0,
+   "checked": [
+    {
+     "name": "박용규",
+     "region": "KR",
+     "from": "이름 '박용규'",
+     "recent": 1,
+     "previews": 1,
+     "failed": 0,
+     "hit": false
+    }
+   ]
+  },
+  "ver": 2
+ },
+ "com.highbrow.games.tkr": {
+  "meta_pages": [
+   "1169066079850025"
+  ],
+  "google": [],
+  "ios": "6761039504",
+  "meta_by": "검색어 '삼국지 GO!' → 광고 링크의 iOS 앱 ID",
+  "matched_at": "2026-11-27T00:10:11Z",
+  "google_log": {
+   "meta": [
+    "삼국지 GO! : 방치형 키우기 RPG:0",
+    "삼국지 GO!:9"
+   ],
+   "names": [
+    "highbrow",
+    "하이브로",
+    "하이브로 : highbrow"
+   ],
+   "domains": [
+    "highbrow.com"
+   ],
+   "candidates": 10,
+   "error": "소재 미리보기 99건 중 89건 실패 (일시 차단일 수 있음)",
+   "previews": 99,
+   "failed": 89,
+   "checked": [
+    {
+     "name": "주식회사 하이브로",
+     "region": "KR",
+     "from": "이름 '하이브로'",
+     "recent": 102,
+     "previews": 99,
+     "failed": 89,
+     "hit": false
+    }
+   ]
+  }
  }
 }
