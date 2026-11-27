@@ -26,6 +26,10 @@ def get(url):
     raise err
 
 
+class SiteDown(Exception):
+    """첫 요청부터 접속이 안 됨 (11/27: GitHub 서버 → 루리웹 시간 초과가 가끔 남). run() 이 잠시 뒤 한 번 더 시도"""
+
+
 def txt(s):
     return re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', '', s))).strip()
 
@@ -61,12 +65,14 @@ def main():
     os.makedirs(DIR, exist_ok=True)
     got, fails, secn, added = {}, [], {}, {'m': 0, 'pc': 0, 'cs': 0}
     for sec, no in SECTIONS:
-        n = 0
+        n, err = 0, False
         for pg in range(1, PAGES + 1):
             try:
                 items = parse_list(get(f'{BASE}/news/{no}' + (f'?page={pg}' if pg > 1 else '')), sec)
             except Exception as e:
-                fails.append(f'{sec}:{pg} {e}'); break
+                if not got:   # 아직 아무것도 못 받음 = 사이트 접속 자체가 안 됨 → 나머지 섹션도 기다리지 않고 바로 중단
+                    raise SiteDown(f'{sec}:{pg} {e}')
+                fails.append(f'{sec}:{pg} 접속 실패 ({e})'); err = True; break
             for it in items:
                 if it['id'] in got:
                     got[it['id']]['p'] = sorted(set(got[it['id']]['p'] + [sec]), key=['m', 'pc', 'cs'].index)
@@ -74,7 +80,7 @@ def main():
                     got[it['id']] = it
             n += len(items); time.sleep(1.5)
         print(f'{sec}: {n}건'); secn[sec] = n
-        if n == 0:
+        if n == 0 and not err:   # 받긴 했는데 0건일 때만 화면 구조를 의심
             fails.append(f'{sec}: 0건 (화면 구조 바뀜?)')
     # 달 파일에 합치기
     months = {}
@@ -122,14 +128,22 @@ def run():
     """수집 로그 (11/25): /admin 뉴스 줄. 3시간마다 도는 실행이 하루 파일의 attempts 에 차례로 쌓임"""
     sys.path.insert(0, ROOT); import runlog
     start = runlog.now()
-    try:
-        fails, secn, added, fetched = main()
-    except Exception as e:
-        runlog.add('news', '3시간마다', start, False, [['x', f'수집 중단: {str(e)[:120]}']]); raise
+    retried = ''
+    for attempt in (1, 2):
+        try:
+            fails, secn, added, fetched = main(); break
+        except SiteDown as e:
+            if attempt == 1:
+                retried = str(e); print('루리웹 접속 실패 → 2분 30초 뒤 다시 시도:', e); time.sleep(150); continue
+            runlog.add('news', '3시간마다', start, False, [['x', f'루리웹 접속 실패 (2번 시도): {str(e)[:100]}']]); sys.exit(1)
+        except Exception as e:
+            runlog.add('news', '3시간마다', start, False, [['x', f'수집 중단: {str(e)[:120]}']]); raise
     nm = {'m': '모바일', 'pc': 'PC', 'cs': '콘솔'}
     new = sum(added.values())
     msgs = [['o' if not fails else 'x', f'새 기사 {new}건' + (' (' + ' · '.join(f'{nm[k]} {v}' for k, v in added.items() if v) + ')' if new else '')]]
     msgs += [['x', f] for f in fails]
+    if retried:
+        msgs.append(['m', '첫 접속 실패 → 다시 시도해 성공'])
     msgs.append(['m', '목록 ' + ' · '.join(f'{nm[k]} {secn.get(k, 0)}' for k in nm) + (f' · 제목 보충 {fetched}' if fetched else '')])
     runlog.add('news', '3시간마다', start, not fails, msgs)
     if fails: sys.exit(1)
