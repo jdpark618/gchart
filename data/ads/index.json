@@ -458,12 +458,12 @@
   "tracked_at": "2026-11-26T10:19:07Z",
   "days": 1,
   "meta_live": 79,
-  "google_live": 18,
-  "meta_new7": 49,
-  "google_new7": 8,
+  "google_live": 17,
+  "meta_new7": 24,
+  "google_new7": 7,
   "meta": 287,
   "meta_total": 134,
-  "google": 50
+  "google": 51
  },
  {
   "pkg": "com.gamespark.topking.gp",
@@ -484,10 +484,10 @@
   "meta_live": 39,
   "google_live": 7,
   "meta_new7": 14,
-  "google_new7": 1,
+  "google_new7": 2,
   "meta": 45,
   "meta_total": 39,
-  "google": 8
+  "google": 9
  },
  {
   "pkg": "com.mocacorp.sudoku",
