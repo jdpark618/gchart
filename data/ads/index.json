@@ -1,5 +1,137 @@
 [
  {
+  "pkg": "com.nexon.fmk",
+  "name": "FC 모바일",
+  "publisher": "NEXON Company",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "Nexon Korea"
+  ],
+  "tracked_at": "2026-11-28T00:22:04Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.garena.game.mho",
+  "name": "몬스터헌터 아웃랜더스",
+  "publisher": "Garena Online Private Limited",
+  "charts": {
+   "popular": 5
+  },
+  "rank_date": "2026-11-06",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [
+   "Garena Online Private Limited",
+   "아이루"
+  ],
+  "tracked_at": "2026-11-28T00:18:16Z",
+  "days": 1,
+  "meta_live": 42,
+  "google_live": 5,
+  "meta_new7": 42,
+  "google_new7": 2,
+  "meta": 80,
+  "meta_total": 54,
+  "google": 39
+ },
+ {
+  "pkg": "com.netmarble.sol",
+  "name": "SOL: enchant",
+  "publisher": "Netmarble",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "sales"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-28T00:16:51Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.yg.sf.minigames",
+  "name": "Super Fun Mini Games",
+  "publisher": "SUPERIOR  STUDIO",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-28T00:16:21Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.pongvn.tg",
+  "name": "훠이훠이 요괴! 로그라이크 디펜스 RPG",
+  "publisher": "Pong Studio Co., Ltd.",
+  "charts": {},
+  "rank_date": "",
+  "pool": [
+   "popular"
+  ],
+  "aliases": [],
+  "tracked_at": "2026-11-28T00:16:00Z",
+  "days": 0,
+  "meta_live": 0,
+  "google_live": 0,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 0
+ },
+ {
+  "pkg": "com.mergegames.gossipharbor",
+  "name": "가십하버: 합성 & 스토리 게임",
+  "publisher": "Microfun Limited",
+  "charts": {
+   "sales": 5
+  },
+  "rank_date": "2026-11-21",
+  "pool": [
+   "popular",
+   "sales"
+  ],
+  "aliases": [
+   "Microfun Limited"
+  ],
+  "tracked_at": "2026-11-28T00:15:27Z",
+  "days": 2,
+  "meta_live": 0,
+  "google_live": 22,
+  "meta_new7": 0,
+  "google_new7": 0,
+  "meta": 0,
+  "meta_total": 0,
+  "google": 24
+ },
+ {
   "pkg": "com.nexon.ma",
   "name": "메이플 키우기",
   "publisher": "NEXON Company",
@@ -1167,26 +1299,6 @@
   "google": 0
  },
  {
-  "pkg": "com.netmarble.sol",
-  "name": "SOL: enchant",
-  "publisher": "Netmarble",
-  "charts": {},
-  "rank_date": "",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [],
-  "tracked_at": "2026-11-21T00:30:28Z",
-  "days": 0,
-  "meta_live": 0,
-  "google_live": 0,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 0
- },
- {
   "pkg": "com.block.juggle",
   "name": "블록 블라스트 (Block Blast)",
   "publisher": "HungryStudio",
@@ -1230,30 +1342,6 @@
   "meta": 71,
   "meta_total": 392,
   "google": 53
- },
- {
-  "pkg": "com.mergegames.gossipharbor",
-  "name": "가십하버: 합성 & 스토리 게임",
-  "publisher": "Microfun Limited",
-  "charts": {
-   "sales": 5
-  },
-  "rank_date": "2026-11-21",
-  "pool": [
-   "sales"
-  ],
-  "aliases": [
-   "Microfun Limited"
-  ],
-  "tracked_at": "2026-11-21T00:25:39Z",
-  "days": 2,
-  "meta_live": 0,
-  "google_live": 23,
-  "meta_new7": 0,
-  "google_new7": 0,
-  "meta": 0,
-  "meta_total": 0,
-  "google": 24
  },
  {
   "pkg": "com.HoYoverse.hkrpgoversea",
@@ -1479,28 +1567,6 @@
   "meta_live": 0,
   "google_live": 1,
   "meta_new7": 0,
-  "google_new7": 0
- },
- {
-  "pkg": "com.garena.game.mho",
-  "name": "몬스터헌터 아웃랜더스",
-  "publisher": "Garena Online Private Limited",
-  "aliases": [
-   "Garena Online Private Limited",
-   "아이루"
-  ],
-  "tracked_at": "2026-11-09T01:02:14Z",
-  "meta": 38,
-  "meta_total": 58,
-  "google": 36,
-  "charts": {
-   "popular": 5
-  },
-  "rank_date": "2026-11-06",
-  "days": 1,
-  "meta_live": 34,
-  "google_live": 8,
-  "meta_new7": 13,
   "google_new7": 0
  },
  {

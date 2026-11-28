@@ -358,7 +358,35 @@
   ],
   "ios": "6763262759",
   "meta_by": "검색어 '몬스터헌터 아웃랜더스' → 광고 링크의 iOS 앱 ID",
-  "matched_at": "2026-11-06T01:40:59Z"
+  "matched_at": "2026-11-06T01:40:59Z",
+  "rematched_at": "2026-11-28T00:18:16Z",
+  "google_log": {
+   "meta": [],
+   "names": [
+    "Garena Online",
+    "Garena Online Private Limited",
+    "Garena Online Private Ltd.",
+    "Garena Online Private Ltd"
+   ],
+   "domains": [
+    "garena.com"
+   ],
+   "candidates": 1,
+   "error": "소재 미리보기 106건 중 106건 실패 (일시 차단일 수 있음)",
+   "previews": 106,
+   "failed": 106,
+   "checked": [
+    {
+     "name": "Garena Online Private Limited",
+     "region": "SG",
+     "from": "이름 'Garena Online'",
+     "recent": 110,
+     "previews": 106,
+     "failed": 106,
+     "hit": false
+    }
+   ]
+  }
  },
  "com.ryonggame.dragonknightidle": {
   "meta_pages": [
@@ -1016,31 +1044,13 @@
     "Microfun Limited"
    ],
    "domains": [],
-   "candidates": 3,
-   "previews": 43,
-   "failed": 13,
-   "checked": [
-    {
-     "name": "Microfun Limited",
-     "region": "HK",
-     "from": "이름 'Microfun'",
-     "recent": 25,
-     "previews": 10,
-     "failed": 0,
-     "hit": true
-    },
-    {
-     "name": "Microfun Limited",
-     "region": "HK",
-     "from": "이름 'Microfun'",
-     "recent": 33,
-     "previews": 33,
-     "failed": 13,
-     "hit": false
-    }
-   ]
+   "candidates": 0,
+   "previews": null,
+   "failed": null,
+   "checked": []
   },
-  "ver": 2
+  "ver": 2,
+  "rematched_at": "2026-11-28T00:15:27Z"
  },
  "com.run.tower.defense": {
   "meta_pages": [
@@ -1468,45 +1478,37 @@
   "meta_by": "검색어 'Netmarble' → 광고 링크의 Play 패키지",
   "matched_at": "2026-11-21T00:30:28Z",
   "google_log": {
-   "meta": [
-    "SOL: enchant:43",
-    "SOL:50001",
-    "enchant:25255",
-    "SOL enchant:43",
-    "SOLenchant:50001",
-    "Netmarble:175"
-   ],
+   "meta": [],
    "names": [
     "Netmarble",
     "넷마블",
-    "Netmarble Corporation",
-    "Solo Leveling:ARISE"
+    "Netmarble Corporation"
    ],
    "domains": [
     "netmarble.com",
     "netmarble.net"
    ],
    "candidates": 14,
-   "error": "소재 미리보기 215건 중 130건 실패 (일시 차단일 수 있음)",
-   "previews": 215,
-   "failed": 130,
+   "error": "소재 미리보기 238건 중 161건 실패 (일시 차단일 수 있음)",
+   "previews": 238,
+   "failed": 161,
    "checked": [
     {
      "name": "netmarble",
      "region": "KR",
      "from": "이름 'Netmarble'",
-     "recent": 116,
-     "previews": 115,
-     "failed": 72,
+     "recent": 111,
+     "previews": 110,
+     "failed": 90,
      "hit": false
     },
     {
      "name": "넷마블",
      "region": "KR",
      "from": "이름 '넷마블'",
-     "recent": 56,
-     "previews": 50,
-     "failed": 50,
+     "recent": 73,
+     "previews": 67,
+     "failed": 10,
      "hit": false
     },
     {
@@ -1531,9 +1533,18 @@
      "name": "넷마블 주식회사",
      "region": "KR",
      "from": "이름 '넷마블'",
+     "recent": 14,
+     "previews": 13,
+     "failed": 13,
+     "hit": false
+    },
+    {
+     "name": "넷마블 주식회사",
+     "region": "KR",
+     "from": "이름 '넷마블'",
      "recent": 10,
      "previews": 10,
-     "failed": 1,
+     "failed": 10,
      "hit": false
     },
     {
@@ -1542,29 +1553,30 @@
      "from": "이름 '넷마블'",
      "recent": 4,
      "previews": 3,
-     "failed": 0,
+     "failed": 3,
      "hit": false
     },
     {
      "name": "넷마블 주식회사",
      "region": "KR",
      "from": "이름 '넷마블'",
-     "recent": 8,
-     "previews": 8,
-     "failed": 0,
+     "recent": 9,
+     "previews": 9,
+     "failed": 9,
      "hit": false
     },
     {
      "name": "넷마블 주식회사",
      "region": "",
      "from": "도메인 'netmarble.com'",
-     "recent": 28,
-     "previews": 22,
-     "failed": 0,
+     "recent": 25,
+     "previews": 19,
+     "failed": 19,
      "hit": false
     }
    ]
-  }
+  },
+  "rematched_at": "2026-11-28T00:16:51Z"
  },
  "com.percent.aos.luckydefense": {
   "meta_pages": [],
@@ -2957,6 +2969,145 @@
    "previews": 0,
    "failed": 0,
    "checked": []
+  },
+  "ver": 2
+ },
+ "com.pongvn.tg": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "6815579896",
+  "meta_by": "",
+  "matched_at": "2026-11-28T00:16:00Z",
+  "google_log": {
+   "meta": [
+    "훠이훠이 요괴! 로그라이크 디펜스 RPG:0",
+    "Pong Studio Co., Ltd.:0"
+   ],
+   "names": [
+    "Pong Studio",
+    "Pong Studio Co., Ltd.",
+    "CÔNG TY TNHH PONG STUDIO",
+    "PONG STUDIO COMPANY LIMITED"
+   ],
+   "domains": [],
+   "candidates": 1,
+   "previews": 0,
+   "failed": 0,
+   "checked": []
+  },
+  "ver": 2
+ },
+ "com.yg.sf.minigames": {
+  "meta_pages": [],
+  "google": [],
+  "ios": "",
+  "meta_by": "",
+  "matched_at": "2026-11-28T00:16:21Z",
+  "google_log": {
+   "meta": [
+    "Super Fun Mini Games:1761",
+    "SUPERIOR  STUDIO:4971"
+   ],
+   "names": [
+    "SUPERIOR STUDIO",
+    "HONG KONG YOUZHI TECHNOLOGY",
+    "HONG KONG YOUZHI TECHNOLOGY LIMITED"
+   ],
+   "domains": [],
+   "candidates": 1,
+   "previews": 0,
+   "failed": 0,
+   "checked": []
+  },
+  "ver": 2
+ },
+ "com.nexon.fmk": {
+  "meta_pages": [],
+  "google": [
+   {
+    "id": "AR13330680495021752321",
+    "name": "Nexon Korea",
+    "by": "이름 'NEXON' → 소재에 패키지/iOS ID"
+   }
+  ],
+  "ios": "1478371252",
+  "meta_by": "",
+  "matched_at": "2026-11-28T00:22:04Z",
+  "google_log": {
+   "meta": [
+    "FC 모바일:18",
+    "FC모바일:18",
+    "NEXON Company:529"
+   ],
+   "names": [
+    "NEXON",
+    "NEXON Company",
+    "Nexon Korea",
+    "Nexon Korea Corporation"
+   ],
+   "domains": [
+    "nexon.com",
+    "nexon.co.jp"
+   ],
+   "candidates": 25,
+   "previews": 306,
+   "failed": 249,
+   "checked": [
+    {
+     "name": "Nexon Korea",
+     "region": "KR",
+     "from": "이름 'NEXON'",
+     "recent": 1235,
+     "previews": 87,
+     "failed": 55,
+     "hit": true
+    },
+    {
+     "name": "Nexon Korea Co., Ltd.",
+     "region": "KR",
+     "from": "이름 'Nexon Korea'",
+     "recent": 89,
+     "previews": 89,
+     "failed": 89,
+     "hit": false
+    },
+    {
+     "name": "NEXON Co. Ltd",
+     "region": "JP",
+     "from": "이름 'NEXON'",
+     "recent": 26,
+     "previews": 2,
+     "failed": 2,
+     "hit": false
+    },
+    {
+     "name": "(주)넥슨코리아",
+     "region": "",
+     "from": "도메인 'nexon.com'",
+     "recent": 104,
+     "previews": 25,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "Nexon America, Inc",
+     "region": "",
+     "from": "도메인 'nexon.com'",
+     "recent": 2,
+     "previews": 0,
+     "failed": 0,
+     "hit": false
+    },
+    {
+     "name": "(주)넥슨코리아",
+     "region": "",
+     "from": "도메인 'nexon.com'",
+     "recent": 799,
+     "previews": 103,
+     "failed": 103,
+     "hit": false
+    }
+   ]
   },
   "ver": 2
  }

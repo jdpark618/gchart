@@ -1,5 +1,4 @@
 {
- "day": "2026-11-28",
  "top5": {
   "com.davestudio.mika": {
    "name": "미카: 던전 백패커",
@@ -100,6 +99,65 @@
    },
    "date": "2026-11-28",
    "chart": "sales"
+  }
+ },
+ "day": "2026-11-28",
+ "rotation": {
+  "com.mergegames.gossipharbor": {
+   "name": "가십하버: 합성 & 스토리 게임",
+   "pkg": "com.mergegames.gossipharbor",
+   "publisher": "Microfun Limited",
+   "ranks": {},
+   "date": "2026-11-28",
+   "chart": "popular"
+  },
+  "com.pongvn.tg": {
+   "name": "훠이훠이 요괴! 로그라이크 디펜스 RPG",
+   "pkg": "com.pongvn.tg",
+   "publisher": "Pong Studio Co., Ltd.",
+   "ranks": {},
+   "date": "2026-11-28",
+   "chart": "popular"
+  },
+  "com.yg.sf.minigames": {
+   "name": "Super Fun Mini Games",
+   "pkg": "com.yg.sf.minigames",
+   "publisher": "SUPERIOR  STUDIO",
+   "ranks": {},
+   "date": "2026-11-28",
+   "chart": "popular"
+  },
+  "com.netmarble.sol": {
+   "name": "SOL: enchant",
+   "pkg": "com.netmarble.sol",
+   "publisher": "Netmarble",
+   "ranks": {},
+   "date": "2026-11-28",
+   "chart": "sales"
+  },
+  "com.garena.game.mho": {
+   "name": "몬스터헌터 아웃랜더스",
+   "pkg": "com.garena.game.mho",
+   "publisher": "Garena Online Private Limited",
+   "ranks": {},
+   "date": "2026-11-28",
+   "chart": "sales"
+  },
+  "com.nexon.fmk": {
+   "name": "FC 모바일",
+   "pkg": "com.nexon.fmk",
+   "publisher": "NEXON Company",
+   "ranks": {},
+   "date": "2026-11-28",
+   "chart": "sales"
+  },
+  "com.nebula.rotaterings": {
+   "name": "로테이트 링스 (Rotate Rings)",
+   "pkg": "com.nebula.rotaterings",
+   "publisher": "Nebula  Studio",
+   "ranks": {},
+   "date": "2026-11-28",
+   "chart": "popular"
   }
  }
 }
