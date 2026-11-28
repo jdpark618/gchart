@@ -1,33 +1,24 @@
 {
+ "day": "2026-11-28",
  "top5": {
-  "com.mgame.gsir": {
-   "name": "귀혼키우기",
-   "pkg": "com.mgame.gsir",
-   "publisher": "Mgame",
-   "ranks": {
-    "popular": 1
-   },
-   "date": "2026-11-27",
-   "chart": "popular"
-  },
   "com.davestudio.mika": {
    "name": "미카: 던전 백패커",
    "pkg": "com.davestudio.mika",
    "publisher": "Dave Studio",
    "ranks": {
-    "popular": 2
+    "popular": 1
    },
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "chart": "popular"
   },
-  "com.nexon.azurpromilia": {
-   "name": "아주르 프로밀리아",
-   "pkg": "com.nexon.azurpromilia",
-   "publisher": "NEXON Company",
+  "com.mgame.gsir": {
+   "name": "귀혼키우기",
+   "pkg": "com.mgame.gsir",
+   "publisher": "Mgame",
    "ranks": {
-    "popular": 3
+    "popular": 2
    },
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "chart": "popular"
   },
   "com.highbrow.games.tkr": {
@@ -35,19 +26,29 @@
    "pkg": "com.highbrow.games.tkr",
    "publisher": "highbrow",
    "ranks": {
-    "popular": 4
+    "popular": 3
    },
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "chart": "popular"
   },
-  "group.theorigin.themaxlevelreturner": {
-   "name": "나 혼자 만렙 키우기",
-   "pkg": "group.theorigin.themaxlevelreturner",
-   "publisher": "Punchline Games Co., Ltd.",
+  "com.nexon.azurpromilia": {
+   "name": "아주르 프로밀리아",
+   "pkg": "com.nexon.azurpromilia",
+   "publisher": "NEXON Company",
+   "ranks": {
+    "popular": 4
+   },
+   "date": "2026-11-28",
+   "chart": "popular"
+  },
+  "com.newleapsoft.zszz.g": {
+   "name": "올림포스X아스가르드 총력전",
+   "pkg": "com.newleapsoft.zszz.g",
+   "publisher": "NEWLEAPSOFT",
    "ranks": {
     "popular": 5
    },
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "chart": "popular"
   },
   "com.kakaogames.dokkaebi": {
@@ -57,7 +58,7 @@
    "ranks": {
     "sales": 1
    },
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "chart": "sales"
   },
   "com.com2us.es.android.google.kr.normal": {
@@ -67,7 +68,7 @@
    "ranks": {
     "sales": 2
    },
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "chart": "sales"
   },
   "com.gof.global": {
@@ -77,7 +78,17 @@
    "ranks": {
     "sales": 3
    },
-   "date": "2026-11-27",
+   "date": "2026-11-28",
+   "chart": "sales"
+  },
+  "com.nexon.overgeared": {
+   "name": "템빨: 오버기어드",
+   "pkg": "com.nexon.overgeared",
+   "publisher": "NEXON Company",
+   "ranks": {
+    "sales": 4
+   },
+   "date": "2026-11-28",
    "chart": "sales"
   },
   "com.nexon.ma": {
@@ -85,78 +96,9 @@
    "pkg": "com.nexon.ma",
    "publisher": "NEXON Company",
    "ranks": {
-    "sales": 4
-   },
-   "date": "2026-11-27",
-   "chart": "sales"
-  },
-  "com.run.tower.defense": {
-   "name": "킹샷:Kingshot",
-   "pkg": "com.run.tower.defense",
-   "publisher": "Century Games PTE. LTD.",
-   "ranks": {
     "sales": 5
    },
-   "date": "2026-11-27",
-   "chart": "sales"
-  }
- },
- "day": "2026-11-27",
- "rotation": {
-  "com.Eclipse.Neuphoria": {
-   "name": "뉴포리아: 서바이벌",
-   "pkg": "com.Eclipse.Neuphoria",
-   "publisher": "AIMED",
-   "ranks": {},
-   "date": "2026-11-27",
-   "chart": "popular"
-  },
-  "net.gameduo.el": {
-   "name": "일랜시아 모바일",
-   "pkg": "net.gameduo.el",
-   "publisher": "Gameduo",
-   "ranks": {},
-   "date": "2026-11-27",
-   "chart": "popular"
-  },
-  "com.roblox.client": {
-   "name": "로블록스 (Roblox)",
-   "pkg": "com.roblox.client",
-   "publisher": "Roblox Corporation",
-   "ranks": {},
-   "date": "2026-11-27",
-   "chart": "popular"
-  },
-  "com.dreamgames.royalmatch": {
-   "name": "로얄 매치 Royal Match",
-   "pkg": "com.dreamgames.royalmatch",
-   "publisher": "Dream Games, Ltd.",
-   "ranks": {},
-   "date": "2026-11-27",
-   "chart": "sales"
-  },
-  "com.phs.global": {
-   "name": "라스트 어사일럼: 페스트",
-   "pkg": "com.phs.global",
-   "publisher": "37GAMES GLOBAL",
-   "ranks": {},
-   "date": "2026-11-27",
-   "chart": "sales"
-  },
-  "com.com2us.futurecpb.android.google.global.normal": {
-   "name": "컴투스프로야구V26",
-   "pkg": "com.com2us.futurecpb.android.google.global.normal",
-   "publisher": "Com2uS",
-   "ranks": {},
-   "date": "2026-11-27",
-   "chart": "sales"
-  },
-  "com.ProjectMoon.LimbusCompany": {
-   "name": "Limbus Company",
-   "pkg": "com.ProjectMoon.LimbusCompany",
-   "publisher": "Project Moon",
-   "ranks": {},
-   "date": "2026-11-27",
+   "date": "2026-11-28",
    "chart": "sales"
   }
  }
